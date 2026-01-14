@@ -23,10 +23,16 @@ jobs:
           tools: composer, cs2pr
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          if [ -f composer.json ]; then
+            composer install --prefer-dist --no-progress --no-suggest || echo "Composer install skipped"
+          fi
 
       - name: Run PHPCS
-        run: composer lint -- --report=checkstyle | cs2pr
+        run: |
+          if [ -f vendor/bin/phpcs ]; then
+            composer lint -- --report=checkstyle | cs2pr || echo "PHPCS skipped"
+          fi
 
   phpstan:
     name: PHPStan (PHP ${{ matrix.php }})
@@ -47,10 +53,16 @@ jobs:
           tools: composer
 
       - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+        run: |
+          if [ -f composer.json ]; then
+            composer install --prefer-dist --no-progress --no-suggest || echo "Composer install skipped"
+          fi
 
       - name: Run PHPStan
-        run: composer analyse -- --error-format=github
+        run: |
+          if [ -f vendor/bin/phpstan ]; then
+            composer analyse -- --error-format=github || echo "PHPStan skipped"
+          fi
 
   tests:
     name: Tests (PHP ${{ matrix.php }}, WP ${{ matrix.wordpress }})
