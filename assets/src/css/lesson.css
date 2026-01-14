@@ -1,0 +1,153 @@
+/**
+ * Simple LMS - Lesson Styles
+ * 
+ * Styles specific to lesson pages.
+ * 
+ * @package SimpleLMS
+ * @since 1.4.0
+ */
+
+.simple-lms-video-container {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.simple-lms-video-container iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: none;
+}
+
+.lesson-attachment-list {
+    margin: 30px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.lesson-attachment-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.lesson-attachment-item:hover {
+    background: #e9ecef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.lesson-attachment-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.lesson-attachment-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: #6c757d;
+}
+
+.lesson-attachment-info {
+    flex: 1;
+}
+
+.lesson-attachment-title {
+    margin: 0 0 5px;
+    font-weight: 600;
+    color: #212529;
+}
+
+.lesson-attachment-meta {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.lesson-attachment-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.lesson-attachment-link:hover {
+    background: #0056b3;
+    color: #fff;
+}
+
+.lesson-completion-message {
+    display: none;
+    padding: 20px;
+    margin: 30px 0;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 6px;
+    color: #155724;
+    text-align: center;
+}
+
+.lesson-completion-message.show {
+    display: block;
+}
+
+.lesson-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.lesson-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #6c757d;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.lesson-nav-btn:hover {
+    background: #5a6268;
+    color: #fff;
+}
+
+.lesson-nav-btn.prev::before {
+    content: '←';
+    margin-right: 8px;
+}
+
+.lesson-nav-btn.next::after {
+    content: '→';
+    margin-left: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .lesson-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .lesson-nav-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "simple-lms",
+  "version": "1.4.0",
+  "description": "Modern LMS plugin for WordPress with WooCommerce integration",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webisko/simple-lms"
+  },
+  "keywords": [
+    "wordpress",
+    "lms",
+    "elearning",
+    "woocommerce"
+  ],
+  "author": "Filip Meyer-Lüters <filip@webisko.pl>",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "@vitejs/plugin-legacy": "^5.4.0",
+    "terser": "^5.31.0",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "sass": "^1.77.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

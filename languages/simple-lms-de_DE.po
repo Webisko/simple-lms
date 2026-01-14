@@ -1,0 +1,353 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple LMS 1.3.3\n"
+"POT-Creation-Date: 2025-12-01 00:00+0000\n"
+"PO-Revision-Date: 2025-12-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: VS Code\n"
+"X-Domain: simple-lms\n"
+
+# Frontend strings
+msgid "Ładowanie..."
+msgstr "Wird geladen..."
+
+msgid "Ukończono"
+msgstr "Abgeschlossen"
+
+msgid "Oznacz jako ukończoną"
+msgstr "Als abgeschlossen markieren"
+
+msgid "Wystąpił błąd"
+msgstr "Ein Fehler ist aufgetreten"
+
+# Admin localized strings
+msgid "Czy na pewno chcesz trwale usunąć ten moduł wraz ze wszystkimi jego lekcjami?"
+msgstr "Möchten Sie dieses Modul mit allen zugehörigen Lektionen dauerhaft löschen?"
+
+msgid "Czy na pewno chcesz trwale usunąć tę lekcję?"
+msgstr "Möchten Sie diese Lektion dauerhaft löschen?"
+
+msgid "Wystąpił błąd podczas wykonywania operacji."
+msgstr "Bei der Ausführung des Vorgangs ist ein Fehler aufgetreten."
+
+msgid "Wprowadź tytuł modułu."
+msgstr "Geben Sie einen Modultitel ein."
+
+msgid "Wprowadź tytuł lekcji."
+msgstr "Geben Sie einen Lektionstitel ein."
+
+msgid "Brak uprawnień do wykonania tej operacji."
+msgstr "Sie haben keine Berechtigung für diesen Vorgang."
+
+msgid "Błąd podczas usuwania elementu."
+msgstr "Fehler beim Löschen des Elements."
+
+msgid "Błąd podczas duplikowania elementu."
+msgstr "Fehler beim Duplizieren des Elements."
+
+msgid "Opublikowana"
+msgstr "Veröffentlicht"
+
+msgid "Szkic"
+msgstr "Entwurf"
+
+msgid "Opublikowany"
+msgstr "Veröffentlicht"
+
+msgid "Szkic"
+msgstr "Entwurf"
+
+msgid "(Kopia)"
+msgstr "(Kopie)"
+
+msgid "Wybierz plik wideo"
+msgstr "Videodatei auswählen"
+
+msgid "Wybierz plik"
+msgstr "Datei auswählen"
+
+msgid "Wybrany plik:"
+msgstr "Ausgewählte Datei:"
+
+msgid "Brak wybranego pliku"
+msgstr "Keine Datei ausgewählt"
+
+# Settings UI
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Default (WordPress language)"
+msgstr "Standard (WordPress-Sprache)"
+
+msgid "English"
+msgstr "Englisch"
+
+msgid "Polish"
+msgstr "Polnisch"
+
+msgid "German"
+msgstr "Deutsch"
+
+msgid "Choose the language for the Simple LMS plugin interface."
+msgstr "Wählen Sie die Sprache für die Simple LMS Plugin-Oberfläche."
+
+msgid "Configure basic Simple LMS plugin settings."
+msgstr "Grundlegende Einstellungen des Simple LMS-Plugins konfigurieren."
+
+# Additional settings labels and messages
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Analytics Settings"
+msgstr "Analyse-Einstellungen"
+
+msgid "Enable Analytics"
+msgstr "Analytik aktivieren"
+
+msgid "Google Analytics 4"
+msgstr "Google Analytics 4"
+
+msgid "GA4 Measurement ID"
+msgstr "GA4-Mess-ID"
+
+msgid "GA4 API Secret"
+msgstr "GA4-API-Schlüssel"
+
+msgid "Privacy & Data Retention"
+msgstr "Datenschutz & Aufbewahrung"
+
+msgid "Analytics Data Retention"
+msgstr "Aufbewahrung von Analysedaten"
+
+msgid "Keep Data on Uninstall"
+msgstr "Daten bei Deinstallation behalten"
+
+msgid "Track user learning events and integrate with external analytics platforms."
+msgstr "Lernereignisse der Nutzer verfolgen und mit externen Analyseplattformen integrieren."
+
+msgid "Enable event tracking"
+msgstr "Ereignisverfolgung aktivieren"
+
+msgid "Requires Measurement ID and API Secret below."
+msgstr "Erfordert unten Mess-ID und API-Schlüssel."
+
+msgid "Find in GA4: Admin → Data Streams → Web → Measurement ID"
+msgstr "Zu finden in GA4: Admin → Datenstreams → Web → Mess-ID"
+
+msgid "Find in GA4: Admin → Data Streams → Web → Measurement Protocol API secrets"
+msgstr "Zu finden in GA4: Admin → Datenstreams → Web → API-Geheimnisse des Messprotokolls"
+
+msgid "Configure GDPR compliance and data retention policies."
+msgstr "DSGVO-Konformität und Aufbewahrungsrichtlinien konfigurieren."
+
+msgid "90 days"
+msgstr "90 Tage"
+
+msgid "180 days"
+msgstr "180 Tage"
+
+msgid "1 year (365 days)"
+msgstr "1 Jahr (365 Tage)"
+
+msgid "Unlimited (keep all data)"
+msgstr "Unbegrenzt (alle Daten behalten)"
+
+msgid "Older analytics events will be automatically deleted. Compliance with GDPR data minimization."
+msgstr "Ältere Analyseereignisse werden automatisch gelöscht. Entspricht dem DSGVO-Grundsatz der Datenminimierung."
+
+msgid "Preserve all plugin data when uninstalling"
+msgstr "Alle Plugindaten bei der Deinstallation erhalten"
+
+msgid "If enabled, courses, lessons, user progress, and settings will NOT be deleted when the plugin is uninstalled."
+msgstr "Wenn aktiviert, werden Kurse, Lektionen, Benutzerfortschritt und Einstellungen bei der Deinstallation NICHT gelöscht."
+
+msgid "Settings saved successfully."
+msgstr "Einstellungen erfolgreich gespeichert."
+
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+msgid "Translation Status"
+msgstr "Übersetzungsstatus"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Available"
+msgstr "Verfügbar"
+
+msgid "Not available"
+msgstr "Nicht verfügbar"
+
+msgid "Translation files (.po) need to be compiled to .mo files to work. Use Poedit or Loco Translate plugin to compile them."
+msgstr "Übersetzungsdateien (.po) müssen in .mo-Dateien kompiliert werden. Verwenden Sie Poedit oder das Plugin Loco Translate."
+
+# Admin menu link
+msgid "Kursy"
+msgstr "Kurse"
+
+# Bricks element labels
+msgid "Lesson Content"
+msgstr "Lektionsinhalt"
+
+msgid "Lesson ID"
+msgstr "Lektions-ID"
+
+msgid "Lesson Video"
+msgstr "Lektionsvideo"
+
+msgid "Aspect Ratio"
+msgstr "Seitenverhältnis"
+
+msgid "Show Poster"
+msgstr "Poster anzeigen"
+
+msgid "Lesson Navigation"
+msgstr "Lektionsnavigation"
+
+msgid "Previous Text"
+msgstr "Text für Zurück"
+
+msgid "Next Text"
+msgstr "Text für Weiter"
+
+# Access control messages
+msgid "Dostęp wygasł"
+msgstr "Zugriff abgelaufen"
+
+msgid "Dostęp do: %s"
+msgstr "Zugriff bis: %s"
+
+msgid "Twój dostęp wygasa za %s (%s)"
+msgstr "Ihr Zugriff läuft in %s ab (%s)"
+
+# AJAX and admin notices
+msgid "Brak uprawnień do wykonania tej operacji"
+msgstr "Keine Berechtigung, diesen Vorgang auszuführen"
+
+msgid "Brak uprawnień do edycji tego elementu"
+msgstr "Keine Berechtigung, dieses Element zu bearbeiten"
+
+msgid "Brak wymaganych pól"
+msgstr "Erforderliche Felder fehlen"
+
+msgid "Błąd weryfikacji bezpieczeństwa"
+msgstr "Sicherheitsüberprüfung fehlgeschlagen"
+
+msgid "Brak użytkowników z dostępem."
+msgstr "Keine Benutzer mit Zugriff."
+
+msgid "Brak kursów w systemie."
+msgstr "Keine Kurse im System."
+
+msgid "Nieprawidłowy token bezpieczeństwa"
+msgstr "Ungültiges Sicherheitstoken"
+
+msgid "Musisz być zalogowany"
+msgstr "Sie müssen angemeldet sein"
+
+msgid "Brak uprawnień"
+msgstr "Keine Berechtigung"
+
+msgid "Nieprawidłowy token"
+msgstr "Ungültiges Token"
+
+msgid "Brak uprawnień do dodawania lekcji"
+msgstr "Keine Berechtigung, Lektionen hinzuzufügen"
+
+msgid "Nieprawidłowy identyfikator lekcji"
+msgstr "Ungültige Unterrichts-ID"
+
+msgid "Lekcja nie znaleziona"
+msgstr "Lektion nicht gefunden"
+
+msgid "Nie można zduplikować lekcji bez modułu nadrzędnego."
+msgstr "Eine Lektion kann nicht ohne übergeordnetes Modul dupliziert werden."
+
+msgid "Nie masz uprawnień do duplikowania lekcji w tym kursie."
+msgstr "Keine Berechtigung, Lektionen in diesem Kurs zu duplizieren."
+
+msgid "Nieprawidłowy identyfikator modułu"
+msgstr "Ungültige Modul-ID"
+
+msgid "Moduł nie znaleziony"
+msgstr "Modul nicht gefunden"
+
+msgid "Nie masz uprawnień do duplikowania modułów w tym kursie."
+msgstr "Keine Berechtigung, Module in diesem Kurs zu duplizieren."
+
+msgid "Nie masz uprawnień do usunięcia tej lekcji"
+msgstr "Keine Berechtigung, diese Lektion zu löschen"
+
+msgid "Nie udało się usunąć lekcji"
+msgstr "Löschen der Lektion fehlgeschlagen"
+
+msgid "Nie masz uprawnień do usunięcia tego modułu"
+msgstr "Keine Berechtigung, dieses Modul zu löschen"
+
+msgid "Nie udało się usunąć modułu"
+msgstr "Löschen des Moduls fehlgeschlagen"
+
+msgid "Nie masz uprawnień do edycji tego kursu"
+msgstr "Keine Berechtigung, diesen Kurs zu bearbeiten"
+
+msgid "Nie masz uprawnień do edycji tej lekcji"
+msgstr "Keine Berechtigung, diese Lektion zu bearbeiten"
+
+msgid "Aby opublikować tę lekcję, najpierw opublikuj moduł, w którym się znajduje."
+msgstr "Um diese Lektion zu veröffentlichen, veröffentlichen Sie zuerst das zugehörige Modul."
+
+msgid "Zbyt wiele prób. Spróbuj ponownie za chwilę."
+msgstr "Zu viele Versuche. Bitte versuchen Sie es später erneut."
+
+msgid "Postęp zaktualizowany"
+msgstr "Fortschritt aktualisiert"
+
+msgid "Nie udało się zaktualizować postępu"
+msgstr "Aktualisierung des Fortschritts fehlgeschlagen"
+
+msgid "Błąd podczas aktualizacji postępu"
+msgstr "Fehler beim Aktualisieren des Fortschritts"
+
+# Plural forms for access control
+msgid "Pozostał %d dzień dostępu"
+msgid_plural "Pozostało %d dni dostępu"
+msgstr[0] "%d Tag Zugriff verbleibend"
+msgstr[1] "%d Tage Zugriff verbleibend"
+
+msgid "%d dzień"
+msgid_plural "%d dni"
+msgstr[0] "%d Tag"
+msgstr[1] "%d Tage"
+
+msgid "%d tydzień"
+msgid_plural "%d tygodni"
+msgstr[0] "%d Woche"
+msgstr[1] "%d Wochen"
+
+msgid "%d miesiąc"
+msgid_plural "%d miesięcy"
+msgstr[0] "%d Monat"
+msgstr[1] "%d Monate"
+
+msgid "%d rok"
+msgid_plural "%d lat"
+msgstr[0] "%d Jahr"
+msgstr[1] "%d Jahre"
+
+msgid "pozostał %d dzień"
+msgid_plural "pozostało %d dni"
+msgstr[0] "%d Tag verbleibend"
+msgstr[1] "%d Tage verbleibend"
+
+msgid "Kursy"
+msgstr "Kurse"

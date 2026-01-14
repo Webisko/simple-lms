@@ -19,6 +19,8 @@
 "editor.wordWrap": "on",
 "chat.tools.terminal.autoApprove": {
     "git init": true,
-    "git add": true
+    "git add": true,
+    "git commit": true,
+    "git remote": true
 }
 }

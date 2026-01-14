@@ -1,0 +1,853 @@
+# Copyright (C) 2025 Simple LMS
+# This file is distributed under the same license as the Simple LMS plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Simple LMS 1.3.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/simple-lms\n"
+"POT-Creation-Date: 2025-11-29 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Manual\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: simple-lms.php
+msgid "Simple LMS"
+msgstr ""
+
+msgid "Courses"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+#: includes/admin-customizations.php
+msgid "Back to edit"
+msgstr ""
+
+msgid "COURSE"
+msgstr ""
+
+msgid "MODULE"
+msgstr ""
+
+msgid "Delete Module"
+msgstr ""
+
+msgid "Delete Lesson"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Featured Image"
+msgstr ""
+
+msgid "Number of Published Modules"
+msgstr ""
+
+msgid "Number of Published Lessons"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+#: includes/ajax-handlers.php
+msgid "Invalid data."
+msgstr ""
+
+msgid "Invalid action"
+msgstr ""
+
+msgid "Unknown action"
+msgstr ""
+
+msgid "Missing required fields"
+msgstr ""
+
+msgid "Invalid course"
+msgstr ""
+
+msgid "You don't have access to this course"
+msgstr ""
+
+msgid "Security verification failed"
+msgstr ""
+
+msgid "Insufficient permissions"
+msgstr ""
+
+msgid "Invalid module"
+msgstr ""
+
+#: includes/access-control.php
+msgid "Access expired"
+msgstr ""
+
+msgid "Access to: %s"
+msgstr ""
+
+msgid "Your access expires in %s (%s)"
+msgstr ""
+
+#: includes/custom-meta-boxes.php
+msgid "Course Settings"
+msgstr ""
+
+msgid "Parent Course"
+msgstr ""
+
+msgid "Access Schedule"
+msgstr ""
+
+msgid "Parent Module"
+msgstr ""
+
+msgid "Lesson Details"
+msgstr ""
+
+msgid "This module belongs to the course:"
+msgstr ""
+
+msgid "This module is not assigned to any course."
+msgstr ""
+
+msgid "This lesson belongs to the module:"
+msgstr ""
+
+msgid "This lesson is not assigned to any module."
+msgstr ""
+
+msgid "Set parent course first."
+msgstr ""
+
+msgid "Module schedule is available when course has: Drip → Each module independently."
+msgstr ""
+
+msgid "Days counted from the moment of gaining access to the course (purchase/role)."
+msgstr ""
+
+msgid "Available immediately"
+msgstr ""
+
+msgid "After number of days"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+msgid "Manually"
+msgstr ""
+
+msgid "locked"
+msgstr ""
+
+msgid "unlocked"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Allow comments in lessons"
+msgstr ""
+
+msgid "Access"
+msgstr ""
+
+msgid "Access is managed automatically by WooCommerce integration."
+msgstr ""
+
+msgid "Users receive access after purchasing a product linked to this course."
+msgstr ""
+
+msgid "Users with access:"
+msgstr ""
+
+msgid "No users have access to this course."
+msgstr ""
+
+msgid "Add first module to start building the course."
+msgstr ""
+
+msgid "Add module"
+msgstr ""
+
+msgid "Module title"
+msgstr ""
+
+msgid "Lesson list"
+msgstr ""
+
+msgid "This module has no lessons yet."
+msgstr ""
+
+msgid "Add lesson"
+msgstr ""
+
+msgid "Enter lesson title..."
+msgstr ""
+
+msgid "Published"
+msgstr ""
+
+msgid "Draft"
+msgstr ""
+
+msgid "Duplicate"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "No lessons in this module."
+msgstr ""
+
+msgid "Access granted automatically after purchasing linked product (user_meta tag)."
+msgstr ""
+
+msgid "Manual access management in user profile."
+msgstr ""
+
+msgid "Course Information"
+msgstr ""
+
+msgid "Course Structure"
+msgstr ""
+
+msgid "Featured image"
+msgstr ""
+
+msgid "No image"
+msgstr ""
+
+msgid "Add image"
+msgstr ""
+
+msgid "Change image"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Are you sure you want to remove the image?"
+msgstr ""
+
+msgid "Short course description"
+msgstr ""
+
+msgid "Short description displayed on course list and preview."
+msgstr ""
+
+msgid "Select course image"
+msgstr ""
+
+msgid "Use this image"
+msgstr ""
+
+msgid "Module Structure"
+msgstr ""
+
+msgid "Select lesson image"
+msgstr ""
+
+msgid "Lesson video"
+msgstr ""
+
+msgid "Video type:"
+msgstr ""
+
+msgid "No video"
+msgstr ""
+
+msgid "YouTube"
+msgstr ""
+
+msgid "Vimeo"
+msgstr ""
+
+msgid "URL link (other source)"
+msgstr ""
+
+msgid "File from media library"
+msgstr ""
+
+msgid "Video URL:"
+msgstr ""
+
+msgid "File from media library:"
+msgstr ""
+
+msgid "Selected file:"
+msgstr ""
+
+msgid "No file selected"
+msgstr ""
+
+msgid "Select video file"
+msgstr ""
+
+msgid "Select file"
+msgstr ""
+
+msgid "Video preview"
+msgstr ""
+
+msgid "Invalid YouTube link. Check URL format."
+msgstr ""
+
+msgid "Invalid Vimeo link. Check URL format."
+msgstr ""
+
+msgid "Your browser does not support the video element."
+msgstr ""
+
+msgid "Access automatically managed after purchasing product (user_meta tag)."
+msgstr ""
+
+msgid "After course purchase (default)"
+msgstr ""
+
+msgid "From specific date"
+msgstr ""
+
+msgid "Date from which course/modules will be available to all authorized users."
+msgstr ""
+
+msgid "Gradually"
+msgstr ""
+
+msgid "Each subsequent module after X days"
+msgstr ""
+
+msgid "Each module independently (set in module)"
+msgstr ""
+
+#: includes/custom-post-types.php
+msgid "Course"
+msgstr ""
+
+msgid "Courses"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+msgid "Add New Course"
+msgstr ""
+
+msgid "Edit Course"
+msgstr ""
+
+msgid "New Course"
+msgstr ""
+
+msgid "View Course"
+msgstr ""
+
+msgid "View Courses"
+msgstr ""
+
+msgid "Search Courses"
+msgstr ""
+
+msgid "No courses found."
+msgstr ""
+
+msgid "No courses found in Trash."
+msgstr ""
+
+msgid "Module"
+msgstr ""
+
+msgid "Modules"
+msgstr ""
+
+msgid "Add New Module"
+msgstr ""
+
+msgid "Edit Module"
+msgstr ""
+
+msgid "New Module"
+msgstr ""
+
+msgid "View Module"
+msgstr ""
+
+msgid "View Modules"
+msgstr ""
+
+msgid "Search Modules"
+msgstr ""
+
+msgid "No modules found."
+msgstr ""
+
+msgid "No modules found in Trash."
+msgstr ""
+
+msgid "Lesson"
+msgstr ""
+
+msgid "Lessons"
+msgstr ""
+
+msgid "Add New Lesson"
+msgstr ""
+
+msgid "Edit Lesson"
+msgstr ""
+
+msgid "New Lesson"
+msgstr ""
+
+msgid "View Lesson"
+msgstr ""
+
+msgid "View Lessons"
+msgstr ""
+
+msgid "Search Lessons"
+msgstr ""
+
+msgid "No lessons found."
+msgstr ""
+
+msgid "No lessons found in Trash."
+msgstr ""
+
+#: includes/class-shortcodes.php
+msgid "Continue Learning"
+msgstr ""
+
+msgid "You are not enrolled in any courses."
+msgstr ""
+
+msgid "Start Course"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "In Progress"
+msgstr ""
+
+msgid "Not Started"
+msgstr ""
+
+msgid "View Course"
+msgstr ""
+
+msgid "My Courses"
+msgstr ""
+
+msgid "Previous Lesson"
+msgstr ""
+
+msgid "Next Lesson"
+msgstr ""
+
+msgid "Mark as Complete"
+msgstr ""
+
+msgid "Mark as Incomplete"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "An error occurred"
+msgstr ""
+
+msgid "lessons"
+msgstr ""
+
+msgid "lesson"
+msgstr ""
+
+msgid "No content available."
+msgstr ""
+
+#: includes/class-woocommerce-integration.php
+msgid "Is course product"
+msgstr ""
+
+msgid "Check if this product grants access to a course"
+msgstr ""
+
+msgid "Select course..."
+msgstr ""
+
+msgid "Assigned course"
+msgstr ""
+
+msgid "Select the course this product should grant access to"
+msgstr ""
+
+msgid "WooCommerce Product"
+msgstr ""
+
+msgid "Assigned product:"
+msgstr ""
+
+msgid "Price:"
+msgstr ""
+
+msgid "Status:"
+msgstr ""
+
+msgid "View product"
+msgstr ""
+
+msgid "Disconnect product"
+msgstr ""
+
+msgid "No assigned WooCommerce product."
+msgstr ""
+
+msgid "Create product"
+msgstr ""
+
+msgid "Creating..."
+msgstr ""
+
+msgid "Error creating product:"
+msgstr ""
+
+msgid "An error occurred while communicating with the server"
+msgstr ""
+
+msgid "Are you sure you want to disconnect this product from the course?"
+msgstr ""
+
+msgid "Buy Course"
+msgstr ""
+
+msgid "This course is not available for purchase."
+msgstr ""
+
+msgid "Access Restricted"
+msgstr ""
+
+msgid "You don't have access to course \"%s\"."
+msgstr ""
+
+msgid "Buy this course"
+msgstr ""
+
+msgid "This course is not currently available for purchase."
+msgstr ""
+
+msgid "Contact administrator to get access."
+msgstr ""
+
+msgid "Invalid security token"
+msgstr ""
+
+msgid "Invalid course ID"
+msgstr ""
+
+msgid "Course not found"
+msgstr ""
+
+msgid "Course already has an assigned product"
+msgstr ""
+
+msgid "Failed to create product"
+msgstr ""
+
+msgid "Sale!"
+msgstr ""
+
+msgid "Select product"
+msgstr ""
+
+msgid "Edit course"
+msgstr ""
+
+#: includes/elementor-dynamic-tags/
+msgid "Course Title"
+msgstr ""
+
+msgid "Displays the current course title"
+msgstr ""
+
+msgid "Module Title"
+msgstr ""
+
+msgid "Displays the current module title"
+msgstr ""
+
+msgid "Lesson Title"
+msgstr ""
+
+msgid "Displays the current lesson title"
+msgstr ""
+
+#: includes/elementor-dynamic-tags/widgets/
+msgid "Lesson Content"
+msgstr ""
+
+msgid "Displays the lesson content"
+msgstr ""
+
+msgid "Course Overview"
+msgstr ""
+
+msgid "Displays course structure with progress"
+msgstr ""
+
+msgid "Show Progress"
+msgstr ""
+
+msgid "Show lesson completion status"
+msgstr ""
+
+msgid "Collapsible Modules"
+msgstr ""
+
+msgid "Allow expanding/collapsing modules"
+msgstr ""
+
+msgid "Course Progress"
+msgstr ""
+
+msgid "Shows course completion progress"
+msgstr ""
+
+msgid "Show Percentage"
+msgstr ""
+
+msgid "Display completion percentage"
+msgstr ""
+
+msgid "Progress Bar Color"
+msgstr ""
+
+msgid "Lesson Completion Button"
+msgstr ""
+
+msgid "Button to mark lesson as complete"
+msgstr ""
+
+msgid "Complete Text"
+msgstr ""
+
+msgid "Incomplete Text"
+msgstr ""
+
+msgid "Lesson Navigation"
+msgstr ""
+
+msgid "Previous/Next lesson buttons"
+msgstr ""
+
+msgid "Show Labels"
+msgstr ""
+
+msgid "Button Style"
+msgstr ""
+
+msgid "Arrows"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Arrows + Text"
+msgstr ""
+
+msgid "Lesson Video"
+msgstr ""
+
+msgid "Displays lesson video player"
+msgstr ""
+
+msgid "Autoplay"
+msgstr ""
+
+msgid "Controls"
+msgstr ""
+
+msgid "Show video controls"
+msgstr ""
+
+msgid "Lesson Attachments"
+msgstr ""
+
+msgid "List of downloadable lesson files"
+msgstr ""
+
+msgid "Show Icons"
+msgstr ""
+
+msgid "Download"
+msgstr ""
+
+msgid "Course Info Box"
+msgstr ""
+
+msgid "Course information card"
+msgstr ""
+
+msgid "Show Title"
+msgstr ""
+
+msgid "Show Excerpt"
+msgstr ""
+
+msgid "Show Progress"
+msgstr ""
+
+msgid "Show Button"
+msgstr ""
+
+msgid "Continue Learning Button"
+msgstr ""
+
+msgid "Button to continue last viewed lesson"
+msgstr ""
+
+msgid "Access Status"
+msgstr ""
+
+msgid "Shows user's course access status"
+msgstr ""
+
+msgid "Active Text"
+msgstr ""
+
+msgid "Expired Text"
+msgstr ""
+
+msgid "No Access Text"
+msgstr ""
+
+msgid "Course Purchase"
+msgstr ""
+
+msgid "WooCommerce course purchase button"
+msgstr ""
+
+msgid "Button Text"
+msgstr ""
+
+msgid "Breadcrumbs"
+msgstr ""
+
+msgid "Course navigation breadcrumbs"
+msgstr ""
+
+msgid "Separator"
+msgstr ""
+
+msgid "User Courses Grid"
+msgstr ""
+
+msgid "Grid of user's enrolled courses"
+msgstr ""
+
+msgid "Columns"
+msgstr ""
+
+msgid "Show Empty State"
+msgstr ""
+
+msgid "Module Navigation"
+msgstr ""
+
+msgid "List of course modules"
+msgstr ""
+
+msgid "Show Lesson Count"
+msgstr ""
+
+msgid "Lesson Progress Indicator"
+msgstr ""
+
+msgid "Visual lesson progress indicator"
+msgstr ""
+
+msgid "Indicator Style"
+msgstr ""
+
+msgid "Bar"
+msgstr ""
+
+msgid "Circle"
+msgstr ""
+
+msgid "Steps"
+msgstr ""
+
+msgid "User Progress Dashboard"
+msgstr ""
+
+msgid "Complete user progress dashboard"
+msgstr ""
+
+msgid "Show Statistics"
+msgstr ""
+
+msgid "Show Recent Activity"
+msgstr ""
+
+msgid "Show Certificates"
+msgstr ""
+
+#: Frontend messages
+msgid "Are you sure you want to permanently delete this module along with all its lessons?"
+msgstr ""
+
+msgid "Are you sure you want to permanently delete this lesson?"
+msgstr ""
+
+msgid "An error occurred while performing the operation."
+msgstr ""
+
+msgid "Enter module title."
+msgstr ""
+
+msgid "Enter lesson title."
+msgstr ""
+
+msgid "You don't have permission to perform this operation."
+msgstr ""
+
+msgid "Error deleting item."
+msgstr ""
+
+msgid "Error duplicating item."
+msgstr ""
+
+msgid "(Copy)"
+msgstr ""
+
+msgid "Invalid format"
+msgstr ""
+
+#: Language settings
+msgid "Language"
+msgstr ""
+
+msgid "Default (WordPress language)"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Polish"
+msgstr ""
+
+msgid "Plugin language settings"
+msgstr ""
+
+msgid "Choose the language for the Simple LMS plugin interface."
+msgstr ""

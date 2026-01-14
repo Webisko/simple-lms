@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<wpml-config>
+  <custom-types>
+    <custom-type translate="1">course</custom-type>
+    <custom-type translate="1">module</custom-type>
+    <custom-type translate="1">lesson</custom-type>
+  </custom-types>
+  <custom-fields>
+    <!-- Copy technical meta fields across translations -->
+    <custom-field action="copy">_simple_lms_*</custom-field>
+    <custom-field action="copy">simple_lms_*</custom-field>
+    <!-- Copy parent relationships -->
+    <custom-field action="copy">parent_course</custom-field>
+    <custom-field action="copy">parent_module</custom-field>
+    <!-- Copy lesson video metadata -->
+    <custom-field action="copy">lesson_video_type</custom-field>
+    <custom-field action="copy">lesson_video_url</custom-field>
+    <custom-field action="copy">lesson_video_file_id</custom-field>
+    <custom-field action="copy">lesson_duration</custom-field>
+    <custom-field action="copy">lesson_attachments</custom-field>
+    <!-- Copy access control settings -->
+    <custom-field action="copy">_access_duration_value</custom-field>
+    <custom-field action="copy">_access_duration_unit</custom-field>
+    <custom-field action="copy">_selected_product_id</custom-field>
+    <custom-field action="copy">_module_unlock_delay_value</custom-field>
+    <custom-field action="copy">_module_unlock_delay_unit</custom-field>
+  </custom-fields>
+</wpml-config>

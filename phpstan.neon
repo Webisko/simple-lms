@@ -1,0 +1,46 @@
+parameters:
+	level: 6
+	paths:
+		- includes
+		- simple-lms.php
+	bootstrapFiles:
+		- simple-lms.php
+	excludePaths:
+		- tests/*
+		- vendor/*
+	scanDirectories:
+		- vendor/
+	ignoreErrors:
+		# WordPress globals and functions are dynamically defined
+		- '#Function (add_action|add_filter|apply_filters|do_action|wp_enqueue_script|wp_enqueue_style|get_option|update_option|delete_option|get_post_meta|update_post_meta|delete_post_meta|get_user_meta|update_user_meta|delete_user_meta|wp_send_json_success|wp_send_json_error|esc_html|esc_attr|esc_url|esc_js|wp_kses_post|sanitize_text_field|absint|check_ajax_referer|wp_verify_nonce|current_user_can|is_user_logged_in|get_current_user_id|get_post|get_posts|wp_update_post|wp_insert_post|wp_delete_post|get_permalink|get_edit_post_link|get_the_title|get_post_thumbnail_id|wp_get_attachment_url|wp_get_attachment_image_src|register_post_type|register_post_meta|get_post_type|wp_cache_get|wp_cache_set|wp_cache_delete|set_transient|get_transient|delete_transient|__) invoked with \d+ parameters?, 0 required\.#'
+		
+		# WordPress core classes
+		- '#Access to an undefined property WP_Post::\$#'
+		- '#Call to method .+ on an unknown class WP_Query\.#'
+		- '#Parameter .+ of .+ expects WP_Post, .+ given\.#'
+		
+		# wpdb is a global
+		- '#Undefined variable: \$wpdb#'
+		
+		# Dynamic properties in WordPress (e.g., widget instances)
+		- '#Access to an undefined property#'
+		
+		# wp_editor() and other editor functions
+		- '#Function wp_editor not found\.#'
+		
+		# Strict type issues that are WordPress conventions
+		- '#expects int\|string, int given#'
+		- '#expects string, int given#'
+		
+		# False positives on our namespace usage
+		- '#Instantiated class SimpleLMS\\.+ not found#'
+	
+	# WordPress stubs for better type inference
+	stubFiles:
+		- vendor/szepeviktor/phpstan-wordpress/stubs/wordpress-stubs.php
+	
+	# Report only on code we can control
+	reportUnmatchedIgnoredErrors: false
+	
+	# Memory limit for large codebase analysis
+	memoryLimit: 512M
