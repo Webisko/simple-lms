@@ -1,0 +1,45 @@
+name: PHP Lint & Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['7.4', '8.0', '8.1', '8.2']
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          extensions: mbstring, intl, json
+      
+      - name: Check PHP syntax
+        run: |
+          echo "Running PHP syntax check..."
+          find . -name "*.php" -type f ! -path "./vendor/*" ! -path "./node_modules/*" -exec php -l {} + || exit 1
+          echo "✓ All PHP files have valid syntax"
+      
+      - name: Install Composer dependencies
+        run: |
+          composer install --prefer-dist --no-progress --no-suggest || true
+      
+      - name: Run PHPCS (if available)
+        run: |
+          if [ -f vendor/bin/phpcs ]; then
+            vendor/bin/phpcs --standard=PSR12 includes/ assets/js/ || true
+          fi
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "✓ PHP Lint check completed for PHP ${{ matrix.php-version }}"

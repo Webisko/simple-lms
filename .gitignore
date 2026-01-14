@@ -1,0 +1,27 @@
+# WordPress
+wp-config.php
+wp-content/plugins/*
+!wp-content/plugins/simple-lms
+
+# Dependencies
+vendor/
+node_modules/
+composer.lock
+
+# IDE & Local
+.vscode/workspace.code-workspace
+.idea/
+*.swp
+*.swo
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build & Tests
+dist/
+build/
+*.zip
+coverage/
+.phpunit.result.cache
