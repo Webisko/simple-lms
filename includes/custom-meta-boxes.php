@@ -1115,8 +1115,8 @@ class Meta_Boxes {
         if ($post && $post->post_type === 'course') {
             remove_post_type_support('course', 'editor');
             
-            // Remove default featured image metabox (we have our own)
-            remove_meta_box('postimagediv', 'course', 'side');
+            // Note: We keep the default featured image metabox (postimagediv) for proper WordPress compatibility
+            // Our custom UI in the Information tab is an additional interface, not a replacement
             
             // Remove post attributes metabox
             remove_meta_box('pageparentdiv', 'course', 'side');
@@ -1346,14 +1346,14 @@ class Meta_Boxes {
             echo '<div style="text-align: center;">';
             echo '<img src="' . esc_url($image_url) . '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
             echo '<div style="margin-top: 15px;">';
-            echo '<button type="button" id="change-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
-            echo '<button type="button" id="remove-featured-image" class="button" style="color: #a00;">' . __('Usuń', 'simple-lms') . '</button>';
+            echo '<button type="button" id="change-course-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
+            echo '<button type="button" id="remove-course-featured-image" class="button" style="color: #a00;">' . __('Usuń', 'simple-lms') . '</button>';
             echo '</div>';
             echo '</div>';
         } else {
             echo '<div style="text-align: center; padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa; min-height: 200px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">';
             echo '<p style="color: #666; margin: 0 0 15px 0; font-size: 16px;">' . __('Brak obrazka', 'simple-lms') . '</p>';
-            echo '<button type="button" id="set-featured-image" class="button button-primary">' . __('Dodaj obrazek', 'simple-lms') . '</button>';
+            echo '<button type="button" id="set-course-featured-image" class="button button-primary">' . __('Dodaj obrazek', 'simple-lms') . '</button>';
             echo '</div>';
         }
         
