@@ -1,12 +1,12 @@
 ﻿<?php
+namespace SimpleLMS\Elementor\Widgets;
+
 /**
  * Course Overview Widget (Accordion)
  * Displays course structure with modules as accordion items
  *
  * @package SimpleLMS\Elementor
  */
-
-namespace SimpleLMS\Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;

@@ -1,4 +1,6 @@
 ﻿<?php
+namespace SimpleLMS\Elementor\Widgets;
+
 /**
  * Continue Learning Button Widget for Elementor
  *
@@ -6,8 +8,6 @@
  *
  * @package SimpleLMS
  */
-
-namespace SimpleLMS\Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;

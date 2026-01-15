@@ -1,13 +1,13 @@
 ﻿<?php
 namespace SimpleLMS;
 
-if (!defined('ABSPATH')) {
-    exit;
-}
-
 /**
  * Admin customization handler class
  */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
 class Admin_Customizations {
     /**
      * Hook manager

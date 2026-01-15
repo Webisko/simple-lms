@@ -1,11 +1,11 @@
 ﻿<?php
-/**
- * Access control for Simple LMS (clean)
- */
-
 declare(strict_types=1);
 
 namespace SimpleLMS;
+
+/**
+ * Access control for Simple LMS (clean)
+ */
 
 if (!defined('ABSPATH')) { exit; }
 

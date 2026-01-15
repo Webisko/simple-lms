@@ -1,12 +1,12 @@
 ﻿<?php
+namespace SimpleLMS\Elementor\Widgets;
+
 /**
  * Course Info Box Widget
  * Displays compact course information card
  *
  * @package SimpleLMS\Elementor
  */
-
-namespace SimpleLMS\Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;

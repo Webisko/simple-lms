@@ -1,12 +1,12 @@
 ﻿<?php
+namespace SimpleLMS\Elementor\Widgets;
+
 /**
  * Lesson Content Widget
  * Displays the full WYSIWYG content of a lesson
  *
  * @package SimpleLMS\Elementor
  */
-
-namespace SimpleLMS\Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;

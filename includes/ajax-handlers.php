@@ -1,14 +1,14 @@
 ﻿<?php
+declare(strict_types=1);
+
+namespace SimpleLMS;
+
 /**
  * AJAX request handlers for Simple LMS
  * 
  * @package SimpleLMS
  * @since 1.0.1
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS;
 
 // Import WordPress functions
 use function wp_verify_nonce;

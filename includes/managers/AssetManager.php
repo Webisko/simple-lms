@@ -1,14 +1,15 @@
 ﻿<?php
+
+declare(strict_types=1);
+
+namespace SimpleLMS\Managers;
+
 /**
  * Asset Manager - Manages scripts and styles enqueuing
  *
  * @package SimpleLMS
  * @since 1.4.0
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS\Managers;
 use SimpleLMS\Logger;
 
 if (!defined('ABSPATH')) {

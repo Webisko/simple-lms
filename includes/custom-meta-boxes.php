@@ -1,18 +1,17 @@
 ﻿<?php
 namespace SimpleLMS;
 
+/**
+ * Performance optimization: Uses batch loading to reduce database queries.
+ * For a course with 10 modules and 10 lessons each:
+ * - Before: 1 + 10 + 100 = 111 queries (1 for modules, 1 per module for lessons)
+ * - After: 1 + 1 = 2 queries (1 for modules, 1 for all lessons with IN clause)
+ * This represents a 98% reduction in database queries.
+ */
 
 if (!defined('ABSPATH')) {
     exit;
 }
-
-/**
-    * 
-    * Performance optimization: Uses batch loading to reduce database queries.
-    * For a course with 10 modules and 10 lessons each:
-    * - Before: 1 + 10 + 100 = 111 queries (1 for modules, 1 per module for lessons)
-    * - After: 1 + 1 = 2 queries (1 for modules, 1 for all lessons with IN clause)
-    * This represents a 98% reduction in database queries.
  * Meta boxes handler class
  */
 class Meta_Boxes {

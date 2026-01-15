@@ -1,4 +1,6 @@
 ﻿<?php
+namespace SimpleLMS\Elementor\Widgets;
+
 /**
  * Course Purchase CTA Widget for Elementor
  *
@@ -6,8 +8,6 @@
  *
  * @package SimpleLMS
  */
-
-namespace SimpleLMS\Elementor\Widgets;
 
 use SimpleLMS\Access_Control;
 use SimpleLMS\Elementor\Elementor_Dynamic_Tags;

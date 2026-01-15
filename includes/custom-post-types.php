@@ -1,14 +1,15 @@
 ﻿<?php
+
+declare(strict_types=1);
+
+namespace SimpleLMS;
+
 /**
  * Custom Post Types for Simple LMS
  * 
  * @package SimpleLMS
  * @since 1.0.1
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
     exit;

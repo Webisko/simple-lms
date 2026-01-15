@@ -1,11 +1,12 @@
 ﻿<?php
-/**
- * Admin meta boxes for tag-based course access
- */
 
 declare(strict_types=1);
 
 namespace SimpleLMS;
+
+/**
+ * Admin meta boxes for tag-based course access
+ */
 
 if (!defined('ABSPATH')) { exit; }
 

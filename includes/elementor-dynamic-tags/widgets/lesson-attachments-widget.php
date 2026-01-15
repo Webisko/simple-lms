@@ -1,12 +1,12 @@
 ﻿<?php
+namespace SimpleLMS\Elementor\Widgets;
+
 /**
  * Lesson Attachments Widget
  * Displays lesson downloadable files with icons
  *
  * @package SimpleLMS\Elementor
  */
-
-namespace SimpleLMS\Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;

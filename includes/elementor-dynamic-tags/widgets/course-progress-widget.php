@@ -1,12 +1,12 @@
 ﻿<?php
+namespace SimpleLMS\Elementor\Widgets;
+
 /**
  * Course Progress Bar Widget
  * Displays course completion progress with visual bar
  *
  * @package SimpleLMS\Elementor
  */
-
-namespace SimpleLMS\Elementor\Widgets;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;

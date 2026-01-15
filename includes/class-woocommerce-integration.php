@@ -1,11 +1,15 @@
 ﻿<?php
 namespace SimpleLMS;
 
+/**
+ * WooCommerce Integration
+ * Imports global WordPress and WooCommerce functions for namespaced context
+ */
+
 if (!defined('ABSPATH')) {
     exit;
 }
 
-// Import global WordPress and WooCommerce functions for namespaced context
 use function \add_action;
 use function \add_shortcode;
 use function \admin_url;

@@ -1,14 +1,15 @@
 ﻿<?php
+
+declare(strict_types=1);
+
+namespace SimpleLMS;
+
 /**
  * Progress tracking system for Simple LMS
  * 
  * @package SimpleLMS
  * @since 1.1.0
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
     exit;

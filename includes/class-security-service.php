@@ -1,4 +1,9 @@
 ﻿<?php
+
+declare(strict_types=1);
+
+namespace SimpleLMS;
+
 /**
  * Centralized security helper service for Simple LMS
  *
@@ -8,10 +13,6 @@
  * - Common sanitization helpers for scalar / array inputs
  * - Contextual access checks (course/module/lesson ownership / access)
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS;
 
 if (!defined('ABSPATH')) { exit; }
 
