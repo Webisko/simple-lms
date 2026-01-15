@@ -37,7 +37,7 @@ class Course_Progress_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Pasek postępu kursu', 'simple-lms');
+        return __('Progress bar kursu', 'simple-lms');
     }
 
     /**
@@ -58,7 +58,7 @@ class Course_Progress_Widget extends Widget_Base {
      * Get widget keywords
      */
     public function get_keywords(): array {
-        return ['course', 'progress', 'bar', 'kurs', 'postęp', 'pasek', 'completion', 'ukończenie'];
+        return ['course', 'progress', 'bar', 'kurs', 'postęp', 'pasec', 'completion', 'ukończenie'];
     }
 
     /**
@@ -87,7 +87,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'show_text',
             [
-                'label' => __('Pokaż tekst postępu', 'simple-lms'),
+                'label' => __('Show progress text', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -97,7 +97,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'show_percentage',
             [
-                'label' => __('Pokaż procent', 'simple-lms'),
+                'label' => __('Show percentage', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -111,9 +111,9 @@ class Course_Progress_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'both',
                 'options' => [
-                    'both' => __('completed / Wszystkie lekcje', 'simple-lms'),
+                    'both' => __('completed / All Lessons', 'simple-lms'),
                     'completed' => __('Tylko completed', 'simple-lms'),
-                    'remaining' => __('Pozostałe do ukończenia', 'simple-lms'),
+                    'remaining' => __('Remaining to complete', 'simple-lms'),
                 ],
                 'condition' => [
                     'show_text' => 'yes',
@@ -137,7 +137,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->start_controls_section(
             'bar_style_section',
             [
-                'label' => __('Pasek postępu', 'simple-lms'),
+                'label' => __('Progress bar', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -145,7 +145,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_responsive_control(
             'bar_height',
             [
-                'label' => __('Wysokość paska', 'simple-lms'),
+                'label' => __('Height paska', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'range' => [
@@ -191,7 +191,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'bar_fill_color',
             [
-                'label' => __('Kolor postępu', 'simple-lms'),
+                'label' => __('Progress color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#4CAF50',
                 'selectors' => [
@@ -234,7 +234,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->start_controls_section(
             'text_style_section',
             [
-                'label' => __('Tekst postępu', 'simple-lms'),
+                'label' => __('Progress text', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_text' => 'yes',
@@ -265,7 +265,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_responsive_control(
             'text_margin',
             [
-                'label' => __('Odstęp od paska', 'simple-lms'),
+                'label' => __('Spacing od paska', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'range' => [
@@ -299,7 +299,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_responsive_control(
             'text_align',
             [
-                'label' => __('Wyrównanie tekstu', 'simple-lms'),
+                'label' => __('Alignment tekstu', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -307,7 +307,7 @@ class Course_Progress_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Do środka', 'simple-lms'),
+                        'title' => __('Inward', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
@@ -343,7 +343,7 @@ class Course_Progress_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'inside',
                 'options' => [
-                    'inside' => __('Wewnątrz paska', 'simple-lms'),
+                    'inside' => __('Inside bar', 'simple-lms'),
                     'outside' => __('Obok paska', 'simple-lms'),
                 ],
             ]
@@ -479,12 +479,12 @@ class Course_Progress_Widget extends Widget_Base {
         switch ($format) {
             case 'completed':
                 return sprintf(
-                    __('Ukończono: %d lekcji', 'simple-lms'),
+                    __('Completed: %d lessons', 'simple-lms'),
                     $progress['completed']
                 );
             case 'remaining':
                 return sprintf(
-                    __('Pozostało: %d lekcji', 'simple-lms'),
+                    __('Remaining: %d lessons', 'simple-lms'),
                     $progress['remaining']
                 );
             case 'both':

@@ -17,7 +17,7 @@ class Lesson_Progress_Indicator_Widget extends Widget_Base {
 
     protected function register_controls(): void {
         $this->start_controls_section('content', ['label'=>__('Settings','simple-lms'),'tab'=>Controls_Manager::TAB_CONTENT]);
-        $this->add_control('lesson_id',['label'=>__('ID lekcji','simple-lms'),'type'=>Controls_Manager::NUMBER,'default'=>0,'description'=>__('Zostaw 0 aby wykryć automatycznie','simple-lms')]);
+        $this->add_control('lesson_id',['label'=>__('ID lessons','simple-lms'),'type'=>Controls_Manager::NUMBER,'default'=>0,'description'=>__('Leave 0 to detect automatically','simple-lms')]);
         $this->end_controls_section();
     }
 
@@ -26,27 +26,27 @@ class Lesson_Progress_Indicator_Widget extends Widget_Base {
         $lesson_id = !empty($settings['lesson_id']) ? absint($settings['lesson_id']) : \SimpleLMS\Elementor\Elementor_Dynamic_Tags::get_current_lesson_id();
         if (!$lesson_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div class="elementor-alert elementor-alert-warning">'.esc_html__('Nie wykryto lekcji.','simple-lms').'</div>';
+                echo '<div class="elementor-alert elementor-alert-warning">'.esc_html__('Nie wykryto lessons.','simple-lms').'</div>';
             }
             return;
         }
         if (get_post_type($lesson_id) !== 'lesson') {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div class="elementor-alert elementor-alert-warning">'.esc_html__('Podany ID nie jest lekcją.','simple-lms').'</div>';
+                echo '<div class="elementor-alert elementor-alert-warning">'.esc_html__('Given ID is not a lesson.','simple-lms').'</div>';
             }
             return;
         }
         $module_id = (int) get_post_meta($lesson_id, 'lesson_module', true);
         if (!$module_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Lekcja nie należy do żadnego MODULE.','simple-lms').'</div>';
+                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Lesson does not belong to any module.','simple-lms').'</div>';
             }
             return;
         }
         $lessons = Cache_Handler::getModuleLessons($module_id);
         if (empty($lessons)) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Brak lekcji w tym module.','simple-lms').'</div>';
+                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Brak lessons w tym module.','simple-lms').'</div>';
             }
             return;
         }

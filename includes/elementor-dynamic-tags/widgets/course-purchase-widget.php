@@ -106,12 +106,12 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'icon_position',
             [
-                'label' => __('Pozycja ikony', 'simple-lms'),
+                'label' => __('Icon position', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
                     'left' => __('Przed tekstem', 'simple-lms'),
-                    'right' => __('Po tekście', 'simple-lms'),
+                    'right' => __('After text', 'simple-lms'),
                 ],
             ]
         );
@@ -119,7 +119,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'show_price',
             [
-                'label' => __('Pokaż cenę', 'simple-lms'),
+                'label' => __('Show price', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -146,20 +146,20 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'hide_when_has_access',
             [
-                'label' => __('Ukryj gdy user ma dostęp', 'simple-lms'),
+                'label' => __('Hide when user has access', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
-                'description' => __('Widget będzie ukryty dla użytkowników z dostępem do kursu', 'simple-lms'),
+                'description' => __('Widget will be hidden for users with course access', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'already_owned_text',
             [
-                'label' => __('Tekst gdy już posiada', 'simple-lms'),
+                'label' => __('Text when already owns', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Już posiadasz ten kurs', 'simple-lms'),
+                'default' => __('You already own this course', 'simple-lms'),
                 'condition' => [
                     'hide_when_has_access!' => 'yes',
                 ],
@@ -169,7 +169,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_responsive_control(
             'alignment',
             [
-                'label' => __('Wyrównanie', 'simple-lms'),
+                'label' => __('Alignment', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -177,7 +177,7 @@ class Course_Purchase_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Wyśrodkuj', 'simple-lms'),
+                        'title' => __('Center', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
@@ -251,7 +251,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'regular_price_color',
             [
-                'label' => __('Kolor ceny regularnej (przekreślona)', 'simple-lms'),
+                'label' => __('Regular price color (crossed out)', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#95a5a6',
                 'selectors' => [
@@ -263,7 +263,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_responsive_control(
             'price_spacing',
             [
-                'label' => __('Odstęp od przycisku', 'simple-lms'),
+                'label' => __('Spacing od przycisku', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -314,7 +314,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_responsive_control(
             'button_width',
             [
-                'label' => __('Szerokość', 'simple-lms'),
+                'label' => __('Width', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'auto'],
                 'range' => [
@@ -401,7 +401,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Odstęp ikony', 'simple-lms'),
+                'label' => __('Spacing ikony', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -532,7 +532,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_transition',
             [
-                'label' => __('Czas przejścia (ms)', 'simple-lms'),
+                'label' => __('Transition time (ms)', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [

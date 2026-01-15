@@ -85,7 +85,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
             [
                 'label' => __('Button text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Continue naukę', 'simple-lms'),
+                'default' => __('Continue learning', 'simple-lms'),
                 'placeholder' => __('Wpisz tekst...', 'simple-lms'),
             ]
         );
@@ -93,9 +93,9 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'completed_text',
             [
-                'label' => __('Tekst gdy ukończono', 'simple-lms'),
+                'label' => __('Text when completed', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Kurs ukończony!', 'simple-lms'),
+                'default' => __('Course completed!', 'simple-lms'),
                 'placeholder' => __('Wpisz tekst...', 'simple-lms'),
             ]
         );
@@ -103,9 +103,9 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'no_access_text',
             [
-                'label' => __('Tekst gdy brak dostępu', 'simple-lms'),
+                'label' => __('Text when no access', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Kup kurs aby rozpocząć', 'simple-lms'),
+                'default' => __('Buy course to start', 'simple-lms'),
                 'placeholder' => __('Wpisz tekst...', 'simple-lms'),
             ]
         );
@@ -125,12 +125,12 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'icon_position',
             [
-                'label' => __('Pozycja ikony', 'simple-lms'),
+                'label' => __('Icon position', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
                     'left' => __('Przed tekstem', 'simple-lms'),
-                    'right' => __('Po tekście', 'simple-lms'),
+                    'right' => __('After text', 'simple-lms'),
                 ],
             ]
         );
@@ -138,7 +138,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Odstęp ikony', 'simple-lms'),
+                'label' => __('Spacing ikony', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -169,7 +169,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'hide_when_completed',
             [
-                'label' => __('Ukryj gdy kurs ukończony', 'simple-lms'),
+                'label' => __('Hide when course completed', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -179,7 +179,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'hide_when_no_access',
             [
-                'label' => __('Ukryj gdy brak dostępu', 'simple-lms'),
+                'label' => __('Hide when no access', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -189,7 +189,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_responsive_control(
             'alignment',
             [
-                'label' => __('Wyrównanie', 'simple-lms'),
+                'label' => __('Alignment', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -197,7 +197,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Wyśrodkuj', 'simple-lms'),
+                        'title' => __('Center', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
@@ -238,7 +238,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_responsive_control(
             'button_width',
             [
-                'label' => __('Szerokość', 'simple-lms'),
+                'label' => __('Width', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'auto'],
                 'range' => [
@@ -394,7 +394,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_transition',
             [
-                'label' => __('Czas przejścia (ms)', 'simple-lms'),
+                'label' => __('Transition time (ms)', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [

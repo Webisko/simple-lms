@@ -183,20 +183,16 @@ class Plugin
             return new \SimpleLMS\LmsShortcodes($c->get(Logger::class));
         });
 
-        // REST API
+        // REST API (with DI: Logger + Security_Service)
         $container->singleton('SimpleLMS\\Rest_API', function ($c) {
-            return new \SimpleLMS\Rest_API();
+            return new \SimpleLMS\Rest_API(
+                $c->get(Logger::class),
+                $c->get(Security_Service::class)
+            );
         });
 
-        // WooCommerce Integration (if WooCommerce is active)
-        if (class_exists('WooCommerce')) {
-            $container->singleton('SimpleLMS\\WooCommerce_Integration', function ($c) {
-                return new \SimpleLMS\WooCommerce_Integration(
-                    $c->has(Logger::class) ? $c->get(Logger::class) : null,
-                    $c->has(Security_Service::class) ? $c->get(Security_Service::class) : null
-                );
-            });
-        }
+        // WooCommerce Integration - Lazily loaded on woocommerce_loaded hook
+        // Do not instantiate here - will be registered in loadPluginFiles()
 
         // Analytics Tracker
         $container->singleton('SimpleLMS\\Analytics_Tracker', function ($c) {
@@ -303,7 +299,7 @@ class Plugin
             'includes/custom-meta-boxes.php',
             'includes/admin-customizations.php',
             'includes/ajax-handlers.php',
-            'includes/class-rest-api.php',
+            'includes/class-rest-api-refactored.php',
             'includes/class-progress-tracker.php',
             'includes/class-shortcodes.php',
             'includes/class-woocommerce-integration.php',
@@ -325,29 +321,87 @@ class Plugin
             }
         }
 
-        // Lazy-load Elementor integration
-        \add_action('plugins_loaded', function () {
-            if (defined('ELEMENTOR_VERSION')) {
-                $elemTags = SIMPLE_LMS_PLUGIN_DIR . 'includes/elementor-dynamic-tags/class-elementor-dynamic-tags.php';
-                $elemGuard = SIMPLE_LMS_PLUGIN_DIR . 'includes/compat/elementor-embed-guard.php';
-                if (file_exists($elemTags)) {
-                    require_once $elemTags;
-                }
-                if (file_exists($elemGuard)) {
-                    require_once $elemGuard;
-                }
-            }
-        }, 20);
+        // Register WooCommerce integration on woocommerce_loaded hook
+        // This ensures WooCommerce is fully initialized before our integration hooks in
+        \add_action('woocommerce_loaded', [$this, 'registerWooCommerceIntegration'], 10);
 
-        // Lazy-load Bricks integration
-        \add_action('plugins_loaded', function () {
-            if (defined('BRICKS_VERSION')) {
-                $bricks = SIMPLE_LMS_PLUGIN_DIR . 'includes/bricks/class-bricks-integration.php';
-                if (file_exists($bricks)) {
-                    require_once $bricks;
-                }
+        // Lazy-load Elementor integration only when Elementor is active
+        \add_action('elementor_loaded', [$this, 'registerElementorIntegration']);
+
+        // Lazy-load Bricks integration only when Bricks is active
+        \add_action('bricks_init', [$this, 'registerBricksIntegration']);
+    }
+
+    /**
+     * Register WooCommerce integration on woocommerce_loaded hook
+     * 
+     * Called only when WooCommerce is fully loaded and active
+     *
+     * @return void
+     */
+    public function registerWooCommerceIntegration(): void
+    {
+        $container = $this->container;
+        
+        if (!$container->has('SimpleLMS\\WooCommerce_Integration')) {
+            // Register WooCommerce Integration service
+            $container->singleton('SimpleLMS\\WooCommerce_Integration', function ($c) {
+                return new \SimpleLMS\WooCommerce_Integration(
+                    $c->has(Logger::class) ? $c->get(Logger::class) : null,
+                    $c->has(Security_Service::class) ? $c->get(Security_Service::class) : null
+                );
+            });
+        }
+        
+        if ($container->has('SimpleLMS\\WooCommerce_Integration')) {
+            $container->get('SimpleLMS\\WooCommerce_Integration')->register();
+        }
+    }
+
+    /**
+     * Register Elementor integration
+     * 
+     * Called only when Elementor is loaded and active
+     *
+     * @return void
+     */
+    public function registerElementorIntegration(): void
+    {
+        $elemTags = SIMPLE_LMS_PLUGIN_DIR . 'includes/elementor-dynamic-tags/class-elementor-dynamic-tags.php';
+        $elemGuard = SIMPLE_LMS_PLUGIN_DIR . 'includes/compat/elementor-embed-guard.php';
+        
+        if (file_exists($elemTags)) {
+            require_once $elemTags;
+            if (class_exists('SimpleLMS\Elementor\Elementor_Dynamic_Tags')) {
+                \SimpleLMS\Elementor\Elementor_Dynamic_Tags::init();
             }
-        }, 20);
+        }
+        
+        if (file_exists($elemGuard)) {
+            require_once $elemGuard;
+            if (class_exists('SimpleLMS\Elementor\Elementor_Embed_Guard')) {
+                \SimpleLMS\Elementor\Elementor_Embed_Guard::init();
+            }
+        }
+    }
+
+    /**
+     * Register Bricks integration
+     * 
+     * Called only when Bricks is loaded and active
+     *
+     * @return void
+     */
+    public function registerBricksIntegration(): void
+    {
+        $bricks = SIMPLE_LMS_PLUGIN_DIR . 'includes/bricks/class-bricks-integration.php';
+        
+        if (file_exists($bricks)) {
+            require_once $bricks;
+            if (class_exists('SimpleLMS\Bricks\Bricks_Integration')) {
+                \SimpleLMS\Bricks\Bricks_Integration::init();
+            }
+        }
     }
 
     /**
@@ -396,8 +450,13 @@ class Plugin
             $this->container->get('SimpleLMS\\Ajax_Handler')->register();
         }
 
-        if (class_exists('SimpleLMS\\Rest_API')) {
-            Rest_API::init();
+        // REST API - now uses HookManager for endpoint registration
+        if ($this->container->has('SimpleLMS\\Rest_API')) {
+            /** @var Rest_API $restApi */
+            $restApi = $this->container->get('SimpleLMS\\Rest_API');
+            /** @var Managers\HookManager $hookManager */
+            $hookManager = $this->container->get(Managers\HookManager::class);
+            $hookManager->addAction('rest_api_init', [$restApi, 'registerEndpoints']);
         }
 
         if ($this->container->has('SimpleLMS\\Progress_Tracker')) {
@@ -428,17 +487,8 @@ class Plugin
             $this->container->get('SimpleLMS\\Privacy_Handlers')->register();
         }
 
-        if (class_exists('SimpleLMS\Elementor\Elementor_Dynamic_Tags')) {
-            \SimpleLMS\Elementor\Elementor_Dynamic_Tags::init();
-        }
-
-        if (class_exists('SimpleLMS\Elementor\Elementor_Embed_Guard')) {
-            \SimpleLMS\Elementor\Elementor_Embed_Guard::init();
-        }
-
-        if (class_exists('SimpleLMS\Bricks\Bricks_Integration')) {
-            \SimpleLMS\Bricks\Bricks_Integration::init();
-        }
+        // WooCommerce, Elementor, Bricks integrations now registered on their respective hooks
+        // See: registerWooCommerceIntegration(), registerElementorIntegration(), registerBricksIntegration()
 
         if (class_exists('SimpleLMS\Cache_Handler')) {
             Cache_Handler::init();

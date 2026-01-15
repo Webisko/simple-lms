@@ -15,8 +15,8 @@ class Access_Status extends \Bricks\Element {
 
     public function set_controls() {
         $this->controls['courseId'] = ['tab'=>'content','label'=>esc_html__('Course ID','simple-lms'),'type'=>'number','default'=>0];
-        $this->controls['grantedText'] = ['tab'=>'content','label'=>esc_html__('Access Granted Text','simple-lms'),'type'=>'text','default'=>'Masz dostęp'];
-        $this->controls['deniedText'] = ['tab'=>'content','label'=>esc_html__('Access Denied Text','simple-lms'),'type'=>'text','default'=>'Brak dostępu'];
+        $this->controls['grantedText'] = ['tab'=>'content','label'=>esc_html__('Access Granted Text','simple-lms'),'type'=>'text','default'=>'You have access'];
+        $this->controls['deniedText'] = ['tab'=>'content','label'=>esc_html__('Access Denied Text','simple-lms'),'type'=>'text','default'=>'No access'];
     }
 
     public function render() {

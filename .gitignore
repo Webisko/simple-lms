@@ -25,3 +25,19 @@ build/
 *.zip
 coverage/
 .phpunit.result.cache
+
+# Translation Scripts & Backups (Krok 4 cleanup)
+*-translation*.php
+translate-*.php
+*-polish*.php
+complete-*.php
+extend-*.php
+final-*.php
+test-regex.php
+*.po.backup
+*.po.original
+*.po.original.utf8
+*_en_US.po
+*_en_US.mo
+remaining-*.txt
+untranslated-*.txt

@@ -58,7 +58,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
      * Get widget keywords
      */
     public function get_keywords(): array {
-        return ['lesson', 'complete', 'button', 'lekcja', 'ukończenie', 'przycisk', 'toggle'];
+        return ['lesson', 'complete', 'button', 'lesson', 'ukończenie', 'przycisk', 'toggle'];
     }
 
     /**
@@ -77,28 +77,28 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lekcji (opcjonalne)', 'simple-lms'),
+                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
-                'description' => __('Pozostaw puste, aby automatycznie wykryć bieżącą lekcję', 'simple-lms'),
+                'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'complete_text',
             [
-                'label' => __('Tekst: Oznacz jako ukończoną', 'simple-lms'),
+                'label' => __('Tekst: Mark as completed', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Oznacz jako ukończoną', 'simple-lms'),
+                'default' => __('Mark as completed', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'incomplete_text',
             [
-                'label' => __('Tekst: Oznacz jako nieukończoną', 'simple-lms'),
+                'label' => __('Tekst: Mark as incomplete', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Oznacz jako nieukończoną', 'simple-lms'),
+                'default' => __('Mark as incomplete', 'simple-lms'),
             ]
         );
 
@@ -115,7 +115,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'icon_position',
             [
-                'label' => __('Pozycja ikony', 'simple-lms'),
+                'label' => __('Icon position', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
@@ -131,7 +131,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_responsive_control(
             'button_align',
             [
-                'label' => __('Wyrównanie', 'simple-lms'),
+                'label' => __('Alignment', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -139,7 +139,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Do środka', 'simple-lms'),
+                        'title' => __('Inward', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
@@ -218,7 +218,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->start_controls_tab(
             'button_incomplete_tab',
             [
-                'label' => __('Nieukończona', 'simple-lms'),
+                'label' => __('Incomplete', 'simple-lms'),
             ]
         );
 
@@ -260,7 +260,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->start_controls_tab(
             'button_complete_tab',
             [
-                'label' => __('Ukończona', 'simple-lms'),
+                'label' => __('Completed', 'simple-lms'),
             ]
         );
 
@@ -388,7 +388,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Odstęp od tekstu', 'simple-lms'),
+                'label' => __('Spacing od tekstu', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [

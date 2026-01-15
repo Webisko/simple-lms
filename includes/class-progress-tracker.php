@@ -188,7 +188,7 @@ class Progress_Tracker {
             $courseId = (int) get_post_meta($moduleId, 'parent_course', true);
             
             if (!$moduleId || !$courseId) {
-                throw new \InvalidArgumentException(__('Nieprawidłowa struktura lekcji', 'simple-lms'));
+                throw new \InvalidArgumentException(__('Invalid lesson structure', 'simple-lms'));
             }
             
             $tableName = $wpdb->prefix . self::TABLE_NAME;
@@ -493,7 +493,7 @@ class Progress_Tracker {
             
             $userId = get_current_user_id();
             if (!$userId) {
-                throw new \Exception(__('Musisz być zalogowany', 'simple-lms'));
+                throw new \Exception(__('You must be logged in', 'simple-lms'));
             }
             
             $lessonId = (int) ($_POST['lesson_id'] ?? 0);
@@ -501,7 +501,7 @@ class Progress_Tracker {
             $timeSpent = (int) ($_POST['time_spent'] ?? 0);
             
             if (!$lessonId) {
-                throw new \Exception(__('Nieprawidłowy ID lekcji', 'simple-lms'));
+                throw new \Exception(__('Invalid lesson ID', 'simple-lms'));
             }
             
             // Check if user has access to this lesson
@@ -513,11 +513,11 @@ class Progress_Tracker {
             
             if ($result) {
                 wp_send_json_success([
-                    'message' => $completed ? __('Lekcja oznaczona jako ukończona', 'simple-lms') : __('Postęp zapisany', 'simple-lms'),
+                    'message' => $completed ? __('Lesson marked as completed', 'simple-lms') : __('Progress saved', 'simple-lms'),
                     'completed' => $completed
                 ]);
             } else {
-                throw new \Exception(__('Nie udało się zapisać postępu', 'simple-lms'));
+                throw new \Exception(__('Failed to save progress', 'simple-lms'));
             }
             
         } catch (\Exception $e) {
@@ -536,7 +536,7 @@ class Progress_Tracker {
             
             $userId = get_current_user_id();
             if (!$userId) {
-                throw new \Exception(__('Musisz być zalogowany', 'simple-lms'));
+                throw new \Exception(__('You must be logged in', 'simple-lms'));
             }
             
             $courseId = (int) ($_POST['course_id'] ?? 0);
@@ -556,7 +556,7 @@ class Progress_Tracker {
      * @return array Modified columns
      */
     public function addProgressColumn(array $columns): array {
-        $columns['lms_progress'] = __('Postęp LMS', 'simple-lms');
+        $columns['lms_progress'] = __('LMS Progress', 'simple-lms');
         return $columns;
     }
     
@@ -596,7 +596,7 @@ class Progress_Tracker {
     public function addUserProgressMetaBox(\WP_User $user): void {
         $progress = self::getUserProgress($user->ID);
         
-        echo '<h3>' . __('Postęp w kursach LMS', 'simple-lms') . '</h3>';
+        echo '<h3>' . __('LMS Course Progress', 'simple-lms') . '</h3>';
         echo '<table class="form-table">';
         
         if (!empty($progress['overall_progress'])) {
@@ -611,12 +611,12 @@ class Progress_Tracker {
                     $courseProgress['total_lessons'],
                     $courseProgress['completion_percentage']
                 );
-                echo '<br><small>' . sprintf(__('Łączny czas: %s', 'simple-lms'), self::formatTime($courseProgress['total_time_spent'])) . '</small>';
+                echo '<br><small>' . sprintf(__('Total time: %s', 'simple-lms'), self::formatTime($courseProgress['total_time_spent'])) . '</small>';
                 echo '</td>';
                 echo '</tr>';
             }
         } else {
-            echo '<tr><td colspan="2">' . __('Brak zapisanych postępów', 'simple-lms') . '</td></tr>';
+            echo '<tr><td colspan="2">' . __('No saved progress', 'simple-lms') . '</td></tr>';
         }
         
         echo '</table>';
@@ -733,13 +733,13 @@ class Progress_Tracker {
      */
     private static function formatTime(int $seconds): string {
         if ($seconds < 60) {
-            return sprintf(__('%d sekund', 'simple-lms'), $seconds);
+            return sprintf(__('%d secund', 'simple-lms'), $seconds);
         } elseif ($seconds < 3600) {
             return sprintf(__('%d minut', 'simple-lms'), floor($seconds / 60));
         } else {
             $hours = floor($seconds / 3600);
             $minutes = floor(($seconds % 3600) / 60);
-            return sprintf(__('%d godz. %d min.', 'simple-lms'), $hours, $minutes);
+            return sprintf(__('%d hr. %d min.', 'simple-lms'), $hours, $minutes);
         }
     }
 }

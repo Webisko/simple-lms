@@ -338,15 +338,15 @@ class AssetManager
             'editModuleUrl' => \admin_url('post.php?post=MODULE_ID&action=edit'),
             'editLessonUrl' => \admin_url('post.php?post=LESSON_ID&action=edit'),
             'i18n' => [
-                'error_generic' => __('Wystąpił błąd. Spróbuj ponownie.', 'simple-lms'),
-                'confirm_delete_module' => __('Czy na pewno chcesz usunąć moduł?', 'simple-lms'),
-                'confirm_delete_lesson' => __('Czy na pewno chcesz usunąć lekcję?', 'simple-lms'),
-                'enter_module_title' => __('Wpisz tytuł MODULE.', 'simple-lms'),
+                'error_generic' => __('An error occurred. Try again.', 'simple-lms'),
+                'confirm_delete_module' => __('Are you sure you want to delete the module?', 'simple-lms'),
+                'confirm_delete_lesson' => __('Are you sure you want to delete the lesson?', 'simple-lms'),
+                'enter_module_title' => __('Enter module title.', 'simple-lms'),
                 'enter_lesson_title' => __('Wpisz Lesson Title.', 'simple-lms'),
-                'add_lesson' => __('Dodaj lekcję', 'simple-lms'),
+                'add_lesson' => __('Add lesson', 'simple-lms'),
                 'lesson_title' => __('Lesson Title', 'simple-lms'),
                 'duplicate_module' => __('Duplikuj', 'simple-lms'),
-                'delete_module' => __('Usuń', 'simple-lms'),
+                'delete_module' => __('Remove', 'simple-lms'),
             ],
         ];
         $this->localizeScript('simple-lms-admin', 'simpleLMS', $localization);

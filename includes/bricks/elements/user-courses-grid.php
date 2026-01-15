@@ -33,7 +33,7 @@ class User_Courses_Grid extends \Bricks\Element {
             echo '<div style="Padding:15px">';
             echo '<h3 style="margin:0 0 10px"><a href="'.esc_url(get_permalink($course)).'" style="color:#333;text-decoration:none">'.esc_html($course->post_title).'</a></h3>';
             echo '<div class="progress-bar" style="height:8px;background:#eee;border-radius:4px;overflow:hidden;margin-bottom:10px"><div style="width:'.$progress.'%;height:100%;background:#4CAF50"></div></div>';
-            echo '<span style="font-size:0.9em;color:#666">Postęp: '.$progress.'%</span>';
+            echo '<span style="font-size:0.9em;color:#666">Progress: '.$progress.'%</span>';
             echo '</div></div>';
         }
         echo '</div>';

@@ -22,24 +22,24 @@ class User_Courses_Grid_Widget extends Widget_Base {
             'default' => '3',
             'options' => ['1'=>'1','2'=>'2','3'=>'3','4'=>'4']
         ]);
-        $this->add_control('show_progress', ['label'=>__('Pokaż postęp','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
-        $this->add_control('show_continue', ['label'=>__('Pokaż przycisk Continue','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
+        $this->add_control('show_progress', ['label'=>__('Show progress','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
+        $this->add_control('show_continue', ['label'=>__('Show button Continue','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
         $this->end_controls_section();
 
         $this->start_controls_section('card_style', ['label'=>__('Karta','simple-lms'),'tab'=>Controls_Manager::TAB_STYLE]);
-        $this->add_responsive_control('card_gap', ['label'=>__('Odstęp','simple-lms'),'type'=>Controls_Manager::SLIDER,'size_units'=>['px','em','rem'],'selectors'=>['{{WRAPPER}} .user-courses-grid'=>'gap: {{SIZE}}{{UNIT}};']]);
+        $this->add_responsive_control('card_gap', ['label'=>__('Spacing','simple-lms'),'type'=>Controls_Manager::SLIDER,'size_units'=>['px','em','rem'],'selectors'=>['{{WRAPPER}} .user-courses-grid'=>'gap: {{SIZE}}{{UNIT}};']]);
         $this->add_group_control(\Elementor\Group_Control_Box_Shadow::get_type(), ['name'=>'card_shadow','selector'=>'{{WRAPPER}} .course-card']);
         $this->add_group_control(\Elementor\Group_Control_Border::get_type(), ['name'=>'card_border','selector'=>'{{WRAPPER}} .course-card']);
-        $this->add_control('card_radius',['label'=>__('Zaokrąglenie','simple-lms'),'type'=>Controls_Manager::DIMENSIONS,'size_units'=>['px','%','em','rem'],'selectors'=>['{{WRAPPER}} .course-card'=>'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
+        $this->add_control('card_radius',['label'=>__('Border radius','simple-lms'),'type'=>Controls_Manager::DIMENSIONS,'size_units'=>['px','%','em','rem'],'selectors'=>['{{WRAPPER}} .course-card'=>'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};']]);
         $this->end_controls_section();
     }
 
     protected function render(): void {
-        if (!is_user_logged_in()) { echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Zaloguj się, aby zobaczyć swoje kursy.','simple-lms').'</div>'; return; }
+        if (!is_user_logged_in()) { echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Log in to see your courses.','simple-lms').'</div>'; return; }
         $settings = $this->get_settings_for_display();
         $user_id = get_current_user_id();
         $courses = Access_Control::getUserCourses($user_id);
-        if (empty($courses)) { echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Nie masz żadnych kursów.','simple-lms').'</div>'; return; }
+        if (empty($courses)) { echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('You have no courses.','simple-lms').'</div>'; return; }
         $cols = $settings['columns'] ?? '3';
         echo '<div class="user-courses-grid columns-'.esc_attr($cols).'" style="display:grid">';
         foreach ($courses as $course) {
@@ -60,7 +60,7 @@ class User_Courses_Grid_Widget extends Widget_Base {
                     $continue_url = get_permalink($continue_lesson_id);
                     echo '<a class="continue-btn" href="'.esc_url($continue_url).'" style="display:inline-block;Padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html__('Continue','simple-lms').'</a>';
                 } else {
-                    echo '<span class="continue-btn disabled" style="display:inline-block;Padding:10px 16px;background:#9e9e9e;color:#fff;border-radius:4px">'.esc_html__('Brak lekcji do kontynuowania','simple-lms').'</span>';
+                    echo '<span class="continue-btn disabled" style="display:inline-block;Padding:10px 16px;background:#9e9e9e;color:#fff;border-radius:4px">'.esc_html__('Brak lessons do kontynuowania','simple-lms').'</span>';
                 }
             }
             echo '</div></div>';

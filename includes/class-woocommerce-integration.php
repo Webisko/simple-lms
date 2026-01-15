@@ -174,11 +174,11 @@ class WooCommerce_Integration {
     private static function validateAjax(string $nonceAction, ?int $objectId = null, string $capability = 'edit_posts'): ?array {
         $nonce = isset($_POST['nonce']) ? sanitize_text_field((string) $_POST['nonce']) : '';
         if (!$nonce || !wp_verify_nonce($nonce, $nonceAction)) {
-            return ['message' => __('Nieprawidłowy token bezpieczeństwa', 'simple-lms')];
+            return ['message' => __('Invalid security token', 'simple-lms')];
         }
 
         if (!is_user_logged_in()) {
-            return ['message' => __('Musisz być zalogowany', 'simple-lms')];
+            return ['message' => __('You must be logged in', 'simple-lms')];
         }
 
         if ($objectId && !current_user_can('edit_post', $objectId)) {
@@ -258,7 +258,7 @@ class WooCommerce_Integration {
         // Localize data for admin JS (WooCommerce section)
         wp_localize_script('simple-lms-admin', 'simpleLMSWoo', [
             'currentCourseId' => $current_course_id ?: '',
-            'editCourseText' => __('Edytuj kurs', 'simple-lms'),
+            'editCourseText' => __('Edit Course', 'simple-lms'),
             'editCourseUrl' => admin_url('post.php?action=edit&post='),
         ]);
 
@@ -276,20 +276,20 @@ class WooCommerce_Integration {
         if ($is_virtual === 'yes') {
             // Course product checkbox
             echo '<p class="form-field _is_course_product_field">';
-            echo '<label for="_is_course_product">' . __('To jest produkt kursu', 'simple-lms') . '&nbsp;<span class="woocommerce-help-tip" data-tip="' . esc_attr__('Zaznacz, jeśli ten produkt daje dostęp do kursu', 'simple-lms') . '"></span></label>';
+            echo '<label for="_is_course_product">' . __('To jest produkt kursu', 'simple-lms') . '&nbsp;<span class="woocommerce-help-tip" data-tip="' . esc_attr__('Check if this product gives access to the course', 'simple-lms') . '"></span></label>';
             echo '<input type="checkbox" class="checkbox" name="_is_course_product" id="_is_course_product" value="yes"' . checked($is_course_product, 'yes', false) . ' />';
             echo '</p>';
             
             // Course selection dropdown - include current product ID to get its course
             $courses = self::get_available_courses($post->ID);
-            $course_options = ['' => __('Wybierz kurs...', 'simple-lms')];
+            $course_options = ['' => __('Select course...', 'simple-lms')];
             
             foreach ($courses as $course) {
                 $course_options[$course->ID] = $course->post_title;
             }
             
             echo '<p class="form-field _course_id_field" id="_course_id_field">';
-            echo '<label for="_course_id">' . __('Przypisany kurs', 'simple-lms') . '&nbsp;<span class="woocommerce-help-tip" data-tip="' . esc_attr__('Wybierz kurs, do którego ma dawać dostęp ten produkt', 'simple-lms') . '"></span></label>';
+            echo '<label for="_course_id">' . __('Przypisany kurs', 'simple-lms') . '&nbsp;<span class="woocommerce-help-tip" data-tip="' . esc_attr__('Select course to which this product should give access', 'simple-lms') . '"></span></label>';
             echo '<select name="_course_id" id="_course_id" class="short">';
             foreach ($course_options as $value => $label) {
                 echo '<option value="' . esc_attr($value) . '"' . selected($current_course_id, $value, false) . '>' . esc_html($label) . '</option>';
@@ -305,7 +305,7 @@ class WooCommerce_Integration {
         } else {
             echo '<p class="form-field">';
             echo '<label>' . __('Settings kursu', 'simple-lms') . '</label>';
-            echo '<em>' . __('Settings kursu są dostępne tylko dla produktów wirtualnych.', 'simple-lms') . '</em>';
+            echo '<em>' . __('Course settings are only available for virtual products.', 'simple-lms') . '</em>';
             echo '</p>';
         }
         
@@ -428,7 +428,7 @@ class WooCommerce_Integration {
     public static function add_course_product_metabox() {
         add_meta_box(
             'course_woocommerce_product',
-            __('Produkty WooCommerce', 'simple-lms'),
+            __('Products WooCommerce', 'simple-lms'),
             [__CLASS__, 'course_product_metabox_content'],
             'course',
             'side',
@@ -455,7 +455,7 @@ class WooCommerce_Integration {
         }
         
         echo '<div style="Padding: 0;">';
-        echo '<h4>' . __('Przypisane produkty:', 'simple-lms') . '</h4>';
+        echo '<h4>' . __('Przypisane Products:', 'simple-lms') . '</h4>';
         
         // Kafelki produktów - układ pionowy dla sidebar
         echo '<div id="course-products-grid" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">';
@@ -482,11 +482,11 @@ class WooCommerce_Integration {
                     // Badge domyślnego produktu
                     if ($is_default) {
                         echo '<div style="position: absolute; top: -6px; left: 10px; background: #007cba; color: white; Padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold; z-index: 1;">' . 
-                             __('DOMYŚLNY', 'simple-lms') . '</div>';
+                             __('DEFAULT', 'simple-lms') . '</div>';
                     }
                     
                     // Przycisk usuwania - tylko czerwona ikona X (większa)
-                    echo '<button type="button" class="remove-product" style="position: absolute; top: 4px; right: 4px; background: none; color: #dc3545; border: none; width: 24px; height: 24px; cursor: pointer; font-size: 16px; line-height: 1; font-weight: bold;" title="' . __('Usuń produkt', 'simple-lms') . '">×</button>';
+                    echo '<button type="button" class="remove-product" style="position: absolute; top: 4px; right: 4px; background: none; color: #dc3545; border: none; width: 24px; height: 24px; cursor: pointer; font-size: 16px; line-height: 1; font-weight: bold;" title="' . __('Remove produkt', 'simple-lms') . '">×</button>';
                     
                     // Górna część - informacje o produkcie
                     echo '<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">';
@@ -533,7 +533,7 @@ class WooCommerce_Integration {
                     
                     if (!$is_default) {
                         echo '<button type="button" class="set-default-product button button-primary" data-product-id="' . $product_id . '" style="flex: 1; font-size: 11px; Padding: 4px 8px;">' . 
-                             __('Ustaw domyślny', 'simple-lms') . '</button>';
+                             __('Set default', 'simple-lms') . '</button>';
                     }
                     
                     echo '<a href="' . get_edit_post_link($product_id) . '" target="_blank" class="button button-small" style="flex: 1; font-size: 11px; Padding: 4px 8px; text-decoration: none; text-align: center;">' . 
@@ -548,7 +548,7 @@ class WooCommerce_Integration {
             echo '<div style="text-align: center; Padding: 20px; background: #f9f9f9; border: 2px dashed #ddd; border-radius: 8px; color: #666;">';
             echo '<div style="font-size: 32px; margin-bottom: 10px;">📦</div>';
             echo '<h4 style="margin: 0 0 8px 0; color: #666; font-size: 14px;">' . __('No products', 'simple-lms') . '</h4>';
-            echo '<p style="margin: 0; font-size: 12px;">' . __('Dodaj produkty WooCommerce do kursu.', 'simple-lms') . '</p>';
+            echo '<p style="margin: 0; font-size: 12px;">' . __('Add Producty WooCommerce do kursu.', 'simple-lms') . '</p>';
             echo '</div>';
         }
         
@@ -557,21 +557,21 @@ class WooCommerce_Integration {
         // Przyciski akcji - kompaktowe dla sidebar
         echo '<div style="margin-bottom: 15px; display: flex; flex-direction: column; gap: 8px;">';
         echo '<button type="button" class="button button-primary" id="create-product" style="width: 100%; text-align: center;">' . 
-             __('Utwórz nowy produkt', 'simple-lms') . '</button>';
+             __('Create new product', 'simple-lms') . '</button>';
         echo '<button type="button" class="button" id="add-existing-product" style="width: 100%; text-align: center;">' . 
-             __('Dodaj istniejący produkt', 'simple-lms') . '</button>';
+             __('Add existing product', 'simple-lms') . '</button>';
         echo '</div>';
         
         // Modal do wybierania produktów
         echo '<div id="product-selection-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">';
         echo '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; Padding: 20px; border-radius: 5px; max-width: 600px; width: 90%; max-height: 80%; overflow-y: auto;">';
-        echo '<h3>' . __('Wybierz produkt WooCommerce', 'simple-lms') . '</h3>';
+        echo '<h3>' . __('Select product WooCommerce', 'simple-lms') . '</h3>';
         echo '<div id="product-search">';
-        echo '<input type="text" id="product-search-input" placeholder="' . __('Szukaj produktów...', 'simple-lms') . '" style="width: 100%; Padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;">';
+        echo '<input type="text" id="product-search-input" placeholder="' . __('Search products...', 'simple-lms') . '" style="width: 100%; Padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;">';
         echo '<div id="product-search-results" style="max-height: 300px; overflow-y: auto;"></div>';
         echo '</div>';
         echo '<div style="text-align: right; margin-top: 15px;">';
-        echo '<button type="button" class="button" id="close-product-modal">' . __('Anuluj', 'simple-lms') . '</button>';
+        echo '<button type="button" class="button" id="close-product-modal">' . __('Cancel', 'simple-lms') . '</button>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -625,12 +625,12 @@ class WooCommerce_Integration {
                             
                         } else {
                             
-                            $('#product-list').html('<p><?php echo esc_js(__('Nie znaleziono produktów', 'simple-lms')); ?></p>');
+                            $('#product-list').html('<p><?php echo esc_js(__('No products found', 'simple-lms')); ?></p>');
                         }
                     },
                     error: function(xhr, status, error) {
                         
-                        $('#product-list').html('<p><?php echo esc_js(__('Błąd podczas ładowania produktów', 'simple-lms')); ?></p>');
+                        $('#product-list').html('<p><?php echo esc_js(__('Error loading products', 'simple-lms')); ?></p>');
                     }
                 });
             }
@@ -656,7 +656,7 @@ class WooCommerce_Integration {
                     $('#course-products-grid').html('<div style="grid-column: 1 / -1; text-align: center; Padding: 40px; background: #f9f9f9; border: 2px dashed #ddd; border-radius: 8px; color: #666;">' +
                         '<div style="font-size: 48px; margin-bottom: 15px;">📦</div>' +
                         '<h3 style="margin: 0 0 10px 0; color: #666;"><?php echo esc_js(__('No assigned products', 'simple-lms')); ?></h3>' +
-                        '<p style="margin: 0;"><?php echo esc_js(__('Dodaj produkty WooCommerce, aby umożliwić sprzedaż tego kursu.', 'simple-lms')); ?></p>' +
+                        '<p style="margin: 0;"><?php echo esc_js(__('Add WooCommerce Products to enable sales of this course.', 'simple-lms')); ?></p>' +
                         '</div>');
                 }
             }
@@ -683,23 +683,23 @@ class WooCommerce_Integration {
                                 var $card = $(this);
                                 
                                 
-                                // Usuń klasy i style domyślnego produktu
+                                // Remove klasy i style domyślnego produktu
                                 $card.removeClass('default-product');
                                 $card.css('border-color', '#ddd');
                                 
-                                // Usuń wszystkie możliwe badge'y (różne selektory)
+                                // Remove wszystkie możliwe badge'y (różne selektory)
                                 $card.find('.default-badge').remove();
                                 $card.find('[class*="default-badge"]').remove();
                                 $card.children().filter(function() {
-                                    return $(this).text().trim() === '<?php echo esc_js(__('DOMYŚLNY', 'simple-lms')); ?>';
+                                    return $(this).text().trim() === '<?php echo esc_js(__('DEFAULT', 'simple-lms')); ?>';
                                 }).remove();
                                 
-                                // Dodaj przycisk "Ustaw jako domyślny" jeśli go nie ma
+                                // Dodaj przycisk "Set as default" jeśli go nie ma
                                 var setDefaultBtn = $card.find('.set-default-product');
                                 if (setDefaultBtn.length === 0) {
                                     
                                     var newBtn = $('<button type="button" class="set-default-product button button-primary" style="font-size: 12px; Padding: 6px 12px;">' + 
-                                                '<?php echo esc_js(__('Ustaw jako domyślny', 'simple-lms')); ?></button>');
+                                                '<?php echo esc_js(__('Set as default', 'simple-lms')); ?></button>');
                                     newBtn.attr('data-product-id', $card.data('product-id'));
                                     // Dodaj na końcu (po przycisku "Edytuj produkt")
                                     $card.find('div[style*="margin-top: auto"]').append(newBtn);
@@ -712,25 +712,25 @@ class WooCommerce_Integration {
                             newDefaultCard.addClass('default-product');
                             newDefaultCard.css('border-color', '#007cba');
                             
-                            // Usuń przycisk "Ustaw jako domyślny" z nowej domyślnej karty
+                            // Remove przycisk "Set as default" z nowej domyślnej karty
                             newDefaultCard.find('.set-default-product').remove();
                             
                             
                             // Dodaj badge domyślnego (sprawdzamy czy już nie ma)
-                            newDefaultCard.find('.default-badge').remove(); // Usuń na wszelki wypadek
+                            newDefaultCard.find('.default-badge').remove(); // Remove na wszelki wypadek
                             var badge = $('<div class="default-badge" style="position: absolute; top: -8px; left: 15px; background: #007cba; color: white; Padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; z-index: 10;">' + 
-                                       '<?php echo esc_js(__('DOMYŚLNY', 'simple-lms')); ?></div>');
+                                       '<?php echo esc_js(__('DEFAULT', 'simple-lms')); ?></div>');
                             newDefaultCard.prepend(badge);
                             
                             
-                            // Pokaż komunikat sukcesu
-                            showNotice('<?php echo esc_js(__('Produkt został ustawiony jako domyślny', 'simple-lms')); ?>', 'success');
+                            // Show message sukcesu
+                            showNotice('<?php echo esc_js(__('Product has been set as default', 'simple-lms')); ?>', 'success');
                         } else {
-                            showNotice('<?php echo esc_js(__('Błąd podczas ustawiania domyślnego produktu', 'simple-lms')); ?>', 'error');
+                            showNotice('<?php echo esc_js(__('Error setting default product', 'simple-lms')); ?>', 'error');
                         }
                     },
                     error: function() {
-                        showNotice('<?php echo esc_js(__('Wystąpił błąd podczas komunikacji z serwerem', 'simple-lms')); ?>', 'error');
+                        showNotice('<?php echo esc_js(__('An error occurred while communicating with the server', 'simple-lms')); ?>', 'error');
                     }
                 });
             }
@@ -765,13 +765,13 @@ class WooCommerce_Integration {
                             // Redirect to product edit page
                             window.open('<?php echo admin_url('post.php?action=edit&post='); ?>' + response.data.product_id, '_blank');
                         } else {
-                            alert('<?php echo esc_js(__('Błąd podczas tworzenia produktu:', 'simple-lms')); ?> ' + response.data);
+                            alert('<?php echo esc_js(__('Error creating product:', 'simple-lms')); ?> ' + response.data);
                         }
-                        button.prop('disabled', false).text('<?php echo esc_js(__('Utwórz nowy produkt', 'simple-lms')); ?>');
+                        button.prop('disabled', false).text('<?php echo esc_js(__('Create new product', 'simple-lms')); ?>');
                     },
                     error: function() {
-                        alert('<?php echo esc_js(__('Wystąpił błąd podczas komunikacji z serwerem', 'simple-lms')); ?>');
-                        button.prop('disabled', false).text('<?php echo esc_js(__('Utwórz nowy produkt', 'simple-lms')); ?>');
+                        alert('<?php echo esc_js(__('An error occurred while communicating with the server', 'simple-lms')); ?>');
+                        button.prop('disabled', false).text('<?php echo esc_js(__('Create new product', 'simple-lms')); ?>');
                     }
                 });
             });
@@ -816,16 +816,16 @@ class WooCommerce_Integration {
             
             // Usuwanie produktu z listy
             $(document).on('click', '.remove-product', function() {
-                if (confirm('<?php echo esc_js(__('Czy na pewno chcesz usunąć ten produkt z kursu?', 'simple-lms')); ?>')) {
+                if (confirm('<?php echo esc_js(__('Are you sure you want to remove this product from the course?', 'simple-lms')); ?>')) {
                     var productId = $(this).closest('.course-product-card').data('product-id');
                     var $card = $(this).closest('.course-product-card');
                     
-                    // Usuń z interfejsu
+                    // Remove z interfejsu
                     $card.remove();
                     updateProductIds();
                     checkEmptyState();
                     
-                    // Usuń z bazy danych
+                    // Remove z bazy danych
                     removeProductFromCourse(productId);
                 }
             });
@@ -851,7 +851,7 @@ class WooCommerce_Integration {
                 // Sprawdź czy produkt już nie jest dodany
                 var existingCard = $('.course-product-card[data-product-id="' + productId + '"]');
                 if (existingCard.length > 0) {
-                    alert('<?php echo esc_js(__('Ten produkt jest już dodany do kursu', 'simple-lms')); ?>');
+                    alert('<?php echo esc_js(__('This product is already added to the course', 'simple-lms')); ?>');
                     return;
                 }
                 
@@ -893,23 +893,23 @@ class WooCommerce_Integration {
                                 var $card = $(this);
                                 
                                 
-                                // Usuń klasy i style domyślnego produktu
+                                // Remove klasy i style domyślnego produktu
                                 $card.removeClass('default-product');
                                 $card.css('border-color', '#ddd');
                                 
-                                // Usuń wszystkie możliwe badge'y (różne selektory)
+                                // Remove wszystkie możliwe badge'y (różne selektory)
                                 $card.find('.default-badge').remove();
                                 $card.find('[class*="default-badge"]').remove();
                                 $card.children().filter(function() {
-                                    return $(this).text().trim() === '<?php echo esc_js(__('DOMYŚLNY', 'simple-lms')); ?>';
+                                    return $(this).text().trim() === '<?php echo esc_js(__('DEFAULT', 'simple-lms')); ?>';
                                 }).remove();
                                 
-                                // Dodaj przycisk "Ustaw jako domyślny" jeśli go nie ma
+                                // Dodaj przycisk "Set as default" jeśli go nie ma
                                 var setDefaultBtn = $card.find('.set-default-product');
                                 if (setDefaultBtn.length === 0) {
                                     
                                     var newBtn = $('<button type="button" class="set-default-product button button-primary" style="font-size: 12px; Padding: 6px 12px;">' + 
-                                                '<?php echo esc_js(__('Ustaw jako domyślny', 'simple-lms')); ?></button>');
+                                                '<?php echo esc_js(__('Set as default', 'simple-lms')); ?></button>');
                                     newBtn.attr('data-product-id', $card.data('product-id'));
                                     // Dodaj na końcu (po przycisku "Edytuj produkt")
                                     $card.find('div[style*="margin-top: auto"]').append(newBtn);
@@ -922,25 +922,25 @@ class WooCommerce_Integration {
                             newDefaultCard.addClass('default-product');
                             newDefaultCard.css('border-color', '#007cba');
                             
-                            // Usuń przycisk "Ustaw jako domyślny" z nowej domyślnej karty
+                            // Remove przycisk "Set as default" z nowej domyślnej karty
                             newDefaultCard.find('.set-default-product').remove();
                             
                             
                             // Dodaj badge domyślnego (sprawdzamy czy już nie ma)
-                            newDefaultCard.find('.default-badge').remove(); // Usuń na wszelki wypadek
+                            newDefaultCard.find('.default-badge').remove(); // Remove na wszelki wypadek
                             var badge = $('<div class="default-badge" style="position: absolute; top: -8px; left: 15px; background: #007cba; color: white; Padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; z-index: 10;">' + 
-                                       '<?php echo esc_js(__('DOMYŚLNY', 'simple-lms')); ?></div>');
+                                       '<?php echo esc_js(__('DEFAULT', 'simple-lms')); ?></div>');
                             newDefaultCard.prepend(badge);
                             
                             
-                            // Pokaż komunikat sukcesu
-                            showNotice('<?php echo esc_js(__('Produkt został ustawiony jako domyślny', 'simple-lms')); ?>', 'success');
+                            // Show message sukcesu
+                            showNotice('<?php echo esc_js(__('Product has been set as default', 'simple-lms')); ?>', 'success');
                         } else {
-                            showNotice('<?php echo esc_js(__('Błąd podczas ustawiania domyślnego produktu', 'simple-lms')); ?>', 'error');
+                            showNotice('<?php echo esc_js(__('Error setting default product', 'simple-lms')); ?>', 'error');
                         }
                     },
                     error: function() {
-                        showNotice('<?php echo esc_js(__('Wystąpił błąd podczas komunikacji z serwerem', 'simple-lms')); ?>', 'error');
+                        showNotice('<?php echo esc_js(__('An error occurred while communicating with the server', 'simple-lms')); ?>', 'error');
                     }
                 });
             }
@@ -1007,7 +1007,7 @@ class WooCommerce_Integration {
                             var html = '<div class="course-product-card" style="background: #fff; border: 2px solid #ddd; border-radius: 8px; Padding: 12px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; flex-direction: column;" data-product-id="' + product.id + '">';
                             
                             // Przycisk usuwania - tylko czerwona ikona X (większa)
-                            html += '<button type="button" class="remove-product" style="position: absolute; top: 4px; right: 4px; background: none; color: #dc3545; border: none; width: 24px; height: 24px; cursor: pointer; font-size: 16px; line-height: 1; font-weight: bold;" title="<?php echo esc_js(__('Usuń produkt', 'simple-lms')); ?>">×</button>';
+                            html += '<button type="button" class="remove-product" style="position: absolute; top: 4px; right: 4px; background: none; color: #dc3545; border: none; width: 24px; height: 24px; cursor: pointer; font-size: 16px; line-height: 1; font-weight: bold;" title="<?php echo esc_js(__('Remove produkt', 'simple-lms')); ?>">×</button>';
                             
                             // Górna część - informacje o produkcie
                             html += '<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">';
@@ -1038,12 +1038,12 @@ class WooCommerce_Integration {
                             
                             // Przyciski akcji wyrównane do dołu
                             html += '<div style="display: flex; gap: 8px; margin-top: auto;">';
-                            html += '<button type="button" class="set-default-product button button-primary" data-product-id="' + product.id + '" style="flex: 1; font-size: 11px; Padding: 4px 8px;"><?php echo esc_js(__('Ustaw domyślny', 'simple-lms')); ?></button>';
+                            html += '<button type="button" class="set-default-product button button-primary" data-product-id="' + product.id + '" style="flex: 1; font-size: 11px; Padding: 4px 8px;"><?php echo esc_js(__('Set default', 'simple-lms')); ?></button>';
                             html += '<a href="' + product.edit_link + '" target="_blank" class="button button-small" style="flex: 1; text-align: center; font-size: 11px; Padding: 4px 8px; text-decoration: none;"><?php echo esc_js(__('Edytuj', 'simple-lms')); ?></a>';
                             html += '</div>';
                             html += '</div>';
                             
-                            // Usuń placeholder jeśli istnieje
+                            // Remove placeholder jeśli istnieje
                             $('#course-products-grid').find('[style*="grid-column: 1 / -1"]').remove();
                             
                             // Dodaj nowy kafelek
@@ -1201,7 +1201,7 @@ class WooCommerce_Integration {
                     delete_post_meta($post_id, '_default_wc_product_id');
                 }
             } else {
-                // Usuń domyślny produkt jeśli wybrano "automatyczny"
+                // Remove domyślny produkt jeśli wybrano "automatyczny"
                 delete_post_meta($post_id, '_default_wc_product_id');
             }
         }
@@ -1217,12 +1217,12 @@ class WooCommerce_Integration {
             return;
         }
         if (!$course_id) {
-            wp_send_json_error(__('Nieprawidłowy ID kursu', 'simple-lms'));
+            wp_send_json_error(__('Invalid course ID', 'simple-lms'));
         }
         
         $course = get_post($course_id);
         if (!$course || $course->post_type !== 'course') {
-            wp_send_json_error(__('Kurs nie znaleziony', 'simple-lms'));
+            wp_send_json_error(__('Course nie znaleziony', 'simple-lms'));
         }
 
         try {
@@ -1264,7 +1264,7 @@ class WooCommerce_Integration {
                     'edit_link' => get_edit_post_link($product_id)
                 ]);
             } else {
-                wp_send_json_error(__('Nie udało się utworzyć produktu', 'simple-lms'));
+                wp_send_json_error(__('Failed to create product', 'simple-lms'));
             }
             
         } catch (\Exception $e) {
@@ -1426,7 +1426,7 @@ class WooCommerce_Integration {
             if ($old_product_id) {
                 $product_ids = [$old_product_id];
             } else {
-                return '<p>' . __('Ten kurs nie jest dostępny do zakupu.', 'simple-lms') . '</p>';
+                return '<p>' . __('This course is not available for purchase.', 'simple-lms') . '</p>';
             }
         }
         
@@ -1455,7 +1455,7 @@ class WooCommerce_Integration {
         }
         
         if (!$selected_product) {
-            return '<p>' . __('Ten kurs nie jest dostępny do zakupu.', 'simple-lms') . '</p>';
+            return '<p>' . __('This course is not available for purchase.', 'simple-lms') . '</p>';
         }
         
         $product_url = esc_url(get_permalink($selected_product->get_id()));
@@ -1727,7 +1727,7 @@ class WooCommerce_Integration {
         
         $product_id = absint($_POST['product_id']);
         if (!$product_id) {
-            wp_send_json_error(__('Nieprawidłowy ID produktu', 'simple-lms'));
+            wp_send_json_error(__('Invalid product ID', 'simple-lms'));
         }
         
         $product = wc_get_product($product_id);
@@ -1773,13 +1773,13 @@ class WooCommerce_Integration {
         }
 
         if (!$course_id || !$product_id) {
-            wp_send_json_error(__('Nieprawidłowe parametry', 'simple-lms'));
+            wp_send_json_error(__('Invalid parameters', 'simple-lms'));
         }
 
         // Sprawdź czy produkt istnieje
         $product = wc_get_product($product_id);
         if (!$product) {
-            wp_send_json_error(__('Produkt nie istnieje', 'simple-lms'));
+            wp_send_json_error(__('Product does not exist', 'simple-lms'));
         }
 
         // Sprawdź czy produkt jest przypisany do kursu
@@ -1796,11 +1796,11 @@ class WooCommerce_Integration {
             wp_send_json_error(__('Produkt nie jest przypisany do tego kursu', 'simple-lms'));
         }
 
-        // Ustaw domyślny produkt
+        // Set default produkt
         update_post_meta($course_id, '_default_wc_product_id', $product_id);
 
         wp_send_json_success([
-            'message' => __('Produkt został ustawiony jako domyślny', 'simple-lms'),
+            'message' => __('Product has been set as default', 'simple-lms'),
             'product_id' => $product_id,
             'course_id' => $course_id
         ]);
@@ -1818,13 +1818,13 @@ class WooCommerce_Integration {
         }
 
         if (!$course_id || !$product_id) {
-            wp_send_json_error(__('Nieprawidłowe parametry', 'simple-lms'));
+            wp_send_json_error(__('Invalid parameters', 'simple-lms'));
         }
 
         // Sprawdź czy produkt istnieje
         $product = wc_get_product($product_id);
         if (!$product) {
-            wp_send_json_error(__('Produkt nie istnieje', 'simple-lms'));
+            wp_send_json_error(__('Product does not exist', 'simple-lms'));
         }
 
         // Pobierz aktualną listę produktów kursu
@@ -1839,10 +1839,10 @@ class WooCommerce_Integration {
 
         // Sprawdź czy produkt już nie jest przypisany
         if (in_array($product_id, $course_products)) {
-            wp_send_json_error(__('Produkt jest już przypisany do tego kursu', 'simple-lms'));
+            wp_send_json_error(__('Product is already assigned to this course', 'simple-lms'));
         }
 
-        // Dodaj produkt do listy
+        // Add Product do listy
         $course_products[] = $product_id;
         update_post_meta($course_id, '_wc_product_ids', $course_products);
 
@@ -1857,7 +1857,7 @@ class WooCommerce_Integration {
         }
 
         wp_send_json_success([
-            'message' => __('Produkt został dodany do kursu', 'simple-lms'),
+            'message' => __('Product has been added to the course', 'simple-lms'),
             'product_id' => $product_id,
             'course_id' => $course_id
         ]);
@@ -1875,7 +1875,7 @@ class WooCommerce_Integration {
         }
 
         if (!$course_id || !$product_id) {
-            wp_send_json_error(__('Nieprawidłowe parametry', 'simple-lms'));
+            wp_send_json_error(__('Invalid parameters', 'simple-lms'));
         }
 
         // Pobierz aktualną listę produktów kursu
@@ -1888,11 +1888,11 @@ class WooCommerce_Integration {
             $course_products = json_decode($course_products, true);
         }
 
-        // Usuń produkt z listy
+        // Remove produkt z listy
         $course_products = array_values(array_diff($course_products, [$product_id]));
         update_post_meta($course_id, '_wc_product_ids', $course_products);
 
-        // Usuń relację z produktu
+        // Remove relację z produktu
         delete_post_meta($product_id, '_course_id');
         delete_post_meta($product_id, '_is_course_product');
 
@@ -1903,13 +1903,13 @@ class WooCommerce_Integration {
                 // Ustaw pierwszy pozostały produkt jako domyślny
                 update_post_meta($course_id, '_default_wc_product_id', $course_products[0]);
             } else {
-                // Usuń domyślny produkt jeśli nie ma więcej produktów
+                // Remove domyślny produkt jeśli nie ma więcej produktów
                 delete_post_meta($course_id, '_default_wc_product_id');
             }
         }
 
         wp_send_json_success([
-            'message' => __('Produkt został usunięty z kursu', 'simple-lms'),
+            'message' => __('Product was deleted z kursu', 'simple-lms'),
             'product_id' => $product_id,
             'course_id' => $course_id
         ]);

@@ -1,9 +1,9 @@
 ﻿<?php
 /**
- * REST API endpoints for Simple LMS
+ * REST API - Refactored with Dependency Injection
  * 
  * @package SimpleLMS
- * @since 1.1.0
+ * @since 1.5.0
  */
 
 declare(strict_types=1);
@@ -14,33 +14,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * REST API handler class
- * 
- * Provides REST API endpoints for external integrations and frontend applications
- */
-class Rest_API {
-    
-    /**
-     * API namespace
-     */
-    public const NAMESPACE = 'simple-lms/v1';
-    
-    /**
-     * Initialize REST API endpoints
-     * 
-     * @return void
-     */
-    public static function init(): void {
-        add_action('rest_api_init', [__CLASS__, 'registerEndpoints']);
-    }
-    
-    /**
-     * Register all REST API endpoints
-     * 
-     * @return void
-     */
-    public static function registerEndpoints(): void {
+// Include refactored class
+require_once __DIR__ . '/class-rest-api-refactored.php';
         // Courses endpoints
         register_rest_route(self::NAMESPACE, '/courses', [
             [
@@ -198,7 +173,7 @@ class Rest_API {
                 // Fallback to error_log
                 error_log('Simple LMS REST API Error (getCourses): ' . $e->getMessage());
             }
-            return new \WP_Error('api_error', __('Błąd podczas pobierania kursów', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('api_error', __('Error fetching courses', 'simple-lms'), ['status' => 500]);
         }
     }
     
@@ -214,7 +189,7 @@ class Rest_API {
             $post = get_post($courseId);
             
             if (!$post || $post->post_type !== 'course') {
-                return new \WP_Error('course_not_found', __('Kurs nie znaleziony', 'simple-lms'), ['status' => 404]);
+                return new \WP_Error('course_not_found', __('Course nie znaleziony', 'simple-lms'), ['status' => 404]);
             }
             
             $courseData = self::prepareCourseData($post, true);
@@ -229,7 +204,7 @@ class Rest_API {
             } catch (\Throwable $t) {
                 error_log('Simple LMS REST API Error (getCourse): ' . $e->getMessage());
             }
-            return new \WP_Error('api_error', __('Błąd podczas pobierania kursu', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('api_error', __('Error fetching course', 'simple-lms'), ['status' => 500]);
         }
     }
     
@@ -256,7 +231,7 @@ class Rest_API {
             } catch (\Throwable $t) {
                 error_log('Simple LMS REST API Error (getCourseModules): ' . $e->getMessage());
             }
-            return new \WP_Error('api_error', __('Błąd podczas pobierania modułów', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('api_error', __('Error fetching modules', 'simple-lms'), ['status' => 500]);
         }
     }
     
@@ -283,7 +258,7 @@ class Rest_API {
             } catch (\Throwable $t) {
                 error_log('Simple LMS REST API Error (getModuleLessons): ' . $e->getMessage());
             }
-            return new \WP_Error('api_error', __('Błąd podczas pobierania lekcji', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('api_error', __('Error fetching lesson', 'simple-lms'), ['status' => 500]);
         }
     }
     
@@ -302,7 +277,7 @@ class Rest_API {
             
         } catch (\Exception $e) {
             error_log('Simple LMS REST API Error (getUserProgress): ' . $e->getMessage());
-            return new \WP_Error('api_error', __('Błąd podczas pobierania postępów', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('api_error', __('Error fetching progress', 'simple-lms'), ['status' => 500]);
         }
     }
     
@@ -321,14 +296,14 @@ class Rest_API {
             $result = Progress_Tracker::updateLessonProgress($userId, $lessonId, $completed);
             
             if ($result) {
-                return rest_ensure_response(['success' => true, 'message' => __('Postęp zaktualizowany', 'simple-lms')]);
+                return rest_ensure_response(['success' => true, 'message' => __('Progress updated', 'simple-lms')]);
             } else {
-                return new \WP_Error('update_failed', __('Nie udało się zaktualizować postępu', 'simple-lms'), ['status' => 500]);
+                return new \WP_Error('update_failed', __('Failed to update progress', 'simple-lms'), ['status' => 500]);
             }
             
         } catch (\Exception $e) {
             error_log('Simple LMS REST API Error (updateLessonProgress): ' . $e->getMessage());
-            return new \WP_Error('api_error', __('Błąd podczas aktualizacji postępu', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('api_error', __('Error updating progress', 'simple-lms'), ['status' => 500]);
         }
     }
     
@@ -677,7 +652,7 @@ class Rest_API {
      */
     public static function createCourse(\WP_REST_Request $request) {
         if (!self::verifyRequestNonce($request)) {
-            return new \WP_Error('invalid_nonce', __('Nieprawidłowy nonce', 'simple-lms'), ['status' => 403]);
+            return new \WP_Error('invalid_nonce', __('Invalid nonce', 'simple-lms'), ['status' => 403]);
         }
         $title = sanitize_text_field((string) $request->get_param('title'));
         $status = (string) $request->get_param('status');
@@ -688,7 +663,7 @@ class Rest_API {
             'post_title' => $title,
         ]);
         if (is_wp_error($courseId) || $courseId <= 0) {
-            return new \WP_Error('create_failed', __('Nie udało się utworzyć kursu', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('create_failed', __('Failed to create course', 'simple-lms'), ['status' => 500]);
         }
         return rest_ensure_response(['id' => $courseId]);
     }
@@ -698,11 +673,11 @@ class Rest_API {
      */
     public static function updateCourse(\WP_REST_Request $request) {
         if (!self::verifyRequestNonce($request)) {
-            return new \WP_Error('invalid_nonce', __('Nieprawidłowy nonce', 'simple-lms'), ['status' => 403]);
+            return new \WP_Error('invalid_nonce', __('Invalid nonce', 'simple-lms'), ['status' => 403]);
         }
         $courseId = (int) $request->get_param('id');
         if ($courseId <= 0 || get_post_type($courseId) !== 'course') {
-            return new \WP_Error('invalid_course', __('Nieprawidłowy kurs', 'simple-lms'), ['status' => 404]);
+            return new \WP_Error('invalid_course', __('Invalid course', 'simple-lms'), ['status' => 404]);
         }
         $update = ['ID' => $courseId];
         if ($title = $request->get_param('title')) {
@@ -725,11 +700,11 @@ class Rest_API {
      */
     public static function createModule(\WP_REST_Request $request) {
         if (!self::verifyRequestNonce($request)) {
-            return new \WP_Error('invalid_nonce', __('Nieprawidłowy nonce', 'simple-lms'), ['status' => 403]);
+            return new \WP_Error('invalid_nonce', __('Invalid nonce', 'simple-lms'), ['status' => 403]);
         }
         $courseId = (int) $request->get_param('course_id');
         if ($courseId <= 0 || get_post_type($courseId) !== 'course') {
-            return new \WP_Error('invalid_course', __('Nieprawidłowy kurs', 'simple-lms'), ['status' => 404]);
+            return new \WP_Error('invalid_course', __('Invalid course', 'simple-lms'), ['status' => 404]);
         }
         $title = sanitize_text_field((string) $request->get_param('title'));
         $moduleId = wp_insert_post([
@@ -741,7 +716,7 @@ class Rest_API {
             ]
         ]);
         if (is_wp_error($moduleId) || $moduleId <= 0) {
-            return new \WP_Error('create_failed', __('Nie udało się utworzyć MODULE', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('create_failed', __('Failed to create module', 'simple-lms'), ['status' => 500]);
         }
         return rest_ensure_response(['id' => $moduleId]);
     }
@@ -751,11 +726,11 @@ class Rest_API {
      */
     public static function createLesson(\WP_REST_Request $request) {
         if (!self::verifyRequestNonce($request)) {
-            return new \WP_Error('invalid_nonce', __('Nieprawidłowy nonce', 'simple-lms'), ['status' => 403]);
+            return new \WP_Error('invalid_nonce', __('Invalid nonce', 'simple-lms'), ['status' => 403]);
         }
         $moduleId = (int) $request->get_param('module_id');
         if ($moduleId <= 0 || get_post_type($moduleId) !== 'module') {
-            return new \WP_Error('invalid_module', __('Nieprawidłowy moduł', 'simple-lms'), ['status' => 404]);
+            return new \WP_Error('invalid_module', __('Invalid module', 'simple-lms'), ['status' => 404]);
         }
         $title = sanitize_text_field((string) $request->get_param('title'));
         $content = wp_kses_post((string) $request->get_param('content'));
@@ -769,7 +744,7 @@ class Rest_API {
             ]
         ]);
         if (is_wp_error($lessonId) || $lessonId <= 0) {
-            return new \WP_Error('create_failed', __('Nie udało się utworzyć lekcji', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('create_failed', __('Failed to create lesson', 'simple-lms'), ['status' => 500]);
         }
         return rest_ensure_response(['id' => $lessonId]);
     }

@@ -85,7 +85,7 @@ class Breadcrumbs_Widget extends Widget_Base {
                     '•' => '•',
                     '|' => '|',
                     '::' => '::',
-                    'custom' => __('Własny', 'simple-lms'),
+                    'custom' => __('Custom', 'simple-lms'),
                 ],
             ]
         );
@@ -93,7 +93,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'custom_separator',
             [
-                'label' => __('Własny separator', 'simple-lms'),
+                'label' => __('Custom separator', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => '>',
                 'condition' => [
@@ -105,7 +105,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'separator_icon',
             [
-                'label' => __('Użyj ikony jako separator', 'simple-lms'),
+                'label' => __('Use icon as separator', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -130,7 +130,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'show_home',
             [
-                'label' => __('Pokaż link "Strona główna"', 'simple-lms'),
+                'label' => __('Show link "Home"', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -140,9 +140,9 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'home_text',
             [
-                'label' => __('Tekst "Strona główna"', 'simple-lms'),
+                'label' => __('Tekst "Home"', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Strona główna', 'simple-lms'),
+                'default' => __('Home', 'simple-lms'),
                 'condition' => [
                     'show_home' => 'yes',
                 ],
@@ -152,7 +152,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'show_course',
             [
-                'label' => __('Pokaż kurs', 'simple-lms'),
+                'label' => __('Show course', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -162,7 +162,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'show_module',
             [
-                'label' => __('Pokaż moduł', 'simple-lms'),
+                'label' => __('Show module', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -172,7 +172,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'show_lesson',
             [
-                'label' => __('Pokaż lekcję', 'simple-lms'),
+                'label' => __('Show lesson', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -182,7 +182,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_responsive_control(
             'alignment',
             [
-                'label' => __('Wyrównanie', 'simple-lms'),
+                'label' => __('Alignment', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -190,7 +190,7 @@ class Breadcrumbs_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Wyśrodkuj', 'simple-lms'),
+                        'title' => __('Center', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
@@ -216,7 +216,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->start_controls_section(
             'general_style_section',
             [
-                'label' => __('Ogólne', 'simple-lms'),
+                'label' => __('General', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -259,7 +259,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_responsive_control(
             'items_spacing',
             [
-                'label' => __('Odstęp między elementami', 'simple-lms'),
+                'label' => __('Spacing between elements', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [

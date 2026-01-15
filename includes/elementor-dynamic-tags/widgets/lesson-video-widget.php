@@ -58,7 +58,7 @@ class Lesson_Video_Widget extends Widget_Base {
      * Get widget keywords
      */
     public function get_keywords(): array {
-        return ['video', 'lesson', 'player', 'wideo', 'lekcja', 'odtwarzacz', 'youtube', 'vimeo'];
+        return ['video', 'lesson', 'player', 'wideo', 'lesson', 'odtwarzacz', 'youtube', 'vimeo'];
     }
 
     /**
@@ -77,10 +77,10 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lekcji (opcjonalne)', 'simple-lms'),
+                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
-                'description' => __('Pozostaw puste, aby automatycznie wykryć bieżącą lekcję', 'simple-lms'),
+                'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
             ]
         );
 
@@ -91,8 +91,8 @@ class Lesson_Video_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'custom_field',
                 'options' => [
-                    'custom_field' => __('Z pola niestandardowego lekcji', 'simple-lms'),
-                    'custom_url' => __('Własny URL', 'simple-lms'),
+                    'custom_field' => __('Z pola niestandardowego lessons', 'simple-lms'),
+                    'custom_url' => __('Custom URL', 'simple-lms'),
                 ],
             ]
         );
@@ -103,7 +103,7 @@ class Lesson_Video_Widget extends Widget_Base {
                 'label' => __('Video URL', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'placeholder' => 'https://www.youtube.com/watch?v=...',
-                'description' => __('Obsługuje YouTube, Vimeo, pliki MP4', 'simple-lms'),
+                'description' => __('Supports YouTube, Vimeo, MP4 files', 'simple-lms'),
                 'condition' => [
                     'video_source' => 'custom_url',
                 ],
@@ -113,7 +113,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'poster_heading',
             [
-                'label' => __('Okładka wideo', 'simple-lms'),
+                'label' => __('Video poster', 'simple-lms'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -122,7 +122,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'show_poster',
             [
-                'label' => __('Pokaż okładkę (poster)', 'simple-lms'),
+                'label' => __('Show poster', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -132,12 +132,12 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'poster_source',
             [
-                'label' => __('Źródło okładki', 'simple-lms'),
+                'label' => __('Poster source', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'featured',
                 'options' => [
-                    'featured' => __('Miniatura wyróżniająca lekcji', 'simple-lms'),
-                    'custom' => __('Własny obraz', 'simple-lms'),
+                    'featured' => __('Featured lesson thumbnail', 'simple-lms'),
+                    'custom' => __('Custom obraz', 'simple-lms'),
                 ],
                 'condition' => [
                     'show_poster' => 'yes',
@@ -148,7 +148,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'custom_poster',
             [
-                'label' => __('Wybierz okładkę', 'simple-lms'),
+                'label' => __('Select poster', 'simple-lms'),
                 'type' => Controls_Manager::MEDIA,
                 'default' => [
                     'url' => '',
@@ -200,7 +200,7 @@ class Lesson_Video_Widget extends Widget_Base {
                     '4-3' => '4:3',
                     '1-1' => '1:1',
                     '21-9' => '21:9',
-                    'custom' => __('Własne', 'simple-lms'),
+                    'custom' => __('Custom', 'simple-lms'),
                 ],
             ]
         );
@@ -208,7 +208,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_responsive_control(
             'custom_height',
             [
-                'label' => __('Wysokość', 'simple-lms'),
+                'label' => __('Height', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'vh', '%'],
                 'range' => [
@@ -261,7 +261,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'controls',
             [
-                'label' => __('Pokaż kontrolki', 'simple-lms'),
+                'label' => __('Show controls', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -275,8 +275,8 @@ class Lesson_Video_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'hide',
                 'options' => [
-                    'hide' => __('Ukryj całkowicie', 'simple-lms'),
-                    'message' => __('Pokaż komunikat', 'simple-lms'),
+                    'hide' => __('Hide completely', 'simple-lms'),
+                    'message' => __('Show message', 'simple-lms'),
                 ],
             ]
         );
@@ -286,7 +286,7 @@ class Lesson_Video_Widget extends Widget_Base {
             [
                 'label' => __('Komunikat o braku wideo', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Wideo dla tej lekcji nie jest jeszcze dostępne.', 'simple-lms'),
+                'default' => __('Video for this lesson is not yet available.', 'simple-lms'),
                 'condition' => [
                     'show_when_no_video' => 'message',
                 ],
@@ -338,7 +338,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->start_controls_section(
             'poster_style_section',
             [
-                'label' => __('Okładka i ikona Play', 'simple-lms'),
+                'label' => __('Poster and Play icon', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_poster' => 'yes',
@@ -349,7 +349,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'poster_overlay_heading',
             [
-                'label' => __('Nakładka (overlay)', 'simple-lms'),
+                'label' => __('Overlay', 'simple-lms'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -357,7 +357,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'poster_overlay_color',
             [
-                'label' => __('Kolor nakładki', 'simple-lms'),
+                'label' => __('Overlay color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(0,0,0,0.3)',
                 'selectors' => [
@@ -369,7 +369,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'poster_overlay_hover_color',
             [
-                'label' => __('Kolor nakładki (hover)', 'simple-lms'),
+                'label' => __('Overlay color (hover)', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'rgba(0,0,0,0.5)',
                 'selectors' => [
@@ -427,7 +427,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'play_icon_color',
             [
-                'label' => __('Kolor ikony', 'simple-lms'),
+                'label' => __('Icon color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -443,7 +443,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'play_icon_hover_color',
             [
-                'label' => __('Kolor ikony (hover)', 'simple-lms'),
+                'label' => __('Icon color (hover)', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ff0000',
                 'selectors' => [
@@ -473,7 +473,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->start_controls_section(
             'fallback_style_section',
             [
-                'label' => __('Komunikat zastępczy', 'simple-lms'),
+                'label' => __('Fallback message', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_when_no_video' => 'message',
@@ -808,7 +808,7 @@ class Lesson_Video_Widget extends Widget_Base {
                     <# if (settings.video_source === 'custom_url' && settings.custom_video_url) { #>
                         {{{ settings.custom_video_url }}}
                     <# } else { #>
-                        <?php echo esc_html__('Podgląd wideo w edytorze', 'simple-lms'); ?>
+                        <?php echo esc_html__('Preview wideo w edytorze', 'simple-lms'); ?>
                     <# } #>
                 </p>
             </div>

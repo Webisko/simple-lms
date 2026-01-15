@@ -82,11 +82,11 @@ class Ajax_Handler {
         bool $check_login = true
     ): ?array {
         if ($check_nonce && !check_ajax_referer('simple_lms_ajax_nonce', 'nonce', false)) {
-            return ['message' => __('Nieprawidłowy token bezpieczeństwa', 'simple-lms')];
+            return ['message' => __('Invalid security token', 'simple-lms')];
         }
         
         if ($check_login && !is_user_logged_in()) {
-            return ['message' => __('Musisz być zalogowany', 'simple-lms')];
+            return ['message' => __('You must be logged in', 'simple-lms')];
         }
         
         if ($capability && !current_user_can($capability)) {
@@ -165,7 +165,7 @@ class Ajax_Handler {
             $moduleOrder = self::getPostArray('module_order', 'int');
 
             if (!$courseId || empty($moduleOrder)) {
-                throw new \InvalidArgumentException(__('Nieprawidłowe dane.', 'simple-lms'));
+                throw new \InvalidArgumentException(__('Invalid data.', 'simple-lms'));
             }
 
             foreach ($moduleOrder as $position => $moduleId) {
@@ -195,7 +195,7 @@ class Ajax_Handler {
             $lessonOrder = self::getPostArray('lesson_order', 'int');
 
             if (!$moduleId || empty($lessonOrder)) {
-                throw new \InvalidArgumentException(__('Nieprawidłowe dane.', 'simple-lms'));
+                throw new \InvalidArgumentException(__('Invalid data.', 'simple-lms'));
             }
 
             foreach ($lessonOrder as $position => $lessonId) {
@@ -234,7 +234,7 @@ class Ajax_Handler {
                 } catch (\Throwable $t) {
                     error_log('Simple LMS AJAX: Invalid action: ' . ($action ?: 'NONE'));
                 }
-                throw new \InvalidArgumentException(__('Nieprawidłowa akcja', 'simple-lms'));
+                throw new \InvalidArgumentException(__('Invalid action', 'simple-lms'));
             }
 
             // Skip verifyAjaxRequest for lesson completion handlers (they have their own verification)
@@ -280,7 +280,7 @@ class Ajax_Handler {
                     self::uncompleteLessonHandler($_POST);
                     break;
                 default:
-                    throw new \InvalidArgumentException(__('Nieznana akcja', 'simple-lms'));
+                    throw new \InvalidArgumentException(__('Unknown action', 'simple-lms'));
             }
         } catch (\Exception $e) {
             error_log('SimpleLMS AJAX ERROR in action ' . ($action ?? 'unknown_action') . ': ' . $e->getMessage());
@@ -305,11 +305,11 @@ class Ajax_Handler {
 
         // Validate course exists and is correct post type
         if (!self::validatePostType($courseId, 'course')) {
-            throw new \InvalidArgumentException(__('Nieprawidłowy kurs', 'simple-lms'));
+            throw new \InvalidArgumentException(__('Invalid course', 'simple-lms'));
         }
 
         if (!self::userHasAccessToCourse($courseId)) {
-            throw new \InvalidArgumentException(__('Nie masz dostępu do tego kursu', 'simple-lms'));
+            throw new \InvalidArgumentException(__('You do not have access to this course', 'simple-lms'));
         }
 
         // Get the highest menu_order for existing modules using optimized query
@@ -408,7 +408,7 @@ class Ajax_Handler {
             if (self::$logger) {
                 self::$logger->warning('AJAX nonce verification failed', ['action' => $action]);
             }
-            throw new \Exception(__('Błąd weryfikacji bezpieczeństwa', 'simple-lms'));
+            throw new \Exception(__('Security verification failed', 'simple-lms'));
         }
         
         error_log('SimpleLMS AJAX: Nonce verification SUCCESS');
@@ -417,14 +417,14 @@ class Ajax_Handler {
             if (self::$logger) {
                 self::$logger->warning('AJAX request from logged-out user', ['action' => $action]);
             }
-            throw new \Exception(__('Musisz być zalogowany', 'simple-lms'));
+            throw new \Exception(__('You must be logged in', 'simple-lms'));
         }
 
         if ($requiredCap && !current_user_can($requiredCap)) {
             if (self::$logger) {
                 self::$logger->warning('AJAX insufficient capability', ['action' => $action, 'required' => $requiredCap]);
             }
-            throw new \Exception(__('Niewystarczające uprawnienia', 'simple-lms'));
+            throw new \Exception(__('Insufficient permissions', 'simple-lms'));
         }
     }
 
@@ -538,13 +538,13 @@ class Ajax_Handler {
 
         // Validate module exists and is correct post type
         if (!self::validatePostType($module_id, 'module')) {
-            throw new \Exception(__('Nieprawidłowy moduł', 'simple-lms'));
+            throw new \Exception(__('Invalid module', 'simple-lms'));
         }
 
         $course_id = get_post_meta($module_id, 'parent_course', true);
         $course_id = absint($course_id);
         if (!$course_id || !self::userHasAccessToCourse($course_id)) {
-            throw new \Exception(__('Nie masz dostępu do tego kursu', 'simple-lms'));
+            throw new \Exception(__('You do not have access to this course', 'simple-lms'));
         }
 
         // Get the current order of lessons dynamically
@@ -595,7 +595,7 @@ class Ajax_Handler {
     private static function duplicate_lesson($data) {
         $lesson_id = absint($data['lesson_id'] ?? 0);
         if (!$lesson_id) {
-            throw new \Exception(__('Nieprawidłowy identyfikator lekcji', 'simple-lms'));
+            throw new \Exception(__('Invalid lesson ID', 'simple-lms'));
         }
 
         $lesson = get_post($lesson_id);
@@ -613,11 +613,11 @@ class Ajax_Handler {
         if ($parent_module_id) {
             $course_id = absint(get_post_meta($parent_module_id, 'parent_course', true));
             if (!$course_id || !self::userHasAccessToCourse($course_id)) {
-                throw new \Exception(__('Nie masz uprawnień do duplikowania lessons in this course.', 'simple-lms'));
+                throw new \Exception(__('You do not have permission to duplicate lessons in this course.', 'simple-lms'));
             }
         } else {
             // If lesson has no parent module, it's an orphaned lesson, prevent duplication or handle as error
-            throw new \Exception(__('Nie można zduplikować lekcji bez MODULE nadrzędnego.', 'simple-lms'));
+            throw new \Exception(__('Cannot duplicate lesson without parent module.', 'simple-lms'));
         }
 
         // Get parent module (already fetched as $parent_module_id)
@@ -676,22 +676,22 @@ class Ajax_Handler {
     private static function delete_lesson($data) {
         $lesson_id = absint($data['lesson_id'] ?? 0);
         if (!$lesson_id) {
-            throw new \Exception(__('Nieprawidłowy identyfikator lekcji', 'simple-lms'));
+            throw new \Exception(__('Invalid lesson ID', 'simple-lms'));
         }
 
         // Verify post type before capability check
         if (!self::validatePostType($lesson_id, 'lesson')) {
-            throw new \Exception(__('Nieprawidłowa lekcja', 'simple-lms'));
+            throw new \Exception(__('Invalid lesson', 'simple-lms'));
         }
 
         if (!current_user_can('delete_post', $lesson_id)) {
-            throw new \Exception(__('Nie masz uprawnień do usunięcia tej lekcji', 'simple-lms'));
+            throw new \Exception(__('You do not have permission to delete this lesson', 'simple-lms'));
         }
 
         $module_id = get_post_meta($lesson_id, 'parent_module', true);
 
         if (!wp_delete_post($lesson_id, true)) {
-            throw new \Exception(__('Nie udało się usunąć lekcji', 'simple-lms'));
+            throw new \Exception(__('Failed to delete lesson', 'simple-lms'));
         }
 
         wp_send_json_success([
@@ -706,12 +706,12 @@ class Ajax_Handler {
     private static function duplicate_module($data) {
         $module_id = absint($data['module_id'] ?? 0);
         if (!$module_id) {
-            throw new \Exception(__('Nieprawidłowy identyfikator MODULE', 'simple-lms'));
+            throw new \Exception(__('Invalid module ID', 'simple-lms'));
         }
 
         $module = get_post($module_id);
         if (!$module || $module->post_type !== 'module') {
-            throw new \Exception(__('Moduł nie znaleziony', 'simple-lms'));
+            throw new \Exception(__('Module nie znaleziony', 'simple-lms'));
         }
 
         // Check user permission - needs publish capability for duplication
@@ -723,7 +723,7 @@ class Ajax_Handler {
         $parent_course_id = get_post_meta($module_id, 'parent_course', true);
         $parent_course_id = absint($parent_course_id);
         if (!$parent_course_id || !self::userHasAccessToCourse($parent_course_id)) {
-            throw new \Exception(__('Nie masz uprawnień do duplikowania modułów w tym kursie.', 'simple-lms'));
+            throw new \Exception(__('You do not have permission to duplicate modules in this course.', 'simple-lms'));
         }
         
         // Get the highest menu_order for existing modules
@@ -819,16 +819,16 @@ class Ajax_Handler {
     private static function delete_module($data) {
         $module_id = absint($data['module_id'] ?? 0);
         if (!$module_id) {
-            throw new \Exception(__('Nieprawidłowy identyfikator MODULE', 'simple-lms'));
+            throw new \Exception(__('Invalid module ID', 'simple-lms'));
         }
 
         // Verify post type before capability check
         if (!self::validatePostType($module_id, 'module')) {
-            throw new \Exception(__('Nieprawidłowy moduł', 'simple-lms'));
+            throw new \Exception(__('Invalid module', 'simple-lms'));
         }
 
         if (!current_user_can('delete_post', $module_id)) {
-            throw new \Exception(__('Nie masz uprawnień do usunięcia tego MODULE', 'simple-lms'));
+            throw new \Exception(__('You do not have permission to delete this module', 'simple-lms'));
         }
         
         // Delete associated lessons (verify user can delete each one)
@@ -849,7 +849,7 @@ class Ajax_Handler {
         $course_id = get_post_meta($module_id, 'parent_course', true);
         
         if (!wp_delete_post($module_id, true)) {
-            throw new \Exception(__('Nie udało się usunąć MODULE', 'simple-lms'));
+            throw new \Exception(__('Failed to delete module', 'simple-lms'));
         }
 
         wp_send_json_success([
@@ -867,17 +867,17 @@ class Ajax_Handler {
         $allow_comments = isset($data['allow_comments']) ? rest_sanitize_boolean($data['allow_comments']) : false;
 
         if (!$course_id) {
-            throw new \Exception(__('Nieprawidłowy identyfikator kursu', 'simple-lms'));
+            throw new \Exception(__('Invalid course ID', 'simple-lms'));
         }
 
         if (!current_user_can('edit_post', $course_id)) {
-            throw new \Exception(__('Nie masz uprawnień do edycji tego kursu', 'simple-lms'));
+            throw new \Exception(__('You do not have permission to edit this course', 'simple-lms'));
         }
 
         // Save allow_comments setting
         update_post_meta($course_id, 'allow_comments', $allow_comments);
 
-        wp_send_json_success(['message' => __('Settings zapisane pomyślnie!', 'simple-lms')]);
+        wp_send_json_success(['message' => __('Settings saved successfully!', 'simple-lms')]);
     }
 
     /**
@@ -892,7 +892,7 @@ class Ajax_Handler {
         }
 
         if (!current_user_can('edit_post', $lesson_id)) {
-            throw new \Exception(__('Nie masz uprawnień do edycji tej lekcji', 'simple-lms'));
+            throw new \Exception(__('You do not have permission to edit this lesson', 'simple-lms'));
         }
 
         // Sprawdź czy moduł nadrzędny jest opublikowany gdy próbujemy opublikować lekcję
@@ -937,7 +937,7 @@ class Ajax_Handler {
 
             if (!current_user_can('edit_post', $module_id)) {
                 error_log('SimpleLMS: Brak uprawnień dla module_id=' . $module_id);
-                throw new \Exception(__('Nie masz uprawnień do edycji tego MODULE', 'simple-lms'));
+                throw new \Exception(__('You do not have permission to edit this module', 'simple-lms'));
             }
 
             // Update module status
@@ -1113,7 +1113,7 @@ class Ajax_Handler {
      */
     private static function bulk_update_tags(): void {
         self::bulkUpdateAllTags();
-        wp_send_json_success(['message' => __('Wszystkie tagi zostały zaktualizowane', 'simple-lms')]);
+        wp_send_json_success(['message' => __('All tags have been updated', 'simple-lms')]);
     }
 
     /**
@@ -1149,14 +1149,14 @@ class Ajax_Handler {
     private static function completeLessonHandler(array $data): void {
         // Verify nonce for lesson completion
         if (!check_ajax_referer('simple-lms-nonce', 'nonce', false)) {
-            wp_send_json_error(['message' => __('Nieprawidłowy token bezpieczeństwa', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Invalid security token', 'simple-lms')]);
             return;
         }
 
         // Check if user is logged in
         $user_id = get_current_user_id();
         if (!$user_id) {
-            wp_send_json_error(['message' => __('Musisz być zalogowany', 'simple-lms')]);
+            wp_send_json_error(['message' => __('You must be logged in', 'simple-lms')]);
             return;
         }
 
@@ -1164,7 +1164,7 @@ class Ajax_Handler {
         $rate_key = 'slms_completion_rate_' . $user_id;
         $attempts = (int) get_transient($rate_key);
         if ($attempts >= 20) {
-            wp_send_json_error(['message' => __('Zbyt wiele prób. Spróbuj ponownie za chwilę.', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Too many attempts. Try again in a moment.', 'simple-lms')]);
             return;
         }
         set_transient($rate_key, $attempts + 1, MINUTE_IN_SECONDS);
@@ -1172,13 +1172,13 @@ class Ajax_Handler {
         $lesson_id = intval($data['lesson_id'] ?? 0);
         
         if (!$lesson_id) {
-            wp_send_json_error(['message' => __('Nieprawidłowy ID lekcji', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Invalid lesson ID', 'simple-lms')]);
         }
 
         // Verify lesson exists
         $lesson = get_post($lesson_id);
         if (!$lesson || $lesson->post_type !== 'lesson') {
-            wp_send_json_error(['message' => __('Lekcja nie została znaleziona', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Lesson not found', 'simple-lms')]);
         }
 
         // Get current completed lessons
@@ -1197,7 +1197,7 @@ class Ajax_Handler {
         }
 
         wp_send_json_success([
-            'message' => __('Lekcja oznaczona jako ukończona', 'simple-lms'),
+            'message' => __('Lesson marked as completed', 'simple-lms'),
             'lesson_id' => $lesson_id,
             'completed_count' => count($completed_lessons)
         ]);
@@ -1212,14 +1212,14 @@ class Ajax_Handler {
     private static function uncompleteLessonHandler(array $data): void {
         // Verify nonce for lesson un-completion
         if (!check_ajax_referer('simple-lms-nonce', 'nonce', false)) {
-            wp_send_json_error(['message' => __('Nieprawidłowy token bezpieczeństwa', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Invalid security token', 'simple-lms')]);
             return;
         }
 
         // Check if user is logged in
         $user_id = get_current_user_id();
         if (!$user_id) {
-            wp_send_json_error(['message' => __('Musisz być zalogowany', 'simple-lms')]);
+            wp_send_json_error(['message' => __('You must be logged in', 'simple-lms')]);
             return;
         }
 
@@ -1227,7 +1227,7 @@ class Ajax_Handler {
         $rate_key = 'slms_uncompletion_rate_' . $user_id;
         $attempts = (int) get_transient($rate_key);
         if ($attempts >= 20) {
-            wp_send_json_error(['message' => __('Zbyt wiele prób. Spróbuj ponownie za chwilę.', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Too many attempts. Try again in a moment.', 'simple-lms')]);
             return;
         }
         set_transient($rate_key, $attempts + 1, MINUTE_IN_SECONDS);
@@ -1235,14 +1235,14 @@ class Ajax_Handler {
         $lesson_id = intval($data['lesson_id'] ?? 0);
         
         if (!$lesson_id) {
-            wp_send_json_error(['message' => __('Nieprawidłowy ID lekcji', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Invalid lesson ID', 'simple-lms')]);
             return;
         }
 
         // Verify lesson exists
         $lesson = get_post($lesson_id);
         if (!$lesson || $lesson->post_type !== 'lesson') {
-            wp_send_json_error(['message' => __('Lekcja nie została znaleziona', 'simple-lms')]);
+            wp_send_json_error(['message' => __('Lesson not found', 'simple-lms')]);
             return;
         }
 
@@ -1266,7 +1266,7 @@ class Ajax_Handler {
         }
 
         wp_send_json_success([
-            'message' => __('Lekcja oznaczona jako nieukończona', 'simple-lms'),
+            'message' => __('Lesson marked as incomplete', 'simple-lms'),
             'lesson_id' => $lesson_id,
             'completed_count' => count($completed_lessons)
         ]);

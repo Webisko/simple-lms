@@ -1,353 +1,2120 @@
-msgid ""
+
+
+msgid "%d hr. %d min."
 msgstr ""
-"Project-Id-Version: Simple LMS 1.3.3\n"
-"POT-Creation-Date: 2025-12-01 00:00+0000\n"
-"PO-Revision-Date: 2025-12-01 00:00+0000\n"
-"Last-Translator: \n"
-"Language-Team: German\n"
-"Language: de_DE\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: VS Code\n"
-"X-Domain: simple-lms\n"
 
-# Frontend strings
-msgid "Ładowanie..."
-msgstr "Wird geladen..."
+msgid "%d minut"
+msgstr ""
 
-msgid "Ukończono"
-msgstr "Abgeschlossen"
+msgid "%d of %d lessons completed"
+msgstr ""
 
-msgid "Oznacz jako ukończoną"
-msgstr "Als abgeschlossen markieren"
+msgid "%d secund"
+msgstr ""
 
-msgid "Wystąpił błąd"
-msgstr "Ein Fehler ist aufgetreten"
+msgid "%d/%d lessons completed (%.1f%%)"
+msgstr ""
 
-# Admin localized strings
-msgid "Czy na pewno chcesz trwale usunąć ten moduł wraz ze wszystkimi jego lekcjami?"
-msgstr "Möchten Sie dieses Modul mit allen zugehörigen Lektionen dauerhaft löschen?"
-
-msgid "Czy na pewno chcesz trwale usunąć tę lekcję?"
-msgstr "Möchten Sie diese Lektion dauerhaft löschen?"
-
-msgid "Wystąpił błąd podczas wykonywania operacji."
-msgstr "Bei der Ausführung des Vorgangs ist ein Fehler aufgetreten."
-
-msgid "Wprowadź tytuł modułu."
-msgstr "Geben Sie einen Modultitel ein."
-
-msgid "Wprowadź tytuł lekcji."
-msgstr "Geben Sie einen Lektionstitel ein."
-
-msgid "Brak uprawnień do wykonania tej operacji."
-msgstr "Sie haben keine Berechtigung für diesen Vorgang."
-
-msgid "Błąd podczas usuwania elementu."
-msgstr "Fehler beim Löschen des Elements."
-
-msgid "Błąd podczas duplikowania elementu."
-msgstr "Fehler beim Duplizieren des Elements."
-
-msgid "Opublikowana"
-msgstr "Veröffentlicht"
-
-msgid "Szkic"
-msgstr "Entwurf"
-
-msgid "Opublikowany"
-msgstr "Veröffentlicht"
-
-msgid "Szkic"
-msgstr "Entwurf"
+msgid "(0 = lifetime access)"
+msgstr ""
 
 msgid "(Kopia)"
 msgstr "(Kopie)"
 
-msgid "Wybierz plik wideo"
-msgstr "Videodatei auswählen"
+msgid "1 year (365 days)"
+msgstr "1 Jahr (365 Tage)"
 
-msgid "Wybierz plik"
-msgstr "Datei auswählen"
-
-msgid "Wybrany plik:"
-msgstr "Ausgewählte Datei:"
-
-msgid "Brak wybranego pliku"
-msgstr "Keine Datei ausgewählt"
-
-# Settings UI
-msgid "Settings"
-msgstr "Einstellungen"
-
-msgid "Default (WordPress language)"
-msgstr "Standard (WordPress-Sprache)"
-
-msgid "English"
-msgstr "Englisch"
-
-msgid "Polish"
-msgstr "Polnisch"
-
-msgid "German"
-msgstr "Deutsch"
-
-msgid "Choose the language for the Simple LMS plugin interface."
-msgstr "Wählen Sie die Sprache für die Simple LMS Plugin-Oberfläche."
-
-msgid "Configure basic Simple LMS plugin settings."
-msgstr "Grundlegende Einstellungen des Simple LMS-Plugins konfigurieren."
-
-# Additional settings labels and messages
-msgid "General Settings"
-msgstr "Allgemeine Einstellungen"
-
-msgid "Language"
-msgstr "Sprache"
-
-msgid "Analytics Settings"
-msgstr "Analyse-Einstellungen"
-
-msgid "Enable Analytics"
-msgstr "Analytik aktivieren"
-
-msgid "Google Analytics 4"
-msgstr "Google Analytics 4"
-
-msgid "GA4 Measurement ID"
-msgstr "GA4-Mess-ID"
-
-msgid "GA4 API Secret"
-msgstr "GA4-API-Schlüssel"
-
-msgid "Privacy & Data Retention"
-msgstr "Datenschutz & Aufbewahrung"
-
-msgid "Analytics Data Retention"
-msgstr "Aufbewahrung von Analysedaten"
-
-msgid "Keep Data on Uninstall"
-msgstr "Daten bei Deinstallation behalten"
-
-msgid "Track user learning events and integrate with external analytics platforms."
-msgstr "Lernereignisse der Nutzer verfolgen und mit externen Analyseplattformen integrieren."
-
-msgid "Enable event tracking"
-msgstr "Ereignisverfolgung aktivieren"
-
-msgid "Requires Measurement ID and API Secret below."
-msgstr "Erfordert unten Mess-ID und API-Schlüssel."
-
-msgid "Find in GA4: Admin → Data Streams → Web → Measurement ID"
-msgstr "Zu finden in GA4: Admin → Datenstreams → Web → Mess-ID"
-
-msgid "Find in GA4: Admin → Data Streams → Web → Measurement Protocol API secrets"
-msgstr "Zu finden in GA4: Admin → Datenstreams → Web → API-Geheimnisse des Messprotokolls"
-
-msgid "Configure GDPR compliance and data retention policies."
-msgstr "DSGVO-Konformität und Aufbewahrungsrichtlinien konfigurieren."
-
-msgid "90 days"
-msgstr "90 Tage"
+msgid "15 of 20 lessons completed"
+msgstr ""
 
 msgid "180 days"
 msgstr "180 Tage"
 
-msgid "1 year (365 days)"
-msgstr "1 Jahr (365 Tage)"
+msgid "90 days"
+msgstr "90 Tage"
 
-msgid "Unlimited (keep all data)"
-msgstr "Unbegrenzt (alle Daten behalten)"
+msgid "Access"
+msgstr ""
 
-msgid "Older analytics events will be automatically deleted. Compliance with GDPR data minimization."
-msgstr "Ältere Analyseereignisse werden automatisch gelöscht. Entspricht dem DSGVO-Grundsatz der Datenminimierung."
+msgid "Access Denied Text"
+msgstr ""
 
-msgid "Preserve all plugin data when uninstalling"
-msgstr "Alle Plugindaten bei der Deinstallation erhalten"
+msgid "Access Duration"
+msgstr ""
 
-msgid "If enabled, courses, lessons, user progress, and settings will NOT be deleted when the plugin is uninstalled."
-msgstr "Wenn aktiviert, werden Kurse, Lektionen, Benutzerfortschritt und Einstellungen bei der Deinstallation NICHT gelöscht."
+msgid "Access Granted Text"
+msgstr ""
 
-msgid "Settings saved successfully."
-msgstr "Einstellungen erfolgreich gespeichert."
+msgid "Access Schedule"
+msgstr ""
 
-msgid "Save Settings"
-msgstr "Einstellungen speichern"
+msgid "Access Status"
+msgstr ""
 
-msgid "Translation Status"
-msgstr "Übersetzungsstatus"
+msgid "Access do kursu nadawany automatycznie po zakupie produktu (tag user_meta)."
+msgstr ""
 
-msgid "Status"
-msgstr "Status"
+msgid "Access duration:"
+msgstr ""
+
+msgid "Access expired"
+msgstr ""
+
+msgid "Access is managed automatically by WooCommerce after product purchase."
+msgstr ""
+
+msgid "Access time:"
+msgstr ""
+
+msgid "Access to:"
+msgstr ""
+
+msgid "Access to: %s"
+msgstr ""
+
+msgid "Active lesson"
+msgstr ""
+
+msgid "Add Lesson"
+msgstr ""
+
+msgid "Add Module"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+msgid "Add New Course"
+msgstr ""
+
+msgid "Add New Lesson"
+msgstr ""
+
+msgid "Add New Module"
+msgstr ""
+
+msgid "Add Producty WooCommerce do kursu."
+msgstr ""
+
+msgid "Add WooCommerce Products to enable sales of this course."
+msgstr ""
+
+msgid "Add attachment"
+msgstr ""
+
+msgid "Add existing product"
+msgstr ""
+
+msgid "Add first module to start building the course."
+msgstr ""
+
+msgid "Add lesson"
+msgstr ""
+
+msgid "Add new lesson"
+msgstr ""
+
+msgid "Additional Data"
+msgstr ""
+
+msgid "After course purchase (default)"
+msgstr ""
+
+msgid "After number of days"
+msgstr ""
+
+msgid "After text"
+msgstr ""
+
+msgid "Aktualny element"
+msgstr ""
+
+msgid "Alignment"
+msgstr ""
+
+msgid "Alignment tekstu"
+msgstr ""
+
+msgid "All Courses"
+msgstr ""
+
+msgid "All Lessons"
+msgstr ""
+
+msgid "All Modules"
+msgstr ""
+
+msgid "All tags have been updated"
+msgstr ""
+
+msgid "Allow comments in lessons"
+msgstr ""
+
+msgid "Allow multiple modules to be opened"
+msgstr ""
+
+msgid "An error occurred while communicating with the server"
+msgstr ""
+
+msgid "An error occurred. Try again."
+msgstr ""
+
+msgid "Analytics Data Retention"
+msgstr "Aufbewahrung von Analysedaten"
+
+msgid "Analytics Settings"
+msgstr "Analyse-Einstellungen"
+
+msgid "Analytics table does not exist"
+msgstr ""
+
+msgid "Are you sure you want to delete the image?"
+msgstr ""
+
+msgid "Are you sure you want to delete the lesson?"
+msgstr ""
+
+msgid "Are you sure you want to delete the module?"
+msgstr ""
+
+msgid "Are you sure you want to remove this product from the course?"
+msgstr ""
+
+msgid "Aspect Ratio"
+msgstr "Seitenverh├Ąltnis"
+
+msgid "Automatyczne odtwarzanie"
+msgstr ""
 
 msgid "Available"
-msgstr "Verfügbar"
+msgstr "Verf├╝gbar"
 
-msgid "Not available"
-msgstr "Nicht verfügbar"
+msgid "Available from: %s"
+msgstr ""
 
-msgid "Translation files (.po) need to be compiled to .mo files to work. Use Poedit or Loco Translate plugin to compile them."
-msgstr "Übersetzungsdateien (.po) müssen in .mo-Dateien kompiliert werden. Verwenden Sie Poedit oder das Plugin Loco Translate."
+msgid "Available immediately"
+msgstr ""
 
-# Admin menu link
+msgid "Back to edit"
+msgstr ""
+
+msgid "Background"
+msgstr ""
+
+msgid "Background color"
+msgstr ""
+
+msgid "Background color (hover)"
+msgstr ""
+
+msgid "Background color elementu"
+msgstr ""
+
+msgid "Badge"
+msgstr ""
+
+msgid "Bezterminowy"
+msgstr ""
+
+msgid "Border color"
+msgstr ""
+
+msgid "Border radius"
+msgstr ""
+
+msgid "Border radius elementu"
+msgstr ""
+
+msgid "Brak ceny"
+msgstr ""
+
+msgid "Brak filmu"
+msgstr ""
+
+msgid "Brak lessons do kontynuowania"
+msgstr ""
+
+msgid "Brak lessons w koszu"
+msgstr ""
+
+msgid "Brak lessons w tym module"
+msgstr ""
+
+msgid "Brak lessons w tym module."
+msgstr ""
+
+msgid "Brak obrazka"
+msgstr ""
+
+msgid "Brak wybranego pliku"
+msgstr "Keine Datei ausgew├Ąhlt"
+
+msgid "Breadcrumbs Navigation"
+msgstr ""
+
+msgid "Button Text"
+msgstr ""
+
+msgid "Button layout"
+msgstr ""
+
+msgid "Button text"
+msgstr ""
+
+msgid "Buy Course"
+msgstr ""
+
+msgid "Buy course to start"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cannot detect course. Make sure the widget is used on a course page or set the course ID manually."
+msgstr ""
+
+msgid "Cannot detect course. Make sure the widget is used on a course page."
+msgstr ""
+
+msgid "Cannot detect lesson. Make sure the widget is used on a lesson page."
+msgstr ""
+
+msgid "Cannot detect valid course. Make sure the widget is used on a course page or set correct ID."
+msgstr ""
+
+msgid "Cannot detect valid course. Make sure the widget is used on course or lesson page or set correct ID."
+msgstr ""
+
+msgid "Cannot detect valid course. Make sure the widget is used on course/module/lesson page or set correct ID."
+msgstr ""
+
+msgid "Cannot detect valid lesson. Make sure the widget is used on a lesson page or set correct ID."
+msgstr ""
+
+msgid "Cannot duplicate lesson without parent module."
+msgstr ""
+
+msgid "Cena"
+msgstr ""
+
+msgid "Center"
+msgstr ""
+
+msgid "Change expiration date:"
+msgstr ""
+
+msgid "Change image"
+msgstr ""
+
+msgid "Check if this product gives access to the course"
+msgstr ""
+
+msgid "Choose how to unlock access to course content."
+msgstr ""
+
+msgid "Choose the language for the Simple LMS plugin interface."
+msgstr "W├Ąhlen Sie die Sprache f├╝r die Simple LMS Plugin-Oberfl├Ąche."
+
+msgid "Color - completed"
+msgstr ""
+
+msgid "Color - incomplete"
+msgstr ""
+
+msgid "Columns"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Completed At"
+msgstr ""
+
+msgid "Completed Text"
+msgstr ""
+
+msgid "Completed: %d lessons"
+msgstr ""
+
+msgid "Completion Status"
+msgstr ""
+
+msgid "Configure GDPR compliance and data retention policies."
+msgstr "DSGVO-Konformit├Ąt und Aufbewahrungsrichtlinien konfigurieren."
+
+msgid "Configure basic Simple LMS plugin settings."
+msgstr "Grundlegende Einstellungen des Simple LMS-Plugins konfigurieren."
+
+msgid "Content"
+msgstr ""
+
+msgid "Content unlocked gradually"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Continue Learning Button"
+msgstr ""
+
+msgid "Continue learning"
+msgstr ""
+
+msgid "Course"
+msgstr ""
+
+msgid "Course Access"
+msgstr ""
+
+msgid "Course Access (Simple LMS)"
+msgstr ""
+
+msgid "Course Access Status"
+msgstr ""
+
+msgid "Course Archives"
+msgstr ""
+
+msgid "Course Attributes"
+msgstr ""
+
+msgid "Course Breadcrumbs"
+msgstr ""
+
+msgid "Course ID"
+msgstr ""
+
+msgid "Course ID (optional)"
+msgstr ""
+
+msgid "Course Info Box"
+msgstr ""
+
+msgid "Course Lessons"
+msgstr ""
+
+msgid "Course Modules"
+msgstr ""
+
+msgid "Course Overview"
+msgstr ""
+
+msgid "Course Overview (Accordion)"
+msgstr ""
+
+msgid "Course Progress Bar"
+msgstr ""
+
+msgid "Course Purchase Button"
+msgstr ""
+
+msgid "Course Purchase CTA"
+msgstr ""
+
+msgid "Course Title"
+msgstr ""
+
+msgid "Course access is managed automatically by WooCommerce integration."
+msgstr ""
+
+msgid "Course completed!"
+msgstr ""
+
+msgid "Course nie znaleziony"
+msgstr ""
+
+msgid "Course settings are only available for virtual products."
+msgstr ""
+
+msgid "Course update failed"
+msgstr ""
+
+msgid "Courses list"
+msgstr ""
+
+msgid "Courses list navigation"
+msgstr ""
+
+msgid "Coursey"
+msgstr ""
+
+msgid "Create course"
+msgstr ""
+
+msgid "Create new product"
+msgstr ""
+
+msgid "Custom"
+msgstr ""
+
+msgid "Custom URL"
+msgstr ""
+
+msgid "Custom obraz"
+msgstr ""
+
+msgid "Custom separator"
+msgstr ""
+
+msgid "DEFAULT"
+msgstr ""
+
+msgid "Dashboard Title"
+msgstr ""
+
+msgid "Data"
+msgstr ""
+
+msgid "Date from which the course/modules will be available to all authorized users."
+msgstr ""
+
+msgid "Days counted from the moment of gaining access to the course (purchase/role)."
+msgstr ""
+
+msgid "Default (WordPress language)"
+msgstr "Standard (WordPress-Sprache)"
+
+msgid "Delete"
+msgstr ""
+
+msgid "Delete Lesson"
+msgstr ""
+
+msgid "Delete Module"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Displayed when lesson is not found"
+msgstr ""
+
+msgid "Displays module availability information with drip content"
+msgstr ""
+
+msgid "Distance from content"
+msgstr ""
+
+msgid "Do lewej"
+msgstr ""
+
+msgid "Do prawej"
+msgstr ""
+
+msgid "Dodaj New Module"
+msgstr ""
+
+msgid "Dodaj obrazek"
+msgstr ""
+
+msgid "Downloadable files for students"
+msgstr ""
+
+msgid "Draft"
+msgstr ""
+
+msgid "Duplicate"
+msgstr ""
+
+msgid "Duplikuj"
+msgstr ""
+
+msgid "EXPIRED"
+msgstr ""
+
+msgid "Each module independently (set in module)"
+msgstr ""
+
+msgid "Each next module after X days"
+msgstr ""
+
+msgid "Edit Course"
+msgstr ""
+
+msgid "Edit Lesson"
+msgstr ""
+
+msgid "Edit Module"
+msgstr ""
+
+msgid "Edytuj"
+msgstr ""
+
+msgid "Element padding"
+msgstr ""
+
+msgid "Elementy"
+msgstr ""
+
+msgid "Enable Analytics"
+msgstr "Analytik aktivieren"
+
+msgid "Enable detailed debug logs (recommended only for troubleshooting)."
+msgstr ""
+
+msgid "Enable event tracking"
+msgstr "Ereignisverfolgung aktivieren"
+
+msgid "English"
+msgstr "Englisch"
+
+msgid "Enter module title."
+msgstr ""
+
+msgid "Error creating product:"
+msgstr ""
+
+msgid "Error fetching course"
+msgstr ""
+
+msgid "Error fetching courses"
+msgstr ""
+
+msgid "Error fetching lesson"
+msgstr ""
+
+msgid "Error fetching modules"
+msgstr ""
+
+msgid "Error fetching progress"
+msgstr ""
+
+msgid "Error loading products"
+msgstr ""
+
+msgid "Error setting default product"
+msgstr ""
+
+msgid "Error updating progress"
+msgstr ""
+
+msgid "Etykieta lessons"
+msgstr ""
+
+msgid "Event Time"
+msgstr ""
+
+msgid "Event Type"
+msgstr ""
+
+msgid "Example Module 1"
+msgstr ""
+
+msgid "Example Module 2"
+msgstr ""
+
+msgid "Expiration date prefix"
+msgstr ""
+
+msgid "Failed to create course"
+msgstr ""
+
+msgid "Failed to create lesson"
+msgstr ""
+
+msgid "Failed to create module"
+msgstr ""
+
+msgid "Failed to create product"
+msgstr ""
+
+msgid "Failed to delete lesson"
+msgstr ""
+
+msgid "Failed to delete module"
+msgstr ""
+
+msgid "Failed to save progress"
+msgstr ""
+
+msgid "Failed to update progress"
+msgstr ""
+
+msgid "Fallback Text"
+msgstr ""
+
+msgid "Fallback message"
+msgstr ""
+
+msgid "Fallback text"
+msgstr ""
+
+msgid "Featured Image"
+msgstr ""
+
+msgid "Featured image"
+msgstr ""
+
+msgid "Featured lesson thumbnail"
+msgstr ""
+
+msgid "File from media library"
+msgstr ""
+
+msgid "File from media library:"
+msgstr ""
+
+msgid "Fill Color"
+msgstr ""
+
+msgid "Film lessons"
+msgstr ""
+
+msgid "Filter courses list"
+msgstr ""
+
+msgid "Filter lessons list"
+msgstr ""
+
+msgid "Filter modules list"
+msgstr ""
+
+msgid "Find in GA4: Admin → Data Streams → Web → Measurement ID"
+msgstr ""
+
+msgid "Find in GA4: Admin → Data Streams → Web → Measurement Protocol API secrets"
+msgstr ""
+
+msgid "Format tekstu"
+msgstr ""
+
+msgid "From inside ([] ← text | text → [])"
+msgstr ""
+
+msgid "From specific date"
+msgstr ""
+
+msgid "Full width"
+msgstr ""
+
+msgid "GA4 API Secret"
+msgstr "GA4-API-Schl├╝ssel"
+
+msgid "GA4 Measurement ID"
+msgstr "GA4-Mess-ID"
+
+msgid "Gdy brak wideo"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+msgid "German"
+msgstr "Deutsch"
+
+msgid "Given ID is not a lesson."
+msgstr ""
+
+msgid "Google Analytics 4"
+msgstr "Google Analytics 4"
+
+msgid "Gradually (Drip)"
+msgstr ""
+
+msgid "Height"
+msgstr ""
+
+msgid "Height paska"
+msgstr ""
+
+msgid "Hide completely"
+msgstr ""
+
+msgid "Hide when course completed"
+msgstr ""
+
+msgid "Hide when no access"
+msgstr ""
+
+msgid "Hide when user has access"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Home Text"
+msgstr ""
+
+msgid "Hover"
+msgstr ""
+
+msgid "ID kursu"
+msgstr ""
+
+msgid "ID kursu (opcjonalne)"
+msgstr ""
+
+msgid "ID lessons"
+msgstr ""
+
+msgid "ID lessons (opcjonalne)"
+msgstr ""
+
+msgid "Icon (access)"
+msgstr ""
+
+msgid "Icon (no access)"
+msgstr ""
+
+msgid "Icon color"
+msgstr ""
+
+msgid "Icon color (hover)"
+msgstr ""
+
+msgid "Icon position"
+msgstr ""
+
+msgid "If enabled, courses, lessons, user progress, and settings will NOT be deleted when the plugin is uninstalled."
+msgstr "Wenn aktiviert, werden Kurse, Lektionen, Benutzerfortschritt und Einstellungen bei der Deinstallation NICHT gel├Âscht."
+
+msgid "Ikona"
+msgstr ""
+
+msgid "Ikona Play"
+msgstr ""
+
+msgid "Ikona separatora"
+msgstr ""
+
+msgid "Ikony"
+msgstr ""
+
+msgid "In Progress"
+msgstr ""
+
+msgid "Incomplete"
+msgstr ""
+
+msgid "Incomplete Text"
+msgstr ""
+
+msgid "Indicator size"
+msgstr ""
+
+msgid "Informacje o kursie"
+msgstr ""
+
+msgid "Inline"
+msgstr ""
+
+msgid "Insert into course"
+msgstr ""
+
+msgid "Insert into lesson"
+msgstr ""
+
+msgid "Insert into module"
+msgstr ""
+
+msgid "Inside bar"
+msgstr ""
+
+msgid "Insufficient permissions"
+msgstr ""
+
+msgid "Invalid Vimeo link. Check URL format."
+msgstr ""
+
+msgid "Invalid YouTube link. Check URL format."
+msgstr ""
+
+msgid "Invalid action"
+msgstr ""
+
+msgid "Invalid course"
+msgstr ""
+
+msgid "Invalid course ID"
+msgstr ""
+
+msgid "Invalid data."
+msgstr ""
+
+msgid "Invalid lesson"
+msgstr ""
+
+msgid "Invalid lesson ID"
+msgstr ""
+
+msgid "Invalid lesson structure"
+msgstr ""
+
+msgid "Invalid module"
+msgstr ""
+
+msgid "Invalid module ID"
+msgstr ""
+
+msgid "Invalid nonce"
+msgstr ""
+
+msgid "Invalid parameters"
+msgstr ""
+
+msgid "Invalid product ID"
+msgstr ""
+
+msgid "Invalid security token"
+msgstr ""
+
+msgid "Inward"
+msgstr ""
+
+msgid "Justify"
+msgstr ""
+
+msgid "KURSU"
+msgstr ""
+
+msgid "Kafelek informacyjny kursu"
+msgstr ""
+
+msgid "Karta"
+msgstr ""
+
+msgid "Karty"
+msgstr ""
+
+msgid "Keep Data on Uninstall"
+msgstr "Daten bei Deinstallation behalten"
+
+msgid "Keeping %d days: %d events (%d will be deleted on next cleanup)"
+msgstr ""
+
+msgid "Kolor"
+msgstr ""
+
+msgid "Kolor ceny"
+msgstr ""
+
+msgid "Kolor ceny promocyjnej"
+msgstr ""
+
+msgid "Kolor etykiety"
+msgstr ""
+
+msgid "Kolor nazwy pliku"
+msgstr ""
+
+msgid "Kolor rozmiaru pliku"
+msgstr ""
+
+msgid "Kolumny"
+msgstr ""
+
+msgid "Kolumny (grid)"
+msgstr ""
+
+msgid "Komunikat o braku wideo"
+msgstr ""
+
+msgid "Kontener"
+msgstr ""
+
+msgid "Kontener wideo"
+msgstr ""
+
+msgid "Kup kurs"
+msgstr ""
+
+msgid "Kup teraz"
+msgstr ""
+
 msgid "Kursy"
 msgstr "Kurse"
 
-# Bricks element labels
+msgid "LMS Course Progress"
+msgstr ""
+
+msgid "LMS Courses"
+msgstr ""
+
+msgid "LMS Progress"
+msgstr ""
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Last activity: %s"
+msgstr ""
+
+msgid "Layout"
+msgstr ""
+
+msgid "Leave 0 to automatically detect course from current page"
+msgstr ""
+
+msgid "Leave 0 to detect automatically"
+msgstr ""
+
+msgid "Leave empty to automatically detect current course"
+msgstr ""
+
+msgid "Leave empty to automatically detect current lesson"
+msgstr ""
+
+msgid "Leave empty to use current context"
+msgstr ""
+
+msgid "Lekcja"
+msgstr ""
+
+msgid "Lekcja %d z %d"
+msgstr ""
+
+msgid "Lekcja 1"
+msgstr ""
+
+msgid "Lekcja 2"
+msgstr ""
+
+msgid "Lekcja 3"
+msgstr ""
+
+msgid "Lekcja nie znaleziona"
+msgstr "Lektion nicht gefunden"
+
+msgid "Lekcje"
+msgstr ""
+
+msgid "Lekcje: %d"
+msgstr ""
+
+msgid "Lesson"
+msgstr ""
+
+msgid "Lesson Archives"
+msgstr ""
+
+msgid "Lesson Attachments"
+msgstr ""
+
+msgid "Lesson Attributes"
+msgstr ""
+
+msgid "Lesson Completion Button"
+msgstr ""
+
 msgid "Lesson Content"
 msgstr "Lektionsinhalt"
 
 msgid "Lesson ID"
 msgstr "Lektions-ID"
 
-msgid "Lesson Video"
-msgstr "Lektionsvideo"
-
-msgid "Aspect Ratio"
-msgstr "Seitenverhältnis"
-
-msgid "Show Poster"
-msgstr "Poster anzeigen"
+msgid "Lesson ID (optional)"
+msgstr ""
 
 msgid "Lesson Navigation"
 msgstr "Lektionsnavigation"
 
-msgid "Previous Text"
-msgstr "Text für Zurück"
+msgid "Lesson Progress Indicator"
+msgstr ""
+
+msgid "Lesson Title"
+msgstr ""
+
+msgid "Lesson Video"
+msgstr "Lektionsvideo"
+
+msgid "Lesson attachments"
+msgstr ""
+
+msgid "Lesson completion button"
+msgstr ""
+
+msgid "Lesson content"
+msgstr ""
+
+msgid "Lesson content preview (displayed on page)"
+msgstr ""
+
+msgid "Lesson details"
+msgstr ""
+
+msgid "Lesson does not belong to any module."
+msgstr ""
+
+msgid "Lesson list"
+msgstr ""
+
+msgid "Lesson marked as completed"
+msgstr ""
+
+msgid "Lesson marked as incomplete"
+msgstr ""
+
+msgid "Lesson not found"
+msgstr ""
+
+msgid "Lesson video"
+msgstr ""
+
+msgid "Lessons"
+msgstr ""
+
+msgid "Lessons list"
+msgstr ""
+
+msgid "Lessons list navigation"
+msgstr ""
+
+msgid "Lewa"
+msgstr ""
+
+msgid "Liczba opublikowanych lessons"
+msgstr ""
+
+msgid "Lifetime access"
+msgstr ""
+
+msgid "Link URL (other source)"
+msgstr ""
+
+msgid "Link to Course"
+msgstr ""
+
+msgid "Link to Lesson"
+msgstr ""
+
+msgid "Link to Module"
+msgstr ""
+
+msgid "Linki"
+msgstr ""
+
+msgid "Lista"
+msgstr ""
+
+msgid "Log in to see progress."
+msgstr ""
+
+msgid "Log in to see your courses."
+msgstr ""
+
+msgid "MODULE"
+msgstr ""
+
+msgid "Main text"
+msgstr ""
+
+msgid "Manual access management in user profile."
+msgstr ""
+
+msgid "Manually"
+msgstr ""
+
+msgid "Mark as completed"
+msgstr ""
+
+msgid "Mark as incomplete"
+msgstr ""
+
+msgid "Message when no files"
+msgstr ""
+
+msgid "Missing required fields"
+msgstr ""
+
+msgid "Module"
+msgstr ""
+
+msgid "Module Archives"
+msgstr ""
+
+msgid "Module Attributes"
+msgstr ""
+
+msgid "Module ID (optional)"
+msgstr ""
+
+msgid "Module Navigation"
+msgstr ""
+
+msgid "Module Title"
+msgstr ""
+
+msgid "Module header"
+msgstr ""
+
+msgid "Module nie znaleziony"
+msgstr ""
+
+msgid "Module schedule is available when course has: Gradually → Each module independently."
+msgstr ""
+
+msgid "Modules"
+msgstr ""
+
+msgid "Modules label"
+msgstr ""
+
+msgid "Modules list"
+msgstr ""
+
+msgid "Modules list navigation"
+msgstr ""
+
+msgid "Moduley"
+msgstr ""
+
+msgid "Nad przyciskiem"
+msgstr ""
+
+msgid "Nawigacja lessons"
+msgstr ""
+
+msgid "New Course"
+msgstr ""
+
+msgid "New Lesson"
+msgstr ""
+
+msgid "New Module"
+msgstr ""
 
 msgid "Next Text"
-msgstr "Text für Weiter"
+msgstr "Text f├╝r Weiter"
 
-# Access control messages
-msgid "Dostęp wygasł"
-msgstr "Zugriff abgelaufen"
+msgid "Next button text"
+msgstr ""
 
-msgid "Dostęp do: %s"
-msgstr "Zugriff bis: %s"
+msgid "Next icon"
+msgstr ""
 
-msgid "Twój dostęp wygasa za %s (%s)"
-msgstr "Ihr Zugriff läuft in %s ab (%s)"
+msgid "Next lesson"
+msgstr ""
 
-# AJAX and admin notices
-msgid "Brak uprawnień do wykonania tej operacji"
-msgstr "Keine Berechtigung, diesen Vorgang auszuführen"
+msgid "Nie wykryto kursu."
+msgstr ""
 
-msgid "Brak uprawnień do edycji tego elementu"
-msgstr "Keine Berechtigung, dieses Element zu bearbeiten"
+msgid "Nie wykryto lessons."
+msgstr ""
 
-msgid "Brak wymaganych pól"
-msgstr "Erforderliche Felder fehlen"
+msgid "No access to course"
+msgstr ""
 
-msgid "Błąd weryfikacji bezpieczeństwa"
-msgstr "Sicherheitsüberprüfung fehlgeschlagen"
+msgid "No access to this lesson"
+msgstr ""
 
-msgid "Brak użytkowników z dostępem."
-msgstr "Keine Benutzer mit Zugriff."
+msgid "No activity"
+msgstr ""
 
-msgid "Brak kursów w systemie."
-msgstr "Keine Kurse im System."
+msgid "No assigned products"
+msgstr ""
 
-msgid "Nieprawidłowy token bezpieczeństwa"
-msgstr "Ungültiges Sicherheitstoken"
+msgid "No attachments dla tej lessons."
+msgstr ""
 
-msgid "Musisz być zalogowany"
-msgstr "Sie müssen angemeldet sein"
+msgid "No available products or all are already assigned."
+msgstr ""
 
-msgid "Brak uprawnień"
-msgstr "Keine Berechtigung"
+msgid "No courses found"
+msgstr ""
 
-msgid "Nieprawidłowy token"
-msgstr "Ungültiges Token"
+msgid "No courses in account."
+msgstr ""
 
-msgid "Brak uprawnień do dodawania lekcji"
-msgstr "Keine Berechtigung, Lektionen hinzuzufügen"
+msgid "No courses in the system."
+msgstr ""
 
-msgid "Nieprawidłowy identyfikator lekcji"
-msgstr "Ungültige Unterrichts-ID"
+msgid "No courses in trash"
+msgstr ""
 
-msgid "Lekcja nie znaleziona"
-msgstr "Lektion nicht gefunden"
+msgid "No lesson content."
+msgstr ""
 
-msgid "Nie można zduplikować lekcji bez modułu nadrzędnego."
-msgstr "Eine Lektion kann nicht ohne übergeordnetes Modul dupliziert werden."
+msgid "No lessons found"
+msgstr ""
 
-msgid "Nie masz uprawnień do duplikowania lekcji w tym kursie."
-msgstr "Keine Berechtigung, Lektionen in diesem Kurs zu duplizieren."
+msgid "No lessons in this module."
+msgstr ""
 
-msgid "Nieprawidłowy identyfikator modułu"
-msgstr "Ungültige Modul-ID"
+msgid "No modules found"
+msgstr ""
 
-msgid "Moduł nie znaleziony"
-msgstr "Modul nicht gefunden"
+msgid "No modules in course."
+msgstr ""
 
-msgid "Nie masz uprawnień do duplikowania modułów w tym kursie."
-msgstr "Keine Berechtigung, Module in diesem Kurs zu duplizieren."
+msgid "No modules in trash"
+msgstr ""
 
-msgid "Nie masz uprawnień do usunięcia tej lekcji"
-msgstr "Keine Berechtigung, diese Lektion zu löschen"
+msgid "No permission to edit this element"
+msgstr ""
 
-msgid "Nie udało się usunąć lekcji"
-msgstr "Löschen der Lektion fehlgeschlagen"
+msgid "No permission to perform this operation"
+msgstr ""
 
-msgid "Nie masz uprawnień do usunięcia tego modułu"
-msgstr "Keine Berechtigung, dieses Modul zu löschen"
+msgid "No products"
+msgstr ""
 
-msgid "Nie udało się usunąć modułu"
-msgstr "Löschen des Moduls fehlgeschlagen"
+msgid "No products assigned to course"
+msgstr ""
 
-msgid "Nie masz uprawnień do edycji tego kursu"
-msgstr "Keine Berechtigung, diesen Kurs zu bearbeiten"
+msgid "No products found"
+msgstr ""
 
-msgid "Nie masz uprawnień do edycji tej lekcji"
-msgstr "Keine Berechtigung, diese Lektion zu bearbeiten"
+msgid "No saved progress"
+msgstr ""
 
-msgid "Aby opublikować tę lekcję, najpierw opublikuj moduł, w którym się znajduje."
-msgstr "Um diese Lektion zu veröffentlichen, veröffentlichen Sie zuerst das zugehörige Modul."
+msgid "No users with access to this course."
+msgstr ""
 
-msgid "Zbyt wiele prób. Spróbuj ponownie za chwilę."
-msgstr "Zu viele Versuche. Bitte versuchen Sie es später erneut."
+msgid "No users with access."
+msgstr ""
 
-msgid "Postęp zaktualizowany"
-msgstr "Fortschritt aktualisiert"
+msgid "No video - widget will be hidden on frontend"
+msgstr ""
 
-msgid "Nie udało się zaktualizować postępu"
-msgstr "Aktualisierung des Fortschritts fehlgeschlagen"
+msgid "Normalny"
+msgstr ""
 
-msgid "Błąd podczas aktualizacji postępu"
-msgstr "Fehler beim Aktualisieren des Fortschritts"
+msgid "Not available"
+msgstr "Nicht verf├╝gbar"
 
-# Plural forms for access control
-msgid "Pozostał %d dzień dostępu"
-msgid_plural "Pozostało %d dni dostępu"
-msgstr[0] "%d Tag Zugriff verbleibend"
-msgstr[1] "%d Tage Zugriff verbleibend"
+msgid "Not found"
+msgstr ""
 
-msgid "%d dzień"
-msgid_plural "%d dni"
-msgstr[0] "%d Tag"
-msgstr[1] "%d Tage"
+msgid "Not found in Trash"
+msgstr ""
 
-msgid "%d tydzień"
-msgid_plural "%d tygodni"
-msgstr[0] "%d Woche"
-msgstr[1] "%d Wochen"
+msgid "Number of columns"
+msgstr ""
 
-msgid "%d miesiąc"
-msgid_plural "%d miesięcy"
-msgstr[0] "%d Monat"
-msgstr[1] "%d Monate"
+msgid "Number of published modules"
+msgstr ""
 
-msgid "%d rok"
-msgid_plural "%d lat"
-msgstr[0] "%d Jahr"
-msgstr[1] "%d Jahre"
+msgid "Obok paska"
+msgstr ""
 
-msgid "pozostał %d dzień"
-msgid_plural "pozostało %d dni"
-msgstr[0] "%d Tag verbleibend"
-msgstr[1] "%d Tage verbleibend"
+msgid "Older analytics events will be automatically deleted. Compliance with GDPR data minimization."
+msgstr "├ältere Analyseereignisse werden automatisch gel├Âscht. Entspricht dem DSGVO-Grundsatz der Datenminimierung."
 
-msgid "Kursy"
-msgstr "Kurse"
+msgid "Open first module"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Opublikowany"
+msgstr "Ver├Âffentlicht"
+
+msgid "Outside (← [] text | text [] →)"
+msgstr ""
+
+msgid "Overlay"
+msgstr ""
+
+msgid "Overlay color"
+msgstr ""
+
+msgid "Overlay color (hover)"
+msgstr ""
+
+msgid "Padding"
+msgstr ""
+
+msgid "Parent Course"
+msgstr ""
+
+msgid "Parent Course:"
+msgstr ""
+
+msgid "Parent Lesson:"
+msgstr ""
+
+msgid "Parent Module"
+msgstr ""
+
+msgid "Parent Module:"
+msgstr ""
+
+msgid "Pionowy"
+msgstr ""
+
+msgid "Pobierz"
+msgstr ""
+
+msgid "Pod przyciskiem"
+msgstr ""
+
+msgid "Polish"
+msgstr "Polnisch"
+
+msgid "Poster and Play icon"
+msgstr ""
+
+msgid "Poster source"
+msgstr ""
+
+msgid "Poziomy"
+msgstr ""
+
+msgid "Pozycja ceny"
+msgstr ""
+
+msgid "Pozycja ikon"
+msgstr ""
+
+msgid "Pozycja procentu"
+msgstr ""
+
+msgid "Prawa"
+msgstr ""
+
+msgid "Preserve all plugin data when uninstalling"
+msgstr "Alle Plugindaten bei der Deinstallation erhalten"
+
+msgid "Preview"
+msgstr ""
+
+msgid "Preview wideo"
+msgstr ""
+
+msgid "Preview wideo w edytorze"
+msgstr ""
+
+msgid "Previous Text"
+msgstr "Text f├╝r Zur├╝ck"
+
+msgid "Previous icon"
+msgstr ""
+
+msgid "Previous lesson"
+msgstr ""
+
+msgid "Privacy & Data Retention"
+msgstr "Datenschutz & Aufbewahrung"
+
+msgid "Procent"
+msgstr ""
+
+msgid "Product does not exist"
+msgstr ""
+
+msgid "Product has been added to the course"
+msgstr ""
+
+msgid "Product has been set as default"
+msgstr ""
+
+msgid "Product is already assigned to this course"
+msgstr ""
+
+msgid "Product was deleted z kursu"
+msgstr ""
+
+msgid "Products WooCommerce"
+msgstr ""
+
+msgid "Produkt WooCommerce nie istnieje."
+msgstr ""
+
+msgid "Produkt nie jest przypisany do tego kursu"
+msgstr ""
+
+msgid "Produkt nie znaleziony"
+msgstr ""
+
+msgid "Progress bar"
+msgstr ""
+
+msgid "Progress bar kursu"
+msgstr ""
+
+msgid "Progress color"
+msgstr ""
+
+msgid "Progress indicators"
+msgstr ""
+
+msgid "Progress label"
+msgstr ""
+
+msgid "Progress saved"
+msgstr ""
+
+msgid "Progress text"
+msgstr ""
+
+msgid "Progress updated"
+msgstr ""
+
+msgid "Proporcje (aspect ratio)"
+msgstr ""
+
+msgid "Przed tekstem"
+msgstr ""
+
+msgid "Przycisk"
+msgstr ""
+
+msgid "Przyciski"
+msgstr ""
+
+msgid "Przypisane Products:"
+msgstr ""
+
+msgid "Przypisane kursy"
+msgstr ""
+
+msgid "Przypisany kurs"
+msgstr ""
+
+msgid "Published"
+msgstr ""
+
+msgid "Regular price color (crossed out)"
+msgstr ""
+
+msgid "Remaining to complete"
+msgstr ""
+
+msgid "Remaining: %d lessons"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Remove featured image"
+msgstr ""
+
+msgid "Remove limit"
+msgstr ""
+
+msgid "Remove produkt"
+msgstr ""
+
+msgid "Removed %d analytics events"
+msgstr ""
+
+msgid "Removed %d progress records"
+msgstr ""
+
+msgid "Requires Measurement ID and API Secret below."
+msgstr "Erfordert unten Mess-ID und API-Schl├╝ssel."
+
+msgid "Requires user login"
+msgstr ""
+
+msgid "Rozmiar"
+msgstr ""
+
+msgid "Rozmiar ikony"
+msgstr ""
+
+msgid "Save Settings"
+msgstr "Einstellungen speichern"
+
+msgid "Search Course"
+msgstr ""
+
+msgid "Search Courses"
+msgstr ""
+
+msgid "Search Lesson"
+msgstr ""
+
+msgid "Search Lessons"
+msgstr ""
+
+msgid "Search Module"
+msgstr ""
+
+msgid "Search Modules"
+msgstr ""
+
+msgid "Search products..."
+msgstr ""
+
+msgid "Security verification failed"
+msgstr ""
+
+msgid "Select course to which this product should give access"
+msgstr ""
+
+msgid "Select course..."
+msgstr ""
+
+msgid "Select courses the user has access to:"
+msgstr ""
+
+msgid "Select file to attach"
+msgstr ""
+
+msgid "Select poster"
+msgstr ""
+
+msgid "Select product WooCommerce"
+msgstr ""
+
+msgid "Send events to Google Analytics 4"
+msgstr ""
+
+msgid "Separator"
+msgstr ""
+
+msgid "Set as default"
+msgstr ""
+
+msgid "Set default"
+msgstr ""
+
+msgid "Set expiration date:"
+msgstr ""
+
+msgid "Set featured image"
+msgstr ""
+
+msgid "Set parent course first."
+msgstr ""
+
+msgid "Settings"
+msgstr "Einstellungen"
+
+msgid "Settings kursu"
+msgstr ""
+
+msgid "Settings saved successfully!"
+msgstr ""
+
+msgid "Settings saved successfully."
+msgstr "Einstellungen erfolgreich gespeichert."
+
+msgid "Short Course Description"
+msgstr ""
+
+msgid "Short Description displayed on the course list and in preview."
+msgstr ""
+
+msgid "Show Download button"
+msgstr ""
+
+msgid "Show Lesson Title"
+msgstr ""
+
+msgid "Show Next button"
+msgstr ""
+
+msgid "Show Poster"
+msgstr "Poster anzeigen"
+
+msgid "Show Progress"
+msgstr ""
+
+msgid "Show Text"
+msgstr ""
+
+msgid "Show button Continue"
+msgstr ""
+
+msgid "Show completion progress"
+msgstr ""
+
+msgid "Show controls"
+msgstr ""
+
+msgid "Show course"
+msgstr ""
+
+msgid "Show drip content info"
+msgstr ""
+
+msgid "Show expiration date"
+msgstr ""
+
+msgid "Show file size"
+msgstr ""
+
+msgid "Show icon"
+msgstr ""
+
+msgid "Show icon Play"
+msgstr ""
+
+msgid "Show icon typu pliku"
+msgstr ""
+
+msgid "Show icons"
+msgstr ""
+
+msgid "Show last activity"
+msgstr ""
+
+msgid "Show lesson"
+msgstr ""
+
+msgid "Show lesson count"
+msgstr ""
+
+msgid "Show message"
+msgstr ""
+
+msgid "Show module"
+msgstr ""
+
+msgid "Show module count"
+msgstr ""
+
+msgid "Show percentage"
+msgstr ""
+
+msgid "Show poster"
+msgstr ""
+
+msgid "Show price"
+msgstr ""
+
+msgid "Show progress"
+msgstr ""
+
+msgid "Show progress text"
+msgstr ""
+
+msgid "Show streak"
+msgstr ""
+
+msgid "Show unlock dates"
+msgstr ""
+
+msgid "Siatka"
+msgstr ""
+
+msgid "Simple LMS"
+msgstr ""
+
+msgid "Simple LMS - Analytics Events"
+msgstr ""
+
+msgid "Simple LMS - Course Progress"
+msgstr ""
+
+msgid "Spacing"
+msgstr ""
+
+msgid "Spacing between buttons"
+msgstr ""
+
+msgid "Spacing between elements"
+msgstr ""
+
+msgid "Spacing ikony"
+msgstr ""
+
+msgid "Spacing od paska"
+msgstr ""
+
+msgid "Spacing od przycisku"
+msgstr ""
+
+msgid "Spacing od tekstu"
+msgstr ""
+
+msgid "Specify how long after purchase the user will have access to the course. Leave 0 or empty for lifetime access."
+msgstr ""
+
+msgid "Start module"
+msgstr ""
+
+msgid "Started At"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Status: Access"
+msgstr ""
+
+msgid "Status: No access"
+msgstr ""
+
+msgid "Stores learning events (lesson started, completed, milestones) in database."
+msgstr ""
+
+msgid "Stretched (left-right)"
+msgstr ""
+
+msgid "Struktura MODULE"
+msgstr ""
+
+msgid "Struktura kursu"
+msgstr ""
+
+msgid "Supports YouTube, Vimeo, MP4 files"
+msgstr ""
+
+msgid "Szkic"
+msgstr "Entwurf"
+
+msgid "Tekst"
+msgstr ""
+
+msgid "Tekst drip content"
+msgstr ""
+
+msgid "Tekst meta (daty)"
+msgstr ""
+
+msgid "Tekst: Mark as completed"
+msgstr ""
+
+msgid "Tekst: Mark as incomplete"
+msgstr ""
+
+msgid "Ten kurs nie ma przypisanego produktu WooCommerce."
+msgstr ""
+
+msgid "Text (access)"
+msgstr ""
+
+msgid "Text (lifetime access)"
+msgstr ""
+
+msgid "Text (no access)"
+msgstr ""
+
+msgid "Text color"
+msgstr ""
+
+msgid "Text color (hover)"
+msgstr ""
+
+msgid "Text to show if no course is found"
+msgstr ""
+
+msgid "Text to show if no lesson is found"
+msgstr ""
+
+msgid "Text to show if no module is found"
+msgstr ""
+
+msgid "Text when already owns"
+msgstr ""
+
+msgid "Text when completed"
+msgstr ""
+
+msgid "Text when no access"
+msgstr ""
+
+msgid "This course has no modules yet."
+msgstr ""
+
+msgid "This course is not available for purchase."
+msgstr ""
+
+msgid "This lesson belongs to module:"
+msgstr ""
+
+msgid "This lesson is not assigned to any module."
+msgstr ""
+
+msgid "This module belongs to course:"
+msgstr ""
+
+msgid "This module has no lessons yet."
+msgstr ""
+
+msgid "This module is not assigned to any course."
+msgstr ""
+
+msgid "This product is already added to the course"
+msgstr ""
+
+msgid "This widget works only on course, module, or lesson pages."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "To jest produkt kursu"
+msgstr ""
+
+msgid "To publish this lesson, first publish the module it belongs to."
+msgstr ""
+
+msgid "Too many attempts. Try again in a moment."
+msgstr ""
+
+msgid "Total time: %s"
+msgstr ""
+
+msgid "Total: %d users"
+msgstr ""
+
+msgid "Track user learning events and integrate with external analytics platforms."
+msgstr "Lernereignisse der Nutzer verfolgen und mit externen Analyseplattformen integrieren."
+
+msgid "Transition time (ms)"
+msgstr ""
+
+msgid "Translation Status"
+msgstr "├ťbersetzungsstatus"
+
+msgid "Translation files (.po) need to be compiled to .mo files to work. Use Poedit or Loco Translate plugin to compile them."
+msgstr "├ťbersetzungsdateien (.po) m├╝ssen in .mo-Dateien kompiliert werden. Verwenden Sie Poedit oder das Plugin Loco Translate."
+
+msgid "Tworzenie..."
+msgstr ""
+
+msgid "Tylko completed"
+msgstr ""
+
+msgid "Typ filmu:"
+msgstr ""
+
+msgid "Typografia"
+msgstr ""
+
+msgid "Typografia ceny"
+msgstr ""
+
+msgid "Typografia ceny promocyjnej"
+msgstr ""
+
+msgid "Typografia etykiety"
+msgstr ""
+
+msgid "Typografia nazwy"
+msgstr ""
+
+msgid "Typografia rozmiaru"
+msgstr ""
+
+msgid "URL filmu:"
+msgstr ""
+
+msgid "Ukryj gdy 100% completed"
+msgstr ""
+
+msgid "Unknown action"
+msgstr ""
+
+msgid "Unlimited (keep all data)"
+msgstr "Unbegrenzt (alle Daten behalten)"
+
+msgid "Unlimited retention: %d events stored"
+msgstr ""
+
+msgid "Update Course"
+msgstr ""
+
+msgid "Update Lesson"
+msgstr ""
+
+msgid "Update Module"
+msgstr ""
+
+msgid "Uploaded to this course"
+msgstr ""
+
+msgid "Uploaded to this lesson"
+msgstr ""
+
+msgid "Uploaded to this module"
+msgstr ""
+
+msgid "Use as featured image"
+msgstr ""
+
+msgid "Use icon as separator"
+msgstr ""
+
+msgid "Use the checkboxes above to assign or remove course access. Changes will be saved with the user profile."
+msgstr ""
+
+msgid "Use this image"
+msgstr ""
+
+msgid "User Courses Grid"
+msgstr ""
+
+msgid "User Progress Dashboard"
+msgstr ""
+
+msgid "Users receive access after purchasing a product linked to this course."
+msgstr ""
+
+msgid "Users with access (tags)"
+msgstr ""
+
+msgid "Users with access:"
+msgstr ""
+
+msgid "Value color"
+msgstr ""
+
+msgid "Value typography"
+msgstr ""
+
+msgid "Verbose Logging"
+msgstr ""
+
+msgid "Video URL"
+msgstr ""
+
+msgid "Video for this lesson is not yet available."
+msgstr ""
+
+msgid "Video poster"
+msgstr ""
+
+msgid "Video source"
+msgstr ""
+
+msgid "View Course"
+msgstr ""
+
+msgid "View Courses"
+msgstr ""
+
+msgid "View Lesson"
+msgstr ""
+
+msgid "View Lessons"
+msgstr ""
+
+msgid "View Module"
+msgstr ""
+
+msgid "View Modules"
+msgstr ""
+
+msgid "Vimeo"
+msgstr ""
+
+msgid "W przycis ku"
+msgstr ""
+
+msgid "When enabled, the plugin logs additional diagnostic information even if WP_DEBUG is off."
+msgstr ""
+
+msgid "Widget will be hidden for users with course access"
+msgstr ""
+
+msgid "Width"
+msgstr ""
+
+msgid "Width przycisku"
+msgstr ""
+
+msgid "WooCommerce nie jest aktywny. Ten widget wymaga WooCommerce."
+msgstr ""
+
+msgid "Wpisz Lesson Title."
+msgstr ""
+
+msgid "Wpisz Lesson Title..."
+msgstr ""
+
+msgid "Wpisz tekst..."
+msgstr ""
+
+msgid "Wybierz obrazek kursu"
+msgstr ""
+
+msgid "Wybierz obrazek lessons"
+msgstr ""
+
+msgid "Wybierz plik"
+msgstr "Datei ausw├Ąhlen"
+
+msgid "Wybierz plik wideo"
+msgstr "Videodatei ausw├Ąhlen"
+
+msgid "Wybrany plik:"
+msgstr "Ausgew├Ąhlte Datei:"
+
+msgid "Wyciszone"
+msgstr ""
+
+msgid "Wygasa:"
+msgstr ""
+
+msgid "Wyjustuj"
+msgstr ""
+
+msgid "You already own this course"
+msgstr ""
+
+msgid "You do not have access to this course"
+msgstr ""
+
+msgid "You do not have permission to delete this lesson"
+msgstr ""
+
+msgid "You do not have permission to delete this module"
+msgstr ""
+
+msgid "You do not have permission to duplicate lessons in this course."
+msgstr ""
+
+msgid "You do not have permission to duplicate modules in this course."
+msgstr ""
+
+msgid "You do not have permission to edit this course"
+msgstr ""
+
+msgid "You do not have permission to edit this lesson"
+msgstr ""
+
+msgid "You do not have permission to edit this module"
+msgstr ""
+
+msgid "You have access to the course"
+msgstr ""
+
+msgid "You have no courses."
+msgstr ""
+
+msgid "You must be logged in"
+msgstr ""
+
+msgid "YouTube"
+msgstr ""
+
+msgid "Your access expires in %s (%s)"
+msgstr ""
+
+msgid "Your browser does not support the video element."
+msgstr ""
+
+msgid "Z pola niestandardowego lessons"
+msgstr ""
+
+msgid "brak danych"
+msgstr ""
+
+msgid "completed"
+msgstr ""
+
+msgid "completed / All Lessons"
+msgstr ""
+
+msgid "completed lessons: %d/%d (%d%%)"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+msgid "locked"
+msgstr ""
+
+msgid "months"
+msgstr ""
+
+msgid "temu"
+msgstr ""
+
+msgid "tygodays"
+msgstr ""
+
+msgid "unlocked"
+msgstr ""
+
+msgid "years"
+msgstr ""
+

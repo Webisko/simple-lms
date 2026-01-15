@@ -1225,7 +1225,7 @@ class LmsShortcodes {
         if ($lesson_id) { $lesson_id = self::mapId($lesson_id, 'lesson'); }
         
         if (!$lesson_id) {
-            return '<p class="simple-lms-error">Błąd: Nie podano ID lekcji.</p>';
+            return '<p class="simple-lms-error">Błąd: Nie podano ID lessons.</p>';
         }
 
         // Check if the post exists and is a lesson
@@ -1245,8 +1245,8 @@ class LmsShortcodes {
             $completed_lessons = [];
         }
 
-    $btn_text_incomplete = 'Oznacz jako ukończoną';
-    $btn_text_complete   = 'Oznacz jako nieukończoną';
+    $btn_text_incomplete = 'Mark as completed';
+    $btn_text_complete   = 'Mark as incomplete';
 
     $is_completed = in_array($lesson_id, $completed_lessons);
     $button_text = $is_completed ? $btn_text_complete : $btn_text_incomplete;
@@ -1294,14 +1294,14 @@ class LmsShortcodes {
 
     /**
      * Text-only shortcode for builder labels; outputs proper text based on completion state.
-     * Usage: [simple_lms_toggle_text lesson_id="123" complete="Oznacz jako nieukończoną" incomplete="Oznacz jako ukończoną"]
+     * Usage: [simple_lms_toggle_text lesson_id="123" complete="Mark as incomplete" incomplete="Mark as completed"]
      */
     public static function lessonToggleTextShortcode($atts = []): string {
         global $post;
         $atts = shortcode_atts([
             'lesson_id'  => 0,
-            'complete'   => 'Oznacz jako nieukończoną',
-            'incomplete' => 'Oznacz jako ukończoną',
+            'complete'   => 'Mark as incomplete',
+            'incomplete' => 'Mark as completed',
         ], $atts);
 
         $lesson_id = intval($atts['lesson_id']) ?: ($post ? intval($post->ID) : 0);
@@ -1340,13 +1340,13 @@ class LmsShortcodes {
      */
     public static function getLessonsCountText(int $count): string {
         if ($count == 0) {
-            return '0 lekcji';
+            return '0 lessons';
         } elseif ($count == 1) {
-            return '1 lekcja';
+            return '1 lesson';
         } elseif ($count >= 2 && $count <= 4) {
-            return $count . ' lekcje';
+            return $count . ' lessons';
         } else {
-            return $count . ' lekcji';
+            return $count . ' lessons';
         }
     }
 

@@ -37,7 +37,7 @@ class Course_Overview_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Przegląd kursu (Akordeon)', 'simple-lms');
+        return __('Course Overview (Accordion)', 'simple-lms');
     }
 
     /**
@@ -58,7 +58,7 @@ class Course_Overview_Widget extends Widget_Base {
      * Get widget keywords
      */
     public function get_keywords(): array {
-        return ['course', 'overview', 'accordion', 'kurs', 'przegląd', 'akordeon', 'struktura', 'moduły', 'lekcje'];
+        return ['course', 'overview', 'accordion', 'kurs', 'przegląd', 'akordeon', 'struktura', 'moduły', 'lessons'];
     }
 
     /**
@@ -496,7 +496,7 @@ class Course_Overview_Widget extends Widget_Base {
                 
                 echo '</ul>';
             } else {
-                echo '<p class="no-lessons">' . esc_html__('Brak lekcji w tym module', 'simple-lms') . '</p>';
+                echo '<p class="no-lessons">' . esc_html__('Brak lessons w tym module', 'simple-lms') . '</p>';
             }
             
             echo '</div>'; // .accordion-content
@@ -548,7 +548,7 @@ class Course_Overview_Widget extends Widget_Base {
                     <span class="accordion-icon"></span>
                     <h3 class="module-title"><?php echo esc_html__('Example Module 1', 'simple-lms'); ?></h3>
                     <# if (settings.show_lesson_count === 'yes') { #>
-                        <span class="lessons-count">(3 lekcje)</span>
+                        <span class="lessons-count">(3 lessons)</span>
                     <# } #>
                 </div>
                 <div class="accordion-content">
@@ -586,7 +586,7 @@ class Course_Overview_Widget extends Widget_Base {
                     <span class="accordion-icon"></span>
                     <h3 class="module-title"><?php echo esc_html__('Example Module 2', 'simple-lms'); ?></h3>
                     <# if (settings.show_lesson_count === 'yes') { #>
-                        <span class="lessons-count">(2 lekcje)</span>
+                        <span class="lessons-count">(2 lessons)</span>
                     <# } #>
                 </div>
                 <div class="accordion-content">

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Access control for Simple LMS (clean)
  */
@@ -528,7 +528,7 @@ class Access_Control {
         switch ($atts['format']) {
             case 'days':
                 if ($days_remaining === 0) {
-                    $output .= '<strong>' . __('Dostęp wygasł', 'simple-lms') . '</strong>';
+                    $output .= '<strong>' . __('Access expired', 'simple-lms') . '</strong>';
                 } else {
                     $output .= sprintf(
                         _n('Pozostał %d dzień dostępu', 'Pozostało %d dni dostępu', $days_remaining, 'simple-lms'),
@@ -539,7 +539,7 @@ class Access_Control {
                 
             case 'date':
                 $output .= sprintf(
-                    __('Dostęp do: %s', 'simple-lms'),
+                    __('Access to: %s', 'simple-lms'),
                     '<strong>' . esc_html($expiration_date) . '</strong>'
                 );
                 break;
@@ -547,10 +547,10 @@ class Access_Control {
             case 'full':
             default:
                 if ($days_remaining === 0) {
-                    $output .= '<strong>' . __('Dostęp wygasł', 'simple-lms') . '</strong>';
+                    $output .= '<strong>' . __('Access expired', 'simple-lms') . '</strong>';
                 } else {
                     $output .= sprintf(
-                        __('Twój dostęp wygasa za %s (%s)', 'simple-lms'),
+                        __('Your access expires in %s (%s)', 'simple-lms'),
                         '<strong>' . sprintf(
                             _n('%d dzień', '%d dni', $days_remaining, 'simple-lms'),
                             $days_remaining

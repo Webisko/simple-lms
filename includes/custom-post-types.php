@@ -23,16 +23,16 @@ function registerPostTypes(): void {
     $postTypes = [
         'course' => [
             'labels' => [
-                'name'               => __('Kursy', 'simple-lms'),
-                'singular_name'      => __('Kurs', 'simple-lms'),
-                'menu_name'          => __('Kursy', 'simple-lms'),
-                'add_new_item'       => __('Utwórz kurs', 'simple-lms'),
-                'edit_item'          => __('Edytuj kurs', 'simple-lms'),
-                'new_item'           => __('Nowy kurs', 'simple-lms'),
-                'view_item'          => __('Zobacz kurs', 'simple-lms'),
-                'all_items'          => __('Wszystkie kursy', 'simple-lms'),
-                'search_items'       => __('Szukaj kursów', 'simple-lms'),
-                'not_found'          => __('Nie znaleziono kursów', 'simple-lms'),
+                'name'               => __('Coursey', 'simple-lms'),
+                'singular_name'      => __('Course', 'simple-lms'),
+                'menu_name'          => __('Coursey', 'simple-lms'),
+                'add_new_item'       => __('Create course', 'simple-lms'),
+                'edit_item'          => __('Edit Course', 'simple-lms'),
+                'new_item'           => __('New Course', 'simple-lms'),
+                'view_item'          => __('View Course', 'simple-lms'),
+                'all_items'          => __('All Courses', 'simple-lms'),
+                'search_items'       => __('Search Courses', 'simple-lms'),
+                'not_found'          => __('No courses found', 'simple-lms'),
                 'not_found_in_trash' => __('No courses in trash', 'simple-lms'),
             ],
             'public'              => true,
@@ -51,16 +51,16 @@ function registerPostTypes(): void {
         ],
         'module' => [
             'labels' => [
-                'name'               => __('Moduły', 'simple-lms'),
-                'singular_name'      => __('Moduł', 'simple-lms'),
-                'menu_name'          => __('Moduły', 'simple-lms'),
-                'add_new_item'       => __('Dodaj nowy moduł', 'simple-lms'),
-                'edit_item'          => __('Edytuj moduł', 'simple-lms'),
-                'new_item'           => __('Nowy moduł', 'simple-lms'),
-                'view_item'          => __('Zobacz moduł', 'simple-lms'),
-                'all_items'          => __('Wszystkie moduły', 'simple-lms'),
-                'search_items'       => __('Szukaj modułów', 'simple-lms'),
-                'not_found'          => __('Nie znaleziono modułów', 'simple-lms'),
+                'name'               => __('Moduley', 'simple-lms'),
+                'singular_name'      => __('Module', 'simple-lms'),
+                'menu_name'          => __('Moduley', 'simple-lms'),
+                'add_new_item'       => __('Dodaj New Module', 'simple-lms'),
+                'edit_item'          => __('Edit Module', 'simple-lms'),
+                'new_item'           => __('New Module', 'simple-lms'),
+                'view_item'          => __('View Module', 'simple-lms'),
+                'all_items'          => __('All Modules', 'simple-lms'),
+                'search_items'       => __('Search Modules', 'simple-lms'),
+                'not_found'          => __('No modules found', 'simple-lms'),
                 'not_found_in_trash' => __('No modules in trash', 'simple-lms'),
             ],
             'public'              => true,
@@ -82,14 +82,14 @@ function registerPostTypes(): void {
                 'name'               => __('Lekcje', 'simple-lms'),
                 'singular_name'      => __('Lekcja', 'simple-lms'),
                 'menu_name'          => __('Lekcje', 'simple-lms'),
-                'add_new_item'       => __('Dodaj nową lekcję', 'simple-lms'),
-                'edit_item'          => __('Edytuj lekcję', 'simple-lms'),
-                'new_item'           => __('Nowa lekcja', 'simple-lms'),
-                'view_item'          => __('Zobacz lekcję', 'simple-lms'),
-                'all_items'          => __('Wszystkie lekcje', 'simple-lms'),
-                'search_items'       => __('Szukaj lekcji', 'simple-lms'),
-                'not_found'          => __('Nie znaleziono lekcji', 'simple-lms'),
-                'not_found_in_trash' => __('Brak lekcji w koszu', 'simple-lms'),
+                'add_new_item'       => __('Add new lesson', 'simple-lms'),
+                'edit_item'          => __('Edit Lesson', 'simple-lms'),
+                'new_item'           => __('New Lesson', 'simple-lms'),
+                'view_item'          => __('View Lesson', 'simple-lms'),
+                'all_items'          => __('All Lessons', 'simple-lms'),
+                'search_items'       => __('Search Lessons', 'simple-lms'),
+                'not_found'          => __('No lessons found', 'simple-lms'),
+                'not_found_in_trash' => __('Brak lessons w koszu', 'simple-lms'),
             ],
             'public'              => true,
             'menu_icon'           => 'dashicons-media-document',
@@ -101,7 +101,7 @@ function registerPostTypes(): void {
             'capability_type'     => 'post',
             'map_meta_cap'        => true,
             'rewrite'            => [
-                'slug'       => _x('lekcje', 'slug', 'simple-lms'),
+                'slug'       => _x('lessons', 'slug', 'simple-lms'),
                 'with_front' => false
             ]
         ]
@@ -332,7 +332,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_video_url]</div>
-                <div class="item-description">Video URL lekcji do użycia w widżetach Elementor/Bricks</div>
+                <div class="item-description">Video URL lessons do użycia w widżetach Elementor/Bricks</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_video_url]')">Kopiuj</button>
@@ -341,7 +341,7 @@ function renderShortcodesSection(): void {
             <div id="details-video-url" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lekcji (domyślnie: bieżący post)</div>
+                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lessons (domyślnie: bieżący post)</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -359,7 +359,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_files]</div>
-                <div class="item-description">Lista plików do pobrania dla lekcji</div>
+                <div class="item-description">Lista plików do pobrania dla lessons</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_files]')">Kopiuj</button>
@@ -368,7 +368,7 @@ function renderShortcodesSection(): void {
             <div id="details-files" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lekcji (domyślnie: bieżący post)</div>
+                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lessons (domyślnie: bieżący post)</div>
                     <div class="param-item"><span class="param-name">show_download</span> - pokaż linki do pobrania (1/0)</div>
                 </div>
                 <div class="detail-section">
@@ -383,7 +383,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_course_content]</div>
-                <div class="item-description">Pełna zawartość kursu z edytora WYSIWYG (autodetect z lekcji)</div>
+                <div class="item-description">Pełna zawartość kursu z edytora WYSIWYG (autodetect z lessons)</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_course_content]')">Kopiuj</button>
@@ -392,7 +392,7 @@ function renderShortcodesSection(): void {
             <div id="details-course-content" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lekcji/MODULE)</div>
+                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lessons/MODULE)</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -400,7 +400,7 @@ function renderShortcodesSection(): void {
                     <code class="example-code">[simple_lms_course_content course_id="123"]</code>
                 </div>
                 <div class="detail-section">
-                    <div class="detail-title">Użycie na szablonie lekcji:</div>
+                    <div class="detail-title">Użycie na szablonie lessons:</div>
                     <code class="example-code">&lt;div class="course-description"&gt;
     &lt;h3&gt;O tym kursie&lt;/h3&gt;
     [simple_lms_course_content]
@@ -413,7 +413,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_course_navigation]</div>
-                <div class="item-description">Nawigacja kursu z akordeonami (modułami i lekcjami)</div>
+                <div class="item-description">Nawigacja kursu z akordeonami (modułami i lessonmi)</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_course_navigation]')">Kopiuj</button>
@@ -422,7 +422,7 @@ function renderShortcodesSection(): void {
             <div id="details-nav" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lekcji)</div>
+                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lessons)</div>
                     <div class="param-item"><span class="param-name">show_progress</span> - pokazuj kółeczka statusu (1/0)</div>
                 </div>
                 <div class="detail-section">
@@ -437,7 +437,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_course_overview]</div>
-                <div class="item-description">Przegląd kursu bez akordeonów (pełna lista modułów i lekcji)</div>
+                <div class="item-description">Przegląd kursu bez akordeonów (pełna lista modułów i lessons)</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_course_overview]')">Kopiuj</button>
@@ -461,7 +461,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_previous_lesson]</div>
-                <div class="item-description">Przycisk poprzedniej lekcji</div>
+                <div class="item-description">Przycisk poprzedniej lessons</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_previous_lesson]')">Kopiuj</button>
@@ -483,7 +483,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_next_lesson]</div>
-                <div class="item-description">Przycisk następnej lekcji</div>
+                <div class="item-description">Przycisk następnej lessons</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_next_lesson]')">Kopiuj</button>
@@ -506,7 +506,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_complete_toggle]</div>
-                <div class="item-description">Przycisk oznaczania lekcji jako completedj/niecompletedj</div>
+                <div class="item-description">Przycisk oznaczania lessons jako completedj/niecompletedj</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_complete_toggle]')">Kopiuj</button>
@@ -515,7 +515,7 @@ function renderShortcodesSection(): void {
             <div id="details-toggle" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lekcji (domyślnie: bieżący post)</div>
+                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lessons (domyślnie: bieżący post)</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -529,7 +529,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_title]</div>
-                <div class="item-description">Tytuł bieżącej lekcji</div>
+                <div class="item-description">Title bieżącej lessons</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_title]')">Kopiuj</button>
@@ -538,7 +538,7 @@ function renderShortcodesSection(): void {
             <div id="details-title" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lekcji (domyślnie: bieżący post)</div>
+                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lessons (domyślnie: bieżący post)</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -552,7 +552,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_module_title]</div>
-                <div class="item-description">Tytuł MODULE do którego należy bieżąca lekcja</div>
+                <div class="item-description">Title MODULE do którego należy bieżąca lesson</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_module_title]')">Kopiuj</button>
@@ -561,7 +561,7 @@ function renderShortcodesSection(): void {
             <div id="details-module-title" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lekcji (domyślnie: bieżący post)</div>
+                    <div class="param-item"><span class="param-name">lesson_id</span> - ID lessons (domyślnie: bieżący post)</div>
                     <div class="param-item"><span class="param-name">wrapper</span> - tag HTML (domyślnie: span)</div>
                     <div class="param-item"><span class="param-name">class</span> - klasa CSS (domyślnie: simple-lms-module-title)</div>
                 </div>
@@ -577,7 +577,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_course_title]</div>
-                <div class="item-description">Tytuł kursu (autodetect z lekcji/MODULE lub konkretny ID)</div>
+                <div class="item-description">Course title (autodetect z lessons/MODULE lub konkretny ID)</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_course_title]')">Kopiuj</button>
@@ -586,7 +586,7 @@ function renderShortcodesSection(): void {
             <div id="details-course-title" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lekcji/MODULE)</div>
+                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lessons/MODULE)</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -594,8 +594,8 @@ function renderShortcodesSection(): void {
                     <code class="example-code">[simple_lms_course_title course_id="123"]</code>
                 </div>
                 <div class="detail-section">
-                    <div class="detail-title">Użycie na szablonie lekcji:</div>
-                    <code class="example-code">&lt;p&gt;&lt;strong&gt;Kurs:&lt;/strong&gt; [simple_lms_course_title]&lt;/p&gt;</code>
+                    <div class="detail-title">Użycie na szablonie lessons:</div>
+                    <code class="example-code">&lt;p&gt;&lt;strong&gt;Course:&lt;/strong&gt; [simple_lms_course_title]&lt;/p&gt;</code>
                 </div>
             </div>
         </div>
@@ -607,7 +607,7 @@ function renderShortcodesSection(): void {
                 <div class="item-description">Kontrola dostępu do treści na podstawie ról użytkownika</div>
             </div>
             <div class="item-actions">
-                <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_access_control access=&quot;with&quot;]Treść dla użytkowników z dostępem[/simple_lms_access_control]')">Kopiuj</button>
+                <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_access_control access=&quot;with&quot;]Content dla użytkowników z dostępem[/simple_lms_access_control]')">Kopiuj</button>
                 <button class="more-btn" onclick="toggleDetails(this, 'details-access')">więcej</button>
             </div>
             <div id="details-access" class="item-details">
@@ -618,7 +618,7 @@ function renderShortcodesSection(): void {
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
-                    <code class="example-code">[simple_lms_access_control access="with"]Treść dla użytkowników z dostępem[/simple_lms_access_control]</code>
+                    <code class="example-code">[simple_lms_access_control access="with"]Content dla użytkowników z dostępem[/simple_lms_access_control]</code>
                     <code class="example-code">[simple_lms_access_control access="without"]Kup kurs aby uzyskać dostęp[/simple_lms_access_control]</code>
                 </div>
             </div>
@@ -684,12 +684,12 @@ function renderCssClassesSection(): void {
             <div id="details-css-with" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Zastosowanie:</div>
-                    <div class="param-item">Dodaj tę klasę do kontenera w Elementorze zawierającego treść kursu/lekcji</div>
+                    <div class="param-item">Dodaj tę klasę do kontenera w Elementorze zawierającego treść kursu/lessons</div>
                     <div class="param-item">Kontener będzie widoczny tylko dla użytkowników z odpowiednimi rolami</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykład HTML:</div>
-                    <code class="example-code">&lt;div class="simple-lms-with-access"&gt;Treść dla użytkowników z dostępem&lt;/div&gt;</code>
+                    <code class="example-code">&lt;div class="simple-lms-with-access"&gt;Content dla użytkowników z dostępem&lt;/div&gt;</code>
                 </div>
             </div>
         </div>

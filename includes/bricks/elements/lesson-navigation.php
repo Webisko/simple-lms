@@ -15,7 +15,7 @@ class Lesson_Navigation extends \Bricks\Element {
 
     public function set_controls() {
         $this->controls['prevText'] = ['tab'=>'content','label'=>esc_html__('Previous Text','simple-lms'),'type'=>'text','default'=>'← Poprzednia'];
-        $this->controls['nextText'] = ['tab'=>'content','label'=>esc_html__('Next Text','simple-lms'),'type'=>'text','default'=>'Następna →'];
+        $this->controls['nextText'] = ['tab'=>'content','label'=>esc_html__('Next Text','simple-lms'),'type'=>'text','default'=>'Next →'];
     }
 
     public function render() {

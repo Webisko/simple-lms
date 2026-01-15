@@ -87,7 +87,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'show_modules_count',
             [
-                'label' => __('Pokaż liczbę modułów', 'simple-lms'),
+                'label' => __('Show module count', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -111,16 +111,16 @@ class Course_Info_Box_Widget extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
-                'description' => __('Wymaga zalogowania użytkownika', 'simple-lms'),
+                'description' => __('Requires user login', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'modules_label',
             [
-                'label' => __('Etykieta modułów', 'simple-lms'),
+                'label' => __('Modules label', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Moduły', 'simple-lms'),
+                'default' => __('Moduley', 'simple-lms'),
                 'condition' => [
                     'show_modules_count' => 'yes',
                 ],
@@ -130,7 +130,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'lessons_label',
             [
-                'label' => __('Etykieta lekcji', 'simple-lms'),
+                'label' => __('Etykieta lessons', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Lekcje', 'simple-lms'),
                 'condition' => [
@@ -142,9 +142,9 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'progress_label',
             [
-                'label' => __('Etykieta postępu', 'simple-lms'),
+                'label' => __('Progress label', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Ukończono', 'simple-lms'),
+                'default' => __('Completed', 'simple-lms'),
                 'condition' => [
                     'show_progress' => 'yes',
                 ],
@@ -256,7 +256,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_responsive_control(
             'items_gap',
             [
-                'label' => __('Odstęp między elementami', 'simple-lms'),
+                'label' => __('Spacing between elements', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -340,7 +340,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'value_color',
             [
-                'label' => __('Kolor wartości', 'simple-lms'),
+                'label' => __('Value color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2196F3',
                 'selectors' => [
@@ -353,7 +353,7 @@ class Course_Info_Box_Widget extends Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'value_typography',
-                'label' => __('Typografia wartości', 'simple-lms'),
+                'label' => __('Value typography', 'simple-lms'),
                 'selector' => '{{WRAPPER}} .info-value',
             ]
         );

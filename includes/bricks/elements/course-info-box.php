@@ -28,9 +28,9 @@ class Course_Info_Box extends \Bricks\Element {
         $progress = is_user_logged_in() ? Progress_Tracker::getCourseProgress(get_current_user_id(), $course_id) : 0;
         $layout = $settings['layout'] ?? 'vertical';
         echo '<div class="simple-lms-course-info layout-'.$layout.'" style="Padding:16px;border:1px solid #eee;border-radius:6px">';
-        echo '<div class="info-item" style="margin-bottom:10px"><strong>Moduły:</strong> '.count($modules).'</div>';
+        echo '<div class="info-item" style="margin-bottom:10px"><strong>Moduley:</strong> '.count($modules).'</div>';
         echo '<div class="info-item" style="margin-bottom:10px"><strong>Lekcje:</strong> '.$total_lessons.'</div>';
-        if (is_user_logged_in()) echo '<div class="info-item"><strong>Postęp:</strong> '.esc_html($progress).'%</div>';
+        if (is_user_logged_in()) echo '<div class="info-item"><strong>Progress:</strong> '.esc_html($progress).'%</div>';
         echo '</div>';
     }
 }

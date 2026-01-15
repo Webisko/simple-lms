@@ -91,7 +91,7 @@ class Meta_Boxes {
         // Module parent course
         add_meta_box(
             'module_parent_course',
-            __('Kurs nadrzędny', 'simple-lms'),
+            __('Parent Course', 'simple-lms'),
             [$this, 'render_parent_course_meta_box'],
             'module',
             'side',
@@ -113,7 +113,7 @@ class Meta_Boxes {
         // Lesson parent module (metabox in sidebar)
         add_meta_box(
             'zzz_lesson_parent_module',
-            __('Moduł nadrzędny', 'simple-lms'),
+            __('Parent Module', 'simple-lms'),
             [$this, 'render_parent_module_meta_box'],
             'lesson',
             'side',
@@ -123,7 +123,7 @@ class Meta_Boxes {
         // Lesson details (metabox in main area)
         add_meta_box(
             'lesson_details',
-            __('Szczegóły lekcji', 'simple-lms'),
+            __('Lesson details', 'simple-lms'),
             [$this, 'render_lesson_details_meta_box'],
             'lesson',
             'normal',
@@ -298,7 +298,7 @@ class Meta_Boxes {
             if ($course) {
                 $course_edit_link = get_edit_post_link($parent_course);
                 ?>
-                <p><?php esc_html_e('Ten moduł należy do kursu:', 'simple-lms'); ?></p>
+                <p><?php esc_html_e('This module belongs to course:', 'simple-lms'); ?></p>
                 <p><a href="<?php echo esc_url($course_edit_link); ?>" class="parent-course-link">
                     <?php echo esc_html($course->post_title); ?>
                 </a></p>
@@ -306,7 +306,7 @@ class Meta_Boxes {
             }
         } else {
             ?>
-            <p><?php esc_html_e('Ten moduł nie jest przypisany do żadnego kursu.', 'simple-lms'); ?></p>
+            <p><?php esc_html_e('This module is not assigned to any course.', 'simple-lms'); ?></p>
             <?php
         }
     }
@@ -321,7 +321,7 @@ class Meta_Boxes {
             if ($module) {
                 $module_edit_link = get_edit_post_link($parent_module);
                 ?>
-                <p><?php esc_html_e('Ta lekcja należy do MODULE:', 'simple-lms'); ?></p>
+                <p><?php esc_html_e('This lesson belongs to module:', 'simple-lms'); ?></p>
                 <p><a href="<?php echo esc_url($module_edit_link); ?>" class="parent-module-link">
                     <?php echo esc_html($module->post_title); ?>
                 </a></p>
@@ -329,7 +329,7 @@ class Meta_Boxes {
             }
         } else {
             ?>
-            <p><?php esc_html_e('Ta lekcja nie jest przypisana do żadnego MODULE.', 'simple-lms'); ?></p>
+            <p><?php esc_html_e('This lesson is not assigned to any module.', 'simple-lms'); ?></p>
             <?php
         }
     }
@@ -885,7 +885,7 @@ class Meta_Boxes {
                 $preview_html .= '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/' . \esc_attr($youtube_id) . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 $preview_html .= '</div>';
             } else {
-                $preview_html .= '<p style="color: #d63638;">' . \__('Nieprawidłowy link YouTube. Sprawdź format URL.', 'simple-lms') . '</p>';
+                $preview_html .= '<p style="color: #d63638;">' . \__('Invalid YouTube link. Check URL format.', 'simple-lms') . '</p>';
                 $preview_html .= '<p style="color: #666; font-size: 12px;">URL: ' . \esc_html($video_url) . '</p>';
             }
         } elseif ($video_type === 'vimeo' && $video_url) {
@@ -902,7 +902,7 @@ class Meta_Boxes {
                 $preview_html .= '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://player.vimeo.com/video/' . \esc_attr($vimeo_id) . '" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
                 $preview_html .= '</div>';
             } else {
-                $preview_html .= '<p style="color: #d63638;">' . \__('Nieprawidłowy link Vimeo. Sprawdź format URL.', 'simple-lms') . '</p>';
+                $preview_html .= '<p style="color: #d63638;">' . \__('Invalid Vimeo link. Check URL format.', 'simple-lms') . '</p>';
                 $preview_html .= '<p style="color: #666; font-size: 12px;">URL: ' . \esc_html($video_url) . '</p>';
             }
         } elseif ($video_type === 'url' && $video_url) {
@@ -934,7 +934,7 @@ class Meta_Boxes {
             
             $preview_html .= '<video style="width: 100%; max-width: 100%; height: auto;" controls>';
             $preview_html .= '<source src="' . \esc_url($video_url) . '" type="' . esc_attr($mime_type) . '">';
-            $preview_html .= \__('Twoja przeglądarka nie obsługuje elementu video.', 'simple-lms');
+            $preview_html .= \__('Your browser does not support the video element.', 'simple-lms');
             $preview_html .= '</video>';
         } elseif ($video_type === 'file' && $file_url) {
             // Detect video type from file URL extension
@@ -965,7 +965,7 @@ class Meta_Boxes {
             
             $preview_html .= '<video style="width: 100%; max-width: 100%; height: auto;" controls>';
             $preview_html .= '<source src="' . \esc_url($file_url) . '" type="' . esc_attr($mime_type) . '">';
-            $preview_html .= \__('Twoja przeglądarka nie obsługuje elementu video.', 'simple-lms');
+            $preview_html .= \__('Your browser does not support the video element.', 'simple-lms');
             $preview_html .= '</video>';
         }
 
@@ -993,8 +993,8 @@ class Meta_Boxes {
         echo '<label><input type="radio" name="lesson_video_type" value="none"' . checked($video_type, 'none', false) . '> ' . __('Brak filmu', 'simple-lms') . '</label><br>';
         echo '<label><input type="radio" name="lesson_video_type" value="youtube"' . checked($video_type, 'youtube', false) . '> ' . __('YouTube', 'simple-lms') . '</label><br>';
         echo '<label><input type="radio" name="lesson_video_type" value="vimeo"' . checked($video_type, 'vimeo', false) . '> ' . __('Vimeo', 'simple-lms') . '</label><br>';
-        echo '<label><input type="radio" name="lesson_video_type" value="url"' . checked($video_type, 'url', false) . '> ' . __('Link URL (inne źródło)', 'simple-lms') . '</label><br>';
-        echo '<label><input type="radio" name="lesson_video_type" value="file"' . checked($video_type, 'file', false) . '> ' . __('Plik z biblioteki multimediów', 'simple-lms') . '</label><br>';
+        echo '<label><input type="radio" name="lesson_video_type" value="url"' . checked($video_type, 'url', false) . '> ' . __('Link URL (other source)', 'simple-lms') . '</label><br>';
+        echo '<label><input type="radio" name="lesson_video_type" value="file"' . checked($video_type, 'file', false) . '> ' . __('File from media library', 'simple-lms') . '</label><br>';
         
         // URL input (shown for youtube, vimeo, and url types)
         $show_url_input = in_array($video_type, ['youtube', 'vimeo', 'url']);
@@ -1011,7 +1011,7 @@ class Meta_Boxes {
         
         // File selector
         echo '<div class="video-file-section" style="' . ($video_type !== 'file' ? 'display:none;' : '') . 'margin-top:10px;">';
-        echo '<p><strong>' . __('Plik z biblioteki multimediów:', 'simple-lms') . '</strong></p>';
+        echo '<p><strong>' . __('File from media library:', 'simple-lms') . '</strong></p>';
         
         $file_url = '';
         if ($video_file_id) {
@@ -1096,7 +1096,7 @@ class Meta_Boxes {
                 $new_order['default'] = $side_boxes['default'];
             }
             
-            // 6. Finally add low priority boxes (Produkty WooCommerce)
+            // 6. Finally add low priority boxes (Products WooCommerce)
             if (isset($side_boxes['low'])) {
                 $new_order['low'] = $side_boxes['low'];
             }
@@ -1338,7 +1338,7 @@ class Meta_Boxes {
         
         // Featured image section
         echo '<div style="flex: 0 0 300px;">';
-        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Obrazek wyróżniający', 'simple-lms') . '</h3>';
+        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Featured image', 'simple-lms') . '</h3>';
         echo '<div id="course-featured-image-container">';
         
         if ($featured_image_id) {
@@ -1346,7 +1346,7 @@ class Meta_Boxes {
             echo '<div style="text-align: center;">';
             echo '<img src="' . esc_url($image_url) . '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
             echo '<div style="margin-top: 15px;">';
-            echo '<button type="button" id="change-course-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
+            echo '<button type="button" id="change-course-featured-image" class="button">' . __('Change image', 'simple-lms') . '</button> ';
             echo '<button type="button" id="remove-course-featured-image" class="button" style="color: #a00;">' . __('Delete', 'simple-lms') . '</button>';
             echo '</div>';
             echo '</div>';
@@ -1362,7 +1362,7 @@ class Meta_Boxes {
         
         // Short description section
         echo '<div style="flex: 1;">';
-        echo '<h4>' . __('Krótki Description kursu', 'simple-lms') . '</h4>';
+        echo '<h4>' . __('Short Course Description', 'simple-lms') . '</h4>';
         echo '<div style="border: 1px solid #ddd; border-radius: 5px;">';
         
         wp_editor($short_description, 'course_short_description', [
@@ -1377,7 +1377,7 @@ class Meta_Boxes {
         ]);
         
         echo '</div>';
-        echo '<p class="description">' . __('Krótki Description wyświetlany na liście kursów i w podglądzie.', 'simple-lms') . '</p>';
+        echo '<p class="description">' . __('Short Description displayed on the course list and in preview.', 'simple-lms') . '</p>';
         echo '</div>';
         echo '</div>';
         
@@ -1388,9 +1388,9 @@ class Meta_Boxes {
             if (typeof simpleLMSFeaturedImage !== 'undefined') {
                 simpleLMSFeaturedImage.init('course', {
                     mediaTitle: '<?php echo esc_js(__('Wybierz obrazek kursu', 'simple-lms')); ?>',
-                    buttonText: '<?php echo esc_js(__('Użyj tego obrazka', 'simple-lms')); ?>',
-                    confirmText: '<?php echo esc_js(__('Czy na pewno chcesz usunąć obrazek?', 'simple-lms')); ?>',
-                    changeText: '<?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?>',
+                    buttonText: '<?php echo esc_js(__('Use this image', 'simple-lms')); ?>',
+                    confirmText: '<?php echo esc_js(__('Are you sure you want to delete the image?', 'simple-lms')); ?>',
+                    changeText: '<?php echo esc_js(__('Change image', 'simple-lms')); ?>',
                     removeText: '<?php echo esc_js(__('Delete', 'simple-lms')); ?>',
                     emptyText: '<?php echo esc_js(__('Brak obrazka', 'simple-lms')); ?>',
                     addText: '<?php echo esc_js(__('Dodaj obrazek', 'simple-lms')); ?>'
@@ -1517,7 +1517,7 @@ class Meta_Boxes {
         
         // Featured image section
         echo '<div style="flex: 0 0 300px;">';
-        echo '<h4>' . __('Obrazek wyróżniający', 'simple-lms') . '</h4>';
+        echo '<h4>' . __('Featured image', 'simple-lms') . '</h4>';
         echo '<div id="course-featured-image-container">';
         
         if ($featured_image_id) {
@@ -1525,7 +1525,7 @@ class Meta_Boxes {
             echo '<div style="text-align: center;">';
             echo '<img src="' . esc_url($image_url) . '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
             echo '<div style="margin-top: 15px;">';
-            echo '<button type="button" id="change-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
+            echo '<button type="button" id="change-featured-image" class="button">' . __('Change image', 'simple-lms') . '</button> ';
             echo '<button type="button" id="remove-featured-image" class="button" style="color: #a00;">' . __('Delete', 'simple-lms') . '</button>';
             echo '</div>';
             echo '</div>';
@@ -1541,7 +1541,7 @@ class Meta_Boxes {
         
         // Short description section
         echo '<div style="flex: 1;">';
-        echo '<h4>' . __('Krótki Description kursu', 'simple-lms') . '</h4>';
+        echo '<h4>' . __('Short Course Description', 'simple-lms') . '</h4>';
         echo '<div style="border: 1px solid #ddd; border-radius: 5px;">';
         
         wp_editor($short_description, 'course_short_description', [
@@ -1556,7 +1556,7 @@ class Meta_Boxes {
         ]);
         
         echo '</div>';
-        echo '<p class="description">' . __('Krótki Description wyświetlany na liście kursów i w podglądzie.', 'simple-lms') . '</p>';
+        echo '<p class="description">' . __('Short Description displayed on the course list and in preview.', 'simple-lms') . '</p>';
         echo '</div>';
         echo '</div>';
         
@@ -1578,7 +1578,7 @@ class Meta_Boxes {
                 mediaUploader = wp.media({
                     title: '<?php echo esc_js(__('Wybierz obrazek kursu', 'simple-lms')); ?>',
                     button: {
-                        text: '<?php echo esc_js(__('Użyj tego obrazka', 'simple-lms')); ?>'
+                        text: '<?php echo esc_js(__('Use this image', 'simple-lms')); ?>'
                     },
                     multiple: false
                 });
@@ -1589,7 +1589,7 @@ class Meta_Boxes {
                     var imageHtml = '<div style="text-align: center;">';
                     imageHtml += '<img src="' + attachment.sizes.medium.url + '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
                     imageHtml += '<div style="margin-top: 15px;">';
-                    imageHtml += '<button type="button" id="change-featured-image" class="button"><?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?></button> ';
+                    imageHtml += '<button type="button" id="change-featured-image" class="button"><?php echo esc_js(__('Change image', 'simple-lms')); ?></button> ';
                     imageHtml += '<button type="button" id="remove-featured-image" class="button" style="color: #a00;"><?php echo esc_js(__('Delete', 'simple-lms')); ?></button>';
                     imageHtml += '</div>';
                     imageHtml += '</div>';
@@ -1646,7 +1646,7 @@ class Meta_Boxes {
                 mediaUploader = wp.media({
                     title: '<?php echo esc_js(__('Wybierz obrazek kursu', 'simple-lms')); ?>',
                     button: {
-                        text: '<?php echo esc_js(__('Użyj tego obrazka', 'simple-lms')); ?>'
+                        text: '<?php echo esc_js(__('Use this image', 'simple-lms')); ?>'
                     },
                     multiple: false
                 });
@@ -1657,7 +1657,7 @@ class Meta_Boxes {
                     var imageHtml = '<div style="text-align: center;">';
                     imageHtml += '<img src="' + attachment.sizes.medium.url + '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
                     imageHtml += '<div style="margin-top: 15px;">';
-                    imageHtml += '<button type="button" id="change-featured-image" class="button"><?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?></button> ';
+                    imageHtml += '<button type="button" id="change-featured-image" class="button"><?php echo esc_js(__('Change image', 'simple-lms')); ?></button> ';
                     imageHtml += '<button type="button" id="remove-featured-image" class="button" style="color: #a00;"><?php echo esc_js(__('Delete', 'simple-lms')); ?></button>';
                     imageHtml += '</div>';
                     imageHtml += '</div>';
@@ -1704,7 +1704,7 @@ class Meta_Boxes {
         
         // Lesson Details section (fixed)
         echo '<div class="lesson-fixed-section" style="background: #fff; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">';
-        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Szczegóły lekcji', 'simple-lms') . '</h2>';
+        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Lesson details', 'simple-lms') . '</h2>';
         echo '<div style="Padding: 20px;">';
         
         // Two-row layout: First row with image, video controls, and video preview; Second row with attachments
@@ -1755,7 +1755,7 @@ class Meta_Boxes {
     public function render_lesson_featured_image_content($post) {
         $featured_image_id = get_post_thumbnail_id($post->ID);
         
-        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Obrazek wyróżniający', 'simple-lms') . '</h3>';
+        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Featured image', 'simple-lms') . '</h3>';
         echo '<div id="lesson-featured-image-container">';
         
         if ($featured_image_id) {
@@ -1763,7 +1763,7 @@ class Meta_Boxes {
             echo '<div style="text-align: center;">';
             echo '<img src="' . esc_url($image_url) . '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
             echo '<div style="margin-top: 15px;">';
-            echo '<button type="button" id="change-lesson-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
+            echo '<button type="button" id="change-lesson-featured-image" class="button">' . __('Change image', 'simple-lms') . '</button> ';
             echo '<button type="button" id="remove-lesson-featured-image" class="button" style="color: #a00;">' . __('Delete', 'simple-lms') . '</button>';
             echo '</div>';
             echo '</div>';
@@ -1782,10 +1782,10 @@ class Meta_Boxes {
         jQuery(document).ready(function($) {
             if (typeof simpleLMSFeaturedImage !== 'undefined') {
                 simpleLMSFeaturedImage.init('lesson', {
-                    mediaTitle: '<?php echo esc_js(__('Wybierz obrazek lekcji', 'simple-lms')); ?>',
-                    buttonText: '<?php echo esc_js(__('Użyj tego obrazka', 'simple-lms')); ?>',
-                    confirmText: '<?php echo esc_js(__('Czy na pewno chcesz usunąć obrazek?', 'simple-lms')); ?>',
-                    changeText: '<?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?>',
+                    mediaTitle: '<?php echo esc_js(__('Wybierz obrazek lessons', 'simple-lms')); ?>',
+                    buttonText: '<?php echo esc_js(__('Use this image', 'simple-lms')); ?>',
+                    confirmText: '<?php echo esc_js(__('Are you sure you want to delete the image?', 'simple-lms')); ?>',
+                    changeText: '<?php echo esc_js(__('Change image', 'simple-lms')); ?>',
                     removeText: '<?php echo esc_js(__('Delete', 'simple-lms')); ?>',
                     emptyText: '<?php echo esc_js(__('Brak obrazka', 'simple-lms')); ?>',
                     addText: '<?php echo esc_js(__('Dodaj obrazek', 'simple-lms')); ?>'
@@ -1806,7 +1806,7 @@ class Meta_Boxes {
         $video_url = get_post_meta($post->ID, 'lesson_video_url', true);
         $video_file_id = get_post_meta($post->ID, 'lesson_video_file_id', true);
         
-        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Film lekcji', 'simple-lms') . '</h3>';
+        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Film lessons', 'simple-lms') . '</h3>';
         echo '<div class="lesson-video-settings">';
         
         // Video type selector
@@ -1814,8 +1814,8 @@ class Meta_Boxes {
         echo '<label><input type="radio" name="lesson_video_type" value="none"' . checked($video_type, 'none', false) . '> ' . __('Brak filmu', 'simple-lms') . '</label><br>';
         echo '<label><input type="radio" name="lesson_video_type" value="youtube"' . checked($video_type, 'youtube', false) . '> ' . __('YouTube', 'simple-lms') . '</label><br>';
         echo '<label><input type="radio" name="lesson_video_type" value="vimeo"' . checked($video_type, 'vimeo', false) . '> ' . __('Vimeo', 'simple-lms') . '</label><br>';
-        echo '<label><input type="radio" name="lesson_video_type" value="url"' . checked($video_type, 'url', false) . '> ' . __('Link URL (inne źródło)', 'simple-lms') . '</label><br>';
-        echo '<label><input type="radio" name="lesson_video_type" value="file"' . checked($video_type, 'file', false) . '> ' . __('Plik z biblioteki multimediów', 'simple-lms') . '</label><br>';
+        echo '<label><input type="radio" name="lesson_video_type" value="url"' . checked($video_type, 'url', false) . '> ' . __('Link URL (other source)', 'simple-lms') . '</label><br>';
+        echo '<label><input type="radio" name="lesson_video_type" value="file"' . checked($video_type, 'file', false) . '> ' . __('File from media library', 'simple-lms') . '</label><br>';
         
         // URL input (shown for youtube, vimeo, and url types)
         $show_url_input = in_array($video_type, ['youtube', 'vimeo', 'url']);
@@ -1827,7 +1827,7 @@ class Meta_Boxes {
         
         // File selector
         echo '<div class="video-file-section" style="' . ($video_type !== 'file' ? 'display:none;' : '') . 'margin-top:10px;">';
-        echo '<p><strong>' . __('Plik z biblioteki multimediów:', 'simple-lms') . '</strong></p>';
+        echo '<p><strong>' . __('File from media library:', 'simple-lms') . '</strong></p>';
         
         $file_url = '';
         if ($video_file_id) {
@@ -1865,7 +1865,7 @@ class Meta_Boxes {
             // Set initial preview
             var initialPreview = <?php echo json_encode($initial_preview); ?>;
             if (initialPreview) {
-                $('#lesson-video-preview-container').html('<h3 style="margin-top: 0; font-size: 18px; color: #333;"><?php echo esc_js(__('Podgląd wideo', 'simple-lms')); ?></h3>' + initialPreview);
+                $('#lesson-video-preview-container').html('<h3 style="margin-top: 0; font-size: 18px; color: #333;"><?php echo esc_js(__('Preview wideo', 'simple-lms')); ?></h3>' + initialPreview);
             }
             
             function updateVideoPreview() {
@@ -1891,7 +1891,7 @@ class Meta_Boxes {
                     },
                     success: function(response) {
                         if (response.success) {
-                            $('#lesson-video-preview-container').html('<h3 style="margin-top: 0; font-size: 18px; color: #333;"><?php echo esc_js(__('Podgląd wideo', 'simple-lms')); ?></h3>' + response.data);
+                            $('#lesson-video-preview-container').html('<h3 style="margin-top: 0; font-size: 18px; color: #333;"><?php echo esc_js(__('Preview wideo', 'simple-lms')); ?></h3>' + response.data);
                         }
                     }
                 });
@@ -2043,7 +2043,7 @@ class Meta_Boxes {
             delete_post_meta($post_id, 'lesson_attachments');
         }
         
-        wp_send_json_success(['message' => 'Załączniki zostały zapisane', 'count' => count($clean_attachments)]);
+        wp_send_json_success(['message' => 'Attachments zostały zapisane', 'count' => count($clean_attachments)]);
     }
     
     /**
@@ -2079,7 +2079,7 @@ class Meta_Boxes {
             $attachments = [];
         }
         echo '<div class="lesson-attachments-container">';
-        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Pliki do pobrania dla uczniów', 'simple-lms') . '</h3>';
+        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Downloadable files for students', 'simple-lms') . '</h3>';
         echo '<div id="attachments-list">';
         if (!empty($attachments)) {
             foreach ($attachments as $index => $attachment_id) {
@@ -2094,7 +2094,7 @@ class Meta_Boxes {
                     echo '<span class="file-type-badge file-type-' . esc_attr($file_ext) . '" style="display: inline-flex; align-items: center; justify-content: center; width: 62px; height: 28px; Padding: 4px 6px; background: #f0f0f0; color: #666; font-size: 10px; font-weight: 600; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;">' . esc_html($display_ext) . '</span>';
                     echo '<span class="attachment-title" style="flex: 1; font-weight: 500;">' . esc_html($file_title) . '</span>';
                     echo '<div style="display: flex; gap: 10px; align-items: center;">';
-                    echo '<a href="' . esc_url($file_url) . '" target="_blank" class="attachment-link" style="color: #0073aa; text-decoration: none; font-size: 12px;">(' . __('Podgląd', 'simple-lms') . ')</a>';
+                    echo '<a href="' . esc_url($file_url) . '" target="_blank" class="attachment-link" style="color: #0073aa; text-decoration: none; font-size: 12px;">(' . __('Preview', 'simple-lms') . ')</a>';
                     echo '<button type="button" class="button remove-attachment" data-index="' . $index . '" style="font-size: 12px; Padding: 2px 8px;">' . __('Delete', 'simple-lms') . '</button>';
                     echo '</div>';
                     echo '<input type="hidden" name="lesson_attachments[]" value="' . esc_attr($attachment_id) . '" />';
@@ -2104,7 +2104,7 @@ class Meta_Boxes {
         }
         echo '</div>';
         echo '<div class="add-attachment-section">';
-        echo '<button type="button" class="button button-primary" id="add-attachment">' . __('Dodaj załącznik', 'simple-lms') . '</button>';
+        echo '<button type="button" class="button button-primary" id="add-attachment">' . __('Add attachment', 'simple-lms') . '</button>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -2204,8 +2204,8 @@ class Meta_Boxes {
             $("#add-attachment").click(function(e) {
                 e.preventDefault();
                 var custom_uploader = wp.media({
-                    title: "' . __('Wybierz plik do załączenia', 'simple-lms') . '",
-                    button: { text: "' . __('Dodaj załącznik', 'simple-lms') . '" },
+                    title: "' . __('Select file to attach', 'simple-lms') . '",
+                    button: { text: "' . __('Add attachment', 'simple-lms') . '" },
                     multiple: false
                 });
                 custom_uploader.on("select", function() {
@@ -2228,7 +2228,7 @@ class Meta_Boxes {
                         "<span class=\"file-type-badge file-type-" + fileExt + "\" style=\"display: inline-flex; align-items: center; justify-content: center; width: 62px; height: 28px; Padding: 4px 6px; background: #f0f0f0; color: #666; font-size: 10px; font-weight: 600; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;\">" + displayExt + "</span>" +
                         "<span class=\"attachment-title\" style=\"flex: 1; font-weight: 500;\">" + attachment.title + "</span>" +
                         "<div style=\"display: flex; gap: 10px; align-items: center;\">" +
-                        "<a href=\"" + attachment.url + "\" target=\"_blank\" class=\"attachment-link\" style=\"color: #0073aa; text-decoration: none; font-size: 12px;\">(" + "' . __('Podgląd', 'simple-lms') . '" + ")</a>" +
+                        "<a href=\"" + attachment.url + "\" target=\"_blank\" class=\"attachment-link\" style=\"color: #0073aa; text-decoration: none; font-size: 12px;\">(" + "' . __('Preview', 'simple-lms') . '" + ")</a>" +
                         "<button type=\"button\" class=\"button remove-attachment\" data-index=\"" + index + "\" style=\"font-size: 12px; Padding: 2px 8px;\">" + "' . __('Delete', 'simple-lms') . '" + "</button>" +
                         "</div>" +
                         "<input type=\"hidden\" name=\"lesson_attachments[]\" value=\"" + attachment.id + "\" />" +

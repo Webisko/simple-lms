@@ -257,10 +257,10 @@ class Admin_Customizations {
     public function set_course_columns($columns) {
         return [
             'cb'        => $columns['cb'],
-            'title'     => __('Tytuł', 'simple-lms'),
-            'thumbnail' => __('Obrazek wyróżniający', 'simple-lms'),
-            'modules'   => __('Liczba opublikowanych modułów', 'simple-lms'),
-            'lessons'   => __('Liczba opublikowanych lekcji', 'simple-lms'),
+            'title'     => __('Title', 'simple-lms'),
+            'thumbnail' => __('Featured image', 'simple-lms'),
+            'modules'   => __('Number of published modules', 'simple-lms'),
+            'lessons'   => __('Liczba opublikowanych lessons', 'simple-lms'),
             'date'      => __('Data', 'simple-lms'),
         ];
     }

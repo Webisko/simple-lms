@@ -16,7 +16,7 @@ class Module_Navigation_Widget extends Widget_Base {
 
     protected function register_controls(): void {
         $this->start_controls_section('content', ['label'=>__('Settings','simple-lms'),'tab'=>Controls_Manager::TAB_CONTENT]);
-        $this->add_control('course_id',['label'=>__('ID kursu','simple-lms'),'type'=>Controls_Manager::NUMBER,'default'=>0,'description'=>__('Zostaw 0 aby wykryć automatycznie','simple-lms')]);
+        $this->add_control('course_id',['label'=>__('ID kursu','simple-lms'),'type'=>Controls_Manager::NUMBER,'default'=>0,'description'=>__('Leave 0 to detect automatically','simple-lms')]);
         $this->add_responsive_control('layout',['label'=>__('Layout','simple-lms'),'type'=>Controls_Manager::SELECT,'default'=>'list','options'=>['list'=>__('Lista','simple-lms'),'grid'=>__('Siatka','simple-lms')]]);
         $this->add_responsive_control('columns',['label'=>__('Kolumny (grid)','simple-lms'),'type'=>Controls_Manager::SELECT,'default'=>'2','options'=>['1'=>'1','2'=>'2','3'=>'3','4'=>'4'],'condition'=>['layout'=>'grid']]);
         $this->end_controls_section();
@@ -37,7 +37,7 @@ class Module_Navigation_Widget extends Widget_Base {
             echo '<div class="module-item" style="border:1px solid #eee; border-radius:6px; Padding:12px">';
             echo '<div class="module-title" style="font-weight:600; margin-bottom:6px">'.esc_html(get_the_title($module->ID)).'</div>';
             echo '<div class="module-meta" style="font-size:0.9em; opacity:0.8; margin-bottom:10px">'.esc_html(sprintf(__('Lekcje: %d','simple-lms'), count($lessons))).'</div>';
-            echo '<a class="module-start-btn" href="'.esc_url($first_lesson_url).'" style="display:inline-block; Padding:8px 12px; background:#2196F3; color:#fff; text-decoration:none; border-radius:4px">'.esc_html__('Rozpocznij moduł','simple-lms').'</a>';
+            echo '<a class="module-start-btn" href="'.esc_url($first_lesson_url).'" style="display:inline-block; Padding:8px 12px; background:#2196F3; color:#fff; text-decoration:none; border-radius:4px">'.esc_html__('Start module','simple-lms').'</a>';
             echo '</div>';
         }
         echo '</div>';

@@ -37,7 +37,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Nawigacja lekcji', 'simple-lms');
+        return __('Nawigacja lessons', 'simple-lms');
     }
 
     /**
@@ -58,7 +58,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
      * Get widget keywords
      */
     public function get_keywords(): array {
-        return ['lesson', 'navigation', 'next', 'previous', 'lekcja', 'nawigacja', 'następna', 'poprzednia'];
+        return ['lesson', 'navigation', 'next', 'previous', 'lesson', 'nawigacja', 'następna', 'poprzednia'];
     }
 
     /**
@@ -77,17 +77,17 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lekcji (opcjonalne)', 'simple-lms'),
+                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
-                'description' => __('Pozostaw puste, aby automatycznie wykryć bieżącą lekcję', 'simple-lms'),
+                'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'show_prev',
             [
-                'label' => __('Pokaż przycisk "Poprzednia"', 'simple-lms'),
+                'label' => __('Show button "Poprzednia"', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -109,7 +109,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'show_next',
             [
-                'label' => __('Pokaż przycisk "Następna"', 'simple-lms'),
+                'label' => __('Show Next button', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -119,7 +119,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'next_text',
             [
-                'label' => __('Button text "Następna"', 'simple-lms'),
+                'label' => __('Next button text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Next lesson', 'simple-lms'),
                 'condition' => [
@@ -131,7 +131,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'show_icons',
             [
-                'label' => __('Pokaż ikony', 'simple-lms'),
+                'label' => __('Show icons', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -142,7 +142,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'prev_icon',
             [
-                'label' => __('Ikona "Poprzednia"', 'simple-lms'),
+                'label' => __('Previous icon', 'simple-lms'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-arrow-left',
@@ -158,7 +158,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'next_icon',
             [
-                'label' => __('Ikona "Następna"', 'simple-lms'),
+                'label' => __('Next icon', 'simple-lms'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-arrow-right',
@@ -178,8 +178,8 @@ class Lesson_Navigation_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'outside',
                 'options' => [
-                    'outside' => __('Na zewnątrz (← [] tekst | tekst [] →)', 'simple-lms'),
-                    'inside' => __('Od wewnątrz ([] ← tekst | tekst → [])', 'simple-lms'),
+                    'outside' => __('Outside (← [] text | text [] →)', 'simple-lms'),
+                    'inside' => __('From inside ([] ← text | text → [])', 'simple-lms'),
                 ],
                 'condition' => [
                     'show_icons' => 'yes',
@@ -190,13 +190,13 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'layout',
             [
-                'label' => __('Układ przycisków', 'simple-lms'),
+                'label' => __('Button layout', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'space-between',
                 'options' => [
-                    'space-between' => __('Rozciągnięte (lewo-prawo)', 'simple-lms'),
+                    'space-between' => __('Stretched (left-right)', 'simple-lms'),
                     'flex-start' => __('Do lewej', 'simple-lms'),
-                    'center' => __('Do środka', 'simple-lms'),
+                    'center' => __('Inward', 'simple-lms'),
                     'flex-end' => __('Do prawej', 'simple-lms'),
                 ],
             ]
@@ -205,7 +205,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_responsive_control(
             'gap',
             [
-                'label' => __('Odstęp między przyciskami', 'simple-lms'),
+                'label' => __('Spacing between buttons', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'range' => [
@@ -284,7 +284,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Odstęp od tekstu', 'simple-lms'),
+                'label' => __('Spacing od tekstu', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -317,7 +317,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'icon_color',
             [
-                'label' => __('Kolor ikony', 'simple-lms'),
+                'label' => __('Icon color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-nav-icon' => 'color: {{VALUE}};',
@@ -329,7 +329,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'icon_hover_color',
             [
-                'label' => __('Kolor ikony (hover)', 'simple-lms'),
+                'label' => __('Icon color (hover)', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-nav-btn:hover .simple-lms-nav-icon' => 'color: {{VALUE}};',
@@ -477,7 +477,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->start_controls_tab(
             'button_disabled_tab',
             [
-                'label' => __('Wyłączony', 'simple-lms'),
+                'label' => __('Disabled', 'simple-lms'),
             ]
         );
 

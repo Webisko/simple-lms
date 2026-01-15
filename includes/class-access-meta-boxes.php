@@ -136,7 +136,7 @@ class Access_Meta_Boxes {
         echo '</div>';
         
         echo '<p style="margin-top: 12px; font-size: 12px; color: #666;">';
-        echo \esc_html(sprintf(\__('Łącznie: %d użytkowników', 'simple-lms'), count($users_with_access)));
+        echo \esc_html(sprintf(\__('Total: %d users', 'simple-lms'), count($users_with_access)));
         echo '</p>';
     }
 

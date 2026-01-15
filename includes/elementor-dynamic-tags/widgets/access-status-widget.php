@@ -109,7 +109,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'access_icon',
             [
-                'label' => __('Ikona (dostęp)', 'simple-lms'),
+                'label' => __('Icon (access)', 'simple-lms'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-check-circle',
@@ -124,7 +124,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'no_access_icon',
             [
-                'label' => __('Ikona (brak dostępu)', 'simple-lms'),
+                'label' => __('Icon (no access)', 'simple-lms'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-lock',
@@ -139,16 +139,16 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'access_text',
             [
-                'label' => __('Tekst (dostęp)', 'simple-lms'),
+                'label' => __('Text (access)', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Masz dostęp do kursu', 'simple-lms'),
+                'default' => __('You have access to the course', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'no_access_text',
             [
-                'label' => __('Tekst (brak dostępu)', 'simple-lms'),
+                'label' => __('Text (no access)', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('No access to course', 'simple-lms'),
             ]
@@ -157,7 +157,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'show_expiration',
             [
-                'label' => __('Pokaż datę wygaśnięcia', 'simple-lms'),
+                'label' => __('Show expiration date', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -167,9 +167,9 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'expiration_prefix',
             [
-                'label' => __('Prefix daty wygaśnięcia', 'simple-lms'),
+                'label' => __('Expiration date prefix', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Dostęp do:', 'simple-lms'),
+                'default' => __('Access to:', 'simple-lms'),
                 'condition' => [
                     'show_expiration' => 'yes',
                 ],
@@ -179,9 +179,9 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'lifetime_text',
             [
-                'label' => __('Tekst (dożywotni dostęp)', 'simple-lms'),
+                'label' => __('Text (lifetime access)', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Dożywotni dostęp', 'simple-lms'),
+                'default' => __('Lifetime access', 'simple-lms'),
                 'condition' => [
                     'show_expiration' => 'yes',
                 ],
@@ -191,7 +191,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'show_drip',
             [
-                'label' => __('Pokaż info o drip content', 'simple-lms'),
+                'label' => __('Show drip content info', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -203,7 +203,7 @@ class Access_Status_Widget extends Widget_Base {
             [
                 'label' => __('Tekst drip content', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Treści odblokowywane stopniowo', 'simple-lms'),
+                'default' => __('Content unlocked gradually', 'simple-lms'),
                 'condition' => [
                     'show_drip' => 'yes',
                 ],
@@ -213,7 +213,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_responsive_control(
             'alignment',
             [
-                'label' => __('Wyrównanie', 'simple-lms'),
+                'label' => __('Alignment', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -221,7 +221,7 @@ class Access_Status_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Wyśrodkuj', 'simple-lms'),
+                        'title' => __('Center', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
@@ -300,7 +300,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->start_controls_section(
             'access_style_section',
             [
-                'label' => __('Status: Dostęp', 'simple-lms'),
+                'label' => __('Status: Access', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -332,7 +332,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'access_icon_color',
             [
-                'label' => __('Kolor ikony', 'simple-lms'),
+                'label' => __('Icon color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#4caf50',
                 'selectors' => [
@@ -348,7 +348,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->start_controls_section(
             'no_access_style_section',
             [
-                'label' => __('Status: Brak dostępu', 'simple-lms'),
+                'label' => __('Status: No access', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -380,7 +380,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'no_access_icon_color',
             [
-                'label' => __('Kolor ikony', 'simple-lms'),
+                'label' => __('Icon color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f44336',
                 'selectors' => [
@@ -405,7 +405,7 @@ class Access_Status_Widget extends Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'main_text_typography',
-                'label' => __('Główny tekst', 'simple-lms'),
+                'label' => __('Main text', 'simple-lms'),
                 'selector' => '{{WRAPPER}} .access-main-text',
             ]
         );
@@ -453,7 +453,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Odstęp ikony', 'simple-lms'),
+                'label' => __('Spacing ikony', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [

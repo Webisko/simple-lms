@@ -5,14 +5,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple LMS 1.4.0\n"
 "Report-Msgid-Bugs-To: https://github.com/Webisko/simple-lms\n"
-"POT-Creation-Date: 2026-01-15 16:03+0000\n"
+"POT-Creation-Date: 2026-01-15 17:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "%d godz. %d min."
+msgid "%d hr. %d min."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
@@ -24,7 +24,7 @@ msgid "%d of %d lessons completed"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "%d sekund"
+msgid "%d secund"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
@@ -91,12 +91,25 @@ msgstr ""
 msgid "Access duration:"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
+msgid "Access expired"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "Access is managed automatically by WooCommerce after product purchase."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "Access time:"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Access to:"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
+msgid "Access to: %s"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
@@ -133,8 +146,33 @@ msgstr ""
 msgid "Add New Module"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Add Producty WooCommerce do kursu."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Add WooCommerce Products to enable sales of this course."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Add attachment"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Add existing product"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "Add first module to start building the course."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
+msgid "Add lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "Add new lesson"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
@@ -149,20 +187,45 @@ msgstr ""
 msgid "After number of days"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "After text"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
 msgid "Aktualny element"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Alignment"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Alignment tekstu"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "All Courses"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "All Lessons"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "All Modules"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "All tags have been updated"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -173,6 +236,16 @@ msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 msgid "Allow multiple modules to be opened"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "An error occurred while communicating with the server"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
+msgid "An error occurred. Try again."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -187,8 +260,21 @@ msgstr ""
 msgid "Analytics table does not exist"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Are you sure you want to delete the image?"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
+msgid "Are you sure you want to delete the lesson?"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
+msgid "Are you sure you want to delete the module?"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Anuluj"
+msgid "Are you sure you want to remove this product from the course?"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\lesson-video.php
@@ -286,6 +372,7 @@ msgstr ""
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
 msgid "Border radius"
 msgstr ""
 
@@ -304,19 +391,19 @@ msgid "Brak filmu"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
-msgid "Brak lekcji do kontynuowania"
+msgid "Brak lessons do kontynuowania"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Brak lekcji w koszu"
+msgid "Brak lessons w koszu"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
-msgid "Brak lekcji w tym module"
+msgid "Brak lessons w tym module"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
-msgid "Brak lekcji w tym module."
+msgid "Brak lessons w tym module."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -335,10 +422,6 @@ msgstr ""
 msgid "Brak wybranego pliku"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Brak zapisanych postępów"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\breadcrumbs-navigation.php
 msgid "Breadcrumbs Navigation"
 msgstr ""
@@ -348,14 +431,14 @@ msgstr ""
 msgid "Button Text"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Button layout"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
 msgid "Button text"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Button text \"Następna\""
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
@@ -366,45 +449,12 @@ msgstr ""
 msgid "Buy Course"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Błąd podczas aktualizacji postępu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Błąd podczas pobierania kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Błąd podczas pobierania kursów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Błąd podczas pobierania lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Błąd podczas pobierania modułów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Błąd podczas pobierania postępów"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+msgid "Buy course to start"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Błąd podczas tworzenia produktu:"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Błąd podczas ustawiania domyślnego produktu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Błąd podczas ładowania produktów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Błąd weryfikacji bezpieczeństwa"
+msgid "Cancel"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
@@ -438,12 +488,37 @@ msgstr ""
 msgid "Cannot detect valid lesson. Make sure the widget is used on a lesson page or set correct ID."
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Cannot duplicate lesson without parent module."
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
 msgid "Cena"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Center"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
 msgid "Change expiration date:"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Change image"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Check if this product gives access to the course"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -467,6 +542,8 @@ msgid "Columns"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
 msgid "Completed"
 msgstr ""
 
@@ -476,6 +553,10 @@ msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\lesson-completion-button.php
 msgid "Completed Text"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Completed: %d lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
@@ -490,6 +571,14 @@ msgstr ""
 msgid "Configure basic Simple LMS plugin settings."
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Content"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Content unlocked gradually"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
 msgid "Continue"
@@ -501,11 +590,12 @@ msgid "Continue Learning Button"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Continue naukę"
+msgid "Continue learning"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Course"
@@ -565,6 +655,10 @@ msgstr ""
 msgid "Course Overview"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
+msgid "Course Overview (Accordion)"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\course-progress.php
 msgid "Course Progress Bar"
 msgstr ""
@@ -585,6 +679,19 @@ msgstr ""
 msgid "Course access is managed automatically by WooCommerce integration."
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+msgid "Course completed!"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Course nie znaleziony"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Course settings are only available for virtual products."
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
 msgid "Course update failed"
 msgstr ""
@@ -597,34 +704,44 @@ msgstr ""
 msgid "Courses list navigation"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Czas przejścia (ms)"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "Coursey"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
-msgid "Czy na pewno chcesz usunąć lekcję?"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
-msgid "Czy na pewno chcesz usunąć moduł?"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Czy na pewno chcesz usunąć obrazek?"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Czy na pewno chcesz usunąć ten produkt z kursu?"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "Create course"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Create new product"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Custom"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Custom URL"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Custom obraz"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "Custom separator"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "DOMYŚLNY"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "DEFAULT"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\user-progress-dashboard.php
@@ -672,11 +789,20 @@ msgid "Delete Module"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
 msgid "Disabled"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Displayed when lesson is not found"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 msgid "Displays module availability information with drip content"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Distance from content"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
@@ -701,27 +827,8 @@ msgstr ""
 msgid "Do prawej"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Do środka"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Dodaj istniejący produkt"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
-msgid "Dodaj lekcję"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Dodaj nowy moduł"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Dodaj nową lekcję"
+msgid "Dodaj New Module"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -734,34 +841,8 @@ msgstr ""
 msgid "Dodaj obrazek"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Dodaj produkty WooCommerce do kursu."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Dodaj produkty WooCommerce, aby umożliwić sprzedaż tego kursu."
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Dodaj załącznik"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Dostęp do:"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
-msgid "Dostęp do: %s"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
-msgid "Dostęp wygasł"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Dożywotni dostęp"
+msgid "Downloadable files for students"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -790,14 +871,18 @@ msgstr ""
 msgid "Each next module after X days"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Edit Course"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Edit Lesson"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Edit Module"
 msgstr ""
@@ -805,19 +890,6 @@ msgstr ""
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 msgid "Edytuj"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Edytuj kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Edytuj lekcję"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Edytuj moduł"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
@@ -847,16 +919,49 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Etykieta lekcji"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
+msgid "Enter module title."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Error creating product:"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Error fetching course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Error fetching courses"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Error fetching lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Error fetching modules"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Error fetching progress"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Error loading products"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Error setting default product"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Error updating progress"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Etykieta modułów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Etykieta postępu"
+msgid "Etykieta lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
@@ -875,10 +980,54 @@ msgstr ""
 msgid "Example Module 2"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Expiration date prefix"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Failed to create course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Failed to create lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Failed to create module"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Failed to create product"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Failed to delete lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Failed to delete module"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "Failed to save progress"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Failed to update progress"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\tags\course-title.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\tags\lesson-title.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\tags\module-title.php
 msgid "Fallback Text"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Fallback message"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Fallback text"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
@@ -887,12 +1036,33 @@ msgstr ""
 msgid "Featured Image"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Featured image"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Featured lesson thumbnail"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "File from media library"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "File from media library:"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\course-progress.php
 msgid "Fill Color"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Film lekcji"
+msgid "Film lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
@@ -919,6 +1089,10 @@ msgstr ""
 msgid "Format tekstu"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "From inside ([] ← text | text → [])"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "From specific date"
 msgstr ""
@@ -939,12 +1113,20 @@ msgstr ""
 msgid "Gdy brak wideo"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "General"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "General Settings"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "German"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
+msgid "Given ID is not a lesson."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -955,12 +1137,33 @@ msgstr ""
 msgid "Gradually (Drip)"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Główny tekst"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\course-progress.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Height"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\course-progress.php
-msgid "Height"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Height paska"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Hide completely"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+msgid "Hide when course completed"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+msgid "Hide when no access"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Hide when user has access"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "Home"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\breadcrumbs-navigation.php
@@ -990,7 +1193,7 @@ msgid "ID kursu (opcjonalne)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
-msgid "ID lekcji"
+msgid "ID lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
@@ -998,7 +1201,34 @@ msgstr ""
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "ID lekcji (opcjonalne)"
+msgid "ID lessons (opcjonalne)"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Icon (access)"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Icon (no access)"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Icon color"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Icon color (hover)"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+msgid "Icon position"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -1011,22 +1241,6 @@ msgstr ""
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
 msgid "Ikona"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Ikona \"Następna\""
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Ikona \"Poprzednia\""
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Ikona (brak dostępu)"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Ikona (dostęp)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
@@ -1044,6 +1258,10 @@ msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
 msgid "In Progress"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+msgid "Incomplete"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\lesson-completion-button.php
@@ -1074,12 +1292,103 @@ msgstr ""
 msgid "Insert into module"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Justify"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Inside bar"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Już posiadasz ten kurs"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-security-service.php
+msgid "Insufficient permissions"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Invalid Vimeo link. Check URL format."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Invalid YouTube link. Check URL format."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Invalid action"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Invalid course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Invalid course ID"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Invalid data."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Invalid lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "Invalid lesson ID"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "Invalid lesson structure"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Invalid module"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Invalid module ID"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Invalid nonce"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Invalid parameters"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Invalid product ID"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Invalid security token"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Inward"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+msgid "Justify"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
@@ -1125,49 +1434,16 @@ msgstr ""
 msgid "Kolor ceny promocyjnej"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Kolor ceny regularnej (przekreślona)"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
 msgid "Kolor etykiety"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Kolor ikony"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Kolor ikony (hover)"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Kolor nakładki"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Kolor nakładki (hover)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
 msgid "Kolor nazwy pliku"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Kolor postępu"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
 msgid "Kolor rozmiaru pliku"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Kolor wartości"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
@@ -1179,16 +1455,8 @@ msgstr ""
 msgid "Kolumny (grid)"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-msgid "Komunikat gdy brak plików"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
 msgid "Komunikat o braku wideo"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Komunikat zastępczy"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
@@ -1201,58 +1469,37 @@ msgstr ""
 msgid "Kontener wideo"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Krótki Description kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Krótki Description wyświetlany na liście kursów i w podglądzie."
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 msgid "Kup kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Kup kurs aby rozpocząć"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
 msgid "Kup teraz"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Kurs nadrzędny"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Kurs nie znaleziony"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Kurs ukończony!"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\simple-lms.php
 msgid "Kursy"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "LMS Course Progress"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "LMS Courses"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "LMS Progress"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "Language"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
+msgid "Last activity: %s"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\course-info-box.php
@@ -1271,10 +1518,23 @@ msgstr ""
 msgid "Leave 0 to automatically detect course from current page"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\module-navigation-widget.php
+msgid "Leave 0 to detect automatically"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
 msgid "Leave empty to automatically detect current course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Leave empty to automatically detect current lesson"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\tags\course-title.php
@@ -1305,26 +1565,8 @@ msgstr ""
 msgid "Lekcja 3"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
-msgid "Lekcja nie należy do żadnego MODULE."
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
 msgid "Lekcja nie znaleziona"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Lekcja nie została znaleziona"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Lekcja oznaczona jako nieukończona"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Lekcja oznaczona jako ukończona"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
@@ -1404,12 +1646,39 @@ msgid "Lesson completion button"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Lesson content"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
 msgid "Lesson content preview (displayed on page)"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Lesson details"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
+msgid "Lesson does not belong to any module."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 msgid "Lesson list"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "Lesson marked as completed"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Lesson marked as incomplete"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Lesson not found"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
@@ -1432,25 +1701,18 @@ msgstr ""
 msgid "Lewa"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-msgid "Liczba kolumn"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
-msgid "Liczba opublikowanych lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
-msgid "Liczba opublikowanych modułów"
+msgid "Liczba opublikowanych lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
 msgid "Lifetime access"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Link URL (inne źródło)"
+msgid "Link URL (other source)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\tags\course-title.php
@@ -1474,8 +1736,20 @@ msgstr ""
 msgid "Lista"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
+msgid "Log in to see progress."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
+msgid "Log in to see your courses."
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
 msgid "MODULE"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Main text"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -1486,12 +1760,16 @@ msgstr ""
 msgid "Manually"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Masz dostęp do kursu"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+msgid "Mark as completed"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Miniatura wyróżniająca lekcji"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+msgid "Mark as incomplete"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+msgid "Message when no files"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
@@ -1501,6 +1779,7 @@ msgstr ""
 msgid "Missing required fields"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Module"
@@ -1532,12 +1811,20 @@ msgstr ""
 msgid "Module header"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Module nie znaleziony"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "Module schedule is available when course has: Gradually → Each module independently."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Modules"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+msgid "Modules label"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
@@ -1549,57 +1836,30 @@ msgid "Modules list navigation"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Moduł"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Moduł nadrzędny"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Moduł nie znaleziony"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Moduły"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Musisz być zalogowany"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Na zewnątrz (← [] tekst | tekst [] →)"
+msgid "Moduley"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
 msgid "Nad przyciskiem"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Nakładka (overlay)"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Nawigacja lekcji"
+msgid "Nawigacja lessons"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "New Course"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "New Lesson"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "New Module"
 msgstr ""
@@ -1609,80 +1869,15 @@ msgid "Next Text"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Next button text"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Next icon"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
 msgid "Next lesson"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz dostępu do tego kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz uprawnień do duplikowania lessons in this course."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz uprawnień do duplikowania modułów w tym kursie."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz uprawnień do edycji tego MODULE"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz uprawnień do edycji tego kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz uprawnień do edycji tej lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz uprawnień do usunięcia tego MODULE"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie masz uprawnień do usunięcia tej lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
-msgid "Nie masz żadnych kursów."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie można zduplikować lekcji bez MODULE nadrzędnego."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie udało się usunąć MODULE"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nie udało się usunąć lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Nie udało się utworzyć MODULE"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Nie udało się utworzyć kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Nie udało się utworzyć lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Nie udało się utworzyć produktu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Nie udało się zaktualizować postępu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Nie udało się zapisać postępu"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\module-navigation-widget.php
@@ -1690,121 +1885,7 @@ msgid "Nie wykryto kursu."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
-msgid "Nie wykryto lekcji."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Nie znaleziono kursów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Nie znaleziono lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Nie znaleziono modułów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Nie znaleziono produktów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nieprawidłowa akcja"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nieprawidłowa lekcja"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Nieprawidłowa struktura lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nieprawidłowe dane."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Nieprawidłowe parametry"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Nieprawidłowy ID kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Nieprawidłowy ID lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Nieprawidłowy ID produktu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nieprawidłowy identyfikator MODULE"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nieprawidłowy identyfikator kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nieprawidłowy identyfikator lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Nieprawidłowy kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Nieprawidłowy link Vimeo. Sprawdź format URL."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Nieprawidłowy link YouTube. Sprawdź format URL."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Nieprawidłowy moduł"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Nieprawidłowy nonce"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Nieprawidłowy token bezpieczeństwa"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-msgid "Nieukończona"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-security-service.php
-msgid "Niewystarczające uprawnienia"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Nieznana akcja"
+msgid "Nie wykryto lessons."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
@@ -1824,11 +1905,15 @@ msgid "No assigned products"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-msgid "No attachments dla tej lekcji."
+msgid "No attachments dla tej lessons."
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 msgid "No available products or all are already assigned."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "No courses found"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
@@ -1848,8 +1933,16 @@ msgstr ""
 msgid "No lesson content."
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "No lessons found"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "No lessons in this module."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "No modules found"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\module-navigation-widget.php
@@ -1875,6 +1968,14 @@ msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 msgid "No products assigned to course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "No products found"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "No saved progress"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -1914,85 +2015,16 @@ msgstr ""
 msgid "Not found in Trash"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Nowa lekcja"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+msgid "Number of columns"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Nowy kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Nowy moduł"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
+msgid "Number of published modules"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
 msgid "Obok paska"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Obrazek wyróżniający"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Obsługuje YouTube, Vimeo, pliki MP4"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Od wewnątrz ([] ← tekst | tekst → [])"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
-msgid "Odstęp"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Odstęp ikony"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-msgid "Odstęp między elementami"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Odstęp między przyciskami"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Odstęp od paska"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Odstęp od przycisku"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Odstęp od tekstu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Odstęp od treści"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Ogólne"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Okładka i ikona Play"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Okładka wideo"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -2015,16 +2047,20 @@ msgstr ""
 msgid "Opublikowany"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
-msgid "Ostatnia aktywność: %s"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Outside (← [] text | text [] →)"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-msgid "Oznacz jako nieukończoną"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Overlay"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-msgid "Oznacz jako ukończoną"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Overlay color"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Overlay color (hover)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
@@ -2041,6 +2077,10 @@ msgstr ""
 msgid "Padding"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Parent Course"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Parent Course:"
 msgstr ""
@@ -2049,39 +2089,16 @@ msgstr ""
 msgid "Parent Lesson:"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Parent Module"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Parent Module:"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Pasek postępu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Pasek postępu kursu"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
 msgid "Pionowy"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Plik z biblioteki multimediów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Plik z biblioteki multimediów:"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Pliki do pobrania dla uczniów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Po tekście"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
@@ -2092,155 +2109,21 @@ msgstr ""
 msgid "Pod przyciskiem"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
-msgid "Podany ID nie jest lekcją."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Podgląd"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Podgląd wideo"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Podgląd wideo w edytorze"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-msgid "Pokaż Download button"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Pokaż Lesson Title"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Pokaż cenę"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Pokaż datę wygaśnięcia"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Pokaż ikony"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Pokaż info o drip content"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Pokaż komunikat"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Pokaż kontrolki"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Pokaż kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Pokaż lekcję"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Pokaż liczbę modułów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Pokaż link \"Strona główna\""
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Pokaż moduł"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Pokaż okładkę (poster)"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
-msgid "Pokaż ostatnią aktywność"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
-msgid "Pokaż postęp"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Pokaż procent"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Pokaż przycisk \"Następna\""
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Pokaż przycisk \"Poprzednia\""
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
-msgid "Pokaż przycisk Continue"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-msgid "Pokaż rozmiar pliku"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
-msgid "Pokaż streak"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Pokaż tekst postępu"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "Polish"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Postęp LMS"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Poster and Play icon"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Postęp w kursach LMS"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
-msgid "Postęp zaktualizowany"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Postęp zapisany"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Poster source"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
 msgid "Poziomy"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Pozostaw puste, aby automatycznie wykryć bieżącą lekcję"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Pozostałe do ukończenia"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Pozostało: %d lekcji"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
@@ -2251,12 +2134,6 @@ msgstr ""
 msgid "Pozycja ikon"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-msgid "Pozycja ikony"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
 msgid "Pozycja procentu"
 msgstr ""
@@ -2265,16 +2142,30 @@ msgstr ""
 msgid "Prawa"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Prefix daty wygaśnięcia"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "Preserve all plugin data when uninstalling"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Preview"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Preview wideo"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Preview wideo w edytorze"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\lesson-navigation.php
 msgid "Previous Text"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Previous icon"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
@@ -2289,17 +2180,35 @@ msgstr ""
 msgid "Procent"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Product does not exist"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Product has been added to the course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Product has been set as default"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Product is already assigned to this course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Product was deleted z kursu"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Products WooCommerce"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
 msgid "Produkt WooCommerce nie istnieje."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Produkt jest już przypisany do tego kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Produkt nie istnieje"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
@@ -2310,26 +2219,36 @@ msgstr ""
 msgid "Produkt nie znaleziony"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Produkt został dodany do kursu"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Progress bar"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Produkt został ustawiony jako domyślny"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Progress bar kursu"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Produkt został usunięty z kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Produkty WooCommerce"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Progress color"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 msgid "Progress indicators"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+msgid "Progress label"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "Progress saved"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Progress text"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-rest-api.php
+msgid "Progress updated"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
@@ -2339,10 +2258,6 @@ msgstr ""
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
 msgid "Przed tekstem"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
-msgid "Przegląd kursu (Akordeon)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
@@ -2356,12 +2271,12 @@ msgstr ""
 msgid "Przyciski"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
-msgid "Przypisane kursy"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Przypisane Products:"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Przypisane produkty:"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
+msgid "Przypisane kursy"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
@@ -2372,6 +2287,22 @@ msgstr ""
 msgid "Published"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Regular price color (crossed out)"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Remaining to complete"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Remaining: %d lessons"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
+msgid "Remove"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
@@ -2380,6 +2311,11 @@ msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
 msgid "Remove limit"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Remove produkt"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
@@ -2394,8 +2330,8 @@ msgstr ""
 msgid "Requires Measurement ID and API Secret below."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Rozciągnięte (lewo-prawo)"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+msgid "Requires user login"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
@@ -2412,10 +2348,6 @@ msgstr ""
 msgid "Rozmiar ikony"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\module-navigation-widget.php
-msgid "Rozpocznij moduł"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "Save Settings"
 msgstr ""
@@ -2424,16 +2356,56 @@ msgstr ""
 msgid "Search Course"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "Search Courses"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Search Lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "Search Lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "Search Module"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
+msgid "Search Modules"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Search products..."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Security verification failed"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Select course to which this product should give access"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Select course..."
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
 msgid "Select courses the user has access to:"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Select file to attach"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Select poster"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Select product WooCommerce"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -2444,6 +2416,16 @@ msgstr ""
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
 msgid "Separator"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Set as default"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "Set default"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
@@ -2486,16 +2468,34 @@ msgstr ""
 msgid "Settings kursu"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Settings kursu są dostępne tylko dla produktów wirtualnych."
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Settings saved successfully!"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "Settings saved successfully."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Settings zapisane pomyślnie!"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Short Course Description"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Short Description displayed on the course list and in preview."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+msgid "Show Download button"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Show Lesson Title"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Show Next button"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\lesson-video.php
@@ -2510,9 +2510,37 @@ msgstr ""
 msgid "Show Text"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Show button \"Poprzednia\""
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
+msgid "Show button Continue"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 msgid "Show completion progress"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Show controls"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "Show course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Show drip content info"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Show expiration date"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+msgid "Show file size"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
@@ -2528,9 +2556,61 @@ msgstr ""
 msgid "Show icon typu pliku"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Show icons"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
+msgid "Show last activity"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "Show lesson"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 msgid "Show lesson count"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "Show link \"Home\""
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Show message"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "Show module"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+msgid "Show module count"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Show percentage"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Show poster"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Show price"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
+msgid "Show progress"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Show progress text"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
+msgid "Show streak"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
@@ -2562,8 +2642,46 @@ msgstr ""
 msgid "Simple LMS - Course Progress"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
+msgid "Spacing"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Spacing between buttons"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+msgid "Spacing between elements"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Spacing ikony"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
+msgid "Spacing od paska"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Spacing od przycisku"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Spacing od tekstu"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "Specify how long after purchase the user will have access to the course. Leave 0 or empty for lifetime access."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\module-navigation-widget.php
+msgid "Start module"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-privacy-handlers.php
@@ -2575,19 +2693,19 @@ msgid "Status"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Status: Brak dostępu"
+msgid "Status: Access"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Status: Dostęp"
+msgid "Status: No access"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "Stores learning events (lesson started, completed, milestones) in database."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Strona główna"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
+msgid "Stretched (left-right)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -2598,18 +2716,8 @@ msgstr ""
 msgid "Struktura kursu"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Szczegóły lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Szerokość"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
-msgid "Szerokość przycisku"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Supports YouTube, Vimeo, MP4 files"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
@@ -2617,105 +2725,44 @@ msgstr ""
 msgid "Szkic"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Szukaj kursów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Szukaj lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Szukaj modułów"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Szukaj produktów..."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Ta lekcja należy do MODULE:"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Ta lekcja nie jest przypisana do żadnego MODULE."
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
 msgid "Tekst"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Tekst \"Strona główna\""
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Tekst (brak dostępu)"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Tekst (dostęp)"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Tekst (dożywotni dostęp)"
+msgid "Tekst \"Home\""
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
 msgid "Tekst drip content"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Tekst gdy brak dostępu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Tekst gdy już posiada"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Tekst gdy ukończono"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
 msgid "Tekst meta (daty)"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Tekst postępu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Tekst zastępczy"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
+msgid "Tekst: Mark as completed"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-msgid "Tekst: Oznacz jako nieukończoną"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-msgid "Tekst: Oznacz jako ukończoną"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Ten kurs nie jest dostępny do zakupu."
+msgid "Tekst: Mark as incomplete"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
 msgid "Ten kurs nie ma przypisanego produktu WooCommerce."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Ten moduł należy do kursu:"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Text (access)"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Ten moduł nie jest przypisany do żadnego kursu."
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Text (lifetime access)"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Ten produkt jest już dodany do kursu"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
+msgid "Text (no access)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
@@ -2757,17 +2804,59 @@ msgstr ""
 msgid "Text to show if no module is found"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Text when already owns"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+msgid "Text when completed"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+msgid "Text when no access"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
 msgid "This course has no modules yet."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "This course is not available for purchase."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "This lesson belongs to module:"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "This lesson is not assigned to any module."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "This module belongs to course:"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "This module has no lessons yet."
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "This module is not assigned to any course."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
+msgid "This product is already added to the course"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
 msgid "This widget works only on course, module, or lesson pages."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
+msgid "Title"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
@@ -2778,8 +2867,26 @@ msgstr ""
 msgid "To publish this lesson, first publish the module it belongs to."
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Too many attempts. Try again in a moment."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+msgid "Total time: %s"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
+msgid "Total: %d users"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "Track user learning events and integrate with external analytics platforms."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Transition time (ms)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -2790,25 +2897,8 @@ msgstr ""
 msgid "Translation files (.po) need to be compiled to .mo files to work. Use Poedit or Loco Translate plugin to compile them."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-msgid "Treści odblokowywane stopniowo"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Treść"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Twoja przeglądarka nie obsługuje elementu video."
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
 msgid "Tworzenie..."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
-msgid "Twój dostęp wygasa za %s (%s)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
@@ -2845,54 +2935,17 @@ msgstr ""
 msgid "Typografia rozmiaru"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Typografia wartości"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\admin-customizations.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Tytuł"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "URL filmu:"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-msgid "Ukończona"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Ukończono"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Ukończono: %d lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Ukryj całkowicie"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
 msgid "Ukryj gdy 100% completed"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Ukryj gdy brak dostępu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-msgid "Ukryj gdy kurs ukończony"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Ukryj gdy user ma dostęp"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Układ przycisków"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "Unknown action"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -2933,8 +2986,19 @@ msgstr ""
 msgid "Use as featured image"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
+msgid "Use icon as separator"
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
 msgid "Use the checkboxes above to assign or remove course access. Changes will be saved with the user profile."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Use this image"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\bricks\elements\user-courses-grid.php
@@ -2963,44 +3027,12 @@ msgstr ""
 msgid "Users with access:"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Ustaw domyślny"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+msgid "Value color"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Ustaw jako domyślny"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
-msgid "Usuń"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Usuń produkt"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Utwórz kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Utwórz nowy produkt"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Użyj ikony jako separator"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Użyj tego obrazka"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
+msgid "Value typography"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
@@ -3012,9 +3044,18 @@ msgid "Video URL"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Video for this lesson is not yet available."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
+msgid "Video poster"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
 msgid "Video source"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "View Course"
 msgstr ""
@@ -3023,6 +3064,7 @@ msgstr ""
 msgid "View Courses"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "View Lesson"
 msgstr ""
@@ -3031,6 +3073,7 @@ msgstr ""
 msgid "View Lessons"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\CPTManager.php
 msgid "View Module"
 msgstr ""
@@ -3048,20 +3091,21 @@ msgstr ""
 msgid "W przycis ku"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Wewnątrz paska"
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
 msgid "When enabled, the plugin logs additional diagnostic information even if WP_DEBUG is off."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Wideo dla tej lekcji nie jest jeszcze dostępne."
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "Widget will be hidden for users with course access"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Widget będzie ukryty dla użytkowników z dostępem do kursu"
+msgid "Width"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-attachments-widget.php
+msgid "Width przycisku"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
@@ -3082,34 +3126,6 @@ msgstr ""
 msgid "Wpisz tekst..."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
-msgid "Wpisz tytuł MODULE."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Wszystkie kursy"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Wszystkie lekcje"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Wszystkie moduły"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Wszystkie tagi zostały zaktualizowane"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Wybierz kurs, do którego ma dawać dostęp ten produkt"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Wybierz kurs..."
-msgstr ""
-
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -3117,11 +3133,7 @@ msgid "Wybierz obrazek kursu"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Wybierz obrazek lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Wybierz okładkę"
+msgid "Wybierz obrazek lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -3129,17 +3141,9 @@ msgid "Wybierz plik"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Wybierz plik do załączenia"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "Wybierz plik wideo"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Wybierz produkt WooCommerce"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -3160,74 +3164,59 @@ msgstr ""
 msgid "Wyjustuj"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-info-box-widget.php
-msgid "Wymaga zalogowania użytkownika"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
+msgid "You already own this course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have access to this course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have permission to delete this lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have permission to delete this module"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have permission to duplicate lessons in this course."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have permission to duplicate modules in this course."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have permission to edit this course"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have permission to edit this lesson"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+msgid "You do not have permission to edit this module"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-completion-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Wyrównanie"
+msgid "You have access to the course"
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Wyrównanie tekstu"
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
+msgid "You have no courses."
 msgstr ""
 
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Wysokość"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "Wysokość paska"
-msgstr ""
-
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Wystąpił błąd podczas komunikacji z serwerem"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\managers\AssetManager.php
-msgid "Wystąpił błąd. Spróbuj ponownie."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-navigation-widget.php
-msgid "Wyłączony"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\access-status-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\continue-learning-button-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-purchase-widget.php
-msgid "Wyśrodkuj"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Wyświetlany gdy lekcja nie zostanie znaleziona"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Własne"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Własny"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Własny URL"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Własny obraz"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\breadcrumbs-widget.php
-msgid "Własny separator"
+msgid "You must be logged in"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -3235,60 +3224,17 @@ msgstr ""
 msgid "YouTube"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\access-control.php
+msgid "Your access expires in %s (%s)"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Your browser does not support the video element."
+msgstr ""
+
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Z pola niestandardowego lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
-msgid "Zaloguj się, aby zobaczyć postępy."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
-msgid "Zaloguj się, aby zobaczyć swoje kursy."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-courses-grid-widget.php
-msgid "Zaokrąglenie"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-content-widget.php
-msgid "Zawartość lekcji"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-woocommerce-integration.php
-msgid "Zaznacz, jeśli ten produkt daje dostęp do kursu"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\ajax-handlers.php
-msgid "Zbyt wiele prób. Spróbuj ponownie za chwilę."
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
-msgid "Zmień obrazek"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Zobacz kurs"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Zobacz lekcję"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-post-types.php
-msgid "Zobacz moduł"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-progress-indicator-widget.php
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\module-navigation-widget.php
-msgid "Zostaw 0 aby wykryć automatycznie"
+msgid "Z pola niestandardowego lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
@@ -3300,11 +3246,11 @@ msgid "completed"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-progress-widget.php
-msgid "completed / Wszystkie lekcje"
+msgid "completed / All Lessons"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\user-progress-dashboard-widget.php
-msgid "completed lekcje: %d/%d (%d%%)"
+msgid "completed lessons: %d/%d (%d%%)"
 msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
@@ -3335,17 +3281,5 @@ msgstr ""
 
 #: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
 msgid "years"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-access-meta-boxes.php
-msgid "Łącznie: %d użytkowników"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-progress-tracker.php
-msgid "Łączny czas: %s"
-msgstr ""
-
-#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\lesson-video-widget.php
-msgid "Źródło okładki"
 msgstr ""
 

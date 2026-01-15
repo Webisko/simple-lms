@@ -18,13 +18,13 @@ class User_Progress_Dashboard_Widget extends Widget_Base {
     protected function register_controls(): void {
         $this->start_controls_section('content', ['label'=>__('Settings','simple-lms'),'tab'=>Controls_Manager::TAB_CONTENT]);
         $this->add_responsive_control('columns', ['label'=>__('Kolumny','simple-lms'),'type'=>Controls_Manager::SELECT,'default'=>'2','options'=>['1'=>'1','2'=>'2','3'=>'3']]);
-        $this->add_control('show_streak',['label'=>__('Pokaż streak','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
-        $this->add_control('show_last_activity',['label'=>__('Pokaż ostatnią aktywność','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
+        $this->add_control('show_streak',['label'=>__('Show streak','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
+        $this->add_control('show_last_activity',['label'=>__('Show last activity','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
         $this->end_controls_section();
     }
 
     protected function render(): void {
-        if (!is_user_logged_in()) { echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Zaloguj się, aby zobaczyć postępy.','simple-lms').'</div>'; return; }
+        if (!is_user_logged_in()) { echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Log in to see progress.','simple-lms').'</div>'; return; }
         $settings = $this->get_settings_for_display();
         $user_id = get_current_user_id();
         $courses = Access_Control::getUserCourses($user_id);
@@ -44,8 +44,8 @@ class User_Progress_Dashboard_Widget extends Widget_Base {
             echo '<div class="card-body" style="Padding:12px">';
             echo '<div class="card-title" style="font-weight:600; margin-bottom:8px">'.esc_html(get_the_title($course->ID)).'</div>';
             echo '<div class="card-progress" style="height:8px; background:#eee; border-radius:4px; overflow:hidden; margin-bottom:10px"><div style="height:100%; width:'.esc_attr($progress).'%; background:#4CAF50"></div></div>';
-            echo '<div class="card-meta" style="font-size:0.9em; opacity:0.85">'.esc_html(sprintf(__('completed lekcje: %d/%d (%d%%)','simple-lms'), $completed_lessons, $total_lessons, (int)$progress)).'</div>';
-            if ($settings['show_last_activity']==='yes') { echo '<div class="card-last-activity" style="margin-top:6px">'.esc_html(sprintf(__('Ostatnia aktywność: %s','simple-lms'), $last_activity_text)).'</div>'; }
+            echo '<div class="card-meta" style="font-size:0.9em; opacity:0.85">'.esc_html(sprintf(__('completed lessons: %d/%d (%d%%)','simple-lms'), $completed_lessons, $total_lessons, (int)$progress)).'</div>';
+            if ($settings['show_last_activity']==='yes') { echo '<div class="card-last-activity" style="margin-top:6px">'.esc_html(sprintf(__('Last activity: %s','simple-lms'), $last_activity_text)).'</div>'; }
             $continue_url = $last_lesson ? get_permalink($last_lesson) : get_permalink($course->ID);
             echo '<div class="card-actions" style="margin-top:10px">';
             echo '<a class="btn-continue" href="'.esc_url($continue_url).'" style="display:inline-block; Padding:10px 16px; background:#2196F3; color:#fff; text-decoration:none; border-radius:4px">'.esc_html__('Continue','simple-lms').'</a>';

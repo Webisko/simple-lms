@@ -37,7 +37,7 @@ class Lesson_Content_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Zawartość lekcji', 'simple-lms');
+        return __('Lesson content', 'simple-lms');
     }
 
     /**
@@ -58,7 +58,7 @@ class Lesson_Content_Widget extends Widget_Base {
      * Get widget keywords
      */
     public function get_keywords(): array {
-        return ['lesson', 'content', 'lekcja', 'treść', 'simple', 'lms'];
+        return ['lesson', 'content', 'lesson', 'treść', 'simple', 'lms'];
     }
 
     /**
@@ -77,17 +77,17 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lekcji (opcjonalne)', 'simple-lms'),
+                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
-                'description' => __('Pozostaw puste, aby automatycznie wykryć bieżącą lekcję', 'simple-lms'),
+                'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'show_title',
             [
-                'label' => __('Pokaż Lesson Title', 'simple-lms'),
+                'label' => __('Show Lesson Title', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -97,10 +97,10 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->add_control(
             'lesson_fallback_text',
             [
-                'label' => __('Tekst zastępczy', 'simple-lms'),
+                'label' => __('Fallback text', 'simple-lms'),
                 'type' => Controls_Manager::TEXTAREA,
                 'default' => __('No lesson content.', 'simple-lms'),
-                'description' => __('Wyświetlany gdy lekcja nie zostanie znaleziona', 'simple-lms'),
+                'description' => __('Displayed when lesson is not found', 'simple-lms'),
             ]
         );
 
@@ -110,7 +110,7 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->start_controls_section(
             'title_style_section',
             [
-                'label' => __('Tytuł', 'simple-lms'),
+                'label' => __('Title', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 // Use strict conditions to fully remove the section when disabled
                 'conditions' => [
@@ -147,7 +147,7 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->add_responsive_control(
             'title_spacing',
             [
-                'label' => __('Odstęp od treści', 'simple-lms'),
+                'label' => __('Distance from content', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em'],
                 'range' => [
@@ -168,7 +168,7 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_style_section',
             [
-                'label' => __('Treść', 'simple-lms'),
+                'label' => __('Content', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -195,7 +195,7 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->add_responsive_control(
             'content_align',
             [
-                'label' => __('Wyrównanie', 'simple-lms'),
+                'label' => __('Alignment', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
@@ -203,7 +203,7 @@ class Lesson_Content_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Do środka', 'simple-lms'),
+                        'title' => __('Inward', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [

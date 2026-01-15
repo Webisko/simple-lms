@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Centralized security helper service for Simple LMS
  *
@@ -44,7 +44,7 @@ class Security_Service {
     public function assertCapability(string $capability, ?int $objectId = null): void {
         $can = $objectId !== null ? current_user_can($capability, $objectId) : current_user_can($capability);
         if (!$can) {
-            throw new \RuntimeException(__('Niewystarczające uprawnienia', 'simple-lms'));
+            throw new \RuntimeException(__('Insufficient permissions', 'simple-lms'));
         }
     }
 

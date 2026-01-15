@@ -15,7 +15,7 @@ class User_Progress_Dashboard extends \Bricks\Element {
     }
 
     public function set_controls() {
-        $this->controls['title'] = ['tab'=>'content','label'=>esc_html__('Dashboard Title','simple-lms'),'type'=>'text','default'=>'Mój Panel Postępów'];
+        $this->controls['title'] = ['tab'=>'content','label'=>esc_html__('Dashboard Title','simple-lms'),'type'=>'text','default'=>'My Progress Dashboard'];
     }
 
     public function render() {
@@ -45,7 +45,7 @@ class User_Progress_Dashboard extends \Bricks\Element {
             echo '<div class="course-item" style="Padding:20px;background:#fff;border-radius:6px;margin-bottom:15px">';
             echo '<div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:15px">';
             echo '<div><h3 style="margin:0 0 5px"><a href="'.esc_url(get_permalink($course)).'" style="color:#333;text-decoration:none">'.esc_html($course->post_title).'</a></h3>';
-            echo '<div style="font-size:0.9em;color:#666">'.count($modules).' modułów • '.$total_lessons.' lekcji</div></div>';
+            echo '<div style="font-size:0.9em;color:#666">'.count($modules).' modułów • '.$total_lessons.' lessons</div></div>';
             echo '<div style="font-size:24px;font-weight:700;color:#2196F3">'.$progress.'%</div></div>';
             echo '<div class="progress-bar" style="height:10px;background:#eee;border-radius:5px;overflow:hidden"><div style="width:'.$progress.'%;height:100%;background:#4CAF50;transition:width 0.3s"></div></div>';
             echo '</div>';
