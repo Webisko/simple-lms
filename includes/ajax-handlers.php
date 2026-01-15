@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * AJAX request handlers for Simple LMS
  * 
@@ -90,7 +90,7 @@ class Ajax_Handler {
         }
         
         if ($capability && !current_user_can($capability)) {
-            return ['message' => __('Brak uprawnień do wykonania tej operacji', 'simple-lms')];
+            return ['message' => __('No permission to perform this operation', 'simple-lms')];
         }
         
         return null;
@@ -300,7 +300,7 @@ class Ajax_Handler {
         $moduleTitle = self::getPostString('module_title');
 
         if (!$courseId || !$moduleTitle) {
-            throw new \InvalidArgumentException(__('Brak wymaganych pól', 'simple-lms'));
+            throw new \InvalidArgumentException(__('Missing required fields', 'simple-lms'));
         }
 
         // Validate course exists and is correct post type
@@ -533,7 +533,7 @@ class Ajax_Handler {
         $lesson_title = sanitize_text_field($data['lesson_title'] ?? '');
 
         if (!$module_id || !$lesson_title) {
-            throw new \Exception(__('Brak wymaganych pól', 'simple-lms'));
+            throw new \Exception(__('Missing required fields', 'simple-lms'));
         }
 
         // Validate module exists and is correct post type
@@ -613,11 +613,11 @@ class Ajax_Handler {
         if ($parent_module_id) {
             $course_id = absint(get_post_meta($parent_module_id, 'parent_course', true));
             if (!$course_id || !self::userHasAccessToCourse($course_id)) {
-                throw new \Exception(__('Nie masz uprawnień do duplikowania lekcji w tym kursie.', 'simple-lms'));
+                throw new \Exception(__('Nie masz uprawnień do duplikowania lessons in this course.', 'simple-lms'));
             }
         } else {
             // If lesson has no parent module, it's an orphaned lesson, prevent duplication or handle as error
-            throw new \Exception(__('Nie można zduplikować lekcji bez modułu nadrzędnego.', 'simple-lms'));
+            throw new \Exception(__('Nie można zduplikować lekcji bez MODULE nadrzędnego.', 'simple-lms'));
         }
 
         // Get parent module (already fetched as $parent_module_id)
@@ -706,7 +706,7 @@ class Ajax_Handler {
     private static function duplicate_module($data) {
         $module_id = absint($data['module_id'] ?? 0);
         if (!$module_id) {
-            throw new \Exception(__('Nieprawidłowy identyfikator modułu', 'simple-lms'));
+            throw new \Exception(__('Nieprawidłowy identyfikator MODULE', 'simple-lms'));
         }
 
         $module = get_post($module_id);
@@ -819,7 +819,7 @@ class Ajax_Handler {
     private static function delete_module($data) {
         $module_id = absint($data['module_id'] ?? 0);
         if (!$module_id) {
-            throw new \Exception(__('Nieprawidłowy identyfikator modułu', 'simple-lms'));
+            throw new \Exception(__('Nieprawidłowy identyfikator MODULE', 'simple-lms'));
         }
 
         // Verify post type before capability check
@@ -828,7 +828,7 @@ class Ajax_Handler {
         }
 
         if (!current_user_can('delete_post', $module_id)) {
-            throw new \Exception(__('Nie masz uprawnień do usunięcia tego modułu', 'simple-lms'));
+            throw new \Exception(__('Nie masz uprawnień do usunięcia tego MODULE', 'simple-lms'));
         }
         
         // Delete associated lessons (verify user can delete each one)
@@ -849,7 +849,7 @@ class Ajax_Handler {
         $course_id = get_post_meta($module_id, 'parent_course', true);
         
         if (!wp_delete_post($module_id, true)) {
-            throw new \Exception(__('Nie udało się usunąć modułu', 'simple-lms'));
+            throw new \Exception(__('Nie udało się usunąć MODULE', 'simple-lms'));
         }
 
         wp_send_json_success([
@@ -877,7 +877,7 @@ class Ajax_Handler {
         // Save allow_comments setting
         update_post_meta($course_id, 'allow_comments', $allow_comments);
 
-        wp_send_json_success(['message' => __('Ustawienia zapisane pomyślnie!', 'simple-lms')]);
+        wp_send_json_success(['message' => __('Settings zapisane pomyślnie!', 'simple-lms')]);
     }
 
     /**
@@ -888,7 +888,7 @@ class Ajax_Handler {
         $status = sanitize_text_field($data['status'] ?? '');
 
         if (!$lesson_id || !$status) {
-            throw new \Exception(__('Brak wymaganych pól', 'simple-lms'));
+            throw new \Exception(__('Missing required fields', 'simple-lms'));
         }
 
         if (!current_user_can('edit_post', $lesson_id)) {
@@ -901,7 +901,7 @@ class Ajax_Handler {
             if ($parent_module_id) {
                 $parent_module_status = get_post_status($parent_module_id);
                 if ($parent_module_status !== 'publish') {
-                    throw new \Exception(__('Aby opublikować tę lekcję, najpierw opublikuj moduł, w którym się znajduje.', 'simple-lms'));
+                    throw new \Exception(__('To publish this lesson, first publish the module it belongs to.', 'simple-lms'));
                 }
             }
         }
@@ -931,13 +931,13 @@ class Ajax_Handler {
             error_log('SimpleLMS: update_module_status called with module_id=' . $module_id . ', status=' . $status);
 
             if (!$module_id || !$status) {
-                error_log('SimpleLMS: Brak wymaganych pól module_id=' . $module_id . ', status=' . $status);
-                throw new \Exception(__('Brak wymaganych pól', 'simple-lms'));
+                error_log('SimpleLMS: Missing required fields module_id=' . $module_id . ', status=' . $status);
+                throw new \Exception(__('Missing required fields', 'simple-lms'));
             }
 
             if (!current_user_can('edit_post', $module_id)) {
                 error_log('SimpleLMS: Brak uprawnień dla module_id=' . $module_id);
-                throw new \Exception(__('Nie masz uprawnień do edycji tego modułu', 'simple-lms'));
+                throw new \Exception(__('Nie masz uprawnień do edycji tego MODULE', 'simple-lms'));
             }
 
             // Update module status

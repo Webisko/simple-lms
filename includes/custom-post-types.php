@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Custom Post Types for Simple LMS
  * 
@@ -33,7 +33,7 @@ function registerPostTypes(): void {
                 'all_items'          => __('Wszystkie kursy', 'simple-lms'),
                 'search_items'       => __('Szukaj kursów', 'simple-lms'),
                 'not_found'          => __('Nie znaleziono kursów', 'simple-lms'),
-                'not_found_in_trash' => __('Brak kursów w koszu', 'simple-lms'),
+                'not_found_in_trash' => __('No courses in trash', 'simple-lms'),
             ],
             'public'              => true,
             'menu_icon'           => 'dashicons-welcome-learn-more',
@@ -61,7 +61,7 @@ function registerPostTypes(): void {
                 'all_items'          => __('Wszystkie moduły', 'simple-lms'),
                 'search_items'       => __('Szukaj modułów', 'simple-lms'),
                 'not_found'          => __('Nie znaleziono modułów', 'simple-lms'),
-                'not_found_in_trash' => __('Brak modułów w koszu', 'simple-lms'),
+                'not_found_in_trash' => __('No modules in trash', 'simple-lms'),
             ],
             'public'              => true,
             'menu_icon'           => 'dashicons-format-aside',
@@ -154,20 +154,20 @@ function renderManagementPageStyles(): void {
         border: 1px solid #ccd0d4;
         border-radius: 6px;
         margin: 20px 0;
-        padding: 0;
+        Padding: 0;
         box-shadow: 0 1px 1px rgba(0,0,0,.04);
     }
     .section-header {
         background: #f6f7f7;
         border-bottom: 1px solid #ccd0d4;
-        padding: 16px 20px;
+        Padding: 16px 20px;
         margin: 0;
         font-size: 16px;
         font-weight: 600;
         color: #1e1e1e;
     }
     .item-container {
-        padding: 16px 20px;
+        Padding: 16px 20px;
         border-bottom: 1px solid #f0f0f1;
         display: block;
     }
@@ -184,7 +184,7 @@ function renderManagementPageStyles(): void {
     .item-code {
         font-family: 'Courier New', monospace;
         background: #f6f8fa;
-        padding: 4px 8px;
+        Padding: 4px 8px;
         border-radius: 4px;
         color: #0969da;
         font-size: 14px;
@@ -208,7 +208,7 @@ function renderManagementPageStyles(): void {
         background: #0073aa;
         color: #fff;
         border: none;
-        padding: 6px 12px;
+        Padding: 6px 12px;
         border-radius: 4px;
         cursor: pointer;
         font-size: 12px;
@@ -221,7 +221,7 @@ function renderManagementPageStyles(): void {
         background: transparent;
         color: #0073aa;
         border: 1px solid #0073aa;
-        padding: 6px 12px;
+        Padding: 6px 12px;
         border-radius: 4px;
         cursor: pointer;
         font-size: 12px;
@@ -231,7 +231,7 @@ function renderManagementPageStyles(): void {
     .item-details {
         display: none;
         margin-top: 16px;
-        padding: 16px;
+        Padding: 16px;
         background: #f8f9fa;
         border-radius: 4px;
         border-left: 4px solid #0073aa;
@@ -240,13 +240,13 @@ function renderManagementPageStyles(): void {
     .item-details.expanded { display: block; }
     .detail-section { margin: 12px 0; }
     .detail-title { font-weight: 600; margin-bottom: 8px; color: #1e1e1e; }
-    .param-item { background: #fff; padding: 8px 12px; margin: 4px 0; border-radius: 4px; font-size: 13px; }
+    .param-item { background: #fff; Padding: 8px 12px; margin: 4px 0; border-radius: 4px; font-size: 13px; }
     .param-name { font-family: monospace; color: #0969da; font-weight: 600; }
     .example-code {
         background: #fff;
         border: 1px solid #d1d9e0;
         border-radius: 4px;
-        padding: 8px 12px;
+        Padding: 8px 12px;
         margin: 4px 0;
         display: block;
         font-family: 'Courier New', monospace;
@@ -332,7 +332,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_video_url]</div>
-                <div class="item-description">URL wideo lekcji do użycia w widżetach Elementor/Bricks</div>
+                <div class="item-description">Video URL lekcji do użycia w widżetach Elementor/Bricks</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_video_url]')">Kopiuj</button>
@@ -392,7 +392,7 @@ function renderShortcodesSection(): void {
             <div id="details-course-content" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lekcji/modułu)</div>
+                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lekcji/MODULE)</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -470,7 +470,7 @@ function renderShortcodesSection(): void {
             <div id="details-prev" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">text</span> - tekst przycisku (domyślnie: "Poprzednia lekcja")</div>
+                    <div class="param-item"><span class="param-name">text</span> - Button text (domyślnie: "Previous lesson")</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -492,7 +492,7 @@ function renderShortcodesSection(): void {
             <div id="details-next" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">text</span> - tekst przycisku (domyślnie: "Następna lekcja")</div>
+                    <div class="param-item"><span class="param-name">text</span> - Button text (domyślnie: "Next lesson")</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -506,7 +506,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_complete_toggle]</div>
-                <div class="item-description">Przycisk oznaczania lekcji jako ukończonej/nieukończonej</div>
+                <div class="item-description">Przycisk oznaczania lekcji jako completedj/niecompletedj</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_complete_toggle]')">Kopiuj</button>
@@ -552,7 +552,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_lesson_module_title]</div>
-                <div class="item-description">Tytuł modułu do którego należy bieżąca lekcja</div>
+                <div class="item-description">Tytuł MODULE do którego należy bieżąca lekcja</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_lesson_module_title]')">Kopiuj</button>
@@ -577,7 +577,7 @@ function renderShortcodesSection(): void {
         <div class="item-container">
             <div class="item-header">
                 <div class="item-code">[simple_lms_course_title]</div>
-                <div class="item-description">Tytuł kursu (autodetect z lekcji/modułu lub konkretny ID)</div>
+                <div class="item-description">Tytuł kursu (autodetect z lekcji/MODULE lub konkretny ID)</div>
             </div>
             <div class="item-actions">
                 <button class="copy-btn" onclick="copyToClipboard(this, '[simple_lms_course_title]')">Kopiuj</button>
@@ -586,7 +586,7 @@ function renderShortcodesSection(): void {
             <div id="details-course-title" class="item-details">
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
-                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lekcji/modułu)</div>
+                    <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect z bieżącej lekcji/MODULE)</div>
                 </div>
                 <div class="detail-section">
                     <div class="detail-title">Przykłady:</div>
@@ -638,7 +638,7 @@ function renderShortcodesSection(): void {
                 <div class="detail-section">
                     <div class="detail-title">Parametry:</div>
                     <div class="param-item"><span class="param-name">course_id</span> - ID kursu (autodetect)</div>
-                    <div class="param-item"><span class="param-name">text</span> - tekst przycisku (domyślnie: "Kup kurs")</div>
+                    <div class="param-item"><span class="param-name">text</span> - Button text (domyślnie: "Kup kurs")</div>
                     <div class="param-item"><span class="param-name">class</span> - klasy CSS (domyślnie: "button wc-forward")</div>
                     <div class="param-item"><span class="param-name">debug</span> - tryb debugowania ("1" aby włączyć)</div>
                 </div>
@@ -646,7 +646,7 @@ function renderShortcodesSection(): void {
                     <div class="detail-title">Funkcjonalność:</div>
                     <div class="param-item">Automatycznie pobiera powiązany produkt WooCommerce</div>
                     <div class="param-item">Wyświetla cenę kursu</div>
-                    <div class="param-item">Prowadzi do strony produktu (nie dodaje bezpośrednio do koszyka)</div>
+                    <div class="param-item">Prowadzi do strony produktu (nie dodaje bezpoMediumo do koszyka)</div>
                     <div class="param-item">Sprawdza dostępność produktu</div>
                     <div class="param-item">Zielone tło z niebieską czcionką (style Simple LMS)</div>
                 </div>

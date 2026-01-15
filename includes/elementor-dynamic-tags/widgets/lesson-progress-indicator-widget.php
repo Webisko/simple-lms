@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 use SimpleLMS\Elementor\Elementor_Dynamic_Tags;
@@ -16,7 +16,7 @@ class Lesson_Progress_Indicator_Widget extends Widget_Base {
     public function get_categories(): array { return ['simple-lms']; }
 
     protected function register_controls(): void {
-        $this->start_controls_section('content', ['label'=>__('Ustawienia','simple-lms'),'tab'=>Controls_Manager::TAB_CONTENT]);
+        $this->start_controls_section('content', ['label'=>__('Settings','simple-lms'),'tab'=>Controls_Manager::TAB_CONTENT]);
         $this->add_control('lesson_id',['label'=>__('ID lekcji','simple-lms'),'type'=>Controls_Manager::NUMBER,'default'=>0,'description'=>__('Zostaw 0 aby wykryć automatycznie','simple-lms')]);
         $this->end_controls_section();
     }
@@ -39,7 +39,7 @@ class Lesson_Progress_Indicator_Widget extends Widget_Base {
         $module_id = (int) get_post_meta($lesson_id, 'lesson_module', true);
         if (!$module_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Lekcja nie należy do żadnego modułu.','simple-lms').'</div>';
+                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Lekcja nie należy do żadnego MODULE.','simple-lms').'</div>';
             }
             return;
         }

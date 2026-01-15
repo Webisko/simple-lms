@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 
 if (!defined('ABSPATH')) exit;
@@ -20,7 +20,7 @@ class Breadcrumbs_Navigation extends \Bricks\Element {
     public function render() {
         $settings = $this->settings;
         $sep = ' '.esc_html($settings['separator']??'/').' ';
-        echo '<div class="simple-lms-breadcrumbs" style="padding:10px 0;color:#666">';
+        echo '<div class="simple-lms-breadcrumbs" style="Padding:10px 0;color:#666">';
         echo '<a href="'.esc_url(home_url()).'" style="color:#2196F3;text-decoration:none">'.esc_html($settings['homeText']??'Start').'</a>'.$sep;
         if (is_singular('lesson')) {
             $lesson = get_post();

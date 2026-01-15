@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Continue Learning Button Widget for Elementor
  *
@@ -65,7 +65,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -76,16 +76,16 @@ class Continue_Learning_Button_Widget extends Widget_Base {
                 'label' => __('ID kursu', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 0,
-                'description' => __('Zostaw 0 aby automatycznie wykryć kurs z aktualnej strony', 'simple-lms'),
+                'description' => __('Leave 0 to automatically detect course from current page', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'button_text',
             [
-                'label' => __('Tekst przycisku', 'simple-lms'),
+                'label' => __('Button text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Kontynuuj naukę', 'simple-lms'),
+                'default' => __('Continue naukę', 'simple-lms'),
                 'placeholder' => __('Wpisz tekst...', 'simple-lms'),
             ]
         );
@@ -261,7 +261,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'button_padding',
+            'button_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -274,7 +274,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-continue-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-continue-btn' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -282,7 +282,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -304,7 +304,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -316,7 +316,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#4CAF50',
                 'selectors' => [
@@ -354,7 +354,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -366,7 +366,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#45a049',
                 'selectors' => [
@@ -424,7 +424,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_disabled_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#999999',
                 'selectors' => [
@@ -436,7 +436,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_disabled_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e0e0e0',
                 'selectors' => [
@@ -508,7 +508,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         if (!$course_id || get_post_type($course_id) !== 'course') {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć poprawnego kursu. Upewnij się, że widget jest używany na stronie kursu/modułu/lekcji albo ustaw prawidłowy ID.', 'simple-lms');
+                echo esc_html__('Cannot detect valid course. Make sure the widget is used on course/module/lesson page or set correct ID.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -518,7 +518,7 @@ class Continue_Learning_Button_Widget extends Widget_Base {
         if (!is_user_logged_in()) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-info">';
-                echo esc_html__('Użytkownik niezalogowany - przycisk będzie ukryty lub pokazywał "Zaloguj się"', 'simple-lms');
+                echo esc_html__('User not logged in - button will be hidden or show "Log in"', 'simple-lms');
                 echo '</div>';
             }
             return;

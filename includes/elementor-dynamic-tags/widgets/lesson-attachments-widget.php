@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Lesson Attachments Widget
  * Displays lesson downloadable files with icons
@@ -37,7 +37,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Załączniki lekcji', 'simple-lms');
+        return __('Lesson attachments', 'simple-lms');
     }
 
     /**
@@ -69,7 +69,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -119,7 +119,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'show_icon',
             [
-                'label' => __('Pokaż ikonę typu pliku', 'simple-lms'),
+                'label' => __('Show icon typu pliku', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -139,7 +139,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'show_download_button',
             [
-                'label' => __('Pokaż przycisk pobierania', 'simple-lms'),
+                'label' => __('Pokaż Download button', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -149,7 +149,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'download_text',
             [
-                'label' => __('Tekst przycisku', 'simple-lms'),
+                'label' => __('Button text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Pobierz', 'simple-lms'),
                 'condition' => [
@@ -163,7 +163,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
             [
                 'label' => __('Komunikat gdy brak plików', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Brak załączników dla tej lekcji.', 'simple-lms'),
+                'default' => __('No attachments dla tej lekcji.', 'simple-lms'),
             ]
         );
 
@@ -222,7 +222,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'item_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f5f5f5',
                 'selectors' => [
@@ -234,7 +234,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'item_hover_bg_color',
             [
-                'label' => __('Kolor tła (hover)', 'simple-lms'),
+                'label' => __('Background color (hover)', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .attachment-item:hover' => 'background-color: {{VALUE}};',
@@ -243,7 +243,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'item_padding',
+            'item_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -256,7 +256,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .attachment-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .attachment-item' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -264,7 +264,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'item_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -477,7 +477,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'button_padding',
+            'button_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -490,7 +490,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .attachment-download-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .attachment-download-btn' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -498,7 +498,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'button_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -520,7 +520,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'button_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -532,7 +532,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'button_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2196F3',
                 'selectors' => [
@@ -554,7 +554,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .attachment-download-btn:hover' => 'color: {{VALUE}};',
@@ -565,7 +565,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .attachment-download-btn:hover' => 'background-color: {{VALUE}};',
@@ -594,7 +594,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         if (!$lesson_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć lekcji. Upewnij się, że widget jest używany na stronie lekcji.', 'simple-lms');
+                echo esc_html__('Cannot detect lesson. Make sure the widget is used on a lesson page.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -604,7 +604,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $attachments = get_post_meta($lesson_id, 'lesson_attachments', true);
         
         if (empty($attachments) || !is_array($attachments)) {
-            echo '<div class="simple-lms-no-attachments" style="padding: 20px; text-align: center; color: #999;">';
+            echo '<div class="simple-lms-no-attachments" style="Padding: 20px; text-align: center; color: #999;">';
             echo esc_html($settings['empty_message']);
             echo '</div>';
             return;
@@ -724,7 +724,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         #>
         <div class="{{{containerClass}}}" style="display: flex; flex-direction: column; gap: 15px;">
             <# _.each(demoFiles, function(file) { #>
-                <div class="attachment-item" style="display: flex; align-items: center; background-color: #f5f5f5; padding: 15px 20px; border-radius: 4px;">
+                <div class="attachment-item" style="display: flex; align-items: center; background-color: #f5f5f5; Padding: 15px 20px; border-radius: 4px;">
                     <# if (showIcon) { #>
                         <span class="attachment-icon" style="font-size: 40px; margin-right: 15px;">{{{file.icon}}}</span>
                     <# } #>
@@ -735,7 +735,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
                         <# } #>
                     </div>
                     <# if (showButton) { #>
-                        <span class="attachment-download-btn" style="display: inline-block; padding: 8px 16px; background-color: #2196F3; color: #fff; border-radius: 4px;">
+                        <span class="attachment-download-btn" style="display: inline-block; Padding: 8px 16px; background-color: #2196F3; color: #fff; border-radius: 4px;">
                             {{{settings.download_text}}}
                         </span>
                     <# } #>

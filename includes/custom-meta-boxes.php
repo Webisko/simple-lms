@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS;
 
 
@@ -76,7 +76,7 @@ class Meta_Boxes {
         // Course basic info (sidebar)
         add_meta_box(
             'course_basic_info',
-            __('Ustawienia kursu', 'simple-lms'),
+            __('Settings kursu', 'simple-lms'),
             [$this, 'render_course_basic_info_meta_box'],
             'course',
             'side',
@@ -101,7 +101,7 @@ class Meta_Boxes {
         // Module drip schedule (sidebar)
         add_meta_box(
             'module_drip_schedule',
-            __('Harmonogram dostępu', 'simple-lms'),
+            __('Access Schedule', 'simple-lms'),
             [$this, 'render_module_drip_schedule_meta_box'],
             'module',
             'side',
@@ -321,7 +321,7 @@ class Meta_Boxes {
             if ($module) {
                 $module_edit_link = get_edit_post_link($parent_module);
                 ?>
-                <p><?php esc_html_e('Ta lekcja należy do modułu:', 'simple-lms'); ?></p>
+                <p><?php esc_html_e('Ta lekcja należy do MODULE:', 'simple-lms'); ?></p>
                 <p><a href="<?php echo esc_url($module_edit_link); ?>" class="parent-module-link">
                     <?php echo esc_html($module->post_title); ?>
                 </a></p>
@@ -329,7 +329,7 @@ class Meta_Boxes {
             }
         } else {
             ?>
-            <p><?php esc_html_e('Ta lekcja nie jest przypisana do żadnego modułu.', 'simple-lms'); ?></p>
+            <p><?php esc_html_e('Ta lekcja nie jest przypisana do żadnego MODULE.', 'simple-lms'); ?></p>
             <?php
         }
     }
@@ -340,13 +340,13 @@ class Meta_Boxes {
     public function render_module_drip_schedule_meta_box($post) {
         $parent_course = get_post_meta($post->ID, 'parent_course', true);
         if (!$parent_course) {
-            echo '<p>' . esc_html__('Ustaw najpierw kurs nadrzędny.', 'simple-lms') . '</p>';
+            echo '<p>' . esc_html__('Set parent course first.', 'simple-lms') . '</p>';
             return;
         }
         $mode = get_post_meta((int)$parent_course, '_access_schedule_mode', true);
         $strategy = get_post_meta((int)$parent_course, '_drip_strategy', true);
         if ($mode !== 'drip' || $strategy !== 'per_module') {
-            echo '<p>' . esc_html__('Harmonogram modułu jest dostępny, gdy w kursie wybrano: Stopniowo → Każdy moduł niezależnie.', 'simple-lms') . '</p>';
+            echo '<p>' . esc_html__('Module schedule is available when course has: Gradually → Each module independently.', 'simple-lms') . '</p>';
             return;
         }
         $drip_days = (int) get_post_meta($post->ID, '_module_drip_days', true);
@@ -354,25 +354,25 @@ class Meta_Boxes {
         $mode = $saved_mode ?: (($drip_days === 0) ? 'now' : 'days');
         $manual_unlocked = (bool) get_post_meta($post->ID, '_module_manual_unlocked', true);
 
-        echo '<p style="margin-bottom:8px;">' . esc_html__('Dni liczone od momentu uzyskania dostępu do kursu (zakup/rola).', 'simple-lms') . '</p>';
+        echo '<p style="margin-bottom:8px;">' . esc_html__('Days counted from the moment of gaining access to the course (purchase/role).', 'simple-lms') . '</p>';
         echo '<label style="display:block; margin-bottom:6px;">'
             . '<input type="radio" name="_module_drip_mode" value="now" ' . checked($mode, 'now', false) . '> '
-            . esc_html__('Dostępny od razu', 'simple-lms') . '</label>';
+            . esc_html__('Available immediately', 'simple-lms') . '</label>';
         echo '<label style="display:block; margin-bottom:6px;">'
             . '<input type="radio" name="_module_drip_mode" value="days" ' . checked($mode, 'days', false) . '> '
-            . esc_html__('Po liczbie dni', 'simple-lms') . '</label>';
+            . esc_html__('After number of days', 'simple-lms') . '</label>';
         echo '<div id="simple-lms-module-days" style="margin:6px 0 8px 22px; ' . ($mode === 'days' ? 'display:block;' : 'display:none;') . '">';
-        echo '<input type="number" min="0" step="1" style="width:90px;" name="_module_drip_days" value="' . esc_attr($drip_days ?: 0) . '" /> ' . esc_html__('dni', 'simple-lms');
+        echo '<input type="number" min="0" step="1" style="width:90px;" name="_module_drip_days" value="' . esc_attr($drip_days ?: 0) . '" /> ' . esc_html__('days', 'simple-lms');
         echo '</div>';
 
         echo '<label style="display:block; margin-bottom:6px;">'
             . '<input type="radio" name="_module_drip_mode" value="manual" ' . checked($mode, 'manual', false) . '> '
-            . esc_html__('Ręcznie', 'simple-lms') . '</label>';
+            . esc_html__('Manually', 'simple-lms') . '</label>';
         echo '<div id="simple-lms-module-manual" style="margin:6px 0 0 22px; ' . ($mode === 'manual' ? 'display:block;' : 'display:none;') . '">';
         echo '<label style="display:inline-block; margin-right:10px;">'
-            . '<input type="radio" name="_module_manual_unlocked" value="0" ' . checked(!$manual_unlocked, true, false) . '> ' . esc_html__('zablokowany', 'simple-lms') . '</label>';
+            . '<input type="radio" name="_module_manual_unlocked" value="0" ' . checked(!$manual_unlocked, true, false) . '> ' . esc_html__('locked', 'simple-lms') . '</label>';
         echo '<label style="display:inline-block;">'
-            . '<input type="radio" name="_module_manual_unlocked" value="1" ' . checked($manual_unlocked, true, false) . '> ' . esc_html__('odblokowany', 'simple-lms') . '</label>';
+            . '<input type="radio" name="_module_manual_unlocked" value="1" ' . checked($manual_unlocked, true, false) . '> ' . esc_html__('unlocked', 'simple-lms') . '</label>';
         echo '</div>';
         // JS for toggle moved to admin-script.js
     }
@@ -385,27 +385,27 @@ class Meta_Boxes {
         
         $allow_comments = get_post_meta($post->ID, 'allow_comments', true);
 
-        echo '<h3>' . esc_html__('Opcje', 'simple-lms') . '</h3>';
+        echo '<h3>' . esc_html__('Options', 'simple-lms') . '</h3>';
         echo '<label>
                 <input type="checkbox" name="allow_comments" value="1" ' . checked($allow_comments, true, false) . '>
-                ' . esc_html__('Zezwól na komentarze w lekcjach', 'simple-lms') . '
+                ' . esc_html__('Allow comments in lessons', 'simple-lms') . '
               </label><br><br>';
 
-        echo '<h3>' . esc_html__('Dostęp do kursu', 'simple-lms') . '</h3>';
-        echo '<p>' . esc_html__('Dostęp do kursu jest zarządzany automatycznie przez integrację WooCommerce.', 'simple-lms') . '</p>';
-        echo '<p>' . esc_html__('Użytkownicy otrzymują dostęp po zakupie produktu powiązanego z tym kursem.', 'simple-lms') . '</p>';
+        echo '<h3>' . esc_html__('Course Access', 'simple-lms') . '</h3>';
+        echo '<p>' . esc_html__('Course access is managed automatically by WooCommerce integration.', 'simple-lms') . '</p>';
+        echo '<p>' . esc_html__('Users receive access after purchasing a product linked to this course.', 'simple-lms') . '</p>';
         
         // Show users with access (tag-based)
-        echo '<h4>' . esc_html__('Użytkownicy z dostępem:', 'simple-lms') . '</h4>';
+        echo '<h4>' . esc_html__('Users with access:', 'simple-lms') . '</h4>';
         $users_with_access = self::get_users_with_course_access($post->ID);
         if (!empty($users_with_access)) {
-            echo '<ul style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">';
+            echo '<ul style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; Padding: 10px;">';
             foreach ($users_with_access as $user) {
                 echo '<li>' . esc_html($user->display_name) . ' (' . esc_html($user->user_email) . ')</li>';
             }
             echo '</ul>';
         } else {
-            echo '<p><em>' . esc_html__('Brak użytkowników z dostępem do tego kursu.', 'simple-lms') . '</em></p>';
+            echo '<p><em>' . esc_html__('No users with access to this course.', 'simple-lms') . '</em></p>';
         }
     }
     
@@ -512,11 +512,11 @@ class Meta_Boxes {
      */
     private static function render_add_lesson_form($module_id) {
         echo '<div class="add-lesson-form">';
-        echo '<h3 class="add-lesson-heading">' . esc_html__('Dodaj lekcję', 'simple-lms') . '</h3>';
+        echo '<h3 class="add-lesson-heading">' . esc_html__('Add Lesson', 'simple-lms') . '</h3>';
         echo '<input type="text" name="new_lesson_title_' . esc_attr($module_id) . 
-             '" placeholder="' . esc_attr__('Tytuł lekcji', 'simple-lms') . '" class="widefat" />';
+             '" placeholder="' . esc_attr__('Lesson Title', 'simple-lms') . '" class="widefat" />';
         echo '<button type="button" class="button button-primary add-lessons-btn" data-module-id="' . 
-             esc_attr($module_id) . '">' . esc_html__('Dodaj lekcję', 'simple-lms') . '</button>';
+             esc_attr($module_id) . '">' . esc_html__('Add Lesson', 'simple-lms') . '</button>';
         echo '</div>';
     }
 
@@ -527,17 +527,17 @@ class Meta_Boxes {
         echo '<div class="module-actions">';
         echo '<div class="module-status-toggle">';
         self::render_status_toggle(
-            __('Opublikowano', 'simple-lms'),
-            __('Szkic', 'simple-lms'),
+            __('Published', 'simple-lms'),
+            __('Draft', 'simple-lms'),
             $isPublished,
             $module_id,
             'module'
         );
         echo '</div>';
         echo '<a href="#" class="duplicate-module" data-module-id="' . esc_attr($module_id) . '">' . 
-             esc_html__('Duplikuj', 'simple-lms') . '</a>';
+             esc_html__('Duplicate', 'simple-lms') . '</a>';
         echo '<a href="#" class="delete-module delete-button" data-module-id="' . esc_attr($module_id) . '">' . 
-             esc_html__('Usuń', 'simple-lms') . '</a>';
+             esc_html__('Delete', 'simple-lms') . '</a>';
         echo '</div>';
     }
 
@@ -553,7 +553,7 @@ class Meta_Boxes {
             echo '</ul>';
         } else {
             echo '<ul class="module-lessons-list visible" id="module-lessons-' . esc_attr($module_id) . '" style="display: none;">';
-            echo '<li class="lessons-empty">' . esc_html__('Brak lekcji w tym module.', 'simple-lms') . '</li>';
+            echo '<li class="lessons-empty">' . esc_html__('No lessons in this module.', 'simple-lms') . '</li>';
             echo '</ul>';
         }
     }
@@ -565,17 +565,17 @@ class Meta_Boxes {
         echo '<div class="lesson-actions">';
         echo '<div class="lesson-status-toggle">';
         self::render_status_toggle(
-            'Opublikowano',
-            'Szkic',
+            'Published',
+            'Draft',
             $isPublished,
             $lesson_id,
             'lesson'
         );
         echo '</div>';
         echo '<a href="#" class="duplicate-lesson" data-lesson-id="' . esc_attr($lesson_id) . '">' . 
-             esc_html__('Duplikuj', 'simple-lms') . '</a>';
+             esc_html__('Duplicate', 'simple-lms') . '</a>';
         echo '<a href="#" class="delete-lesson delete-button" data-lesson-id="' . esc_attr($lesson_id) . '">' . 
-             esc_html__('Usuń', 'simple-lms') . '</a>';
+             esc_html__('Delete', 'simple-lms') . '</a>';
         echo '</div>';
     }
 
@@ -590,7 +590,7 @@ class Meta_Boxes {
      * @return void
      */
     private static function render_status_toggle(string $labelPublished, string $labelDraft, bool $isPublished, int $objectId, string $type): void {
-        echo '<span class="status-label" data-status="' . ($isPublished ? 'published' : 'draft') . '">' . esc_html($isPublished ? 'Opublikowano' : 'Szkic') . '</span>';
+        echo '<span class="status-label" data-status="' . ($isPublished ? 'published' : 'draft') . '">' . esc_html($isPublished ? 'Published' : 'Draft') . '</span>';
         echo '<label class="toggle-switch">';
         echo '<input type="checkbox" ' . checked($isPublished, true, false) . ' class="toggle-input" data-id="' . esc_attr((string) $objectId) . '" data-type="' . esc_attr($type) . '">';
         echo '<span class="slider"></span>';
@@ -869,7 +869,7 @@ class Meta_Boxes {
             return '';
         }
 
-        $preview_html = '<div class="video-preview" style="margin-top: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: #f9f9f9; max-width: 100%;">';
+        $preview_html = '<div class="video-preview" style="margin-top: 15px; Padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: #f9f9f9; max-width: 100%;">';
 
         if ($video_type === 'youtube' && $video_url) {
             // Extract YouTube ID with improved regex
@@ -881,7 +881,7 @@ class Meta_Boxes {
             }
             
             if ($youtube_id) {
-                $preview_html .= '<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">';
+                $preview_html .= '<div style="position: reyearsive; Padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">';
                 $preview_html .= '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/' . \esc_attr($youtube_id) . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 $preview_html .= '</div>';
             } else {
@@ -898,7 +898,7 @@ class Meta_Boxes {
             }
             
             if ($vimeo_id) {
-                $preview_html .= '<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">';
+                $preview_html .= '<div style="position: reyearsive; Padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">';
                 $preview_html .= '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://player.vimeo.com/video/' . \esc_attr($vimeo_id) . '" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
                 $preview_html .= '</div>';
             } else {
@@ -1028,7 +1028,7 @@ class Meta_Boxes {
         
         echo '<input type="hidden" id="lesson_video_file_id" name="lesson_video_file_id" value="' . esc_attr($video_file_id) . '" />';
         echo '<button type="button" class="button" id="select-video-file">' . __('Wybierz plik wideo', 'simple-lms') . '</button> ';
-        echo '<button type="button" class="button" id="remove-video-file"' . (!$video_file_id ? ' style="display:none;"' : '') . '>' . __('Usuń', 'simple-lms') . '</button>';
+        echo '<button type="button" class="button" id="remove-video-file"' . (!$video_file_id ? ' style="display:none;"' : '') . '>' . __('Delete', 'simple-lms') . '</button>';
         
         // Show video preview for file type
         if ($video_type === 'file' && $file_url) {
@@ -1068,7 +1068,7 @@ class Meta_Boxes {
                 unset($side_boxes['default']['submitdiv']);
             }
             
-            // 2. Then add our Ustawienia kursu (course_basic_info)
+            // 2. Then add our Settings kursu (course_basic_info)
             if (isset($side_boxes['high']['course_basic_info'])) {
                 if (!isset($new_order['high'])) $new_order['high'] = [];
                 $new_order['high']['course_basic_info'] = $side_boxes['high']['course_basic_info'];
@@ -1145,14 +1145,14 @@ class Meta_Boxes {
         
         $allow_comments = get_post_meta($post->ID, 'allow_comments', true);
 
-        echo '<h3>' . esc_html__('Opcje', 'simple-lms') . '</h3>';
+        echo '<h3>' . esc_html__('Options', 'simple-lms') . '</h3>';
         echo '<label>
                 <input type="checkbox" name="allow_comments" value="1" ' . checked($allow_comments, true, false) . '>
-                ' . esc_html__('Zezwól na komentarze w lekcjach', 'simple-lms') . '
+                ' . esc_html__('Allow comments in lessons', 'simple-lms') . '
               </label><br><br>';
 
-        echo '<h3>' . esc_html__('Dostęp', 'simple-lms') . '</h3>';
-        echo '<p>' . esc_html__('Dostęp jest zarządzany automatycznie przez WooCommerce po zakupie produktu.', 'simple-lms') . '</p>';
+        echo '<h3>' . esc_html__('Access', 'simple-lms') . '</h3>';
+        echo '<p>' . esc_html__('Access is managed automatically by WooCommerce after product purchase.', 'simple-lms') . '</p>';
 
         // Access schedule section
         $access_mode = get_post_meta($post->ID, '_access_schedule_mode', true) ?: 'purchase';
@@ -1164,51 +1164,51 @@ class Meta_Boxes {
         $access_duration_value = (int) get_post_meta($post->ID, '_access_duration_value', true);
         $access_duration_unit = get_post_meta($post->ID, '_access_duration_unit', true) ?: 'days';
         echo '<hr style="margin:12px 0;">';
-        echo '<h3>' . esc_html__('Czas trwania dostępu', 'simple-lms') . '</h3>';
-        echo '<p style="margin-bottom:8px;">' . esc_html__('Określ, jak długo po zakupie użytkownik będzie miał dostęp do kursu. Pozostaw 0 lub puste dla dostępu bezterminowego.', 'simple-lms') . '</p>';
+        echo '<h3>' . esc_html__('Access Duration', 'simple-lms') . '</h3>';
+        echo '<p style="margin-bottom:8px;">' . esc_html__('Specify how long after purchase the user will have access to the course. Leave 0 or empty for lifetime access.', 'simple-lms') . '</p>';
         echo '<label style="display:block; margin-bottom:12px;">';
-        echo esc_html__('Czas dostępu:', 'simple-lms') . '<br>';
+        echo esc_html__('Access time:', 'simple-lms') . '<br>';
         echo '<input type="number" min="0" step="1" style="width:90px; margin-top:4px;" name="_access_duration_value" value="' . esc_attr($access_duration_value) . '" /> ';
         echo '<select name="_access_duration_unit" style="width:120px;">';
-        echo '<option value="days"' . selected($access_duration_unit, 'days', false) . '>' . esc_html__('dni', 'simple-lms') . '</option>';
-        echo '<option value="weeks"' . selected($access_duration_unit, 'weeks', false) . '>' . esc_html__('tygodni', 'simple-lms') . '</option>';
-        echo '<option value="months"' . selected($access_duration_unit, 'months', false) . '>' . esc_html__('miesięcy', 'simple-lms') . '</option>';
-        echo '<option value="years"' . selected($access_duration_unit, 'years', false) . '>' . esc_html__('lat', 'simple-lms') . '</option>';
+        echo '<option value="days"' . selected($access_duration_unit, 'days', false) . '>' . esc_html__('days', 'simple-lms') . '</option>';
+        echo '<option value="weeks"' . selected($access_duration_unit, 'weeks', false) . '>' . esc_html__('tygodays', 'simple-lms') . '</option>';
+        echo '<option value="months"' . selected($access_duration_unit, 'months', false) . '>' . esc_html__('months', 'simple-lms') . '</option>';
+        echo '<option value="years"' . selected($access_duration_unit, 'years', false) . '>' . esc_html__('years', 'simple-lms') . '</option>';
         echo '</select>';
-        echo '<p class="description" style="margin-top:4px;">' . esc_html__('(0 = dostęp bezterminowy)', 'simple-lms') . '</p>';
+        echo '<p class="description" style="margin-top:4px;">' . esc_html__('(0 = lifetime access)', 'simple-lms') . '</p>';
         echo '</label>';
 
         echo '<hr style="margin:12px 0;">';
-        echo '<h3>' . esc_html__('Harmonogram dostępu', 'simple-lms') . '</h3>';
-        echo '<p style="margin-bottom:8px;">' . esc_html__('Wybierz sposób odblokowywania dostępu do treści kursu.', 'simple-lms') . '</p>';
+        echo '<h3>' . esc_html__('Access Schedule', 'simple-lms') . '</h3>';
+        echo '<p style="margin-bottom:8px;">' . esc_html__('Choose how to unlock access to course content.', 'simple-lms') . '</p>';
 
         echo '<label style="display:block; margin-bottom:6px;">'
             . '<input type="radio" name="_access_schedule_mode" value="purchase" ' . checked($access_mode, 'purchase', false) . '> '
-            . esc_html__('Po zakupie kursu (domyślne)', 'simple-lms') . '</label>';
+            . esc_html__('After course purchase (default)', 'simple-lms') . '</label>';
 
         echo '<label style="display:block; margin-bottom:6px;">'
             . '<input type="radio" name="_access_schedule_mode" value="fixed_date" ' . checked($access_mode, 'fixed_date', false) . '> '
-            . esc_html__('Od konkretnej daty', 'simple-lms') . '</label>';
+            . esc_html__('From specific date', 'simple-lms') . '</label>';
 
         echo '<div id="simple-lms-fixed-date-wrap" style="margin:6px 0 12px 22px; display:' . ($access_mode === 'fixed_date' ? 'block' : 'none') . ';">';
         echo '<input type="date" name="_access_fixed_date" value="' . esc_attr($fixed_date) . '" />';
-        echo '<p class="description" style="margin-top:4px;">' . esc_html__('Data, od której kurs/moduły będą dostępne dla wszystkich uprawnionych użytkowników.', 'simple-lms') . '</p>';
+        echo '<p class="description" style="margin-top:4px;">' . esc_html__('Date from which the course/modules will be available to all authorized users.', 'simple-lms') . '</p>';
         echo '</div>';
 
         echo '<label style="display:block; margin-bottom:6px;">'
             . '<input type="radio" name="_access_schedule_mode" value="drip" ' . checked($access_mode, 'drip', false) . '> '
-            . esc_html__('Stopniowo', 'simple-lms') . '</label>';
+            . esc_html__('Gradually (Drip)', 'simple-lms') . '</label>';
 
         echo '<div id="simple-lms-drip-wrap" style="margin:6px 0 0 22px; display:' . ($access_mode === 'drip' ? 'block' : 'none') . ';">';
         echo '<label style="display:block; margin-bottom:6px;">'
             . '<input type="radio" name="_drip_strategy" value="interval" ' . checked($drip_strategy, 'interval', false) . '> '
-            . esc_html__('Każdy kolejny moduł po X dniach', 'simple-lms') . '</label>';
+            . esc_html__('Each next module after X days', 'simple-lms') . '</label>';
         echo '<div id="simple-lms-drip-interval" style="margin:6px 0 12px 22px; display:' . ($drip_strategy === 'interval' ? 'block' : 'none') . ';">';
-        echo '<input type="number" min="0" step="1" style="width:90px;" name="_drip_interval_days" value="' . esc_attr($drip_interval_days ?: 0) . '" /> ' . esc_html__('dni', 'simple-lms');
+        echo '<input type="number" min="0" step="1" style="width:90px;" name="_drip_interval_days" value="' . esc_attr($drip_interval_days ?: 0) . '" /> ' . esc_html__('days', 'simple-lms');
         echo '</div>';
         echo '<label style="display:block;">'
             . '<input type="radio" name="_drip_strategy" value="per_module" ' . checked($drip_strategy, 'per_module', false) . '> '
-            . esc_html__('Każdy moduł niezależnie (ustaw w module)', 'simple-lms') . '</label>';
+            . esc_html__('Each module independently (set in module)', 'simple-lms') . '</label>';
         echo '</div>';
 
         // Schedule toggle JS moved to admin-script.js
@@ -1270,15 +1270,15 @@ class Meta_Boxes {
             
             self::render_modules_list($modules, $lessons_by_module);
         } else {
-            echo '<p>' . esc_html__('Dodaj pierwszy moduł, aby rozpocząć budowanie kursu.', 'simple-lms') . '</p>';
+            echo '<p>' . esc_html__('Add first module to start building the course.', 'simple-lms') . '</p>';
         }
 
         echo '<div class="course-add-module">';
-        echo '<h3 class="add-module-heading">' . esc_html__('Dodaj moduł', 'simple-lms') . '</h3>';
+        echo '<h3 class="add-module-heading">' . esc_html__('Add Module', 'simple-lms') . '</h3>';
         echo '<input type="text" name="new_module_title" placeholder="' . 
-             esc_attr__('Tytuł modułu', 'simple-lms') . '" class="widefat" />';
+             esc_attr__('Module Title', 'simple-lms') . '" class="widefat" />';
         echo '<button type="button" id="add-module-btn" class="button button-primary" data-course-id="' . 
-             esc_attr($post->ID) . '">' . esc_html__('Dodaj moduł', 'simple-lms') . '</button>';
+             esc_attr($post->ID) . '">' . esc_html__('Add Module', 'simple-lms') . '</button>';
         echo '</div>';
         echo '</div>';
     }
@@ -1289,11 +1289,11 @@ class Meta_Boxes {
     public function render_course_settings_content($post) {
         wp_nonce_field('course_settings_nonce', 'course_settings_nonce');
         $allow_comments = get_post_meta($post->ID, 'allow_comments', true);
-        echo '<h3>' . esc_html__('Opcje', 'simple-lms') . '</h3>';
-        echo '<label><input type="checkbox" name="allow_comments" value="1" ' . checked($allow_comments, true, false) . '> ' . esc_html__('Zezwól na komentarze w lekcjach', 'simple-lms') . '</label><br><br>';
-        echo '<h3>' . esc_html__('Dostęp', 'simple-lms') . '</h3>';
-        echo '<p>' . esc_html__('Dostęp do kursu nadawany automatycznie po zakupie produktu (tag user_meta).', 'simple-lms') . '</p>';
-        echo '<p><em>' . esc_html__('Ręczne zarządzanie dostępem w profilu użytkownika.', 'simple-lms') . '</em></p>';
+        echo '<h3>' . esc_html__('Options', 'simple-lms') . '</h3>';
+        echo '<label><input type="checkbox" name="allow_comments" value="1" ' . checked($allow_comments, true, false) . '> ' . esc_html__('Allow comments in lessons', 'simple-lms') . '</label><br><br>';
+        echo '<h3>' . esc_html__('Access', 'simple-lms') . '</h3>';
+        echo '<p>' . esc_html__('Access do kursu nadawany automatycznie po zakupie produktu (tag user_meta).', 'simple-lms') . '</p>';
+        echo '<p><em>' . esc_html__('Manual access management in user profile.', 'simple-lms') . '</em></p>';
     }
     
     /**
@@ -1308,16 +1308,16 @@ class Meta_Boxes {
         
         // Course Information section (fixed)
         echo '<div class="course-fixed-section" style="background: #fff; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">';
-        echo '<h2 style="margin: 0; padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Informacje o kursie', 'simple-lms') . '</h2>';
-        echo '<div style="padding: 20px;">';
+        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Informacje o kursie', 'simple-lms') . '</h2>';
+        echo '<div style="Padding: 20px;">';
         self::render_course_information_content($post);
         echo '</div>';
         echo '</div>';
         
         // Course Structure section (fixed)
         echo '<div class="course-fixed-section" style="background: #fff; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">';
-        echo '<h2 style="margin: 0; padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Struktura kursu', 'simple-lms') . '</h2>';
-        echo '<div style="padding: 20px;">';
+        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Struktura kursu', 'simple-lms') . '</h2>';
+        echo '<div style="Padding: 20px;">';
         self::render_course_structure_content($post);
         echo '</div>';
         echo '</div>';
@@ -1347,11 +1347,11 @@ class Meta_Boxes {
             echo '<img src="' . esc_url($image_url) . '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
             echo '<div style="margin-top: 15px;">';
             echo '<button type="button" id="change-course-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
-            echo '<button type="button" id="remove-course-featured-image" class="button" style="color: #a00;">' . __('Usuń', 'simple-lms') . '</button>';
+            echo '<button type="button" id="remove-course-featured-image" class="button" style="color: #a00;">' . __('Delete', 'simple-lms') . '</button>';
             echo '</div>';
             echo '</div>';
         } else {
-            echo '<div style="text-align: center; padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa; min-height: 200px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">';
+            echo '<div style="text-align: center; Padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa; min-height: 200px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">';
             echo '<p style="color: #666; margin: 0 0 15px 0; font-size: 16px;">' . __('Brak obrazka', 'simple-lms') . '</p>';
             echo '<button type="button" id="set-course-featured-image" class="button button-primary">' . __('Dodaj obrazek', 'simple-lms') . '</button>';
             echo '</div>';
@@ -1362,7 +1362,7 @@ class Meta_Boxes {
         
         // Short description section
         echo '<div style="flex: 1;">';
-        echo '<h4>' . __('Krótki opis kursu', 'simple-lms') . '</h4>';
+        echo '<h4>' . __('Krótki Description kursu', 'simple-lms') . '</h4>';
         echo '<div style="border: 1px solid #ddd; border-radius: 5px;">';
         
         wp_editor($short_description, 'course_short_description', [
@@ -1377,7 +1377,7 @@ class Meta_Boxes {
         ]);
         
         echo '</div>';
-        echo '<p class="description">' . __('Krótki opis wyświetlany na liście kursów i w podglądzie.', 'simple-lms') . '</p>';
+        echo '<p class="description">' . __('Krótki Description wyświetlany na liście kursów i w podglądzie.', 'simple-lms') . '</p>';
         echo '</div>';
         echo '</div>';
         
@@ -1391,7 +1391,7 @@ class Meta_Boxes {
                     buttonText: '<?php echo esc_js(__('Użyj tego obrazka', 'simple-lms')); ?>',
                     confirmText: '<?php echo esc_js(__('Czy na pewno chcesz usunąć obrazek?', 'simple-lms')); ?>',
                     changeText: '<?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?>',
-                    removeText: '<?php echo esc_js(__('Usuń', 'simple-lms')); ?>',
+                    removeText: '<?php echo esc_js(__('Delete', 'simple-lms')); ?>',
                     emptyText: '<?php echo esc_js(__('Brak obrazka', 'simple-lms')); ?>',
                     addText: '<?php echo esc_js(__('Dodaj obrazek', 'simple-lms')); ?>'
                 });
@@ -1413,8 +1413,8 @@ class Meta_Boxes {
         
         // Module Structure section (fixed)
         echo '<div class="module-fixed-section" style="background: #fff; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">';
-        echo '<h2 style="margin: 0; padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Struktura modułu', 'simple-lms') . '</h2>';
-        echo '<div style="padding: 20px;">';
+        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Struktura MODULE', 'simple-lms') . '</h2>';
+        echo '<div style="Padding: 20px;">';
         self::render_module_hierarchy_content($post);
         echo '</div>';
         echo '</div>';
@@ -1439,7 +1439,7 @@ class Meta_Boxes {
         ]);
 
         echo '<div class="module-structure" data-module-id="' . esc_attr($post->ID) . '">';
-        echo '<h3 class="module-lessons-heading">' . esc_html__('Lista lekcji', 'simple-lms') . '</h3>';
+        echo '<h3 class="module-lessons-heading">' . esc_html__('Lesson list', 'simple-lms') . '</h3>';
 
         if ($lessons) {
             echo '<ul class="module-lessons-list visible" id="module-lessons-' . esc_attr($post->ID) . '">';
@@ -1451,7 +1451,7 @@ class Meta_Boxes {
             echo '<ul class="module-lessons-list visible" id="module-lessons-' . esc_attr($post->ID) . '">';
             echo '<li class="lessons-empty">';
             echo '<span class="dashicons dashicons-info"></span> ';
-            echo esc_html__('Ten moduł nie ma jeszcze lekcji.', 'simple-lms');
+            echo esc_html__('This module has no lessons yet.', 'simple-lms');
             echo '</li>';
             echo '</ul>';
         }
@@ -1459,12 +1459,12 @@ class Meta_Boxes {
 
         echo '<div class="module-add-lessons">';
         echo '<div class="add-lesson-form">';
-        echo '<h3 class="add-lesson-heading">' . esc_html__('Dodaj lekcję', 'simple-lms') . '</h3>';
+        echo '<h3 class="add-lesson-heading">' . esc_html__('Add Lesson', 'simple-lms') . '</h3>';
         echo '<input type="text" name="new_lesson_title_' . esc_attr($post->ID) . 
-             '" placeholder="' . esc_attr__('Wpisz tytuł lekcji...', 'simple-lms') . '" class="widefat" />';
+             '" placeholder="' . esc_attr__('Wpisz Lesson Title...', 'simple-lms') . '" class="widefat" />';
         echo '<button type="button" class="button button-primary add-lessons-btn" data-module-id="' . 
              esc_attr($post->ID) . '">';
-        echo esc_html__('Dodaj lekcję', 'simple-lms');
+        echo esc_html__('Add Lesson', 'simple-lms');
         echo '</button>';
         echo '</div>';
         echo '</div>';
@@ -1526,11 +1526,11 @@ class Meta_Boxes {
             echo '<img src="' . esc_url($image_url) . '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
             echo '<div style="margin-top: 15px;">';
             echo '<button type="button" id="change-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
-            echo '<button type="button" id="remove-featured-image" class="button" style="color: #a00;">' . __('Usuń', 'simple-lms') . '</button>';
+            echo '<button type="button" id="remove-featured-image" class="button" style="color: #a00;">' . __('Delete', 'simple-lms') . '</button>';
             echo '</div>';
             echo '</div>';
         } else {
-            echo '<div style="text-align: center; padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa; min-height: 200px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">';
+            echo '<div style="text-align: center; Padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa; min-height: 200px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">';
             echo '<p style="color: #666; margin: 0 0 15px 0; font-size: 16px;">' . __('Brak obrazka', 'simple-lms') . '</p>';
             echo '<button type="button" id="set-featured-image" class="button button-primary">' . __('Dodaj obrazek', 'simple-lms') . '</button>';
             echo '</div>';
@@ -1541,7 +1541,7 @@ class Meta_Boxes {
         
         // Short description section
         echo '<div style="flex: 1;">';
-        echo '<h4>' . __('Krótki opis kursu', 'simple-lms') . '</h4>';
+        echo '<h4>' . __('Krótki Description kursu', 'simple-lms') . '</h4>';
         echo '<div style="border: 1px solid #ddd; border-radius: 5px;">';
         
         wp_editor($short_description, 'course_short_description', [
@@ -1556,7 +1556,7 @@ class Meta_Boxes {
         ]);
         
         echo '</div>';
-        echo '<p class="description">' . __('Krótki opis wyświetlany na liście kursów i w podglądzie.', 'simple-lms') . '</p>';
+        echo '<p class="description">' . __('Krótki Description wyświetlany na liście kursów i w podglądzie.', 'simple-lms') . '</p>';
         echo '</div>';
         echo '</div>';
         
@@ -1590,7 +1590,7 @@ class Meta_Boxes {
                     imageHtml += '<img src="' + attachment.sizes.medium.url + '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
                     imageHtml += '<div style="margin-top: 15px;">';
                     imageHtml += '<button type="button" id="change-featured-image" class="button"><?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?></button> ';
-                    imageHtml += '<button type="button" id="remove-featured-image" class="button" style="color: #a00;"><?php echo esc_js(__('Usuń', 'simple-lms')); ?></button>';
+                    imageHtml += '<button type="button" id="remove-featured-image" class="button" style="color: #a00;"><?php echo esc_js(__('Delete', 'simple-lms')); ?></button>';
                     imageHtml += '</div>';
                     imageHtml += '</div>';
                     
@@ -1607,7 +1607,7 @@ class Meta_Boxes {
                 
                 $('#_thumbnail_id').val('');
                 
-                var placeholderHtml = '<div style="text-align: center; padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa;">';
+                var placeholderHtml = '<div style="text-align: center; Padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa;">';
                 placeholderHtml += '<p style="color: #666; margin: 0 0 15px 0; font-size: 16px;"><?php echo esc_js(__('Brak obrazka', 'simple-lms')); ?></p>';
                 placeholderHtml += '<button type="button" id="set-featured-image" class="button button-primary"><?php echo esc_js(__('Dodaj obrazek', 'simple-lms')); ?></button>';
                 placeholderHtml += '</div>';
@@ -1658,7 +1658,7 @@ class Meta_Boxes {
                     imageHtml += '<img src="' + attachment.sizes.medium.url + '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
                     imageHtml += '<div style="margin-top: 15px;">';
                     imageHtml += '<button type="button" id="change-featured-image" class="button"><?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?></button> ';
-                    imageHtml += '<button type="button" id="remove-featured-image" class="button" style="color: #a00;"><?php echo esc_js(__('Usuń', 'simple-lms')); ?></button>';
+                    imageHtml += '<button type="button" id="remove-featured-image" class="button" style="color: #a00;"><?php echo esc_js(__('Delete', 'simple-lms')); ?></button>';
                     imageHtml += '</div>';
                     imageHtml += '</div>';
                     
@@ -1675,7 +1675,7 @@ class Meta_Boxes {
                 
                 $('#_thumbnail_id').val('');
                 
-                var placeholderHtml = '<div style="text-align: center; padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa;">';
+                var placeholderHtml = '<div style="text-align: center; Padding: 40px 20px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa;">';
                 placeholderHtml += '<p style="color: #666; margin: 0 0 15px 0; font-size: 16px;"><?php echo esc_js(__('Brak obrazka', 'simple-lms')); ?></p>';
                 placeholderHtml += '<button type="button" id="set-featured-image" class="button button-primary"><?php echo esc_js(__('Dodaj obrazek', 'simple-lms')); ?></button>';
                 placeholderHtml += '</div>';
@@ -1704,8 +1704,8 @@ class Meta_Boxes {
         
         // Lesson Details section (fixed)
         echo '<div class="lesson-fixed-section" style="background: #fff; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">';
-        echo '<h2 style="margin: 0; padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Szczegóły lekcji', 'simple-lms') . '</h2>';
-        echo '<div style="padding: 20px;">';
+        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Szczegóły lekcji', 'simple-lms') . '</h2>';
+        echo '<div style="Padding: 20px;">';
         
         // Two-row layout: First row with image, video controls, and video preview; Second row with attachments
         
@@ -1722,7 +1722,7 @@ class Meta_Boxes {
         self::render_lesson_video_content($post);
         echo '</div>';
         
-        // Video preview section (right column - will be populated by JS)
+        // Video preview section (right column - will be popuyearsed by JS)
         echo '<div style="flex: 1;" id="lesson-video-preview-container">';
         // Video preview will be inserted here by JavaScript
         echo '</div>';
@@ -1730,7 +1730,7 @@ class Meta_Boxes {
         echo '</div>'; // End first row
         
         echo '</div>'; // End three columns
-        echo '</div>'; // End padding
+        echo '</div>'; // End Padding
         echo '</div>'; // End lesson-fixed-section
         
         echo '</div>'; // End fixed-lesson-elements
@@ -1764,11 +1764,11 @@ class Meta_Boxes {
             echo '<img src="' . esc_url($image_url) . '" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.15);">';
             echo '<div style="margin-top: 15px;">';
             echo '<button type="button" id="change-lesson-featured-image" class="button">' . __('Zmień obrazek', 'simple-lms') . '</button> ';
-            echo '<button type="button" id="remove-lesson-featured-image" class="button" style="color: #a00;">' . __('Usuń', 'simple-lms') . '</button>';
+            echo '<button type="button" id="remove-lesson-featured-image" class="button" style="color: #a00;">' . __('Delete', 'simple-lms') . '</button>';
             echo '</div>';
             echo '</div>';
         } else {
-            echo '<div style="text-align: center; padding: 30px 15px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa; min-height: 150px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">';
+            echo '<div style="text-align: center; Padding: 30px 15px; border: 2px dashed #ddd; border-radius: 8px; background: #fafafa; min-height: 150px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center;">';
             echo '<p style="color: #666; margin: 0 0 10px 0; font-size: 14px;">' . __('Brak obrazka', 'simple-lms') . '</p>';
             echo '<button type="button" id="set-lesson-featured-image" class="button button-primary">' . __('Dodaj obrazek', 'simple-lms') . '</button>';
             echo '</div>';
@@ -1786,7 +1786,7 @@ class Meta_Boxes {
                     buttonText: '<?php echo esc_js(__('Użyj tego obrazka', 'simple-lms')); ?>',
                     confirmText: '<?php echo esc_js(__('Czy na pewno chcesz usunąć obrazek?', 'simple-lms')); ?>',
                     changeText: '<?php echo esc_js(__('Zmień obrazek', 'simple-lms')); ?>',
-                    removeText: '<?php echo esc_js(__('Usuń', 'simple-lms')); ?>',
+                    removeText: '<?php echo esc_js(__('Delete', 'simple-lms')); ?>',
                     emptyText: '<?php echo esc_js(__('Brak obrazka', 'simple-lms')); ?>',
                     addText: '<?php echo esc_js(__('Dodaj obrazek', 'simple-lms')); ?>'
                 });
@@ -1844,7 +1844,7 @@ class Meta_Boxes {
         
         echo '<input type="hidden" id="lesson_video_file_id" name="lesson_video_file_id" value="' . esc_attr($video_file_id) . '" />';
         echo '<button type="button" class="button" id="select-video-file">' . __('Wybierz plik wideo', 'simple-lms') . '</button> ';
-        echo '<button type="button" class="button" id="remove-video-file"' . (!$video_file_id ? ' style="display:none;"' : '') . '>' . __('Usuń', 'simple-lms') . '</button>';
+        echo '<button type="button" class="button" id="remove-video-file"' . (!$video_file_id ? ' style="display:none;"' : '') . '>' . __('Delete', 'simple-lms') . '</button>';
         
         echo '</div>';
         
@@ -2066,13 +2066,13 @@ class Meta_Boxes {
         
         // Video preview section (right column)
         echo '<div style="flex: 1;" id="lesson-video-preview-container">';
-        // Preview will be populated by JavaScript
+        // Preview will be popuyearsed by JavaScript
         echo '</div>';
         
         echo '</div>';
         
         // Attachments section (full width below)
-        echo '<div style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px;">';
+        echo '<div style="margin-top: 30px; border-top: 1px solid #ddd; Padding-top: 20px;">';
         wp_nonce_field('simple_lms_lesson_attachments_meta', 'simple_lms_lesson_attachments_nonce');
         $attachments = get_post_meta($post->ID, 'lesson_attachments', true);
         if (!is_array($attachments)) {
@@ -2090,12 +2090,12 @@ class Meta_Boxes {
                     $file_ext = strtolower(pathinfo(parse_url($file_url, PHP_URL_PATH), PATHINFO_EXTENSION));
                     $display_ext = $file_ext ? strtoupper($file_ext) : 'FILE';
                     
-                    echo '<div class="attachment-item" data-index="' . $index . '" style="padding: 12px 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px;">';
-                    echo '<span class="file-type-badge file-type-' . esc_attr($file_ext) . '" style="display: inline-flex; align-items: center; justify-content: center; width: 62px; height: 28px; padding: 4px 6px; background: #f0f0f0; color: #666; font-size: 10px; font-weight: 600; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;">' . esc_html($display_ext) . '</span>';
+                    echo '<div class="attachment-item" data-index="' . $index . '" style="Padding: 12px 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px;">';
+                    echo '<span class="file-type-badge file-type-' . esc_attr($file_ext) . '" style="display: inline-flex; align-items: center; justify-content: center; width: 62px; height: 28px; Padding: 4px 6px; background: #f0f0f0; color: #666; font-size: 10px; font-weight: 600; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;">' . esc_html($display_ext) . '</span>';
                     echo '<span class="attachment-title" style="flex: 1; font-weight: 500;">' . esc_html($file_title) . '</span>';
                     echo '<div style="display: flex; gap: 10px; align-items: center;">';
                     echo '<a href="' . esc_url($file_url) . '" target="_blank" class="attachment-link" style="color: #0073aa; text-decoration: none; font-size: 12px;">(' . __('Podgląd', 'simple-lms') . ')</a>';
-                    echo '<button type="button" class="button remove-attachment" data-index="' . $index . '" style="font-size: 12px; padding: 2px 8px;">' . __('Usuń', 'simple-lms') . '</button>';
+                    echo '<button type="button" class="button remove-attachment" data-index="' . $index . '" style="font-size: 12px; Padding: 2px 8px;">' . __('Delete', 'simple-lms') . '</button>';
                     echo '</div>';
                     echo '<input type="hidden" name="lesson_attachments[]" value="' . esc_attr($attachment_id) . '" />';
                     echo '</div>';
@@ -2224,12 +2224,12 @@ class Meta_Boxes {
                         }
                     }
                     
-                    var attachmentHtml = "<div class=\"attachment-item\" data-index=\"" + index + "\" style=\"padding: 12px 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px;\">" +
-                        "<span class=\"file-type-badge file-type-" + fileExt + "\" style=\"display: inline-flex; align-items: center; justify-content: center; width: 62px; height: 28px; padding: 4px 6px; background: #f0f0f0; color: #666; font-size: 10px; font-weight: 600; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;\">" + displayExt + "</span>" +
+                    var attachmentHtml = "<div class=\"attachment-item\" data-index=\"" + index + "\" style=\"Padding: 12px 0; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 15px;\">" +
+                        "<span class=\"file-type-badge file-type-" + fileExt + "\" style=\"display: inline-flex; align-items: center; justify-content: center; width: 62px; height: 28px; Padding: 4px 6px; background: #f0f0f0; color: #666; font-size: 10px; font-weight: 600; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; flex-shrink: 0;\">" + displayExt + "</span>" +
                         "<span class=\"attachment-title\" style=\"flex: 1; font-weight: 500;\">" + attachment.title + "</span>" +
                         "<div style=\"display: flex; gap: 10px; align-items: center;\">" +
                         "<a href=\"" + attachment.url + "\" target=\"_blank\" class=\"attachment-link\" style=\"color: #0073aa; text-decoration: none; font-size: 12px;\">(" + "' . __('Podgląd', 'simple-lms') . '" + ")</a>" +
-                        "<button type=\"button\" class=\"button remove-attachment\" data-index=\"" + index + "\" style=\"font-size: 12px; padding: 2px 8px;\">" + "' . __('Usuń', 'simple-lms') . '" + "</button>" +
+                        "<button type=\"button\" class=\"button remove-attachment\" data-index=\"" + index + "\" style=\"font-size: 12px; Padding: 2px 8px;\">" + "' . __('Delete', 'simple-lms') . '" + "</button>" +
                         "</div>" +
                         "<input type=\"hidden\" name=\"lesson_attachments[]\" value=\"" + attachment.id + "\" />" +
                         "</div>";

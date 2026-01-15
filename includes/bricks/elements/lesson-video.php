@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 
 if (!defined('ABSPATH')) exit;
@@ -27,8 +27,8 @@ class Lesson_Video extends \Bricks\Element {
         $video_url = get_post_meta($lesson_id, 'lesson_video_url', true);
         if (!$video_url) return;
         $ratio = $settings['aspectRatio'] ?? '16-9';
-        $padding = ['16-9'=>'56.25%','4-3'=>'75%','1-1'=>'100%','21-9'=>'42.86%'][$ratio] ?? '56.25%';
-        echo '<div class="simple-lms-video-wrapper" style="position:relative;padding-bottom:'.$padding.';height:0;overflow:hidden">';
+        $Padding = ['16-9'=>'56.25%','4-3'=>'75%','1-1'=>'100%','21-9'=>'42.86%'][$ratio] ?? '56.25%';
+        echo '<div class="simple-lms-video-wrapper" style="position:relative;Padding-bottom:'.$Padding.';height:0;overflow:hidden">';
         if (strpos($video_url, 'youtube.com') !== false || strpos($video_url, 'youtu.be') !== false) {
             $m = [];
             preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/', $video_url, $m);

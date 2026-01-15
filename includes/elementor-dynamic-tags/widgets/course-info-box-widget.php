@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Course Info Box Widget
  * Displays compact course information card
@@ -69,7 +69,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -80,7 +80,7 @@ class Course_Info_Box_Widget extends Widget_Base {
                 'label' => __('ID kursu (opcjonalne)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
-                'description' => __('Pozostaw puste, aby automatycznie wykryć bieżący kurs', 'simple-lms'),
+                'description' => __('Leave empty to automatically detect current course', 'simple-lms'),
             ]
         );
 
@@ -97,7 +97,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'show_lessons_count',
             [
-                'label' => __('Pokaż liczbę lekcji', 'simple-lms'),
+                'label' => __('Show lesson count', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -107,7 +107,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'show_progress',
             [
-                'label' => __('Pokaż postęp ukończenia', 'simple-lms'),
+                'label' => __('Show completion progress', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -179,7 +179,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'container_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -189,7 +189,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'container_padding',
+            'container_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -202,7 +202,7 @@ class Course_Info_Box_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-info-box' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-info-box' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -210,7 +210,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'container_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'default' => [
@@ -286,7 +286,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'item_bg_color',
             [
-                'label' => __('Kolor tła elementu', 'simple-lms'),
+                'label' => __('Background color elementu', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f8f9fa',
                 'selectors' => [
@@ -296,9 +296,9 @@ class Course_Info_Box_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'item_padding',
+            'item_Padding',
             [
-                'label' => __('Padding elementu', 'simple-lms'),
+                'label' => __('Element padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', 'rem'],
                 'default' => [
@@ -309,7 +309,7 @@ class Course_Info_Box_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .info-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .info-item' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -317,7 +317,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'item_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów elementu', 'simple-lms'),
+                'label' => __('Border radius elementu', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -397,7 +397,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         if (!$course_id || get_post_type($course_id) !== 'course') {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć poprawnego kursu. Upewnij się, że widget jest używany na stronie kursu lub lekcji albo ustaw prawidłowy ID.', 'simple-lms');
+                echo esc_html__('Cannot detect valid course. Make sure the widget is used on course or lesson page or set correct ID.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -408,7 +408,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $modules_count = count($modules);
         if ($modules_count === 0) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
-                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('Ten kurs nie ma jeszcze modułów.','simple-lms').'</div>';
+                echo '<div class="elementor-alert elementor-alert-info">'.esc_html__('This course has no modules yet.','simple-lms').'</div>';
             }
         }
         

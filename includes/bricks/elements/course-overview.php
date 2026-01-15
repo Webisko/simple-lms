@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Cache_Handler;
 use SimpleLMS\Progress_Tracker;
@@ -29,7 +29,7 @@ class Course_Overview extends \Bricks\Element {
         echo '<div class="simple-lms-course-overview">';
         foreach ($modules as $module) {
             $lessons = Cache_Handler::getModuleLessons($module->ID);
-            echo '<div class="module-item"><div class="module-header" style="cursor:pointer;padding:12px;background:#f5f5f5;font-weight:600">'.esc_html(get_the_title($module->ID)).'</div><div class="module-content" style="display:none;padding:10px">';
+            echo '<div class="module-item"><div class="module-header" style="cursor:pointer;Padding:12px;background:#f5f5f5;font-weight:600">'.esc_html(get_the_title($module->ID)).'</div><div class="module-content" style="display:none;Padding:10px">';
             foreach ($lessons as $lesson) {
                 $completed = $user_id && Progress_Tracker::isLessonCompleted($user_id, $lesson->ID);
                 echo '<div class="lesson-item"><a href="'.esc_url(get_permalink($lesson->ID)).'">'.($completed?'✓ ':'').''.esc_html(get_the_title($lesson->ID)).'</a></div>';

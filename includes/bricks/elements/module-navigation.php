@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Cache_Handler;
 use SimpleLMS\Progress_Tracker;
@@ -29,7 +29,7 @@ class Module_Navigation extends \Bricks\Element {
         echo '<div class="simple-lms-module-nav layout-'.$layout.'" style="display:'.($layout==='grid'?'grid':'flex').';'.($layout==='grid'?'grid-template-columns:repeat(auto-fill,minmax(250px,1fr));':'flex-direction:column;').'gap:15px">';
         foreach ($modules as $module) {
             $lessons = Cache_Handler::getModuleLessons($module->ID);
-            echo '<div class="module-item" style="padding:15px;border:1px solid #eee;border-radius:6px">';
+            echo '<div class="module-item" style="Padding:15px;border:1px solid #eee;border-radius:6px">';
             echo '<h4 style="margin:0 0 10px"><a href="'.esc_url(get_permalink($module)).'" style="color:#333;text-decoration:none">'.esc_html($module->post_title).'</a></h4>';
             echo '<div style="font-size:0.9em;color:#666">Lekcji: '.count($lessons).'</div>';
             echo '</div>';

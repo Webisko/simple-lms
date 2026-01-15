@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Lesson Content Widget
  * Displays the full WYSIWYG content of a lesson
@@ -69,7 +69,7 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -87,7 +87,7 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->add_control(
             'show_title',
             [
-                'label' => __('Pokaż tytuł lekcji', 'simple-lms'),
+                'label' => __('Pokaż Lesson Title', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -99,7 +99,7 @@ class Lesson_Content_Widget extends Widget_Base {
             [
                 'label' => __('Tekst zastępczy', 'simple-lms'),
                 'type' => Controls_Manager::TEXTAREA,
-                'default' => __('Brak treści lekcji.', 'simple-lms'),
+                'default' => __('No lesson content.', 'simple-lms'),
                 'description' => __('Wyświetlany gdy lekcja nie zostanie znaleziona', 'simple-lms'),
             ]
         );
@@ -176,7 +176,7 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->add_control(
             'content_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-lesson-content' => 'color: {{VALUE}};',
@@ -284,16 +284,16 @@ class Lesson_Content_Widget extends Widget_Base {
     protected function content_template(): void {
         ?>
         <# 
-        var fallbackText = settings.lesson_fallback_text || '<?php echo esc_js(__('Brak treści lekcji.', 'simple-lms')); ?>';
+        var fallbackText = settings.lesson_fallback_text || '<?php echo esc_js(__('No lesson content.', 'simple-lms')); ?>';
         #>
         <div class="simple-lms-lesson-content-wrapper">
             <# if (settings.show_title === 'yes') { #>
                 <h2 class="simple-lms-lesson-title">
-                    <?php echo esc_html__('Tytuł lekcji', 'simple-lms'); ?>
+                    <?php echo esc_html__('Lesson Title', 'simple-lms'); ?>
                 </h2>
             <# } #>
             <div class="simple-lms-lesson-content elementor-alert elementor-alert-info">
-                <p><?php echo esc_html__('Podgląd treści lekcji (wyświetlane na stronie)', 'simple-lms'); ?></p>
+                <p><?php echo esc_html__('Lesson content preview (displayed on page)', 'simple-lms'); ?></p>
             </div>
         </div>
         <?php

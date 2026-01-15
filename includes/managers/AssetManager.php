@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Asset Manager - Manages scripts and styles enqueuing
  *
@@ -341,10 +341,10 @@ class AssetManager
                 'error_generic' => __('Wystąpił błąd. Spróbuj ponownie.', 'simple-lms'),
                 'confirm_delete_module' => __('Czy na pewno chcesz usunąć moduł?', 'simple-lms'),
                 'confirm_delete_lesson' => __('Czy na pewno chcesz usunąć lekcję?', 'simple-lms'),
-                'enter_module_title' => __('Wpisz tytuł modułu.', 'simple-lms'),
-                'enter_lesson_title' => __('Wpisz tytuł lekcji.', 'simple-lms'),
+                'enter_module_title' => __('Wpisz tytuł MODULE.', 'simple-lms'),
+                'enter_lesson_title' => __('Wpisz Lesson Title.', 'simple-lms'),
                 'add_lesson' => __('Dodaj lekcję', 'simple-lms'),
-                'lesson_title' => __('Tytuł lekcji', 'simple-lms'),
+                'lesson_title' => __('Lesson Title', 'simple-lms'),
                 'duplicate_module' => __('Duplikuj', 'simple-lms'),
                 'delete_module' => __('Usuń', 'simple-lms'),
             ],

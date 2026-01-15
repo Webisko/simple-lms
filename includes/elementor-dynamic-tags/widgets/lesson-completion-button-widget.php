@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Lesson Completion Button Widget
  * Interactive button to mark lesson as complete/incomplete
@@ -37,7 +37,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Przycisk ukończenia lekcji', 'simple-lms');
+        return __('Lesson completion button', 'simple-lms');
     }
 
     /**
@@ -69,7 +69,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -105,7 +105,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'show_icon',
             [
-                'label' => __('Pokaż ikonę', 'simple-lms'),
+                'label' => __('Show icon', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -147,7 +147,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                        'title' => __('Pełna szerokość', 'simple-lms'),
+                        'title' => __('Full width', 'simple-lms'),
                         'icon' => 'eicon-text-align-justify',
                     ],
                 ],
@@ -175,7 +175,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'button_padding',
+            'button_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -188,7 +188,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-completion-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-completion-btn' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -196,7 +196,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'button_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'default' => [
@@ -225,7 +225,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'incomplete_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -237,7 +237,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'incomplete_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2196F3',
                 'selectors' => [
@@ -267,7 +267,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'complete_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -279,7 +279,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'complete_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#4CAF50',
                 'selectors' => [
@@ -309,7 +309,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'hover_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-completion-btn:hover' => 'color: {{VALUE}};',
@@ -320,7 +320,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'hover_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-completion-btn:hover' => 'background-color: {{VALUE}};',
@@ -433,7 +433,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         if (!$lesson_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć lekcji. Upewnij się, że widget jest używany na stronie lekcji.', 'simple-lms');
+                echo esc_html__('Cannot detect lesson. Make sure the widget is used on a lesson page.', 'simple-lms');
                 echo '</div>';
             }
             return;

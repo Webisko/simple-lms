@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\LmsShortcodes;
 
@@ -27,8 +27,8 @@ class Lesson_Navigation extends \Bricks\Element {
         $prev = LmsShortcodes::getPreviousLesson($lesson_id);
         $next = LmsShortcodes::getNextLesson($lesson_id);
         echo '<div class="simple-lms-lesson-nav" style="display:flex;justify-content:space-between;gap:10px">';
-        if ($prev) echo '<a href="'.esc_url(get_permalink($prev->ID)).'" class="nav-prev" style="padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html($this->settings['prevText']??'← Poprzednia').'</a>'; else echo '<span></span>';
-        if ($next) echo '<a href="'.esc_url(get_permalink($next->ID)).'" class="nav-next" style="padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html($this->settings['nextText']??'Następna →').'</a>';
+        if ($prev) echo '<a href="'.esc_url(get_permalink($prev->ID)).'" class="nav-prev" style="Padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html($this->settings['prevText']??'← Poprzednia').'</a>'; else echo '<span></span>';
+        if ($next) echo '<a href="'.esc_url(get_permalink($next->ID)).'" class="nav-next" style="Padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html($this->settings['nextText']??'Następna →').'</a>';
         echo '</div>';
     }
 }

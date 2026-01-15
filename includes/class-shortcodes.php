@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Shortcodes for Simple LMS
  *
@@ -806,8 +806,8 @@ class LmsShortcodes {
                 $info = \SimpleLMS\Access_Control::getModuleUnlockInfo((int)$module->ID);
                 if (!empty($info['unlock_ts'])) {
                     $date_str = date_i18n('d.m.Y', (int)$info['unlock_ts']);
-                    $unlock_title = ' title="' . esc_attr('Dostępne od: ' . $date_str) . '"';
-                    $unlock_label_html = '<span class="unlock-date" aria-label="' . esc_attr('Dostępne od: ' . $date_str) . '">Dostępne od: ' . esc_html($date_str) . '</span>';
+                    $unlock_title = ' title="' . esc_attr(sprintf(__('Available from: %s', 'simple-lms'), $date_str)) . '"';
+                    $unlock_label_html = '<span class="unlock-date" aria-label="' . esc_attr(sprintf(__('Available from: %s', 'simple-lms'), $date_str)) . '">' . sprintf(__('Available from: %s', 'simple-lms'), esc_html($date_str)) . '</span>';
                 }
             }
             $output .= '<div class="accordion-module' . ($module_locked ? ' locked' : '') . '" data-module-id="' . $module->ID . '"' . $unlock_title . '>';
@@ -912,8 +912,8 @@ class LmsShortcodes {
                 $info = \SimpleLMS\Access_Control::getModuleUnlockInfo((int)$module->ID);
                 if (!empty($info['unlock_ts'])) {
                     $date_str = date_i18n('d.m.Y', (int)$info['unlock_ts']);
-                    $unlock_title = ' title="' . esc_attr('Dostępne od: ' . $date_str) . '"';
-                    $unlock_label_html = '<span class="unlock-date" aria-label="' . esc_attr('Dostępne od: ' . $date_str) . '">Dostępne od: ' . esc_html($date_str) . '</span>';
+                    $unlock_title = ' title="' . esc_attr(sprintf(__('Available from: %s', 'simple-lms'), $date_str)) . '"';
+                    $unlock_label_html = '<span class="unlock-date" aria-label="' . esc_attr(sprintf(__('Available from: %s', 'simple-lms'), $date_str)) . '">' . sprintf(__('Available from: %s', 'simple-lms'), esc_html($date_str)) . '</span>';
                 }
             }
             $output .= '<div class="overview-module' . ($module_locked ? ' locked' : '') . '" data-module-id="' . $module->ID . '"' . $unlock_title . '>';
@@ -973,7 +973,7 @@ class LmsShortcodes {
      */
     public static function previousLessonShortcode($atts): string {
         $atts = shortcode_atts([
-            'text' => 'Poprzednia lekcja',
+            'text' => 'Previous lesson',
             'class' => 'simple-lms-prev-lesson'
         ], $atts);
 
@@ -1002,7 +1002,7 @@ class LmsShortcodes {
      */
     public static function nextLessonShortcode($atts): string {
         $atts = shortcode_atts([
-            'text' => 'Następna lekcja',
+            'text' => 'Next lesson',
             'class' => 'simple-lms-next-lesson'
         ], $atts);
 

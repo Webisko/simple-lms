@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Lesson Video Player Widget
  * Displays lesson video with full styling control
@@ -37,7 +37,7 @@ class Lesson_Video_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Wideo lekcji', 'simple-lms');
+        return __('Lesson video', 'simple-lms');
     }
 
     /**
@@ -69,7 +69,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -87,7 +87,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'video_source',
             [
-                'label' => __('Źródło wideo', 'simple-lms'),
+                'label' => __('Video source', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'custom_field',
                 'options' => [
@@ -100,7 +100,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'custom_video_url',
             [
-                'label' => __('URL wideo', 'simple-lms'),
+                'label' => __('Video URL', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'placeholder' => 'https://www.youtube.com/watch?v=...',
                 'description' => __('Obsługuje YouTube, Vimeo, pliki MP4', 'simple-lms'),
@@ -163,7 +163,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'show_play_icon',
             [
-                'label' => __('Pokaż ikonę Play', 'simple-lms'),
+                'label' => __('Show icon Play', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -307,7 +307,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'video_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -484,7 +484,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'fallback_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f5f5f5',
                 'selectors' => [
@@ -496,7 +496,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'fallback_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#666666',
                 'selectors' => [
@@ -514,7 +514,7 @@ class Lesson_Video_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'fallback_padding',
+            'fallback_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -527,7 +527,7 @@ class Lesson_Video_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-video-fallback' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-video-fallback' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -549,7 +549,7 @@ class Lesson_Video_Widget extends Widget_Base {
         if (!$lesson_id && $settings['video_source'] === 'custom_field') {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć lekcji. Upewnij się, że widget jest używany na stronie lekcji.', 'simple-lms');
+                echo esc_html__('Cannot detect lesson. Make sure the widget is used on a lesson page.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -569,7 +569,7 @@ class Lesson_Video_Widget extends Widget_Base {
                 // Return nothing in frontend, show notice in editor
                 if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                     echo '<div class="elementor-alert elementor-alert-info">';
-                    echo esc_html__('Brak wideo - widget będzie ukryty na froncie', 'simple-lms');
+                    echo esc_html__('No video - widget will be hidden on frontend', 'simple-lms');
                     echo '</div>';
                 }
                 return;
@@ -645,12 +645,12 @@ class Lesson_Video_Widget extends Widget_Base {
                 '1-1' => '100%',
                 '21-9' => '42.86%',
             ];
-            $padding = $ratios[$settings['aspect_ratio']] ?? '56.25%';
+            $Padding = $ratios[$settings['aspect_ratio']] ?? '56.25%';
             ?>
             <style>
                 .simple-lms-video-container.aspect-<?php echo esc_attr($settings['aspect_ratio']); ?> .simple-lms-video-wrapper {
                     position: relative;
-                    padding-bottom: <?php echo esc_attr($padding); ?>;
+                    Padding-bottom: <?php echo esc_attr($Padding); ?>;
                     height: 0;
                     overflow: hidden;
                 }

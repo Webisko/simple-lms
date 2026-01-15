@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Progress tracking system for Simple LMS
  * 
@@ -506,7 +506,7 @@ class Progress_Tracker {
             
             // Check if user has access to this lesson
             if (!self::userCanAccessLesson($userId, $lessonId)) {
-                throw new \Exception(__('Brak dostępu do tej lekcji', 'simple-lms'));
+                throw new \Exception(__('No access to this lesson', 'simple-lms'));
             }
             
             $result = self::updateLessonProgress($userId, $lessonId, $completed, $timeSpent);
@@ -575,13 +575,13 @@ class Progress_Tracker {
             if (!empty($progress['summary'])) {
                 $summary = $progress['summary'];
                 return sprintf(
-                    '%d kursów (%.1f%% średnio)',
+                    '%d kursów (%.1f%% Mediumo)',
                     $summary['total_courses'],
                     $summary['avg_completion']
                 );
             }
             
-            return __('Brak aktywności', 'simple-lms');
+            return __('No activity', 'simple-lms');
         }
         
         return $value;
@@ -606,7 +606,7 @@ class Progress_Tracker {
                 echo '<th>' . esc_html($courseTitle) . '</th>';
                 echo '<td>';
                 echo sprintf(
-                    __('%d/%d lekcji ukończonych (%.1f%%)', 'simple-lms'),
+                    __('%d/%d lessons completed (%.1f%%)', 'simple-lms'),
                     $courseProgress['completed_lessons'],
                     $courseProgress['total_lessons'],
                     $courseProgress['completion_percentage']

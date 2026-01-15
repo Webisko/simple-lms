@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Course Overview Widget (Accordion)
  * Displays course structure with modules as accordion items
@@ -69,7 +69,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -80,14 +80,14 @@ class Course_Overview_Widget extends Widget_Base {
                 'label' => __('ID kursu (opcjonalne)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
-                'description' => __('Pozostaw puste, aby automatycznie wykryć bieżący kurs', 'simple-lms'),
+                'description' => __('Leave empty to automatically detect current course', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'show_progress',
             [
-                'label' => __('Pokaż postęp ukończenia', 'simple-lms'),
+                'label' => __('Show completion progress', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -97,7 +97,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'show_lesson_count',
             [
-                'label' => __('Pokaż liczbę lekcji', 'simple-lms'),
+                'label' => __('Show lesson count', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -107,18 +107,18 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'show_unlock_dates',
             [
-                'label' => __('Pokaż daty odblokowania', 'simple-lms'),
+                'label' => __('Show unlock dates', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
-                'description' => __('Wyświetla informacje o dostępności modułów z drip content', 'simple-lms'),
+                'description' => __('Displays module availability information with drip content', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'accordion_open_first',
             [
-                'label' => __('Otwórz pierwszy moduł', 'simple-lms'),
+                'label' => __('Open first module', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -128,7 +128,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'accordion_allow_multiple',
             [
-                'label' => __('Pozwól na otwarcie wielu modułów', 'simple-lms'),
+                'label' => __('Allow multiple modules to be opened', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -141,7 +141,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->start_controls_section(
             'module_header_style',
             [
-                'label' => __('Nagłówek modułu', 'simple-lms'),
+                'label' => __('Module header', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -149,7 +149,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'module_header_bg',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#f5f5f5',
                 'selectors' => [
@@ -161,7 +161,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'module_header_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#333',
                 'selectors' => [
@@ -179,7 +179,7 @@ class Course_Overview_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'module_header_padding',
+            'module_header_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -192,7 +192,7 @@ class Course_Overview_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-accordion-item .accordion-header' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-accordion-item .accordion-header' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -200,7 +200,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'module_header_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -215,7 +215,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->start_controls_section(
             'lesson_list_style',
             [
-                'label' => __('Lista lekcji', 'simple-lms'),
+                'label' => __('Lesson list', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -223,7 +223,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'lesson_bg',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -235,7 +235,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'lesson_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-accordion-item .lesson-link' => 'color: {{VALUE}};',
@@ -246,7 +246,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'lesson_hover_color',
             [
-                'label' => __('Kolor tekstu (hover)', 'simple-lms'),
+                'label' => __('Text color (hover)', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-accordion-item .lesson-link:hover' => 'color: {{VALUE}};',
@@ -263,13 +263,13 @@ class Course_Overview_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'lesson_padding',
+            'lesson_Padding',
             [
-                'label' => __('Padding elementu', 'simple-lms'),
+                'label' => __('Element padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', 'rem'],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-accordion-item .lesson-item' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-accordion-item .lesson-item' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -280,7 +280,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->start_controls_section(
             'progress_style',
             [
-                'label' => __('Wskaźniki postępu', 'simple-lms'),
+                'label' => __('Progress indicators', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_progress' => 'yes',
@@ -291,7 +291,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'progress_complete_color',
             [
-                'label' => __('Kolor - ukończone', 'simple-lms'),
+                'label' => __('Color - completed', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#4CAF50',
                 'selectors' => [
@@ -303,7 +303,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'progress_incomplete_color',
             [
-                'label' => __('Kolor - nieukończone', 'simple-lms'),
+                'label' => __('Color - incomplete', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ddd',
                 'selectors' => [
@@ -315,7 +315,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_responsive_control(
             'progress_size',
             [
-                'label' => __('Rozmiar wskaźnika', 'simple-lms'),
+                'label' => __('Indicator size', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -348,7 +348,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->start_controls_section(
             'current_lesson_style',
             [
-                'label' => __('Aktywna lekcja', 'simple-lms'),
+                'label' => __('Active lesson', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -356,7 +356,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'current_lesson_bg',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e3f2fd',
                 'selectors' => [
@@ -368,7 +368,7 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'current_lesson_border',
             [
-                'label' => __('Kolor obramowania', 'simple-lms'),
+                'label' => __('Border color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2196F3',
                 'selectors' => [
@@ -394,7 +394,7 @@ class Course_Overview_Widget extends Widget_Base {
         if (!$course_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć kursu. Upewnij się, że widget jest używany na stronie kursu lub ustaw ID kursu ręcznie.', 'simple-lms');
+                echo esc_html__('Cannot detect course. Make sure the widget is used on a course page or set the course ID manually.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -410,7 +410,7 @@ class Course_Overview_Widget extends Widget_Base {
         if (empty($modules)) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-info">';
-                echo esc_html__('Ten kurs nie ma jeszcze modułów.', 'simple-lms');
+                echo esc_html__('This course has no modules yet.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -454,7 +454,7 @@ class Course_Overview_Widget extends Widget_Base {
             // Unlock date
             if ($settings['show_unlock_dates'] === 'yes' && $module_locked && !empty($unlock_info['unlock_ts'])) {
                 $date_str = date_i18n('d.m.Y', (int)$unlock_info['unlock_ts']);
-                echo '<span class="unlock-date">Dostępne od: ' . esc_html($date_str) . '</span>';
+                echo '<span class="unlock-date">' . sprintf(__('Available from: %s', 'simple-lms'), esc_html($date_str)) . '</span>';
             }
             
             echo '</div>';
@@ -546,7 +546,7 @@ class Course_Overview_Widget extends Widget_Base {
             <div class="simple-lms-accordion-item open">
                 <div class="accordion-header">
                     <span class="accordion-icon"></span>
-                    <h3 class="module-title"><?php echo esc_html__('Przykładowy moduł 1', 'simple-lms'); ?></h3>
+                    <h3 class="module-title"><?php echo esc_html__('Example Module 1', 'simple-lms'); ?></h3>
                     <# if (settings.show_lesson_count === 'yes') { #>
                         <span class="lessons-count">(3 lekcje)</span>
                     <# } #>
@@ -584,7 +584,7 @@ class Course_Overview_Widget extends Widget_Base {
             <div class="simple-lms-accordion-item">
                 <div class="accordion-header">
                     <span class="accordion-icon"></span>
-                    <h3 class="module-title"><?php echo esc_html__('Przykładowy moduł 2', 'simple-lms'); ?></h3>
+                    <h3 class="module-title"><?php echo esc_html__('Example Module 2', 'simple-lms'); ?></h3>
                     <# if (settings.show_lesson_count === 'yes') { #>
                         <span class="lessons-count">(2 lekcje)</span>
                     <# } #>

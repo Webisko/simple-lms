@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Admin meta boxes for tag-based course access
  */
@@ -39,7 +39,7 @@ class Access_Meta_Boxes {
     public static function registerCourseAccessBox(): void {
         \add_meta_box(
             'simple_lms_course_access',
-            \__('Użytkownicy z dostępem (tagi)', 'simple-lms'),
+            \__('Users with access (tags)', 'simple-lms'),
             [__CLASS__, 'renderCourseAccessBox'],
             'course',
             'side',
@@ -62,8 +62,8 @@ class Access_Meta_Boxes {
                 'years' => _n('%d rok', '%d lat', $duration_value, 'simple-lms')
             ];
             
-            echo '<div style="padding: 8px; background: #e7f5fe; border-left: 3px solid #0073aa; margin-bottom: 12px;">';
-            echo '<strong>⏱️ ' . \esc_html__('Czas trwania dostępu:', 'simple-lms') . '</strong> ';
+            echo '<div style="Padding: 8px; background: #e7f5fe; border-left: 3px solid #0073aa; margin-bottom: 12px;">';
+            echo '<strong>⏱️ ' . \esc_html__('Access duration:', 'simple-lms') . '</strong> ';
             echo sprintf(
                 $unit_labels[$duration_unit] ?? $unit_labels['days'],
                 $duration_value
@@ -86,12 +86,12 @@ class Access_Meta_Boxes {
         }
 
         if (empty($users_with_access)) {
-            echo '<p style="color: #666;">' . \esc_html__('Brak użytkowników z dostępem.', 'simple-lms') . '</p>';
+            echo '<p style="color: #666;">' . \esc_html__('No users with access.', 'simple-lms') . '</p>';
             return;
         }
 
-        echo '<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 8px; background: #f9f9f9;">';
-        echo '<ul style="margin: 0; padding: 0; list-style: none;">';
+        echo '<div style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; Padding: 8px; background: #f9f9f9;">';
+        echo '<ul style="margin: 0; Padding: 0; list-style: none;">';
         foreach ($users_with_access as $data) {
             $user = $data['user'];
             $expiration = $data['expiration'];
@@ -100,10 +100,10 @@ class Access_Meta_Boxes {
             
             $warning_style = '';
             if ($days_remaining !== null && $days_remaining <= 7) {
-                $warning_style = ' style="border-left: 3px solid #d63638; padding-left: 8px; background: #fff;"';
+                $warning_style = ' style="border-left: 3px solid #d63638; Padding-left: 8px; background: #fff;"';
             }
             
-            echo '<li style="margin: 6px 0; padding: 6px; background: white; border-radius: 3px;"' . $warning_style . '>';
+            echo '<li style="margin: 6px 0; Padding: 6px; background: white; border-radius: 3px;"' . $warning_style . '>';
             echo '<a href="' . \esc_attr($edit_link) . '" target="_blank" style="font-weight: 500;">' . \esc_html($user->display_name) . '</a>';
             echo ' <span style="color: #999; font-size: 0.9em;">(' . \esc_html($user->user_login) . ')</span>';
             
@@ -112,7 +112,7 @@ class Access_Meta_Boxes {
                 echo '📅 ' . date_i18n('Y-m-d H:i', $expiration);
                 if ($days_remaining !== null) {
                     if ($days_remaining === 0) {
-                        echo ' <span style="color: #d63638; font-weight: bold;">(' . \esc_html__('WYGASŁ', 'simple-lms') . ')</span>';
+                        echo ' <span style="color: #d63638; font-weight: bold;">(' . \esc_html__('EXPIRED', 'simple-lms') . ')</span>';
                     } elseif ($days_remaining <= 7) {
                         echo ' <span style="color: #d63638;">(' . sprintf(
                             _n('pozostał %d dzień', 'pozostało %d dni', $days_remaining, 'simple-lms'),
@@ -156,7 +156,7 @@ class Access_Meta_Boxes {
             'order' => 'ASC',
         ]);
 
-        echo '<h2>' . \esc_html__('Dostęp do kursów (Simple LMS)', 'simple-lms') . '</h2>';
+        echo '<h2>' . \esc_html__('Course Access (Simple LMS)', 'simple-lms') . '</h2>';
         echo '<table class="form-table">';
         echo '<tr>';
         echo '<th>' . \esc_html__('Przypisane kursy', 'simple-lms') . '</th>';
@@ -165,17 +165,17 @@ class Access_Meta_Boxes {
         \wp_nonce_field('simple_lms_user_access', 'simple_lms_user_access_nonce');
         
         if (empty($courses)) {
-            echo '<p>' . \esc_html__('Brak kursów w systemie.', 'simple-lms') . '</p>';
+            echo '<p>' . \esc_html__('No courses in the system.', 'simple-lms') . '</p>';
         } else {
-            echo '<fieldset style="border: 1px solid #ddd; padding: 12px; background: #f9f9f9; max-height: 300px; overflow-y: auto;">';
-            echo '<legend style="padding: 0 8px; font-weight: bold;">' . \esc_html__('Zaznacz kursy, do których użytkownik ma dostęp:', 'simple-lms') . '</legend>';
+            echo '<fieldset style="border: 1px solid #ddd; Padding: 12px; background: #f9f9f9; max-height: 300px; overflow-y: auto;">';
+            echo '<legend style="Padding: 0 8px; font-weight: bold;">' . \esc_html__('Select courses the user has access to:', 'simple-lms') . '</legend>';
             
             foreach ($courses as $course) {
                 $checked = in_array((int)$course->ID, array_map('intval', $access_tags), true);
                 $expiration = \SimpleLMS\simple_lms_get_course_access_expiration($user_id, (int)$course->ID);
                 $days_remaining = \SimpleLMS\simple_lms_get_course_access_days_remaining($user_id, (int)$course->ID);
                 
-                echo '<div style="display: flex; align-items: center; margin: 8px 0; padding: 8px; background: white; border-left: 3px solid ' . ($checked ? '#00a32a' : '#ddd') . ';">';
+                echo '<div style="display: flex; align-items: center; margin: 8px 0; Padding: 8px; background: white; border-left: 3px solid ' . ($checked ? '#00a32a' : '#ddd') . ';">';
                 echo '<label style="flex: 1; margin: 0;">';
                 echo '<input type="checkbox" name="simple_lms_course_access[]" value="' . \esc_attr((string)$course->ID) . '"' . ($checked ? ' checked' : '') . '> ';
                 echo '<strong>' . \esc_html($course->post_title) . '</strong>';
@@ -188,7 +188,7 @@ class Access_Meta_Boxes {
                     echo '📅 ' . \esc_html__('Wygasa:', 'simple-lms') . ' ' . $expiration_date;
                     if ($days_remaining !== null) {
                         if ($days_remaining === 0) {
-                            echo ' <strong>(' . \esc_html__('WYGASŁ', 'simple-lms') . ')</strong>';
+                            echo ' <strong>(' . \esc_html__('EXPIRED', 'simple-lms') . ')</strong>';
                         } else {
                             echo ' (' . sprintf(
                                 _n('pozostał %d dzień', 'pozostało %d dni', $days_remaining, 'simple-lms'),
@@ -200,20 +200,20 @@ class Access_Meta_Boxes {
                     
                     // Field to modify expiration date
                     echo '<br><label style="font-size: 0.85em; margin-top: 4px;">';
-                    echo \esc_html__('Zmień datę wygaśnięcia:', 'simple-lms') . ' ';
+                    echo \esc_html__('Change expiration date:', 'simple-lms') . ' ';
                     echo '<input type="datetime-local" name="simple_lms_course_expiration[' . $course->ID . ']" ';
                     echo 'value="' . date('Y-m-d\TH:i', $expiration) . '" ';
                     echo 'style="font-size: 0.9em;">';
                     echo ' <button type="button" class="button button-small" onclick="this.previousElementSibling.value=\'\'">';
-                    echo \esc_html__('Usuń limit', 'simple-lms');
+                    echo \esc_html__('Remove limit', 'simple-lms');
                     echo '</button>';
                     echo '</label>';
                 } elseif ($checked) {
-                    echo '<br><span style="font-size: 0.85em; color: #00a32a;">✓ ' . \esc_html__('Dostęp bezterminowy', 'simple-lms') . '</span>';
+                    echo '<br><span style="font-size: 0.85em; color: #00a32a;">✓ ' . \esc_html__('Lifetime access', 'simple-lms') . '</span>';
                     
                     // Field to add expiration date
                     echo '<br><label style="font-size: 0.85em; margin-top: 4px;">';
-                    echo \esc_html__('Ustaw datę wygaśnięcia:', 'simple-lms') . ' ';
+                    echo \esc_html__('Set expiration date:', 'simple-lms') . ' ';
                     echo '<input type="datetime-local" name="simple_lms_course_expiration[' . $course->ID . ']" ';
                     echo 'style="font-size: 0.9em;">';
                     echo '</label>';
@@ -226,7 +226,7 @@ class Access_Meta_Boxes {
             echo '</fieldset>';
         }
         
-        echo '<p class="description">' . \esc_html__('Użyj checkboxów powyżej, aby przypisać lub usunąć dostęp do kursów. Zmiany zostaną zapisane wraz z profilem użytkownika.', 'simple-lms') . '</p>';
+        echo '<p class="description">' . \esc_html__('Use the checkboxes above to assign or remove course access. Changes will be saved with the user profile.', 'simple-lms') . '</p>';
         echo '</td>';
         echo '</tr>';
         echo '</table>';

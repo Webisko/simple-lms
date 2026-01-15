@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 use SimpleLMS\Access_Control;
@@ -15,7 +15,7 @@ class User_Courses_Grid_Widget extends Widget_Base {
     public function get_categories(): array { return ['simple-lms']; }
 
     protected function register_controls(): void {
-        $this->start_controls_section('content', ['label' => __('Ustawienia', 'simple-lms'), 'tab' => Controls_Manager::TAB_CONTENT]);
+        $this->start_controls_section('content', ['label' => __('Settings', 'simple-lms'), 'tab' => Controls_Manager::TAB_CONTENT]);
         $this->add_responsive_control('columns', [
             'label' => __('Kolumny', 'simple-lms'),
             'type' => Controls_Manager::SELECT,
@@ -23,7 +23,7 @@ class User_Courses_Grid_Widget extends Widget_Base {
             'options' => ['1'=>'1','2'=>'2','3'=>'3','4'=>'4']
         ]);
         $this->add_control('show_progress', ['label'=>__('Pokaż postęp','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
-        $this->add_control('show_continue', ['label'=>__('Pokaż przycisk Kontynuuj','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
+        $this->add_control('show_continue', ['label'=>__('Pokaż przycisk Continue','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
         $this->end_controls_section();
 
         $this->start_controls_section('card_style', ['label'=>__('Karta','simple-lms'),'tab'=>Controls_Manager::TAB_STYLE]);
@@ -47,7 +47,7 @@ class User_Courses_Grid_Widget extends Widget_Base {
             $progress = Progress_Tracker::getCourseProgress($user_id, $course->ID);
             echo '<div class="course-card" style="display:flex; flex-direction:column;">';
             if ($thumb) echo '<div class="course-thumb" style="background-image:url('.esc_url($thumb).');background-size:cover;background-position:center;height:160px"></div>';
-            echo '<div class="course-body" style="padding:12px">';
+            echo '<div class="course-body" style="Padding:12px">';
             echo '<div class="course-title" style="font-weight:600; margin-bottom:8px">'.esc_html(get_the_title($course->ID)).'</div>';
             if ($settings['show_progress']==='yes') {
                 echo '<div class="course-progress" style="height:6px;background:#eee;border-radius:4px;overflow:hidden;margin-bottom:10px">';
@@ -58,9 +58,9 @@ class User_Courses_Grid_Widget extends Widget_Base {
                 $continue_lesson_id = $this->get_continue_lesson($user_id, $course->ID);
                 if ($continue_lesson_id && get_post_type($continue_lesson_id) === 'lesson') {
                     $continue_url = get_permalink($continue_lesson_id);
-                    echo '<a class="continue-btn" href="'.esc_url($continue_url).'" style="display:inline-block;padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html__('Kontynuuj','simple-lms').'</a>';
+                    echo '<a class="continue-btn" href="'.esc_url($continue_url).'" style="display:inline-block;Padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html__('Continue','simple-lms').'</a>';
                 } else {
-                    echo '<span class="continue-btn disabled" style="display:inline-block;padding:10px 16px;background:#9e9e9e;color:#fff;border-radius:4px">'.esc_html__('Brak lekcji do kontynuowania','simple-lms').'</span>';
+                    echo '<span class="continue-btn disabled" style="display:inline-block;Padding:10px 16px;background:#9e9e9e;color:#fff;border-radius:4px">'.esc_html__('Brak lekcji do kontynuowania','simple-lms').'</span>';
                 }
             }
             echo '</div></div>';

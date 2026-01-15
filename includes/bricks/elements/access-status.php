@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Access_Control;
 
@@ -27,6 +27,6 @@ class Access_Status extends \Bricks\Element {
         $has_access = Access_Control::userHasAccess(get_current_user_id(), $course_id);
         $text = $has_access ? ($settings['grantedText']??'Masz dostęp') : ($settings['deniedText']??'Brak dostępu');
         $color = $has_access ? '#4CAF50' : '#f44336';
-        echo '<div class="simple-lms-access-status" style="padding:10px 16px;background:'.esc_attr($color).';color:#fff;border-radius:4px;display:inline-block">'.esc_html($text).'</div>';
+        echo '<div class="simple-lms-access-status" style="Padding:10px 16px;background:'.esc_attr($color).';color:#fff;border-radius:4px;display:inline-block">'.esc_html($text).'</div>';
     }
 }

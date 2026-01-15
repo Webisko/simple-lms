@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Lesson Navigation Widget
  * Previous/Next lesson navigation buttons
@@ -69,7 +69,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -97,9 +97,9 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'prev_text',
             [
-                'label' => __('Tekst przycisku "Poprzednia"', 'simple-lms'),
+                'label' => __('Button text "Poprzednia"', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Poprzednia lekcja', 'simple-lms'),
+                'default' => __('Previous lesson', 'simple-lms'),
                 'condition' => [
                     'show_prev' => 'yes',
                 ],
@@ -119,9 +119,9 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'next_text',
             [
-                'label' => __('Tekst przycisku "Następna"', 'simple-lms'),
+                'label' => __('Button text "Następna"', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Następna lekcja', 'simple-lms'),
+                'default' => __('Next lesson', 'simple-lms'),
                 'condition' => [
                     'show_next' => 'yes',
                 ],
@@ -358,7 +358,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'button_padding',
+            'button_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -371,7 +371,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-nav-btn' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-nav-btn' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -379,7 +379,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'button_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'default' => [
@@ -408,7 +408,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'button_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -420,7 +420,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'button_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2196F3',
                 'selectors' => [
@@ -450,7 +450,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -462,7 +462,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#1976D2',
                 'selectors' => [
@@ -484,7 +484,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'button_disabled_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#999999',
                 'selectors' => [
@@ -496,7 +496,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         $this->add_control(
             'button_disabled_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e0e0e0',
                 'selectors' => [
@@ -535,7 +535,7 @@ class Lesson_Navigation_Widget extends Widget_Base {
         if (!$lesson_id || get_post_type($lesson_id) !== 'lesson') {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć poprawnej lekcji. Upewnij się, że widget jest używany na stronie lekcji albo ustaw prawidłowy ID.', 'simple-lms');
+                echo esc_html__('Cannot detect valid lesson. Make sure the widget is used on a lesson page or set correct ID.', 'simple-lms');
                 echo '</div>';
             }
             return;

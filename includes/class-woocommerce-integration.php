@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
@@ -182,11 +182,11 @@ class WooCommerce_Integration {
         }
 
         if ($objectId && !current_user_can('edit_post', $objectId)) {
-            return ['message' => __('Brak uprawnień do edycji tego elementu', 'simple-lms')];
+            return ['message' => __('No permission to edit this element', 'simple-lms')];
         }
 
         if (!$objectId && $capability && !current_user_can($capability)) {
-            return ['message' => __('Brak uprawnień do wykonania tej operacji', 'simple-lms')];
+            return ['message' => __('No permission to perform this operation', 'simple-lms')];
         }
 
         return null;
@@ -304,8 +304,8 @@ class WooCommerce_Integration {
             echo '</p>';
         } else {
             echo '<p class="form-field">';
-            echo '<label>' . __('Ustawienia kursu', 'simple-lms') . '</label>';
-            echo '<em>' . __('Ustawienia kursu są dostępne tylko dla produktów wirtualnych.', 'simple-lms') . '</em>';
+            echo '<label>' . __('Settings kursu', 'simple-lms') . '</label>';
+            echo '<em>' . __('Settings kursu są dostępne tylko dla produktów wirtualnych.', 'simple-lms') . '</em>';
             echo '</p>';
         }
         
@@ -454,7 +454,7 @@ class WooCommerce_Integration {
             }
         }
         
-        echo '<div style="padding: 0;">';
+        echo '<div style="Padding: 0;">';
         echo '<h4>' . __('Przypisane produkty:', 'simple-lms') . '</h4>';
         
         // Kafelki produktów - układ pionowy dla sidebar
@@ -477,11 +477,11 @@ class WooCommerce_Integration {
                 if ($product) {
                     $is_default = ($default_product_id == $product_id);
                     
-                    echo '<div class="course-product-card' . ($is_default ? ' default-product' : '') . '" style="background: #fff; border: 2px solid ' . ($is_default ? '#007cba' : '#ddd') . '; border-radius: 8px; padding: 12px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; flex-direction: column;" data-product-id="' . $product_id . '">';
+                    echo '<div class="course-product-card' . ($is_default ? ' default-product' : '') . '" style="background: #fff; border: 2px solid ' . ($is_default ? '#007cba' : '#ddd') . '; border-radius: 8px; Padding: 12px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; flex-direction: column;" data-product-id="' . $product_id . '">';
                     
                     // Badge domyślnego produktu
                     if ($is_default) {
-                        echo '<div style="position: absolute; top: -6px; left: 10px; background: #007cba; color: white; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold; z-index: 1;">' . 
+                        echo '<div style="position: absolute; top: -6px; left: 10px; background: #007cba; color: white; Padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold; z-index: 1;">' . 
                              __('DOMYŚLNY', 'simple-lms') . '</div>';
                     }
                     
@@ -532,11 +532,11 @@ class WooCommerce_Integration {
                     echo '<div style="display: flex; gap: 8px; margin-top: auto;">';
                     
                     if (!$is_default) {
-                        echo '<button type="button" class="set-default-product button button-primary" data-product-id="' . $product_id . '" style="flex: 1; font-size: 11px; padding: 4px 8px;">' . 
+                        echo '<button type="button" class="set-default-product button button-primary" data-product-id="' . $product_id . '" style="flex: 1; font-size: 11px; Padding: 4px 8px;">' . 
                              __('Ustaw domyślny', 'simple-lms') . '</button>';
                     }
                     
-                    echo '<a href="' . get_edit_post_link($product_id) . '" target="_blank" class="button button-small" style="flex: 1; font-size: 11px; padding: 4px 8px; text-decoration: none; text-align: center;">' . 
+                    echo '<a href="' . get_edit_post_link($product_id) . '" target="_blank" class="button button-small" style="flex: 1; font-size: 11px; Padding: 4px 8px; text-decoration: none; text-align: center;">' . 
                          __('Edytuj', 'simple-lms') . '</a>';
                     
                     echo '</div>';
@@ -545,9 +545,9 @@ class WooCommerce_Integration {
                 }
             }
         } else {
-            echo '<div style="text-align: center; padding: 20px; background: #f9f9f9; border: 2px dashed #ddd; border-radius: 8px; color: #666;">';
+            echo '<div style="text-align: center; Padding: 20px; background: #f9f9f9; border: 2px dashed #ddd; border-radius: 8px; color: #666;">';
             echo '<div style="font-size: 32px; margin-bottom: 10px;">📦</div>';
-            echo '<h4 style="margin: 0 0 8px 0; color: #666; font-size: 14px;">' . __('Brak produktów', 'simple-lms') . '</h4>';
+            echo '<h4 style="margin: 0 0 8px 0; color: #666; font-size: 14px;">' . __('No products', 'simple-lms') . '</h4>';
             echo '<p style="margin: 0; font-size: 12px;">' . __('Dodaj produkty WooCommerce do kursu.', 'simple-lms') . '</p>';
             echo '</div>';
         }
@@ -564,10 +564,10 @@ class WooCommerce_Integration {
         
         // Modal do wybierania produktów
         echo '<div id="product-selection-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999;">';
-        echo '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 5px; max-width: 600px; width: 90%; max-height: 80%; overflow-y: auto;">';
+        echo '<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; Padding: 20px; border-radius: 5px; max-width: 600px; width: 90%; max-height: 80%; overflow-y: auto;">';
         echo '<h3>' . __('Wybierz produkt WooCommerce', 'simple-lms') . '</h3>';
         echo '<div id="product-search">';
-        echo '<input type="text" id="product-search-input" placeholder="' . __('Szukaj produktów...', 'simple-lms') . '" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;">';
+        echo '<input type="text" id="product-search-input" placeholder="' . __('Szukaj produktów...', 'simple-lms') . '" style="width: 100%; Padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 3px;">';
         echo '<div id="product-search-results" style="max-height: 300px; overflow-y: auto;"></div>';
         echo '</div>';
         echo '<div style="text-align: right; margin-top: 15px;">';
@@ -614,7 +614,7 @@ class WooCommerce_Integration {
                         if (response.success) {
                             var html = '';
                             $.each(response.data, function(index, product) {
-                                html += '<div class="product-item" style="padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer;" data-product-id="' + product.id + '">';
+                                html += '<div class="product-item" style="Padding: 10px; border-bottom: 1px solid #ddd; cursor: pointer;" data-product-id="' + product.id + '">';
                                 html += '<strong>' + product.name + '</strong>';
                                 if (product.price) {
                                     html += ' - ' + product.price;
@@ -653,9 +653,9 @@ class WooCommerce_Integration {
                 var hasProducts = $('.course-product-card').length > 0;
                 
                 if (!hasProducts) {
-                    $('#course-products-grid').html('<div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #f9f9f9; border: 2px dashed #ddd; border-radius: 8px; color: #666;">' +
+                    $('#course-products-grid').html('<div style="grid-column: 1 / -1; text-align: center; Padding: 40px; background: #f9f9f9; border: 2px dashed #ddd; border-radius: 8px; color: #666;">' +
                         '<div style="font-size: 48px; margin-bottom: 15px;">📦</div>' +
-                        '<h3 style="margin: 0 0 10px 0; color: #666;"><?php echo esc_js(__('Brak przypisanych produktów', 'simple-lms')); ?></h3>' +
+                        '<h3 style="margin: 0 0 10px 0; color: #666;"><?php echo esc_js(__('No assigned products', 'simple-lms')); ?></h3>' +
                         '<p style="margin: 0;"><?php echo esc_js(__('Dodaj produkty WooCommerce, aby umożliwić sprzedaż tego kursu.', 'simple-lms')); ?></p>' +
                         '</div>');
                 }
@@ -698,7 +698,7 @@ class WooCommerce_Integration {
                                 var setDefaultBtn = $card.find('.set-default-product');
                                 if (setDefaultBtn.length === 0) {
                                     
-                                    var newBtn = $('<button type="button" class="set-default-product button button-primary" style="font-size: 12px; padding: 6px 12px;">' + 
+                                    var newBtn = $('<button type="button" class="set-default-product button button-primary" style="font-size: 12px; Padding: 6px 12px;">' + 
                                                 '<?php echo esc_js(__('Ustaw jako domyślny', 'simple-lms')); ?></button>');
                                     newBtn.attr('data-product-id', $card.data('product-id'));
                                     // Dodaj na końcu (po przycisku "Edytuj produkt")
@@ -718,7 +718,7 @@ class WooCommerce_Integration {
                             
                             // Dodaj badge domyślnego (sprawdzamy czy już nie ma)
                             newDefaultCard.find('.default-badge').remove(); // Usuń na wszelki wypadek
-                            var badge = $('<div class="default-badge" style="position: absolute; top: -8px; left: 15px; background: #007cba; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; z-index: 10;">' + 
+                            var badge = $('<div class="default-badge" style="position: absolute; top: -8px; left: 15px; background: #007cba; color: white; Padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; z-index: 10;">' + 
                                        '<?php echo esc_js(__('DOMYŚLNY', 'simple-lms')); ?></div>');
                             newDefaultCard.prepend(badge);
                             
@@ -908,7 +908,7 @@ class WooCommerce_Integration {
                                 var setDefaultBtn = $card.find('.set-default-product');
                                 if (setDefaultBtn.length === 0) {
                                     
-                                    var newBtn = $('<button type="button" class="set-default-product button button-primary" style="font-size: 12px; padding: 6px 12px;">' + 
+                                    var newBtn = $('<button type="button" class="set-default-product button button-primary" style="font-size: 12px; Padding: 6px 12px;">' + 
                                                 '<?php echo esc_js(__('Ustaw jako domyślny', 'simple-lms')); ?></button>');
                                     newBtn.attr('data-product-id', $card.data('product-id'));
                                     // Dodaj na końcu (po przycisku "Edytuj produkt")
@@ -928,7 +928,7 @@ class WooCommerce_Integration {
                             
                             // Dodaj badge domyślnego (sprawdzamy czy już nie ma)
                             newDefaultCard.find('.default-badge').remove(); // Usuń na wszelki wypadek
-                            var badge = $('<div class="default-badge" style="position: absolute; top: -8px; left: 15px; background: #007cba; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; z-index: 10;">' + 
+                            var badge = $('<div class="default-badge" style="position: absolute; top: -8px; left: 15px; background: #007cba; color: white; Padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold; z-index: 10;">' + 
                                        '<?php echo esc_js(__('DOMYŚLNY', 'simple-lms')); ?></div>');
                             newDefaultCard.prepend(badge);
                             
@@ -962,7 +962,7 @@ class WooCommerce_Integration {
                             
                             $.each(response.data, function(index, product) {
                                 if (currentIds.indexOf(product.id.toString()) === -1) {
-                                    html += '<div class="product-search-item" style="padding: 10px; border: 1px solid #ddd; margin-bottom: 5px; cursor: pointer;" data-product-id="' + product.id + '">';
+                                    html += '<div class="product-search-item" style="Padding: 10px; border: 1px solid #ddd; margin-bottom: 5px; cursor: pointer;" data-product-id="' + product.id + '">';
                                     html += '<strong>' + product.name + '</strong><br>';
                                     html += '<small>ID: ' + product.id + ' | ' + product.price + '</small>';
                                     html += '</div>';
@@ -970,7 +970,7 @@ class WooCommerce_Integration {
                             });
                             
                             if (html === '') {
-                                html = '<p style="color: #666; font-style: italic;"><?php echo esc_js(__('Brak dostępnych produktów lub wszystkie są już przypisane.', 'simple-lms')); ?></p>';
+                                html = '<p style="color: #666; font-style: italic;"><?php echo esc_js(__('No available products or all are already assigned.', 'simple-lms')); ?></p>';
                             }
                             
                             $('#product-search-results').html(html);
@@ -1004,7 +1004,7 @@ class WooCommerce_Integration {
                             var isFirstProduct = $('.course-product-card').length === 0;
                             
                             // Nowy layout - pionowy, kompaktowy
-                            var html = '<div class="course-product-card" style="background: #fff; border: 2px solid #ddd; border-radius: 8px; padding: 12px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; flex-direction: column;" data-product-id="' + product.id + '">';
+                            var html = '<div class="course-product-card" style="background: #fff; border: 2px solid #ddd; border-radius: 8px; Padding: 12px; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; flex-direction: column;" data-product-id="' + product.id + '">';
                             
                             // Przycisk usuwania - tylko czerwona ikona X (większa)
                             html += '<button type="button" class="remove-product" style="position: absolute; top: 4px; right: 4px; background: none; color: #dc3545; border: none; width: 24px; height: 24px; cursor: pointer; font-size: 16px; line-height: 1; font-weight: bold;" title="<?php echo esc_js(__('Usuń produkt', 'simple-lms')); ?>">×</button>';
@@ -1038,8 +1038,8 @@ class WooCommerce_Integration {
                             
                             // Przyciski akcji wyrównane do dołu
                             html += '<div style="display: flex; gap: 8px; margin-top: auto;">';
-                            html += '<button type="button" class="set-default-product button button-primary" data-product-id="' + product.id + '" style="flex: 1; font-size: 11px; padding: 4px 8px;"><?php echo esc_js(__('Ustaw domyślny', 'simple-lms')); ?></button>';
-                            html += '<a href="' + product.edit_link + '" target="_blank" class="button button-small" style="flex: 1; text-align: center; font-size: 11px; padding: 4px 8px; text-decoration: none;"><?php echo esc_js(__('Edytuj', 'simple-lms')); ?></a>';
+                            html += '<button type="button" class="set-default-product button button-primary" data-product-id="' + product.id + '" style="flex: 1; font-size: 11px; Padding: 4px 8px;"><?php echo esc_js(__('Ustaw domyślny', 'simple-lms')); ?></button>';
+                            html += '<a href="' + product.edit_link + '" target="_blank" class="button button-small" style="flex: 1; text-align: center; font-size: 11px; Padding: 4px 8px; text-decoration: none;"><?php echo esc_js(__('Edytuj', 'simple-lms')); ?></a>';
                             html += '</div>';
                             html += '</div>';
                             
@@ -1408,7 +1408,7 @@ class WooCommerce_Integration {
 
         // Debug information
         if ($atts['debug'] === '1') {
-            $debug_info = '<div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 10px; margin: 10px 0;">';
+            $debug_info = '<div style="background: #fff3cd; border: 1px solid #ffeaa7; Padding: 10px; margin: 10px 0;">';
             $debug_info .= '<strong>Debug informacje:</strong><br>';
             $debug_info .= 'Bieżąca strona ID: ' . get_the_ID() . '<br>';
             $debug_info .= 'Typ postu: ' . get_post_type() . '<br>';
@@ -1615,7 +1615,7 @@ class WooCommerce_Integration {
                 'course_id' => $course_id,
                 'product_ids' => is_array($product_ids) ? implode(', ', $product_ids) : 'brak',
             ];
-            return '<pre style="background:#f6f8fa;border:1px solid #e1e4e8;padding:8px;">' . esc_html(print_r($debug, true)) . '</pre>';
+            return '<pre style="background:#f6f8fa;border:1px solid #e1e4e8;Padding:8px;">' . esc_html(print_r($debug, true)) . '</pre>';
         }
 
         return self::get_purchase_url_for_course($course_id) ?: '';
@@ -1881,7 +1881,7 @@ class WooCommerce_Integration {
         // Pobierz aktualną listę produktów kursu
         $course_products = get_post_meta($course_id, '_wc_product_ids', true);
         if (empty($course_products)) {
-            wp_send_json_error(__('Brak produktów przypisanych do kursu', 'simple-lms'));
+            wp_send_json_error(__('No products assigned to course', 'simple-lms'));
         }
         
         if (is_string($course_products)) {

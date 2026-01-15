@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Cache_Handler;
 use SimpleLMS\Progress_Tracker;
@@ -30,7 +30,7 @@ class Lesson_Progress_Indicator extends \Bricks\Element {
         foreach ($lessons as $i => $lesson) {
             if ($lesson->ID == $lesson_id) { $current_position = $i + 1; break; }
         }
-        echo '<div class="simple-lms-lesson-progress-indicator" style="padding:10px 16px;background:#f5f5f5;border-radius:4px;display:inline-block">';
+        echo '<div class="simple-lms-lesson-progress-indicator" style="Padding:10px 16px;background:#f5f5f5;border-radius:4px;display:inline-block">';
         if ($this->settings['showText'] ?? true) echo '<span>Lekcja </span>';
         echo '<strong>'.$current_position.'</strong> / <strong>'.count($lessons).'</strong>';
         echo '</div>';

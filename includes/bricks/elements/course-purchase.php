@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Access_Control;
 
@@ -35,9 +35,9 @@ class Course_Purchase extends \Bricks\Element {
         }
         $product = wc_get_product($product_id);
         if (!$product) return;
-        echo '<div class="simple-lms-purchase-cta" style="padding:20px;border:2px solid #2196F3;border-radius:8px;text-align:center">';
+        echo '<div class="simple-lms-purchase-cta" style="Padding:20px;border:2px solid #2196F3;border-radius:8px;text-align:center">';
         echo '<div class="price" style="font-size:32px;font-weight:700;color:#2196F3;margin-bottom:15px">'.$product->get_price_html().'</div>';
-        echo '<a href="'.esc_url($product->add_to_cart_url()).'" class="purchase-btn" style="display:inline-block;padding:12px 32px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px;font-weight:600">'.esc_html($settings['buttonText']??'Kup kurs').'</a>';
+        echo '<a href="'.esc_url($product->add_to_cart_url()).'" class="purchase-btn" style="display:inline-block;Padding:12px 32px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px;font-weight:600">'.esc_html($settings['buttonText']??__('Buy Course', 'simple-lms')).'</a>';
         echo '</div>';
     }
 }

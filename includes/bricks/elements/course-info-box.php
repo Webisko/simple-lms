@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Cache_Handler;
 use SimpleLMS\Progress_Tracker;
@@ -27,7 +27,7 @@ class Course_Info_Box extends \Bricks\Element {
         $total_lessons = 0; foreach ($modules as $m) { $total_lessons += count(Cache_Handler::getModuleLessons($m->ID)); }
         $progress = is_user_logged_in() ? Progress_Tracker::getCourseProgress(get_current_user_id(), $course_id) : 0;
         $layout = $settings['layout'] ?? 'vertical';
-        echo '<div class="simple-lms-course-info layout-'.$layout.'" style="padding:16px;border:1px solid #eee;border-radius:6px">';
+        echo '<div class="simple-lms-course-info layout-'.$layout.'" style="Padding:16px;border:1px solid #eee;border-radius:6px">';
         echo '<div class="info-item" style="margin-bottom:10px"><strong>Moduły:</strong> '.count($modules).'</div>';
         echo '<div class="info-item" style="margin-bottom:10px"><strong>Lekcje:</strong> '.$total_lessons.'</div>';
         if (is_user_logged_in()) echo '<div class="info-item"><strong>Postęp:</strong> '.esc_html($progress).'%</div>';

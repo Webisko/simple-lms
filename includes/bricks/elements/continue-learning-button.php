@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Progress_Tracker;
 use SimpleLMS\Cache_Handler;
@@ -16,7 +16,7 @@ class Continue_Learning_Button extends \Bricks\Element {
 
     public function set_controls() {
         $this->controls['courseId'] = ['tab'=>'content','label'=>esc_html__('Course ID','simple-lms'),'type'=>'number','default'=>0];
-        $this->controls['buttonText'] = ['tab'=>'content','label'=>esc_html__('Button Text','simple-lms'),'type'=>'text','default'=>'Kontynuuj naukę'];
+        $this->controls['buttonText'] = ['tab'=>'content','label'=>esc_html__('Button Text','simple-lms'),'type'=>'text','default'=>'Continue naukę'];
     }
 
     public function render() {
@@ -33,6 +33,6 @@ class Continue_Learning_Button extends \Bricks\Element {
             $last_lesson = !empty($lessons) ? $lessons[0]->ID : 0;
         }
         if (!$last_lesson) return;
-        echo '<a href="'.esc_url(get_permalink($last_lesson)).'" class="simple-lms-continue-btn" style="display:inline-block;padding:12px 24px;background:#4CAF50;color:#fff;text-decoration:none;border-radius:4px;font-weight:600">'.esc_html($settings['buttonText']??'Kontynuuj naukę').'</a>';
+        echo '<a href="'.esc_url(get_permalink($last_lesson)).'" class="simple-lms-continue-btn" style="display:inline-block;Padding:12px 24px;background:#4CAF50;color:#fff;text-decoration:none;border-radius:4px;font-weight:600">'.esc_html($settings['buttonText']??'Continue naukę').'</a>';
     }
 }

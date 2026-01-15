@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
@@ -160,14 +160,14 @@ class Admin_Customizations {
         <script>
         jQuery(document).ready(function($) {
             var button = $('<a href="<?php echo esc_url($course_edit_link); ?>" class="page-title-action custom-nav-button"><?php 
-                echo esc_html__('Powrót do edycji', 'simple-lms'); 
+                echo esc_html__('Back to edit', 'simple-lms'); 
                 ?> <span class="custom-strong"><?php echo esc_html__('KURSU', 'simple-lms'); ?></span></a>');
             $('.wp-heading-inline').after(button);
 
             var deleteButton = $('#delete-action a.submitdelete');
             if (deleteButton.length) {
                 deleteButton
-                    .text(<?php echo wp_json_encode(__('Usuń Moduł', 'simple-lms')); ?>)
+                    .text(<?php echo wp_json_encode(__('Delete Module', 'simple-lms')); ?>)
                     .addClass('custom-delete')
                     .removeClass('submitdelete')
                     .attr('href', '#')
@@ -210,21 +210,21 @@ class Admin_Customizations {
         jQuery(document).ready(function($) {
             <?php if ($course_edit_link): ?>
             var buttonCourse = $('<a href="<?php echo esc_url($course_edit_link); ?>" class="page-title-action custom-nav-button"><?php 
-                echo esc_html__('Powrót do edycji', 'simple-lms'); 
+                echo esc_html__('Back to edit', 'simple-lms'); 
                 ?> <span class="custom-strong"><?php echo esc_html__('KURSU', 'simple-lms'); ?></span></a>');
             $('.wp-heading-inline').after(buttonCourse);
             <?php endif; ?>
 
             <?php if ($module_edit_link): ?>
             var buttonModule = $('<a href="<?php echo esc_url($module_edit_link); ?>" class="page-title-action custom-nav-button"><?php 
-                echo esc_html__('Powrót do edycji', 'simple-lms'); 
-                ?> <span class="custom-strong"><?php echo esc_html__('MODUŁU', 'simple-lms'); ?></span></a>');
+                echo esc_html__('Back to edit', 'simple-lms'); 
+                ?> <span class="custom-strong"><?php echo esc_html__('MODULE', 'simple-lms'); ?></span></a>');
             $('.wp-heading-inline').after(buttonModule);
 
             var deleteButton = $('#delete-action a.submitdelete');
             if (deleteButton.length) {
                 deleteButton
-                    .text(<?php echo wp_json_encode(__('Usuń Lekcję', 'simple-lms')); ?>)
+                    .text(<?php echo wp_json_encode(__('Delete Lesson', 'simple-lms')); ?>)
                     .addClass('custom-delete')
                     .removeClass('submitdelete')
                     .attr('href', '#')

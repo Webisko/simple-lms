@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Access Status Widget for Elementor
  *
@@ -67,7 +67,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -78,7 +78,7 @@ class Access_Status_Widget extends Widget_Base {
                 'label' => __('ID kursu', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 0,
-                'description' => __('Zostaw 0 aby automatycznie wykryć kurs z aktualnej strony', 'simple-lms'),
+                'description' => __('Leave 0 to automatically detect course from current page', 'simple-lms'),
             ]
         );
 
@@ -99,7 +99,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'show_icon',
             [
-                'label' => __('Pokaż ikonę', 'simple-lms'),
+                'label' => __('Show icon', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -150,7 +150,7 @@ class Access_Status_Widget extends Widget_Base {
             [
                 'label' => __('Tekst (brak dostępu)', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Brak dostępu do kursu', 'simple-lms'),
+                'default' => __('No access to course', 'simple-lms'),
             ]
         );
 
@@ -248,7 +248,7 @@ class Access_Status_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'container_padding',
+            'container_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -261,7 +261,7 @@ class Access_Status_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-access-status' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-access-status' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -269,7 +269,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'container_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -308,7 +308,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'access_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e8f5e9',
                 'selectors' => [
@@ -320,7 +320,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'access_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2e7d32',
                 'selectors' => [
@@ -356,7 +356,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'no_access_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffebee',
                 'selectors' => [
@@ -368,7 +368,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'no_access_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#c62828',
                 'selectors' => [
@@ -497,7 +497,7 @@ class Access_Status_Widget extends Widget_Base {
         if (!$course_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć kursu. Upewnij się, że widget jest używany na stronie kursu.', 'simple-lms');
+                echo esc_html__('Cannot detect course. Make sure the widget is used on a course page.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -593,7 +593,7 @@ class Access_Status_Widget extends Widget_Base {
             }
             .simple-lms-access-status.layout-badge {
                 display: inline-flex;
-                padding: 8px 16px !important;
+                Padding: 8px 16px !important;
             }
             .simple-lms-access-status .access-status-main {
                 display: flex;

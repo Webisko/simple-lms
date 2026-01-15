@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Progress_Tracker;
 
@@ -25,6 +25,6 @@ class Course_Progress extends \Bricks\Element {
         $course_id = !empty($settings['courseId']) ? absint($settings['courseId']) : \SimpleLMS\Bricks\Bricks_Integration::get_current_course_id();
         if (!$course_id || !is_user_logged_in()) return;
         $progress = Progress_Tracker::getCourseProgress(get_current_user_id(), $course_id);
-        echo '<div class="simple-lms-progress-wrapper"><div class="progress-bar" style="border-radius:4px;overflow:hidden"><div class="progress-fill" style="height:100%;width:'.esc_attr($progress).'%"></div></div><div class="progress-text" style="margin-top:8px">'.esc_html($progress).'% '.esc_html__('ukończone','simple-lms').'</div></div>';
+        echo '<div class="simple-lms-progress-wrapper"><div class="progress-bar" style="border-radius:4px;overflow:hidden"><div class="progress-fill" style="height:100%;width:'.esc_attr($progress).'%"></div></div><div class="progress-text" style="margin-top:8px">'.esc_html($progress).'% '.esc_html__('completed','simple-lms').'</div></div>';
     }
 }

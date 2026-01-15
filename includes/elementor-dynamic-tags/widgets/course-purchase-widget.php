@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Course Purchase CTA Widget for Elementor
  *
@@ -67,7 +67,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -78,14 +78,14 @@ class Course_Purchase_Widget extends Widget_Base {
                 'label' => __('ID kursu', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 0,
-                'description' => __('Zostaw 0 aby automatycznie wykryć kurs z aktualnej strony', 'simple-lms'),
+                'description' => __('Leave 0 to automatically detect course from current page', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'button_text',
             [
-                'label' => __('Tekst przycisku', 'simple-lms'),
+                'label' => __('Button text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Kup teraz', 'simple-lms'),
             ]
@@ -337,7 +337,7 @@ class Course_Purchase_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'button_padding',
+            'button_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
@@ -350,7 +350,7 @@ class Course_Purchase_Widget extends Widget_Base {
                     'unit' => 'px',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .purchase-button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .purchase-button' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -358,7 +358,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'button_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -442,7 +442,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'button_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -454,7 +454,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'button_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e74c3c',
                 'selectors' => [
@@ -492,7 +492,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [
@@ -504,7 +504,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'button_hover_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#c0392b',
                 'selectors' => [
@@ -580,7 +580,7 @@ class Course_Purchase_Widget extends Widget_Base {
         if (!$course_id) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć kursu. Upewnij się, że widget jest używany na stronie kursu.', 'simple-lms');
+                echo esc_html__('Cannot detect course. Make sure the widget is used on a course page.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -702,7 +702,7 @@ class Course_Purchase_Widget extends Widget_Base {
                 opacity: 0.7;
             }
             .already-owned-message {
-                padding: 15px 25px;
+                Padding: 15px 25px;
                 background: #e8f5e9;
                 color: #2e7d32;
                 border-radius: 4px;

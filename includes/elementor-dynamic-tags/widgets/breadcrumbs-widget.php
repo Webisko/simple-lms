@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Breadcrumbs Navigation Widget for Elementor
  *
@@ -67,7 +67,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -222,13 +222,13 @@ class Breadcrumbs_Widget extends Widget_Base {
         );
 
         $this->add_responsive_control(
-            'container_padding',
+            'container_Padding',
             [
                 'label' => __('Padding', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', 'rem'],
                 'selectors' => [
-                    '{{WRAPPER}} .simple-lms-breadcrumbs' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .simple-lms-breadcrumbs' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -236,7 +236,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'container_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-breadcrumbs' => 'background-color: {{VALUE}};',
@@ -247,7 +247,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'container_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'selectors' => [
@@ -466,7 +466,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         if (!in_array($post_type, ['course', 'module', 'lesson'])) {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Ten widget działa tylko na stronach kursów, modułów lub lekcji.', 'simple-lms');
+                echo esc_html__('This widget works only on course, module, or lesson pages.', 'simple-lms');
                 echo '</div>';
             }
             return;

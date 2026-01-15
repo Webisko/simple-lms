@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Course Progress Bar Widget
  * Displays course completion progress with visual bar
@@ -69,7 +69,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->start_controls_section(
             'content_section',
             [
-                'label' => __('Ustawienia', 'simple-lms'),
+                'label' => __('Settings', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -80,7 +80,7 @@ class Course_Progress_Widget extends Widget_Base {
                 'label' => __('ID kursu (opcjonalne)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
-                'description' => __('Pozostaw puste, aby automatycznie wykryć bieżący kurs', 'simple-lms'),
+                'description' => __('Leave empty to automatically detect current course', 'simple-lms'),
             ]
         );
 
@@ -111,8 +111,8 @@ class Course_Progress_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'both',
                 'options' => [
-                    'both' => __('Ukończone / Wszystkie lekcje', 'simple-lms'),
-                    'completed' => __('Tylko ukończone', 'simple-lms'),
+                    'both' => __('completed / Wszystkie lekcje', 'simple-lms'),
+                    'completed' => __('Tylko completed', 'simple-lms'),
                     'remaining' => __('Pozostałe do ukończenia', 'simple-lms'),
                 ],
                 'condition' => [
@@ -124,7 +124,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'hide_when_complete',
             [
-                'label' => __('Ukryj gdy 100% ukończone', 'simple-lms'),
+                'label' => __('Ukryj gdy 100% completed', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -179,7 +179,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'bar_bg_color',
             [
-                'label' => __('Kolor tła', 'simple-lms'),
+                'label' => __('Background color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e0e0e0',
                 'selectors' => [
@@ -203,7 +203,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'bar_border_radius',
             [
-                'label' => __('Zaokrąglenie rogów', 'simple-lms'),
+                'label' => __('Border radius', 'simple-lms'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'default' => [
@@ -245,7 +245,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'text_color',
             [
-                'label' => __('Kolor tekstu', 'simple-lms'),
+                'label' => __('Text color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#333',
                 'selectors' => [
@@ -386,7 +386,7 @@ class Course_Progress_Widget extends Widget_Base {
         if (!$course_id || get_post_type($course_id) !== 'course') {
             if (\Elementor\Plugin::$instance->editor->is_edit_mode()) {
                 echo '<div class="elementor-alert elementor-alert-warning">';
-                echo esc_html__('Nie można wykryć poprawnego kursu. Upewnij się, że widget jest używany na stronie kursu albo ustaw prawidłowy ID.', 'simple-lms');
+                echo esc_html__('Cannot detect valid course. Make sure the widget is used on a course page or set correct ID.', 'simple-lms');
                 echo '</div>';
             }
             return;
@@ -490,7 +490,7 @@ class Course_Progress_Widget extends Widget_Base {
             case 'both':
             default:
                 return sprintf(
-                    __('%d z %d lekcji ukończonych', 'simple-lms'),
+                    __('%d of %d lessons completed', 'simple-lms'),
                     $progress['completed'],
                     $progress['total']
                 );
@@ -510,7 +510,7 @@ class Course_Progress_Widget extends Widget_Base {
         <div class="simple-lms-progress-wrapper">
             <# if (showText) { #>
                 <div class="simple-lms-progress-text">
-                    <?php echo esc_html__('15 z 20 lekcji ukończonych', 'simple-lms'); ?>
+                    <?php echo esc_html__('15 of 20 lessons completed', 'simple-lms'); ?>
                 </div>
             <# } #>
             

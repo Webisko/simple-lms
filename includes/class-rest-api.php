@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * REST API endpoints for Simple LMS
  * 
@@ -715,7 +715,7 @@ class Rest_API {
         }
         $result = wp_update_post($update, true);
         if (is_wp_error($result)) {
-            return new \WP_Error('update_failed', __('Aktualizacja kursu nie powiodła się', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('update_failed', __('Course update failed', 'simple-lms'), ['status' => 500]);
         }
         return rest_ensure_response(['id' => $courseId, 'updated' => true]);
     }
@@ -741,7 +741,7 @@ class Rest_API {
             ]
         ]);
         if (is_wp_error($moduleId) || $moduleId <= 0) {
-            return new \WP_Error('create_failed', __('Nie udało się utworzyć modułu', 'simple-lms'), ['status' => 500]);
+            return new \WP_Error('create_failed', __('Nie udało się utworzyć MODULE', 'simple-lms'), ['status' => 500]);
         }
         return rest_ensure_response(['id' => $moduleId]);
     }
