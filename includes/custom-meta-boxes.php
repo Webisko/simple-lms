@@ -1115,8 +1115,8 @@ class Meta_Boxes {
         if ($post && $post->post_type === 'course') {
             remove_post_type_support('course', 'editor');
             
-            // Note: We keep the default featured image metabox (postimagediv) for proper WordPress compatibility
-            // Our custom UI in the Information tab is an additional interface, not a replacement
+            // Remove default featured image metabox - we use custom UI in Information tab
+            remove_meta_box('postimagediv', 'course', 'side');
             
             // Remove post attributes metabox
             remove_meta_box('pageparentdiv', 'course', 'side');
