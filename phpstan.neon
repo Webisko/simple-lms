@@ -41,6 +41,3 @@ parameters:
 	
 	# Report only on code we can control
 	reportUnmatchedIgnoredErrors: false
-	
-	# Memory limit for large codebase analysis
-	memoryLimit: 512M

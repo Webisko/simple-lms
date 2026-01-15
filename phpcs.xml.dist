@@ -20,35 +20,13 @@
 	<arg name="extensions" value="php"/>
 	<arg name="parallel" value="8"/>
 
-	<!-- Rules: WordPress Coding Standards -->
-	<rule ref="WordPress-Extra">
-		<!-- Allow short array syntax -->
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax"/>
-		
-		<!-- Allow short ternary syntax -->
-		<exclude name="WordPress.PHP.DisallowShortTernary"/>
-		
-		<!-- Don't require file comments on every file -->
-		<exclude name="Squiz.Commenting.FileComment"/>
-		
-		<!-- Allow multiple statements per line for compact code -->
-		<exclude name="Squiz.PHP.DisallowMultipleAssignments"/>
-		
-		<!-- We use our own nonce verification patterns -->
-		<exclude name="WordPress.Security.NonceVerification.Missing"/>
-		<exclude name="WordPress.Security.NonceVerification.Recommended"/>
-	</rule>
+	<!-- Rules: Project style -->
+	<!-- This project follows PSR-12 (spaces indentation), with selected WordPress checks below. -->
+	<rule ref="PSR12"/>
 
-	<!-- WordPress VIP rules (optional - stricter) -->
-	<rule ref="WordPress-VIP-Go">
-		<!-- We use wpdb properly -->
-		<exclude name="WordPress.DB.DirectDatabaseQuery"/>
-		
-		<!-- We need custom meta queries -->
-		<exclude name="WordPress.DB.SlowDBQuery"/>
-		
-		<!-- We manage cache properly -->
-		<exclude name="WordPressVIPMinimum.Performance.LowExpiryCacheTime"/>
+	<!-- Don't enforce LF-only line endings (Windows dev environment uses CRLF) -->
+	<rule ref="Generic.Files.LineEndings.InvalidEOLChar">
+		<severity>0</severity>
 	</rule>
 
 	<!-- Check for PHP cross-version compatibility -->

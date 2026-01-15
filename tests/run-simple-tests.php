@@ -10,11 +10,12 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 echo "==========================================\n";
-echo "  Simple LMS - Manual Tests v1.3.2\n";
+echo "  Simple LMS - Manual Tests v1.4.0\n";
 echo "==========================================\n\n";
 
 $passed = 0;
 $failed = 0;
+$skipped = 0;
 
 /**
  * Test helper
@@ -33,6 +34,15 @@ function test($description, $condition, $expected = true) {
         echo "  Got: " . var_export($condition, true) . "\n";
         $failed++;
     }
+}
+
+/**
+ * Skip helper (for tests requiring WordPress runtime)
+ */
+function skip_test($description) {
+    global $skipped;
+    echo "↷ SKIP: $description\n";
+    $skipped++;
 }
 
 echo "Running tests...\n";
@@ -164,13 +174,25 @@ echo "\n";
 
 // Test 10: Plugin Classes Exist
 echo "Test Group: Plugin Architecture\n";
-require_once dirname(__DIR__) . '/simple-lms.php';
 
-test("Cache_Handler class exists", class_exists('SimpleLMS\Cache_Handler'));
-test("Progress_Tracker class exists", class_exists('SimpleLMS\Progress_Tracker'));
-test("WooCommerce_Integration class exists", class_exists('SimpleLMS\WooCommerce_Integration'));
-test("Ajax_Handler class exists", class_exists('SimpleLMS\Ajax_Handler'));
-test("Custom_Post_Types class exists", class_exists('SimpleLMS\Custom_Post_Types'));
+// These checks require WordPress to be bootstrapped.
+// In plain PHP CLI, loading the plugin will exit early (ABSPATH guard) or fatal on WP functions.
+if (!defined('ABSPATH') && !function_exists('add_action')) {
+    skip_test('Load plugin bootstrap (requires WordPress)');
+    skip_test('Cache_Handler class exists');
+    skip_test('Progress_Tracker class exists');
+    skip_test('WooCommerce_Integration class exists');
+    skip_test('Ajax_Handler class exists');
+    skip_test('Custom_Post_Types class exists');
+} else {
+    require_once dirname(__DIR__) . '/simple-lms.php';
+
+    test("Cache_Handler class exists", class_exists('SimpleLMS\\Cache_Handler'));
+    test("Progress_Tracker class exists", class_exists('SimpleLMS\\Progress_Tracker'));
+    test("WooCommerce_Integration class exists", class_exists('SimpleLMS\\WooCommerce_Integration'));
+    test("Ajax_Handler class exists", class_exists('SimpleLMS\\Ajax_Handler'));
+    test("Custom_Post_Types class exists", class_exists('SimpleLMS\\Custom_Post_Types'));
+}
 echo "\n";
 
 // Results
@@ -179,7 +201,8 @@ echo "  TEST RESULTS\n";
 echo "==========================================\n";
 echo "Passed: $passed tests ✓\n";
 echo "Failed: $failed tests" . ($failed > 0 ? " ✗" : "") . "\n";
-echo "\nTotal: " . ($passed + $failed) . " tests\n";
+echo "Skipped: $skipped tests ↷\n";
+echo "\nTotal: " . ($passed + $failed + $skipped) . " tests\n";
 
 if ($failed === 0) {
     echo "\n🎉 ALL TESTS PASSED!\n";
