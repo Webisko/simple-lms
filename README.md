@@ -1,4 +1,4 @@
-# Simple LMS Plugin v1.4.0
+# Simple LMS Plugin v1.5.0
 
 Educational LMS plugin for WordPress with WooCommerce integration, Elementor & Bricks Builder support.
 
@@ -7,11 +7,12 @@ Educational LMS plugin for WordPress with WooCommerce integration, Elementor & B
 Built with **vibe coding** using GitHub Copilot Agent Mode for rapid development.
 
 ### Requirements
-- PHP 7.4+
+- **PHP 8.0+** (strict requirement as of v1.5.0)
 - WordPress 6.0+
 - WooCommerce 7.0+
 - Elementor 3.5+ (optional)
 - Bricks Builder 1.5+ (optional)
+- Composer (optional, for PSR-4 autoloading)
 
 ### Local Development
 - Local by Flywheel (http://localhost:10003)

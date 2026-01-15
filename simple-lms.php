@@ -3,7 +3,7 @@
  * Plugin Name: Simple LMS
  * Plugin URI:  https://webisko.pl/simple-lms
  * Description: LMS plugin for managing courses, modules, and lessons with WooCommerce integration for course sales.
- * Version:     1.4.0
+ * Version:     1.5.0
  * Author:      Filip Meyer-Lüters
  * Author URI:  https://webisko.pl
  * License:     GPL2 or later
@@ -14,7 +14,17 @@
  * Requires PHP: 8.0
  *
  * @package SimpleLMS
- * @version 1.4.0
+ * @version 1.5.0
+ *
+ * ARCHITECTURAL CHANGES IN 1.5.0:
+ * - Major code audit and refactoring per WordPress best practices
+ * - REST API refactored with full Dependency Injection (Logger + Security_Service)
+ * - Fixed integration hooks: WooCommerce (woocommerce_loaded), Elementor (elementor_loaded), Bricks (bricks_init)
+ * - Composer PSR-4 autoloading for SimpleLMS namespace
+ * - Fixed 40+ PHP files with correct declare(strict_types=1) and namespace ordering
+ * - Production cleanup: removed 20+ temporary translation scripts and backups
+ * - Enhanced security: centralized nonce verification and capability checks
+ * - All code compliant with PHP 8.0+ and PSR-12 standards
  *
  * ARCHITECTURAL CHANGES IN 1.4.0:
  * - Replaced Singleton pattern with PSR-11 ServiceContainer
@@ -33,7 +43,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('SIMPLE_LMS_VERSION', '1.4.0');
+define('SIMPLE_LMS_VERSION', '1.5.0');
 define('SIMPLE_LMS_PLUGIN_DIR', \plugin_dir_path(__FILE__));
 define('SIMPLE_LMS_PLUGIN_URL', \plugin_dir_url(__FILE__));
 define('SIMPLE_LMS_PLUGIN_BASENAME', \plugin_basename(__FILE__));
