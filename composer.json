@@ -18,6 +18,11 @@
   },
   "autoload": {
     "psr-4": {
+      "SimpleLMS\\": "includes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "SimpleLMS\\Tests\\": "tests/"
     }
   },

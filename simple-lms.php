@@ -38,14 +38,32 @@ define('SIMPLE_LMS_PLUGIN_DIR', \plugin_dir_path(__FILE__));
 define('SIMPLE_LMS_PLUGIN_URL', \plugin_dir_url(__FILE__));
 define('SIMPLE_LMS_PLUGIN_BASENAME', \plugin_basename(__FILE__));
 
-// Load ServiceContainer and core dependencies
-require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-service-container.php';
-require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/HookManager.php';
-require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/AssetManager.php';
-require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/CPTManager.php';
-require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-logger.php';
-require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-error-handler.php';
-require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-security-service.php';
+// Load Composer autoloader if available (PSR-4 autoloading)
+// Fallback to require_once if Composer not installed (for legacy setups)
+$autoloadFile = SIMPLE_LMS_PLUGIN_DIR . 'vendor/autoload.php';
+if (file_exists($autoloadFile)) {
+    require_once $autoloadFile;
+} else {
+    // Manual loading fallback - classes will be loaded via require_once in loadPluginFiles()
+    // This allows plugin to work even without Composer
+    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-service-container.php';
+    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-logger.php';
+    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-error-handler.php';
+    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-security-service.php';
+    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/HookManager.php';
+    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/AssetManager.php';
+    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/CPTManager.php';
+}
+
+// Use statements for core classes
+use SimpleLMS\ServiceContainer;
+use SimpleLMS\Managers;
+use SimpleLMS\Logger;
+use SimpleLMS\Error_Handler;
+use SimpleLMS\Security_Service;
+use SimpleLMS\Rest_API;
+use SimpleLMS\Cache_Handler;
+use SimpleLMS\Analytics_Retention;
 
 /**
  * Main Plugin Class (refactored with ServiceContainer)
@@ -314,6 +332,8 @@ class Plugin
             'includes/compat/gtranslate-compat.php',
         ];
 
+        // Load files - classes are auto-loaded via Composer PSR-4
+        // Files are required for WordPress hooks and compatibility code
         foreach ($files as $file) {
             $filePath = SIMPLE_LMS_PLUGIN_DIR . $file;
             if (file_exists($filePath)) {
