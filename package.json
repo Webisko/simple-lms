@@ -1,6 +1,6 @@
 {
   "name": "simple-lms",
-  "version": "1.4.0",
+  "version": "1.5.1",
   "description": "Modern LMS plugin for WordPress with WooCommerce integration",
   "type": "module",
   "scripts": {

@@ -3,7 +3,7 @@
  * Plugin Name: Simple LMS
  * Plugin URI:  https://webisko.pl/simple-lms
  * Description: LMS plugin for managing courses, modules, and lessons with WooCommerce integration for course sales.
- * Version:     1.5.0
+ * Version:     1.5.1
  * Author:      Filip Meyer-LĂĽters
  * Author URI:  https://webisko.pl
  * License:     GPL2 or later
@@ -14,7 +14,7 @@
  * Requires PHP: 8.0
  *
  * @package SimpleLMS
- * @version 1.5.0
+ * @version 1.5.1
  *
  * ARCHITECTURAL CHANGES IN 1.5.0:
  * - Major code audit and refactoring per WordPress best practices
@@ -55,7 +55,7 @@ add_action('save_post', function($post_id) {
 }, 1); // Priority 1 - runs before everything else
 
 // Define plugin constants
-define('SIMPLE_LMS_VERSION', '1.5.0');
+define('SIMPLE_LMS_VERSION', '1.5.1');
 define('SIMPLE_LMS_PLUGIN_DIR', \plugin_dir_path(__FILE__));
 define('SIMPLE_LMS_PLUGIN_URL', \plugin_dir_url(__FILE__));
 define('SIMPLE_LMS_PLUGIN_BASENAME', \plugin_basename(__FILE__));

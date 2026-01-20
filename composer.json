@@ -2,7 +2,7 @@
   "name": "simple-lms/plugin",
   "description": "Simple LMS WordPress plugin - development dependencies",
   "type": "project",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "license": "proprietary",
   "require": {
     "php": ">=8.0"

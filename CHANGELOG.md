@@ -5,6 +5,28 @@ Wszystkie istotne zmiany w tym projekcie będą dokumentowane w tym pliku.
 Format oparty na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 a projekt przestrzega [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1] - 2026-01-20
+
+### Added
+- 🧭 Admin: Added "Preview" button for lessons in list tables (quick access to the lesson permalink).
+- 🌐 i18n: Translated Course Overview widget control label "Display mode" to Polish.
+- 🧹 Settings: New checkbox "Delete all data on uninstall" with full i18n and wired uninstall logic.
+
+### Changed
+- 🛠️ Tooling: Stabilized IDE diagnostics (Intelephense + PHPStan) by adding Elementor/Bricks WordPress stubs, tuning rules, and disabling noisy built-in PHP validator for this workspace.
+- ♻️ Code health: Simplified fully-qualified class usages to satisfy analyzers; tightened method signatures and guarded mixed types for PHP 8+.
+
+### Fixed
+- 🐛 Static analysis uncovered real bugs that were fixed: incorrect namespaces, method signatures, `strtr()` args order, duplicate array keys, and missing strict type casts.
+- 🌍 i18n: Replaced a Polish hardcoded fallback in the video widget with a translatable string; normalized demo filenames in attachments widget.
+
+### Developer Notes
+- ✅ PHPStan clean (0 true errors), syntax checks clean.
+- ✅ Translations compiled: `languages/compile-translations.php` executed successfully.
+- ✅ All tests passing via `composer test` (29 tests: 23 passed, 6 skipped WP runtime).
+
+---
+
 ## [1.5.0] - 2026-01-15
 
 ### 🚀 Major Refactoring - Code Quality & Architecture
