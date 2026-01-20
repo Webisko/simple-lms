@@ -1,4 +1,6 @@
 <?php
+namespace SimpleLMS;
+
 /**
  * Analytics tracking for Simple LMS
  * 
@@ -7,10 +9,6 @@
  * @package SimpleLMS
  * @since 1.4.0
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -55,7 +53,7 @@ class Analytics_Tracker {
      * @return void
      */
     public static function init(): void {
-        // Backward compatibility shim – prefer container managed instance
+        // Backward compatibility shim â€“ prefer container managed instance
         try {
             $container = ServiceContainer::getInstance();
             if ($container->has(self::class)) {
@@ -366,8 +364,8 @@ class Analytics_Tracker {
      * @return bool Success status
      */
     public static function send_to_ga4(string $event_type, int $user_id, array $data): bool {
-        $measurement_id = get_option('simple_lms_ga4_measurement_id', '');
-        $api_secret = get_option('simple_lms_ga4_api_secret', '');
+        $measurement_id = (string) get_option('simple_lms_ga4_measurement_id', '');
+        $api_secret = (string) get_option('simple_lms_ga4_api_secret', '');
         
         if (empty($measurement_id) || empty($api_secret)) {
             return false;

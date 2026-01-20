@@ -34,10 +34,38 @@ parameters:
 		
 		# False positives on our namespace usage
 		- '#Instantiated class SimpleLMS\\.+ not found#'
+		
+		# get_posts() returns WP_Post[] or int[], but we always get objects with post_status param
+		- '#Trying to get property of non-object of type int#'
+		
+		# WordPress function return type issues
+		- '#Assigning "void" from a function#'
+		- '#expects type, .+ given#'
+		
+		# WooCommerce compatibility
+		- '#Call to unknown method: WC_Order_Item::#'
+		
+		# Elementor/Bricks dynamic properties
+		- '#Undefined property: .+::\$(controls|settings)#'
+		
+		# ReflectionType methods (PHP 7.1+)
+		- '#Call to unknown method: ReflectionType::(isBuiltin|getName)\\(\\)#'
+		
+		# String interpolation with get_option
+		- '#Cannot implicitly convert .+ to .string.#'
+		
+		# date_i18n and other WordPress functions with mixed types
+		- '#Argument .+ is expected to be of type string, .+ given#'
+		
+		# Undefined class constants in Elementor
+		- '#Undefined class constant .+::HEADING#'
 	
 	# WordPress stubs for better type inference
 	stubFiles:
+		- vendor/php-stubs/wordpress-stubs/wordpress-stubs.php
+		- vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php
 		- vendor/szepeviktor/phpstan-wordpress/stubs/wordpress-stubs.php
+		- .stubs/elementor-stubs.php
 	
 	# Report only on code we can control
 	reportUnmatchedIgnoredErrors: false

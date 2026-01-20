@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -37,7 +37,7 @@ class Course_Progress_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Progress bar kursu', 'simple-lms');
+        return __('Course Progress Bar', 'simple-lms');
     }
 
     /**
@@ -77,7 +77,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'course_id',
             [
-                'label' => __('ID kursu (opcjonalne)', 'simple-lms'),
+                'label' => __('Course ID (optional)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
                 'description' => __('Leave empty to automatically detect current course', 'simple-lms'),
@@ -107,12 +107,12 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'text_format',
             [
-                'label' => __('Format tekstu', 'simple-lms'),
+                'label' => __('Text format', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'both',
                 'options' => [
-                    'both' => __('completed / All Lessons', 'simple-lms'),
-                    'completed' => __('Tylko completed', 'simple-lms'),
+                    'both' => __('Completed / All lessons', 'simple-lms'),
+                    'completed' => __('Only completed', 'simple-lms'),
                     'remaining' => __('Remaining to complete', 'simple-lms'),
                 ],
                 'condition' => [
@@ -124,7 +124,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'hide_when_complete',
             [
-                'label' => __('Ukryj gdy 100% completed', 'simple-lms'),
+                'label' => __('Hide when 100% complete', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -145,7 +145,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_responsive_control(
             'bar_height',
             [
-                'label' => __('Height paska', 'simple-lms'),
+                'label' => __('Bar height', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'range' => [
@@ -265,7 +265,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_responsive_control(
             'text_margin',
             [
-                'label' => __('Spacing od paska', 'simple-lms'),
+                'label' => __('Spacing from bar', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem'],
                 'range' => [
@@ -299,19 +299,19 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_responsive_control(
             'text_align',
             [
-                'label' => __('Alignment tekstu', 'simple-lms'),
+                'label' => __('Text alignment', 'simple-lms'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Do lewej', 'simple-lms'),
+                        'title' => __('Left', 'simple-lms'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Inward', 'simple-lms'),
+                        'title' => __('Center', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Do prawej', 'simple-lms'),
+                        'title' => __('Right', 'simple-lms'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -328,7 +328,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->start_controls_section(
             'percentage_style_section',
             [
-                'label' => __('Procent', 'simple-lms'),
+                'label' => __('Percentage', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_percentage' => 'yes',
@@ -339,12 +339,12 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'percentage_position',
             [
-                'label' => __('Pozycja procentu', 'simple-lms'),
+                'label' => __('Percentage position', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'inside',
                 'options' => [
                     'inside' => __('Inside bar', 'simple-lms'),
-                    'outside' => __('Obok paska', 'simple-lms'),
+                    'outside' => __('Next to bar', 'simple-lms'),
                 ],
             ]
         );
@@ -352,7 +352,7 @@ class Course_Progress_Widget extends Widget_Base {
         $this->add_control(
             'percentage_color',
             [
-                'label' => __('Kolor', 'simple-lms'),
+                'label' => __('Color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ffffff',
                 'selectors' => [

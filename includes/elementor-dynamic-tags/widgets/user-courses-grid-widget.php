@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 use SimpleLMS\Access_Control;
@@ -17,16 +17,16 @@ class User_Courses_Grid_Widget extends Widget_Base {
     protected function register_controls(): void {
         $this->start_controls_section('content', ['label' => __('Settings', 'simple-lms'), 'tab' => Controls_Manager::TAB_CONTENT]);
         $this->add_responsive_control('columns', [
-            'label' => __('Kolumny', 'simple-lms'),
+            'label' => __('Columns', 'simple-lms'),
             'type' => Controls_Manager::SELECT,
             'default' => '3',
             'options' => ['1'=>'1','2'=>'2','3'=>'3','4'=>'4']
         ]);
         $this->add_control('show_progress', ['label'=>__('Show progress','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
-        $this->add_control('show_continue', ['label'=>__('Show button Continue','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
+        $this->add_control('show_continue', ['label'=>__('Show Continue button','simple-lms'),'type'=>Controls_Manager::SWITCHER,'default'=>'yes','return_value'=>'yes']);
         $this->end_controls_section();
 
-        $this->start_controls_section('card_style', ['label'=>__('Karta','simple-lms'),'tab'=>Controls_Manager::TAB_STYLE]);
+        $this->start_controls_section('card_style', ['label'=>__('Card','simple-lms'),'tab'=>Controls_Manager::TAB_STYLE]);
         $this->add_responsive_control('card_gap', ['label'=>__('Spacing','simple-lms'),'type'=>Controls_Manager::SLIDER,'size_units'=>['px','em','rem'],'selectors'=>['{{WRAPPER}} .user-courses-grid'=>'gap: {{SIZE}}{{UNIT}};']]);
         $this->add_group_control(\Elementor\Group_Control_Box_Shadow::get_type(), ['name'=>'card_shadow','selector'=>'{{WRAPPER}} .course-card']);
         $this->add_group_control(\Elementor\Group_Control_Border::get_type(), ['name'=>'card_border','selector'=>'{{WRAPPER}} .course-card']);
@@ -60,7 +60,7 @@ class User_Courses_Grid_Widget extends Widget_Base {
                     $continue_url = get_permalink($continue_lesson_id);
                     echo '<a class="continue-btn" href="'.esc_url($continue_url).'" style="display:inline-block;Padding:10px 16px;background:#2196F3;color:#fff;text-decoration:none;border-radius:4px">'.esc_html__('Continue','simple-lms').'</a>';
                 } else {
-                    echo '<span class="continue-btn disabled" style="display:inline-block;Padding:10px 16px;background:#9e9e9e;color:#fff;border-radius:4px">'.esc_html__('Brak lessons do kontynuowania','simple-lms').'</span>';
+                    echo '<span class="continue-btn disabled" style="display:inline-block;Padding:10px 16px;background:#9e9e9e;color:#fff;border-radius:4px">'.esc_html__('No lessons to continue','simple-lms').'</span>';
                 }
             }
             echo '</div></div>';

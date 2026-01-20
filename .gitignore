@@ -26,6 +26,11 @@ build/
 coverage/
 .phpunit.result.cache
 
+# Logs & Backups
+debug-hooks.log
+*.backup
+*.log
+
 # Translation Scripts & Backups (Krok 4 cleanup)
 *-translation*.php
 translate-*.php

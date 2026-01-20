@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -37,7 +37,7 @@ class Course_Info_Box_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Kafelek informacyjny kursu', 'simple-lms');
+        return __('Course Info Box', 'simple-lms');
     }
 
     /**
@@ -77,7 +77,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'course_id',
             [
-                'label' => __('ID kursu (opcjonalne)', 'simple-lms'),
+                'label' => __('Course ID (optional)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
                 'description' => __('Leave empty to automatically detect current course', 'simple-lms'),
@@ -120,7 +120,7 @@ class Course_Info_Box_Widget extends Widget_Base {
             [
                 'label' => __('Modules label', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Moduley', 'simple-lms'),
+                'default' => __('Modules', 'simple-lms'),
                 'condition' => [
                     'show_modules_count' => 'yes',
                 ],
@@ -130,9 +130,9 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->add_control(
             'lessons_label',
             [
-                'label' => __('Etykieta lessons', 'simple-lms'),
+                'label' => __('Lessons label', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Lekcje', 'simple-lms'),
+                'default' => __('Lessons', 'simple-lms'),
                 'condition' => [
                     'show_lessons_count' => 'yes',
                 ],
@@ -158,9 +158,9 @@ class Course_Info_Box_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'vertical',
                 'options' => [
-                    'vertical' => __('Pionowy', 'simple-lms'),
-                    'horizontal' => __('Poziomy', 'simple-lms'),
-                    'grid' => __('Siatka', 'simple-lms'),
+                    'vertical' => __('Vertical', 'simple-lms'),
+                    'horizontal' => __('Horizontal', 'simple-lms'),
+                    'grid' => __('Grid', 'simple-lms'),
                 ],
             ]
         );
@@ -171,7 +171,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->start_controls_section(
             'container_style_section',
             [
-                'label' => __('Kontener', 'simple-lms'),
+                'label' => __('Container', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -248,7 +248,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->start_controls_section(
             'items_style_section',
             [
-                'label' => __('Elementy', 'simple-lms'),
+                'label' => __('Items', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -332,7 +332,7 @@ class Course_Info_Box_Widget extends Widget_Base {
         $this->start_controls_section(
             'typography_style_section',
             [
-                'label' => __('Typografia', 'simple-lms'),
+                'label' => __('Typography', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -115,7 +115,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'separator_icon_select',
             [
-                'label' => __('Ikona separatora', 'simple-lms'),
+                'label' => __('Separator icon', 'simple-lms'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-chevron-right',
@@ -140,7 +140,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'home_text',
             [
-                'label' => __('Tekst "Home"', 'simple-lms'),
+                'label' => __('Home text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Home', 'simple-lms'),
                 'condition' => [
@@ -186,7 +186,7 @@ class Breadcrumbs_Widget extends Widget_Base {
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Do lewej', 'simple-lms'),
+                        'title' => __('Left', 'simple-lms'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
@@ -194,7 +194,7 @@ class Breadcrumbs_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Do prawej', 'simple-lms'),
+                        'title' => __('Right', 'simple-lms'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -292,7 +292,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->start_controls_section(
             'links_style_section',
             [
-                'label' => __('Linki', 'simple-lms'),
+                'label' => __('Links', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -310,14 +310,14 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->start_controls_tab(
             'links_normal_tab',
             [
-                'label' => __('Normalny', 'simple-lms'),
+                'label' => __('Normal', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'links_color',
             [
-                'label' => __('Kolor', 'simple-lms'),
+                'label' => __('Color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#3498db',
                 'selectors' => [
@@ -338,7 +338,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'links_hover_color',
             [
-                'label' => __('Kolor', 'simple-lms'),
+                'label' => __('Color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2980b9',
                 'selectors' => [
@@ -357,7 +357,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->start_controls_section(
             'current_style_section',
             [
-                'label' => __('Aktualny element', 'simple-lms'),
+                'label' => __('Current item', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -373,7 +373,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'current_color',
             [
-                'label' => __('Kolor', 'simple-lms'),
+                'label' => __('Color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2c3e50',
                 'selectors' => [
@@ -407,7 +407,7 @@ class Breadcrumbs_Widget extends Widget_Base {
         $this->add_control(
             'separator_color',
             [
-                'label' => __('Kolor', 'simple-lms'),
+                'label' => __('Color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#95a5a6',
                 'selectors' => [

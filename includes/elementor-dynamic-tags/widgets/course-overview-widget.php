@@ -1,15 +1,17 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
- * Course Overview Widget (Accordion)
- * Displays course structure with modules as accordion items
+ * Course Overview Widget
+ * Displays course structure with flexible display modes (accordion, list, grid)
  *
  * @package SimpleLMS\Elementor
  */
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Typography;
+use Elementor\Icons_Manager;
 use SimpleLMS\Elementor\Elementor_Dynamic_Tags;
 
 if (!defined('ABSPATH')) {
@@ -37,7 +39,7 @@ class Course_Overview_Widget extends Widget_Base {
      * Get widget title
      */
     public function get_title(): string {
-        return __('Course Overview (Accordion)', 'simple-lms');
+        return __('Course Overview', 'simple-lms');
     }
 
     /**
@@ -77,13 +79,41 @@ class Course_Overview_Widget extends Widget_Base {
         $this->add_control(
             'course_id',
             [
-                'label' => __('ID kursu (opcjonalne)', 'simple-lms'),
+                'label' => __('Course ID (optional)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
                 'description' => __('Leave empty to automatically detect current course', 'simple-lms'),
             ]
         );
 
+        $this->add_control(
+            'display_mode',
+            [
+                'label' => __('Tryb wyświetlania', 'simple-lms'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'accordion',
+                'options' => [
+                    'accordion' => __('Akordeon', 'simple-lms'),
+                    'list' => __('Lista', 'simple-lms'),
+                    'grid' => __('Siatka', 'simple-lms'),
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'grid_columns',
+            [
+                'label' => __('Grid columns', 'simple-lms'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '2',
+                'options' => ['1' => '1', '2' => '2', '3' => '3', '4' => '4'],
+                'condition' => [
+                    'display_mode' => 'grid',
+                ],
+            ]
+        );
+
+        // Common options
         $this->add_control(
             'show_progress',
             [
@@ -115,6 +145,7 @@ class Course_Overview_Widget extends Widget_Base {
             ]
         );
 
+        // Accordion-only options
         $this->add_control(
             'accordion_open_first',
             [
@@ -122,6 +153,9 @@ class Course_Overview_Widget extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
+                'condition' => [
+                    'display_mode' => 'accordion',
+                ],
             ]
         );
 
@@ -132,6 +166,9 @@ class Course_Overview_Widget extends Widget_Base {
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
+                'condition' => [
+                    'display_mode' => 'accordion',
+                ],
             ]
         );
 
@@ -171,7 +208,7 @@ class Course_Overview_Widget extends Widget_Base {
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
+            Group_Control_Typography::get_type(),
             [
                 'name' => 'module_header_typography',
                 'selector' => '{{WRAPPER}} .simple-lms-accordion-item .accordion-header .module-title',
@@ -255,7 +292,7 @@ class Course_Overview_Widget extends Widget_Base {
         );
 
         $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
+            Group_Control_Typography::get_type(),
             [
                 'name' => 'lesson_typography',
                 'selector' => '{{WRAPPER}} .simple-lms-accordion-item .lesson-link',
@@ -270,6 +307,115 @@ class Course_Overview_Widget extends Widget_Base {
                 'size_units' => ['px', 'em', 'rem'],
                 'selectors' => [
                     '{{WRAPPER}} .simple-lms-accordion-item .lesson-item' => 'Padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        // Lesson icons for list/grid modes
+        $this->add_control(
+            'completed_icon',
+            [
+                'label' => __('Completed icon', 'simple-lms'),
+                'type' => Controls_Manager::ICONS,
+                'default' => ['value' => 'eicon-check', 'library' => 'elementor'],
+                'condition' => [
+                    'display_mode!' => 'accordion',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'completed_icon_color',
+            [
+                'label' => __('Completed icon color', 'simple-lms'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lesson-item.completed .lesson-icon' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'display_mode!' => 'accordion',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'completed_text_color',
+            [
+                'label' => __('Completed text color', 'simple-lms'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lesson-item.completed .lesson-title' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'display_mode!' => 'accordion',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'completed_background',
+            [
+                'label' => __('Completed background', 'simple-lms'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lesson-item.completed' => 'background: {{VALUE}};',
+                ],
+                'condition' => [
+                    'display_mode!' => 'accordion',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'incomplete_icon',
+            [
+                'label' => __('Incomplete icon', 'simple-lms'),
+                'type' => Controls_Manager::ICONS,
+                'default' => ['value' => 'eicon-circle-o', 'library' => 'elementor'],
+                'condition' => [
+                    'display_mode!' => 'accordion',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'incomplete_icon_color',
+            [
+                'label' => __('Incomplete icon color', 'simple-lms'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lesson-item.incomplete .lesson-icon' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'display_mode!' => 'accordion',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'incomplete_text_color',
+            [
+                'label' => __('Incomplete text color', 'simple-lms'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lesson-item.incomplete .lesson-title' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'display_mode!' => 'accordion',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'incomplete_background',
+            [
+                'label' => __('Incomplete background', 'simple-lms'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .lesson-item.incomplete' => 'background: {{VALUE}};',
+                ],
+                'condition' => [
+                    'display_mode!' => 'accordion',
                 ],
             ]
         );
@@ -385,6 +531,7 @@ class Course_Overview_Widget extends Widget_Base {
      */
     protected function render(): void {
         $settings = $this->get_settings_for_display();
+        $display_mode = !empty($settings['display_mode']) ? $settings['display_mode'] : 'accordion';
 
         // Get course ID from settings or context
         $course_id = !empty($settings['course_id']) 
@@ -416,6 +563,14 @@ class Course_Overview_Widget extends Widget_Base {
             return;
         }
 
+        if ($display_mode === 'accordion') {
+            $this->render_accordion($modules, $settings, $current_lesson_id, $is_lesson_page);
+        } else {
+            $this->render_list_or_grid($modules, $settings, $current_lesson_id, $is_lesson_page);
+        }
+    }
+
+    private function render_accordion($modules, $settings, $current_lesson_id, $is_lesson_page): void {
         // Build unique widget ID for JS
         $widget_id = 'simple-lms-accordion-' . $this->get_id();
 
@@ -496,7 +651,7 @@ class Course_Overview_Widget extends Widget_Base {
                 
                 echo '</ul>';
             } else {
-                echo '<p class="no-lessons">' . esc_html__('Brak lessons w tym module', 'simple-lms') . '</p>';
+                echo '<p class="no-lessons">' . esc_html__('No lessons in this module', 'simple-lms') . '</p>';
             }
             
             echo '</div>'; // .accordion-content
@@ -537,80 +692,283 @@ class Course_Overview_Widget extends Widget_Base {
         <?php
     }
 
+    private function render_list_or_grid($modules, $settings, $current_lesson_id, $is_lesson_page): void {
+        $display_mode = !empty($settings['display_mode']) ? $settings['display_mode'] : 'list';
+        $grid_columns = !empty($settings['grid_columns']) ? $settings['grid_columns'] : '2';
+        $current_user_id = get_current_user_id();
+
+        $container_classes = ['simple-lms-course-overview-list-grid', 'mode-'.$display_mode];
+        if ($display_mode === 'grid') {
+            $container_classes[] = 'columns-'.$grid_columns;
+        }
+
+        echo '<div class="'.esc_attr(implode(' ', $container_classes)).'">';
+
+        foreach ($modules as $module) {
+            $module_id = $module->ID;
+            $lessons = \SimpleLMS\Cache_Handler::getModuleLessons($module_id);
+            
+            // Check if module is locked
+            $module_locked = false;
+            $unlock_info = [];
+            if (class_exists('SimpleLMS\\Access_Control')) {
+                $module_locked = !\SimpleLMS\Access_Control::isModuleUnlocked((int)$module_id);
+                if ($module_locked) {
+                    $unlock_info = \SimpleLMS\Access_Control::getModuleUnlockInfo((int)$module_id);
+                }
+            }
+
+            echo '<div class="simple-lms-accordion-item'.($module_locked ? ' locked' : '').'" data-module-id="'.esc_attr($module_id).'">';
+            echo '<div class="accordion-header">';
+            echo '<h3 class="module-title">'.esc_html($module->post_title).'</h3>';
+            
+            // Lesson count
+            if ($settings['show_lesson_count'] === 'yes') {
+                echo '<span class="lessons-count">('.esc_html(\SimpleLMS\LmsShortcodes::getLessonsCountText(count($lessons))).')</span>';
+            }
+
+            // Unlock date
+            if ($settings['show_unlock_dates'] === 'yes' && $module_locked && !empty($unlock_info['unlock_ts'])) {
+                $date_str = date_i18n('d.m.Y', (int)$unlock_info['unlock_ts']);
+                echo '<span class="unlock-date">'.sprintf(__('Available from: %s', 'simple-lms'), esc_html($date_str)).'</span>';
+            }
+            
+            echo '</div>';
+
+            echo '<div class="accordion-content">';
+            if (!empty($lessons)) {
+                echo '<ul class="lessons-list">';
+                foreach ($lessons as $lesson) {
+                    $is_current = ($is_lesson_page && $lesson->ID == $current_lesson_id);
+                    $is_completed = \SimpleLMS\LmsShortcodes::isLessonCompleted($lesson->ID);
+                    $lesson_link = get_permalink($lesson->ID);
+                    
+                    $classes = ['lesson-item'];
+                    if ($is_current) {
+                        $classes[] = 'current-lesson';
+                    }
+                    if ($is_completed) {
+                        $classes[] = 'completed-lesson';
+                    }
+                    
+                    echo '<li class="'.esc_attr(implode(' ', $classes)).'" data-lesson-id="'.esc_attr($lesson->ID).'">';
+                    echo '<a href="'.esc_url($lesson_link).'" class="lesson-link">';
+                    
+                    // Completion status (same as accordion)
+                    if ($settings['show_progress'] === 'yes') {
+                        if ($is_completed) {
+                            echo '<span class="completion-status completed" data-lesson-id="'.esc_attr($lesson->ID).'">✓</span>';
+                        } else {
+                            echo '<span class="completion-status incomplete" data-lesson-id="'.esc_attr($lesson->ID).'"></span>';
+                        }
+                    }
+                    
+                    echo '<span class="lesson-title">'.esc_html($lesson->post_title).'</span>';
+                    echo '</a>';
+                    echo '</li>';
+                }
+                echo '</ul>';
+            } else {
+                echo '<p class="no-lessons">'.esc_html__('No lessons in this module', 'simple-lms').'</p>';
+            }
+            echo '</div>';
+            echo '</div>';
+        }
+
+        echo '</div>';
+        echo $this->get_unified_styles($display_mode, $grid_columns);
+    }
+
+    private function get_unified_styles($display_mode, $grid_columns): string {
+        $grid_styles = '';
+        if ($display_mode === 'grid') {
+            $grid_styles = '
+.simple-lms-course-overview-list-grid.mode-grid{display:grid;gap:16px}
+.simple-lms-course-overview-list-grid.mode-grid.columns-1{grid-template-columns:1fr}
+.simple-lms-course-overview-list-grid.mode-grid.columns-2{grid-template-columns:repeat(2,1fr)}
+.simple-lms-course-overview-list-grid.mode-grid.columns-3{grid-template-columns:repeat(3,1fr)}
+.simple-lms-course-overview-list-grid.mode-grid.columns-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:768px){.simple-lms-course-overview-list-grid.mode-grid{grid-template-columns:1fr}}
+';
+        }
+
+        return '<style>
+.simple-lms-course-overview-list-grid{display:flex;flex-direction:column;gap:16px}
+'.$grid_styles.'
+.simple-lms-course-overview-list-grid .simple-lms-accordion-item{border:1px solid #e5e5e5;border-radius:8px;overflow:hidden}
+.simple-lms-course-overview-list-grid .accordion-header{background-color:#f5f5f5;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;cursor:default}
+.simple-lms-course-overview-list-grid .module-title{margin:0;font-weight:600}
+.simple-lms-course-overview-list-grid .lessons-count{font-size:0.9em;opacity:0.8}
+.simple-lms-course-overview-list-grid .unlock-date{font-size:0.85em;opacity:0.7;color:#666}
+.simple-lms-course-overview-list-grid .accordion-content{display:block!important;opacity:1!important;max-height:none!important;background-color:#ffffff;padding:0}
+.simple-lms-course-overview-list-grid .lessons-list{list-style:none;margin:0;padding:0}
+.simple-lms-course-overview-list-grid .lesson-item{border-bottom:1px solid #edf2f7;transition:background-color 0.2s}
+.simple-lms-course-overview-list-grid .lesson-item:last-child{border-bottom:none}
+.simple-lms-course-overview-list-grid .lesson-item:hover{background-color:#f7fafc!important}
+.simple-lms-course-overview-list-grid .lesson-item.current-lesson{background-color:#e6f3ff!important;position:relative}
+.simple-lms-course-overview-list-grid .lesson-item.current-lesson::before{content:\"\";position:absolute;left:0;top:0;bottom:0;width:4px;background-color:#3182ce;z-index:1}
+.simple-lms-course-overview-list-grid .lesson-item.current-lesson .lesson-link{color:#3182ce!important;font-weight:600!important}
+.simple-lms-course-overview-list-grid .lesson-link{display:flex!important;align-items:center!important;padding:12px 20px!important;text-decoration:none!important;color:#2d3748!important;transition:all 0.2s ease!important;width:100%;box-sizing:border-box}
+.simple-lms-course-overview-list-grid .completion-status{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:20px!important;height:20px!important;border-radius:50%!important;margin-right:12px!important;flex-shrink:0!important;font-size:12px!important;font-weight:bold!important;transition:all 0.3s ease!important}
+.simple-lms-course-overview-list-grid .completion-status.completed{background-color:#48bb78!important;color:#fff!important;border:2px solid #48bb78!important}
+.simple-lms-course-overview-list-grid .completion-status.incomplete{background-color:transparent!important;border:2px solid #cbd5e0!important}
+.simple-lms-course-overview-list-grid .lesson-title{flex:1;word-break:break-word}
+.simple-lms-course-overview-list-grid .no-lessons{margin:0;padding:16px 20px;color:#a0aec0;font-style:italic;text-align:center;font-size:14px}
+</style>';
+    }
+
     /**
      * Render widget output in the editor
      */
     protected function content_template(): void {
         ?>
-        <div class="simple-lms-course-overview-accordion">
-            <div class="simple-lms-accordion-item open">
-                <div class="accordion-header">
-                    <span class="accordion-icon"></span>
-                    <h3 class="module-title"><?php echo esc_html__('Example Module 1', 'simple-lms'); ?></h3>
-                    <# if (settings.show_lesson_count === 'yes') { #>
-                        <span class="lessons-count">(3 lessons)</span>
-                    <# } #>
+        <#
+        let displayMode = settings.display_mode || 'accordion';
+        let showProgress = settings.show_progress === 'yes';
+        let showLessonCount = settings.show_lesson_count === 'yes';
+        let gridColumns = settings.grid_columns || '2';
+        #>
+        
+        <# if (displayMode === 'accordion') { #>
+            <div class="simple-lms-course-overview-accordion">
+                <div class="simple-lms-accordion-item open">
+                    <div class="accordion-header">
+                        <span class="accordion-icon"></span>
+                        <h3 class="module-title"><?php echo esc_html__('Example Module', 'simple-lms'); ?></h3>
+                        <# if (showLessonCount) { #>
+                            <span class="lessons-count">(2 lessons)</span>
+                        <# } #>
+                    </div>
+                    <div class="accordion-content">
+                        <ul class="lessons-list">
+                            <li class="lesson-item completed-lesson">
+                                <a href="#" class="lesson-link">
+                                    <# if (showProgress) { #>
+                                        <span class="completion-status completed">✓</span>
+                                    <# } #>
+                                    <span class="lesson-title"><?php echo esc_html__('Lesson 1', 'simple-lms'); ?></span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="#" class="lesson-link">
+                                    <# if (showProgress) { #>
+                                        <span class="completion-status incomplete"></span>
+                                    <# } #>
+                                    <span class="lesson-title"><?php echo esc_html__('Lesson 2', 'simple-lms'); ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="accordion-content">
-                    <ul class="lessons-list">
-                        <li class="lesson-item current-lesson">
-                            <a href="#" class="lesson-link">
-                                <# if (settings.show_progress === 'yes') { #>
-                                    <span class="completion-status completed">✓</span>
-                                <# } #>
-                                <span class="lesson-title"><?php echo esc_html__('Lekcja 1', 'simple-lms'); ?></span>
-                            </a>
-                        </li>
-                        <li class="lesson-item">
-                            <a href="#" class="lesson-link">
-                                <# if (settings.show_progress === 'yes') { #>
-                                    <span class="completion-status incomplete"></span>
-                                <# } #>
-                                <span class="lesson-title"><?php echo esc_html__('Lekcja 2', 'simple-lms'); ?></span>
-                            </a>
-                        </li>
-                        <li class="lesson-item">
-                            <a href="#" class="lesson-link">
-                                <# if (settings.show_progress === 'yes') { #>
-                                    <span class="completion-status incomplete"></span>
-                                <# } #>
-                                <span class="lesson-title"><?php echo esc_html__('Lekcja 3', 'simple-lms'); ?></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="simple-lms-accordion-item">
-                <div class="accordion-header">
-                    <span class="accordion-icon"></span>
-                    <h3 class="module-title"><?php echo esc_html__('Example Module 2', 'simple-lms'); ?></h3>
-                    <# if (settings.show_lesson_count === 'yes') { #>
-                        <span class="lessons-count">(2 lessons)</span>
-                    <# } #>
-                </div>
-                <div class="accordion-content">
-                    <ul class="lessons-list">
-                        <li class="lesson-item">
-                            <a href="#" class="lesson-link">
-                                <# if (settings.show_progress === 'yes') { #>
-                                    <span class="completion-status incomplete"></span>
-                                <# } #>
-                                <span class="lesson-title"><?php echo esc_html__('Lekcja 1', 'simple-lms'); ?></span>
-                            </a>
-                        </li>
-                        <li class="lesson-item">
-                            <a href="#" class="lesson-link">
-                                <# if (settings.show_progress === 'yes') { #>
-                                    <span class="completion-status incomplete"></span>
-                                <# } #>
-                                <span class="lesson-title"><?php echo esc_html__('Lekcja 2', 'simple-lms'); ?></span>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="simple-lms-accordion-item">
+                    <div class="accordion-header">
+                        <span class="accordion-icon"></span>
+                        <h3 class="module-title"><?php echo esc_html__('Example Module 2', 'simple-lms'); ?></h3>
+                        <# if (showLessonCount) { #>
+                            <span class="lessons-count">(1 lesson)</span>
+                        <# } #>
+                    </div>
+                    <div class="accordion-content">
+                        <ul class="lessons-list">
+                            <li class="lesson-item">
+                                <a href="#" class="lesson-link">
+                                    <# if (showProgress) { #>
+                                        <span class="completion-status incomplete"></span>
+                                    <# } #>
+                                    <span class="lesson-title"><?php echo esc_html__('Lesson 1', 'simple-lms'); ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        <# } else { #>
+            <div class="simple-lms-course-overview-list-grid mode-<# print(displayMode); #> <# if (displayMode === 'grid') { #>columns-<# print(settings.grid_columns || '2'); #><# } #>">
+                <div class="simple-lms-accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="module-title"><?php echo esc_html__('Example Module', 'simple-lms'); ?></h3>
+                        <# if (showLessonCount) { #>
+                            <span class="lessons-count">(2 lessons)</span>
+                        <# } #>
+                    </div>
+                    <div class="accordion-content">
+                        <ul class="lessons-list">
+                            <li class="lesson-item completed-lesson">
+                                <a href="#" class="lesson-link">
+                                    <# if (showProgress) { #>
+                                        <span class="completion-status completed">✓</span>
+                                    <# } #>
+                                    <span class="lesson-title"><?php echo esc_html__('Lesson 1', 'simple-lms'); ?></span>
+                                </a>
+                            </li>
+                            <li class="lesson-item">
+                                <a href="#" class="lesson-link">
+                                    <# if (showProgress) { #>
+                                        <span class="completion-status incomplete"></span>
+                                    <# } #>
+                                    <span class="lesson-title"><?php echo esc_html__('Lesson 2', 'simple-lms'); ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="simple-lms-accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="module-title"><?php echo esc_html__('Example Module 2', 'simple-lms'); ?></h3>
+                        <# if (showLessonCount) { #>
+                            <span class="lessons-count">(1 lesson)</span>
+                        <# } #>
+                    </div>
+                    <div class="accordion-content">
+                        <ul class="lessons-list">
+                            <li class="lesson-item">
+                                <a href="#" class="lesson-link">
+                                    <# if (showProgress) { #>
+                                        <span class="completion-status incomplete"></span>
+                                    <# } #>
+                                    <span class="lesson-title"><?php echo esc_html__('Lesson 1', 'simple-lms'); ?></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <# 
+            // Inline styles for list/grid mode
+            let gridStyles = '';
+            if (displayMode === 'grid') {
+                gridStyles = '.simple-lms-course-overview-list-grid.mode-grid{display:grid;gap:16px}' +
+                '.simple-lms-course-overview-list-grid.mode-grid.columns-1{grid-template-columns:1fr}' +
+                '.simple-lms-course-overview-list-grid.mode-grid.columns-2{grid-template-columns:repeat(2,1fr)}' +
+                '.simple-lms-course-overview-list-grid.mode-grid.columns-3{grid-template-columns:repeat(3,1fr)}' +
+                '.simple-lms-course-overview-list-grid.mode-grid.columns-4{grid-template-columns:repeat(4,1fr)}' +
+                '@media(max-width:768px){.simple-lms-course-overview-list-grid.mode-grid{grid-template-columns:1fr}}';
+            }
+            #>
+            <style>
+.simple-lms-course-overview-list-grid{display:flex;flex-direction:column;gap:16px}
+<# print(gridStyles); #>
+.simple-lms-course-overview-list-grid .simple-lms-accordion-item{border:1px solid #e5e5e5;border-radius:8px;overflow:hidden}
+.simple-lms-course-overview-list-grid .accordion-header{background-color:#f5f5f5;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;cursor:default}
+.simple-lms-course-overview-list-grid .module-title{margin:0;font-weight:600}
+.simple-lms-course-overview-list-grid .lessons-count{font-size:0.9em;opacity:0.8}
+.simple-lms-course-overview-list-grid .accordion-content{display:block!important;opacity:1!important;max-height:none!important;background-color:#ffffff;padding:0}
+.simple-lms-course-overview-list-grid .lessons-list{list-style:none;margin:0;padding:0}
+.simple-lms-course-overview-list-grid .lesson-item{border-bottom:1px solid #edf2f7;transition:background-color 0.2s}
+.simple-lms-course-overview-list-grid .lesson-item:last-child{border-bottom:none}
+.simple-lms-course-overview-list-grid .lesson-item:hover{background-color:#f7fafc!important}
+.simple-lms-course-overview-list-grid .lesson-item.current-lesson{background-color:#e6f3ff!important;position:relative}
+.simple-lms-course-overview-list-grid .lesson-item.current-lesson::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background-color:#3182ce;z-index:1}
+.simple-lms-course-overview-list-grid .lesson-item.current-lesson .lesson-link{color:#3182ce!important;font-weight:600!important}
+.simple-lms-course-overview-list-grid .lesson-link{display:flex!important;align-items:center!important;padding:12px 20px!important;text-decoration:none!important;color:#2d3748!important;transition:all 0.2s ease!important;width:100%;box-sizing:border-box}
+.simple-lms-course-overview-list-grid .completion-status{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:20px!important;height:20px!important;border-radius:50%!important;margin-right:12px!important;flex-shrink:0!important;font-size:12px!important;font-weight:bold!important;transition:all 0.3s ease!important}
+.simple-lms-course-overview-list-grid .completion-status.completed{background-color:#48bb78!important;color:#fff!important;border:2px solid #48bb78!important}
+.simple-lms-course-overview-list-grid .completion-status.incomplete{background-color:transparent!important;border:2px solid #cbd5e0!important}
+.simple-lms-course-overview-list-grid .lesson-title{flex:1;word-break:break-word}
+.simple-lms-course-overview-list-grid .no-lessons{margin:0;padding:16px 20px;color:#a0aec0;font-style:italic;text-align:center;font-size:14px}
+            </style>
+        <# } #>
         <?php
     }
 }

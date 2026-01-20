@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -75,7 +75,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'course_id',
             [
-                'label' => __('ID kursu', 'simple-lms'),
+                'label' => __('Course ID', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 0,
                 'description' => __('Leave 0 to automatically detect course from current page', 'simple-lms'),
@@ -89,7 +89,7 @@ class Access_Status_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'card',
                 'options' => [
-                    'card' => __('Karta', 'simple-lms'),
+                    'card' => __('Card', 'simple-lms'),
                     'inline' => __('Inline', 'simple-lms'),
                     'badge' => __('Badge', 'simple-lms'),
                 ],
@@ -201,7 +201,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_control(
             'drip_text',
             [
-                'label' => __('Tekst drip content', 'simple-lms'),
+                'label' => __('Drip content text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Content unlocked gradually', 'simple-lms'),
                 'condition' => [
@@ -217,7 +217,7 @@ class Access_Status_Widget extends Widget_Base {
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Do lewej', 'simple-lms'),
+                        'title' => __('Left', 'simple-lms'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
@@ -225,7 +225,7 @@ class Access_Status_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Do prawej', 'simple-lms'),
+                        'title' => __('Right', 'simple-lms'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -242,7 +242,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->start_controls_section(
             'container_style_section',
             [
-                'label' => __('Kontener', 'simple-lms'),
+                'label' => __('Container', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -396,7 +396,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->start_controls_section(
             'typography_style_section',
             [
-                'label' => __('Typografia', 'simple-lms'),
+                'label' => __('Typography', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -414,7 +414,7 @@ class Access_Status_Widget extends Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'meta_text_typography',
-                'label' => __('Tekst meta (daty)', 'simple-lms'),
+                'label' => __('Meta text (dates)', 'simple-lms'),
                 'selector' => '{{WRAPPER}} .access-meta-text',
             ]
         );
@@ -422,7 +422,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __('Rozmiar ikony', 'simple-lms'),
+                'label' => __('Icon size', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -453,7 +453,7 @@ class Access_Status_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Spacing ikony', 'simple-lms'),
+                'label' => __('Icon spacing', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -510,7 +510,7 @@ class Access_Status_Widget extends Widget_Base {
         }
 
         $user_id = get_current_user_id();
-        $has_access = Access_Control::userHasAccessToCourse($user_id, $course_id);
+        $has_access = Access_Control::userHasAccessToCourse($course_id);
 
         $this->render_status($has_access, $settings, $course_id, $user_id);
     }
@@ -547,7 +547,7 @@ class Access_Status_Widget extends Widget_Base {
             $expiration_date = get_user_meta($user_id, 'course_access_expires_' . $course_id, true);
             
             if ($expiration_date && $expiration_date !== 'lifetime') {
-                $formatted_date = date_i18n(get_option('date_format'), strtotime($expiration_date));
+                $formatted_date = date_i18n((string) get_option('date_format'), strtotime($expiration_date));
                 echo '<div class="access-meta-text access-expiration">';
                 echo esc_html($settings['expiration_prefix']) . ' <strong>' . esc_html($formatted_date) . '</strong>';
                 echo '</div>';

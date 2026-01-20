@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -77,20 +77,10 @@ class Lesson_Content_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
+                'label' => __('Lesson ID (optional)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
                 'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
-            ]
-        );
-
-        $this->add_control(
-            'show_title',
-            [
-                'label' => __('Show Lesson Title', 'simple-lms'),
-                'type' => Controls_Manager::SWITCHER,
-                'default' => '',
-                'return_value' => 'yes',
             ]
         );
 
@@ -101,64 +91,6 @@ class Lesson_Content_Widget extends Widget_Base {
                 'type' => Controls_Manager::TEXTAREA,
                 'default' => __('No lesson content.', 'simple-lms'),
                 'description' => __('Displayed when lesson is not found', 'simple-lms'),
-            ]
-        );
-
-        $this->end_controls_section();
-
-        // Style section - Title
-        $this->start_controls_section(
-            'title_style_section',
-            [
-                'label' => __('Title', 'simple-lms'),
-                'tab' => Controls_Manager::TAB_STYLE,
-                // Use strict conditions to fully remove the section when disabled
-                'conditions' => [
-                    'terms' => [
-                        [
-                            'name' => 'show_title',
-                            'operator' => '==',
-                            'value' => 'yes',
-                        ],
-                    ],
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'title_color',
-            [
-                'label' => __('Kolor', 'simple-lms'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .simple-lms-lesson-title' => 'color: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Typography::get_type(),
-            [
-                'name' => 'title_typography',
-                'selector' => '{{WRAPPER}} .simple-lms-lesson-title',
-            ]
-        );
-
-        $this->add_responsive_control(
-            'title_spacing',
-            [
-                'label' => __('Distance from content', 'simple-lms'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', 'em'],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 100,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .simple-lms-lesson-title' => 'margin-bottom: {{SIZE}}{{UNIT}};',
-                ],
             ]
         );
 
@@ -199,19 +131,19 @@ class Lesson_Content_Widget extends Widget_Base {
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Do lewej', 'simple-lms'),
+                        'title' => __('Left', 'simple-lms'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Inward', 'simple-lms'),
+                        'title' => __('Center', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Do prawej', 'simple-lms'),
+                        'title' => __('Right', 'simple-lms'),
                         'icon' => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                        'title' => __('Wyjustuj', 'simple-lms'),
+                        'title' => __('Justify', 'simple-lms'),
                         'icon' => 'eicon-text-align-justify',
                     ],
                 ],
@@ -257,13 +189,6 @@ class Lesson_Content_Widget extends Widget_Base {
 
         echo '<div class="simple-lms-lesson-content-wrapper">';
 
-        // Show title if enabled
-        if ($settings['show_title'] === 'yes') {
-            echo '<h2 class="simple-lms-lesson-title">';
-            echo esc_html($lesson->post_title);
-            echo '</h2>';
-        }
-
         // Output lesson content with WordPress filters
         echo '<div class="simple-lms-lesson-content">';
         
@@ -287,11 +212,6 @@ class Lesson_Content_Widget extends Widget_Base {
         var fallbackText = settings.lesson_fallback_text || '<?php echo esc_js(__('No lesson content.', 'simple-lms')); ?>';
         #>
         <div class="simple-lms-lesson-content-wrapper">
-            <# if (settings.show_title === 'yes') { #>
-                <h2 class="simple-lms-lesson-title">
-                    <?php echo esc_html__('Lesson Title', 'simple-lms'); ?>
-                </h2>
-            <# } #>
             <div class="simple-lms-lesson-content elementor-alert elementor-alert-info">
                 <p><?php echo esc_html__('Lesson content preview (displayed on page)', 'simple-lms'); ?></p>
             </div>

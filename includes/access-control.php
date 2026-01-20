@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 declare(strict_types=1);
 
 namespace SimpleLMS;
@@ -249,6 +249,36 @@ class Access_Control {
         add_shortcode('simple_lms_access_control', [$this, 'accessControlShortcode']);
         add_shortcode('simple_lms_access', [$this, 'accessControlShortcode']);
         add_shortcode('simple_lms_access_expiration', [$this, 'accessExpirationShortcode']);
+    }
+
+    /**
+     * Get courses the user has access to (public helper)
+     *
+     * @param int $user_id User ID
+     * @return array<int, \WP_Post> List of course posts
+     */
+    public static function getUserCourses(int $user_id): array {
+        if ($user_id <= 0) {
+            return [];
+        }
+
+        // Read course IDs from user meta
+        $course_ids = (array) get_user_meta($user_id, simple_lms_get_course_access_meta_key(), true);
+        $course_ids = array_values(array_filter(array_map('intval', $course_ids), static fn($id) => $id > 0));
+
+        if (empty($course_ids)) {
+            return [];
+        }
+
+        // Fetch existing course posts only
+        $courses = get_posts([
+            'post_type'      => 'course',
+            'post__in'       => $course_ids,
+            'posts_per_page' => -1,
+            'orderby'        => 'post__in',
+        ]);
+
+        return is_array($courses) ? $courses : [];
     }
 
     /**
@@ -518,7 +548,8 @@ class Access_Control {
         }
         
         $days_remaining = simple_lms_get_course_access_days_remaining($user_id, $course_id);
-        $expiration_date = date_i18n(get_option('date_format'), $expiration);
+        $date_format = get_option('date_format');
+        $expiration_date = date_i18n((string) $date_format, $expiration);
         
         $class = $atts['class'] ? ' ' . esc_attr((string) $atts['class']) : '';
         $warning_class = ($days_remaining !== null && $days_remaining <= 7) ? ' simple-lms-expiration-warning' : '';

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Access_Control;
 
@@ -27,7 +27,7 @@ class Course_Purchase extends \Bricks\Element {
         $settings = $this->settings;
         $course_id = !empty($settings['courseId']) ? absint($settings['courseId']) : \SimpleLMS\Bricks\Bricks_Integration::get_current_course_id();
         if (!$course_id) return;
-        if (is_user_logged_in() && Access_Control::userHasAccess(get_current_user_id(), $course_id)) return;
+        if (is_user_logged_in() && Access_Control::userHasAccessToCourse($course_id)) return;
         $product_id = get_post_meta($course_id, 'course_product', true);
         if (!$product_id) return;
         if (!function_exists('wc_get_product')) {

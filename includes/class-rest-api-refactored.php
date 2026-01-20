@@ -277,7 +277,7 @@ class Rest_API {
             $post = get_post($moduleId);
             
             if (!$post || $post->post_type !== 'module') {
-                return new \WP_Error('module_not_found', __('Moduł nie znaleziony', 'simple-lms'), ['status' => 404]);
+                return new \WP_Error('module_not_found', __('ModuĹ‚ nie znaleziony', 'simple-lms'), ['status' => 404]);
             }
             
             $moduleData = $this->prepareModuleData($post, true);

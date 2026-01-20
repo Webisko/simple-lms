@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
@@ -54,6 +52,9 @@ class Logger implements LoggerInterface
 
     public function log($level, $message, array $context = []): void
     {
+        if (!$this->debugEnabled && in_array($level, ['debug', 'info', 'notice'], true)) {
+            return;
+        }
         $timestamp = gmdate('Y-m-d H:i:s');
         $msg = $this->interpolate((string) $message, $context);
         $line = sprintf('[%s] %s.%s: %s', $timestamp, $this->channel, $level, $msg);

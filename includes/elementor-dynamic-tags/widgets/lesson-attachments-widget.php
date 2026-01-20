@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -77,7 +77,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
+                'label' => __('Lesson ID (optional)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
                 'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
@@ -91,9 +91,9 @@ class Lesson_Attachments_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'list',
                 'options' => [
-                    'list' => __('Lista', 'simple-lms'),
-                    'grid' => __('Siatka', 'simple-lms'),
-                    'cards' => __('Karty', 'simple-lms'),
+                    'list' => __('List', 'simple-lms'),
+                    'grid' => __('Grid', 'simple-lms'),
+                    'cards' => __('Cards', 'simple-lms'),
                 ],
             ]
         );
@@ -119,7 +119,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'show_icon',
             [
-                'label' => __('Show icon typu pliku', 'simple-lms'),
+                'label' => __('Show file type icon', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
                 'return_value' => 'yes',
@@ -151,7 +151,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
             [
                 'label' => __('Button text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Pobierz', 'simple-lms'),
+                'default' => __('Download', 'simple-lms'),
                 'condition' => [
                     'show_download_button' => 'yes',
                 ],
@@ -163,7 +163,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
             [
                 'label' => __('Message when no files', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('No attachments dla tej lessons.', 'simple-lms'),
+                'default' => __('No attachments for this lesson.', 'simple-lms'),
             ]
         );
 
@@ -173,7 +173,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->start_controls_section(
             'container_style_section',
             [
-                'label' => __('Kontener', 'simple-lms'),
+                'label' => __('Container', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -214,7 +214,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->start_controls_section(
             'item_style_section',
             [
-                'label' => __('Elementy', 'simple-lms'),
+                'label' => __('Items', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -295,7 +295,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->start_controls_section(
             'icon_style_section',
             [
-                'label' => __('Ikona', 'simple-lms'),
+                'label' => __('Icon', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_icon' => 'yes',
@@ -306,7 +306,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __('Rozmiar ikony', 'simple-lms'),
+                'label' => __('Icon size', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -348,7 +348,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Spacing od tekstu', 'simple-lms'),
+                'label' => __('Text spacing', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -381,7 +381,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->start_controls_section(
             'text_style_section',
             [
-                'label' => __('Tekst', 'simple-lms'),
+                'label' => __('Text', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -389,7 +389,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'filename_color',
             [
-                'label' => __('Kolor nazwy pliku', 'simple-lms'),
+                'label' => __('Filename color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#333333',
                 'selectors' => [
@@ -402,7 +402,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'filename_typography',
-                'label' => __('Typografia nazwy', 'simple-lms'),
+                'label' => __('Filename typography', 'simple-lms'),
                 'selector' => '{{WRAPPER}} .attachment-name',
             ]
         );
@@ -410,7 +410,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_control(
             'filesize_color',
             [
-                'label' => __('Kolor rozmiaru pliku', 'simple-lms'),
+                'label' => __('File size color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#999999',
                 'selectors' => [
@@ -424,7 +424,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'filesize_typography',
-                'label' => __('Typografia rozmiaru', 'simple-lms'),
+                'label' => __('File size typography', 'simple-lms'),
                 'selector' => '{{WRAPPER}} .attachment-size',
             ]
         );
@@ -435,7 +435,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->start_controls_section(
             'button_style_section',
             [
-                'label' => __('Przycisk', 'simple-lms'),
+                'label' => __('Button', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_download_button' => 'yes',
@@ -454,7 +454,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->add_responsive_control(
             'button_width',
             [
-                'label' => __('Width przycisku', 'simple-lms'),
+                'label' => __('Button width', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'auto'],
                 'range' => [
@@ -513,7 +513,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         $this->start_controls_tab(
             'button_normal_tab',
             [
-                'label' => __('Normalny', 'simple-lms'),
+                'label' => __('Normal', 'simple-lms'),
             ]
         );
 
@@ -627,7 +627,7 @@ class Lesson_Attachments_Widget extends Widget_Base {
         foreach ($attachments as $attachment_id) {
             $file_url = wp_get_attachment_url($attachment_id);
             $file_name = basename(get_attached_file($attachment_id));
-            $file_size = size_format(filesize(get_attached_file($attachment_id)));
+            $file_size = (string) size_format(filesize(get_attached_file($attachment_id)));
             $file_ext = strtoupper(pathinfo($file_name, PATHINFO_EXTENSION));
 
             echo '<div class="attachment-item" style="display: flex; align-items: center; transition: all 0.3s ease;">';
@@ -717,9 +717,9 @@ class Lesson_Attachments_Widget extends Widget_Base {
         
         // Demo data
         var demoFiles = [
-            { name: 'Materiały-do-lessons.pdf', size: '2.5 MB', icon: '📄' },
-            { name: 'Prezentacja.pptx', size: '1.8 MB', icon: '📊' },
-            { name: 'Zadanie-domowe.docx', size: '456 KB', icon: '📝' }
+            { name: 'Materials-for-lessons.pdf', size: '2.5 MB', icon: '📄' },
+            { name: 'Presentation.pptx', size: '1.8 MB', icon: '📊' },
+            { name: 'Homework.docx', size: '456 KB', icon: '📝' }
         ];
         #>
         <div class="{{{containerClass}}}" style="display: flex; flex-direction: column; gap: 15px;">

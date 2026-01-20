@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 declare(strict_types=1);
 
 namespace SimpleLMS;
@@ -172,6 +171,9 @@ class Access_Meta_Boxes {
             echo '<legend style="Padding: 0 8px; font-weight: bold;">' . \esc_html__('Select courses the user has access to:', 'simple-lms') . '</legend>';
             
             foreach ($courses as $course) {
+                if (!$course instanceof \WP_Post) {
+                    continue;
+                }
                 $checked = in_array((int)$course->ID, array_map('intval', $access_tags), true);
                 $expiration = \SimpleLMS\simple_lms_get_course_access_expiration($user_id, (int)$course->ID);
                 $days_remaining = \SimpleLMS\simple_lms_get_course_access_days_remaining($user_id, (int)$course->ID);

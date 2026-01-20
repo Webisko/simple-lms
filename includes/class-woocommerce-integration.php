@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS;
 
 /**
@@ -216,7 +216,11 @@ class WooCommerce_Integration {
         try {
             foreach ($orders as $order) {
                 foreach ($order->get_items() as $item) {
-                    if (in_array($item->get_product_id(), $product_ids)) {
+                    if (!is_object($item) || !method_exists($item, 'get_product_id')) {
+                        continue;
+                    }
+
+                    if (in_array($item->get_product_id(), $product_ids, true)) {
                         return true; // Found completed order for this course
                     }
                 }
@@ -289,6 +293,9 @@ class WooCommerce_Integration {
             $course_options = ['' => __('Select course...', 'simple-lms')];
             
             foreach ($courses as $course) {
+                if (!$course instanceof \WP_Post) {
+                    continue;
+                }
                 $course_options[$course->ID] = $course->post_title;
             }
             
@@ -1146,6 +1153,12 @@ class WooCommerce_Integration {
      * Save course product metabox
      */
     public static function save_course_product_metabox($post_id) {
+        // Skip Elementor templates and library posts
+        $post_type = get_post_type($post_id);
+        if (in_array($post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+            return;
+        }
+        
         if (!isset($_POST['course_product_metabox_nonce']) || 
             !wp_verify_nonce($_POST['course_product_metabox_nonce'], 'course_product_metabox')) {
             return;
@@ -1336,6 +1349,10 @@ class WooCommerce_Integration {
         
         // Process each order item
         foreach ($order->get_items() as $item) {
+            if (!is_object($item) || !method_exists($item, 'get_product_id')) {
+                continue;
+            }
+
             $product_id = $item->get_product_id();
             $is_course_product = get_post_meta($product_id, '_is_course_product', true);
             
@@ -1701,6 +1718,10 @@ class WooCommerce_Integration {
         $result = [];
         
         foreach ($products as $product_post) {
+            if (!$product_post instanceof \WP_Post) {
+                continue;
+            }
+
             $product = wc_get_product($product_post->ID);
             if ($product) {
                 $price = $product->get_price_html();

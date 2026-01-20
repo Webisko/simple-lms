@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 declare(strict_types=1);
 
 namespace SimpleLMS;
@@ -24,9 +23,9 @@ function registerPostTypes(): void {
     $postTypes = [
         'course' => [
             'labels' => [
-                'name'               => __('Coursey', 'simple-lms'),
+                'name'               => __('Courses', 'simple-lms'),
                 'singular_name'      => __('Course', 'simple-lms'),
-                'menu_name'          => __('Coursey', 'simple-lms'),
+                'menu_name'          => __('Courses', 'simple-lms'),
                 'add_new_item'       => __('Create course', 'simple-lms'),
                 'edit_item'          => __('Edit Course', 'simple-lms'),
                 'new_item'           => __('New Course', 'simple-lms'),
@@ -113,6 +112,22 @@ function registerPostTypes(): void {
     }
 }
 add_action('init', __NAMESPACE__ . '\registerPostTypes');
+
+/**
+ * Safety flush: if permalinks for CPTs were never flushed (e.g., plugin updated without reactivation),
+ * flush rewrite rules once after CPTs are registered to avoid 404 on lesson/module/course URLs.
+ */
+function maybeFlushRewriteOnce(): void {
+    $option_key = 'simple_lms_rewrite_flushed_150';
+    if (get_option($option_key) === 'yes') {
+        return;
+    }
+    // Ensure CPTs are registered before flushing
+    registerPostTypes();
+    flush_rewrite_rules(false);
+    update_option($option_key, 'yes', true);
+}
+add_action('init', __NAMESPACE__ . '\maybeFlushRewriteOnce', 20);
 
 /**
  * Render management page with shortcodes and CSS classes
@@ -761,6 +776,11 @@ function updatePostSlug(int $postId, \WP_Post $post, bool $update): void {
     }
 
     if (!in_array($post->post_type, ['course', 'module', 'lesson'])) {
+        return;
+    }
+
+    // Skip Elementor templates and library posts
+    if (in_array($post->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
         return;
     }
 

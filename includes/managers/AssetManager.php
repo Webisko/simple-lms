@@ -1,7 +1,4 @@
-﻿<?php
-
-declare(strict_types=1);
-
+<?php
 namespace SimpleLMS\Managers;
 
 /**
@@ -288,12 +285,15 @@ class AssetManager
         )->enqueueScript('simple-lms-frontend');
 
         // Localize script with data
-        $this->localizeScript('simple-lms-frontend', 'simpleLMS', [
+        $frontendLocalization = [
             'ajaxUrl' => \admin_url('admin-ajax.php'),
             'nonce' => \wp_create_nonce('simple_lms_nonce'),
             'userId' => \get_current_user_id(),
             'isUserLoggedIn' => \is_user_logged_in(),
-        ]);
+        ];
+        $this->localizeScript('simple-lms-frontend', 'simpleLMS', $frontendLocalization);
+        // Legacy/alternate casing expected by frontend.js
+        $this->localizeScript('simple-lms-frontend', 'simpleLms', $frontendLocalization);
 
         // Lesson-specific assets (only on lesson pages)
         if (\is_singular('lesson')) {
@@ -319,6 +319,18 @@ class AssetManager
      */
     public function enqueueAdminAssets(string $hook): void
     {
+        // Load admin assets only on Simple LMS screens
+        $isSettingsPage = (strpos($hook, 'simple-lms-settings') !== false);
+        $isPostEdit = in_array($hook, ['post.php', 'post-new.php'], true);
+        $isPostList = ($hook === 'edit.php');
+
+        $screen = \get_current_screen();
+        $isLmsPostType = ($screen && in_array($screen->post_type ?? '', ['course', 'module', 'lesson'], true));
+
+        if (!$isSettingsPage && !($isPostEdit || $isPostList) || (!$isSettingsPage && !$isLmsPostType)) {
+            return;
+        }
+
         // Admin CSS - load from src since Vite embeds it in JS
         $this->registerStyle(
             'simple-lms-admin',
@@ -343,11 +355,11 @@ class AssetManager
                 'confirm_delete_module' => __('Are you sure you want to delete the module?', 'simple-lms'),
                 'confirm_delete_lesson' => __('Are you sure you want to delete the lesson?', 'simple-lms'),
                 'enter_module_title' => __('Enter module title.', 'simple-lms'),
-                'enter_lesson_title' => __('Wpisz Lesson Title.', 'simple-lms'),
+                'enter_lesson_title' => __('Enter lesson title', 'simple-lms'),
                 'add_lesson' => __('Add lesson', 'simple-lms'),
                 'lesson_title' => __('Lesson Title', 'simple-lms'),
-                'duplicate_module' => __('Duplikuj', 'simple-lms'),
-                'delete_module' => __('Remove', 'simple-lms'),
+                'duplicate_module' => __('Duplicate', 'simple-lms'),
+                'delete_module' => __('Delete', 'simple-lms'),
             ],
         ];
         $this->localizeScript('simple-lms-admin', 'simpleLMS', $localization);

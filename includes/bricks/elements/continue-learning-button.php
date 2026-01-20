@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Bricks\Elements;
 use SimpleLMS\Progress_Tracker;
 use SimpleLMS\Cache_Handler;

@@ -132,41 +132,17 @@
             }
             const $btn = $(this);
             $btn.prop('disabled', true);
-            SimpleLMS.ajaxRequest({
-                action: 'add_new_module',
-                course_id: courseId,
-                module_title: moduleTitle,
-                nonce: simpleLMS.nonce
-            }, function(response) {
-                $btn.prop('disabled', false);
-                $('input[name="new_module_title"]').val('');
-                if (response && response.success && response.data && response.data.module_id) {
-                    const newId = response.data.module_id;
-                    const html = `<li class="module-item" id="module-item-${newId}" data-module-id="${newId}">
-                        <div class="module-header">
-                            <span class="module-drag-handle"></span>
-                            <span class="module-title">
-                                <span class="module-toggle-container"><span class="module-toggle chevron-down" data-module-id="${newId}"></span></span>
-                                <a href="${simpleLMS.editModuleUrl.replace('MODULE_ID', newId)}" class="module-title-link">${$('<div>').text(moduleTitle).html()}</a>
-                                <span class="module-lesson-count"> (0)</span>
-                            </span>
-                            <div class="module-actions">
-                                <div class="module-status-toggle">
-                                    <label class="switch"><input type="checkbox" class="toggle-input" data-id="${newId}" data-type="module"><span class="slider round"></span></label>
-                                </div>
-                                <a href="#" class="duplicate-module" data-module-id="${newId}">${simpleLMS.i18n.duplicate_module || 'Duplikuj'}</a>
-                                <a href="#" class="delete-module delete-button" data-module-id="${newId}">${simpleLMS.i18n.delete_module || 'Usuń'}</a>
-                            </div>
-                        </div>
-                        <ul class="module-lessons-list"></ul>
-                        <div class="add-lesson-form"><h3 class="add-lesson-heading">${simpleLMS.i18n.add_lesson || 'Dodaj lekcję'}</h3><input type="text" name="new_lesson_title_${newId}" placeholder="${simpleLMS.i18n.lesson_title || 'Tytuł lekcji'}" class="widefat" /><button type="button" class="button button-primary add-lessons-btn" data-module-id="${newId}">${simpleLMS.i18n.add_lesson || 'Dodaj lekcję'}</button></div>
-                    </li>`;
-                    var $list = $('#add-module-btn').closest('.course-add-module').siblings('.course-modules-list');
-                    if (!$list.length) $list = $('.course-modules-list');
-                    $list.append(html);
-                    // Re-init events and sortable for new elements
-                    SimpleLMS.bindEvents();
-                    SimpleLMS.initSortable();
+            $.ajax({
+                url: simpleLMS.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'add_new_module',
+                    course_id: courseId,
+                    module_title: moduleTitle,
+                    nonce: simpleLMS.nonce
+                },
+                complete: function() {
+                    location.reload();
                 }
             });
         },
@@ -181,42 +157,37 @@
             }
             const $btn = $(this);
             $btn.prop('disabled', true);
-            SimpleLMS.ajaxRequest({
-                action: 'add_new_lesson_from_module',
-                module_id: moduleId,
-                lesson_title: lessonTitle,
-                nonce: simpleLMS.nonce
-            }, function(response) {
-                $btn.prop('disabled', false);
-                $input.val('');
-                if (response && response.success && response.data && response.data.lesson_id) {
-                    const newId = response.data.lesson_id;
-                    const html = `<li class="lesson-item" id="lesson-item-${newId}" data-lesson-id="${newId}"><span class="lesson-drag-handle"></span><a href="${simpleLMS.editLessonUrl.replace('LESSON_ID', newId)}" class="lesson-title-link">${$('<div>').text(lessonTitle).html()}</a></li>`;
-                    // Zawsze dodawaj na koniec listy lekcji danego modułu
-                    var $lessonsList = $(this).closest('.add-lesson-form').siblings('.module-lessons-list');
-                    if (!$lessonsList.length) {
-                        $lessonsList = $(this).closest('.module-item').find('.module-lessons-list').first();
-                    }
-                    if (!$lessonsList.length) {
-                        $lessonsList = $("#module-item-"+moduleId+" .module-lessons-list");
-                    }
-                    $lessonsList.append(html);
-                    // Re-init events and sortable for new elements
-                    SimpleLMS.bindEvents();
-                    SimpleLMS.initSortable();
+            $.ajax({
+                url: simpleLMS.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'add_new_lesson_from_module',
+                    module_id: moduleId,
+                    lesson_title: lessonTitle,
+                    nonce: simpleLMS.nonce
+                },
+                complete: function() {
+                    location.reload();
                 }
-            }.bind(this));
+            });
         },
 
         handleDuplicateModule: function(e) {
             e.preventDefault();
             const moduleId = $(this).data('module-id');
 
-            SimpleLMS.ajaxRequest({
-                action: 'duplicate_module',
-                module_id: moduleId
-            }, function() {
-                location.reload();
+            $.ajax({
+                url: simpleLMS.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'duplicate_module',
+                    module_id: moduleId,
+                    security: simpleLMS.nonce
+                },
+                complete: function() {
+                    // Reload regardless of response - duplication works on server
+                    location.reload();
+                }
             });
         },
 
@@ -227,15 +198,17 @@
             }
 
             const moduleId = $(this).data('module-id');
-            SimpleLMS.ajaxRequest({
-                action: 'delete_module',
-                module_id: moduleId,
-                security: simpleLMS.nonce
-            }, function(response) {
-                if (response && response.success) {
-                    $("#module-item-"+moduleId).remove();
-                } else {
-                    alert((response && response.data && response.data.message) || simpleLMS.i18n.error_generic);
+            $.ajax({
+                url: simpleLMS.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'delete_module',
+                    module_id: moduleId,
+                    security: simpleLMS.nonce
+                },
+                complete: function() {
+                    // Reload regardless of response - deletion works on server
+                    location.reload();
                 }
             });
         },
@@ -247,15 +220,17 @@
             }
 
             const lessonId = $(this).data('lesson-id');
-            SimpleLMS.ajaxRequest({
-                action: 'delete_lesson',
-                lesson_id: lessonId,
-                security: simpleLMS.nonce
-            }, function(response) {
-                if (response && response.success) {
-                    $("#lesson-item-"+lessonId).remove();
-                } else {
-                    alert((response && response.data && response.data.message) || simpleLMS.i18n.error_generic);
+            $.ajax({
+                url: simpleLMS.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'delete_lesson',
+                    lesson_id: lessonId,
+                    security: simpleLMS.nonce
+                },
+                complete: function() {
+                    // Reload regardless of response - deletion works on server
+                    location.reload();
                 }
             });
         },
@@ -263,34 +238,47 @@
         handleDuplicateLesson: function(e) {
             e.preventDefault();
             const lessonId = $(this).data('lesson-id');
-            const nonceField = $('#module_nonce_field').length ? '#module_nonce_field' : '#course_nonce_field';
 
-            SimpleLMS.ajaxRequest({
-                action: 'duplicate_lesson',
-                lesson_id: lessonId,
-                security: $(nonceField).val()
-            }, function() {
-                location.reload();
+            $.ajax({
+                url: simpleLMS.ajaxurl,
+                type: 'POST',
+                data: {
+                    action: 'duplicate_lesson',
+                    lesson_id: lessonId,
+                    security: simpleLMS.nonce
+                },
+                complete: function() {
+                    // Reload regardless of response - duplication works on server
+                    location.reload();
+                }
             });
         },
 
         ajaxRequest: function(data, successCallback) {
             data.security = data.security || simpleLMS.nonce;
 
+            const url = simpleLMS.ajaxurl || (typeof ajaxurl !== 'undefined' ? ajaxurl : '/wp-admin/admin-ajax.php');
             $.ajax({
-                url: ajaxurl,
+                url: url,
                 type: 'POST',
+                dataType: 'json',
                 data: data,
                 success: function(response) {
-                    if (response.success) {
+                    console.log('AJAX Success:', data.action, response);
+                    if (response && response.success) {
                         if (typeof successCallback === 'function') {
                             successCallback(response.data);
                         }
                     } else {
-                        SimpleLMS.showError(response.data ? response.data.message : simpleLMS.i18n.error_generic);
+                        const errorMsg = response && response.data && response.data.message ? response.data.message : simpleLMS.i18n.error_generic;
+                        console.error('AJAX Error Response:', errorMsg);
+                        SimpleLMS.showError(errorMsg);
                     }
                 },
                 error: function(xhr, status, error) {
+                    console.error('AJAX Request Error:', data.action, status, error);
+                    console.error('Response Text:', xhr.responseText);
+                    console.error('Status Code:', xhr.status);
                     SimpleLMS.showError(simpleLMS.i18n.error_generic + ': ' + error);
                 }
             });

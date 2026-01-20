@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Bricks\Elements;
 
 if (!defined('ABSPATH')) exit;

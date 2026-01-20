@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -75,7 +75,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'course_id',
             [
-                'label' => __('ID kursu', 'simple-lms'),
+                'label' => __('Course ID', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 0,
                 'description' => __('Leave 0 to automatically detect course from current page', 'simple-lms'),
@@ -87,14 +87,14 @@ class Course_Purchase_Widget extends Widget_Base {
             [
                 'label' => __('Button text', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
-                'default' => __('Kup teraz', 'simple-lms'),
+                'default' => __('Buy now', 'simple-lms'),
             ]
         );
 
         $this->add_control(
             'button_icon',
             [
-                'label' => __('Ikona', 'simple-lms'),
+                'label' => __('Icon', 'simple-lms'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-shopping-cart',
@@ -110,7 +110,7 @@ class Course_Purchase_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
-                    'left' => __('Przed tekstem', 'simple-lms'),
+                    'left' => __('Before text', 'simple-lms'),
                     'right' => __('After text', 'simple-lms'),
                 ],
             ]
@@ -129,13 +129,13 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'price_position',
             [
-                'label' => __('Pozycja ceny', 'simple-lms'),
+                'label' => __('Price position', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'above',
                 'options' => [
-                    'above' => __('Nad przyciskiem', 'simple-lms'),
-                    'inline' => __('W przycis ku', 'simple-lms'),
-                    'below' => __('Pod przyciskiem', 'simple-lms'),
+                    'above' => __('Above button', 'simple-lms'),
+                    'inline' => __('Inside button', 'simple-lms'),
+                    'below' => __('Below button', 'simple-lms'),
                 ],
                 'condition' => [
                     'show_price' => 'yes',
@@ -173,7 +173,7 @@ class Course_Purchase_Widget extends Widget_Base {
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Do lewej', 'simple-lms'),
+                        'title' => __('Left', 'simple-lms'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
@@ -181,7 +181,7 @@ class Course_Purchase_Widget extends Widget_Base {
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Do prawej', 'simple-lms'),
+                        'title' => __('Right', 'simple-lms'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -198,7 +198,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->start_controls_section(
             'price_style_section',
             [
-                'label' => __('Cena', 'simple-lms'),
+                'label' => __('Price', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_price' => 'yes',
@@ -210,7 +210,7 @@ class Course_Purchase_Widget extends Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'price_typography',
-                'label' => __('Typografia ceny', 'simple-lms'),
+                'label' => __('Price typography', 'simple-lms'),
                 'selector' => '{{WRAPPER}} .purchase-price .woocommerce-Price-amount',
             ]
         );
@@ -218,7 +218,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'price_color',
             [
-                'label' => __('Kolor ceny', 'simple-lms'),
+                'label' => __('Price color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2c3e50',
                 'selectors' => [
@@ -231,7 +231,7 @@ class Course_Purchase_Widget extends Widget_Base {
             \Elementor\Group_Control_Typography::get_type(),
             [
                 'name' => 'sale_price_typography',
-                'label' => __('Typografia ceny promocyjnej', 'simple-lms'),
+                'label' => __('Sale price typography', 'simple-lms'),
                 'selector' => '{{WRAPPER}} .purchase-price ins .woocommerce-Price-amount',
             ]
         );
@@ -239,7 +239,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_control(
             'sale_price_color',
             [
-                'label' => __('Kolor ceny promocyjnej', 'simple-lms'),
+                'label' => __('Sale price color', 'simple-lms'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#e74c3c',
                 'selectors' => [
@@ -263,7 +263,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_responsive_control(
             'price_spacing',
             [
-                'label' => __('Spacing od przycisku', 'simple-lms'),
+                'label' => __('Spacing from button', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -298,7 +298,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->start_controls_section(
             'button_style_section',
             [
-                'label' => __('Przycisk', 'simple-lms'),
+                'label' => __('Button', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -370,7 +370,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __('Rozmiar ikony', 'simple-lms'),
+                'label' => __('Icon size', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -401,7 +401,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Spacing ikony', 'simple-lms'),
+                'label' => __('Icon spacing', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -435,7 +435,7 @@ class Course_Purchase_Widget extends Widget_Base {
         $this->start_controls_tab(
             'button_normal_tab',
             [
-                'label' => __('Normalny', 'simple-lms'),
+                'label' => __('Normal', 'simple-lms'),
             ]
         );
 
@@ -601,7 +601,7 @@ class Course_Purchase_Widget extends Widget_Base {
         // Check if user already has access
         if (is_user_logged_in()) {
             $user_id = get_current_user_id();
-            $has_access = Access_Control::userHasAccessToCourse($user_id, $course_id);
+            $has_access = Access_Control::userHasAccessToCourse($course_id);
 
             if ($has_access) {
                 if ($settings['hide_when_has_access'] === 'yes') {

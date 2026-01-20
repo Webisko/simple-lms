@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 declare(strict_types=1);
 
 namespace SimpleLMS;
@@ -1341,14 +1340,13 @@ class LmsShortcodes {
      */
     public static function getLessonsCountText(int $count): string {
         if ($count == 0) {
-            return '0 lessons';
-        } elseif ($count == 1) {
-            return '1 lesson';
-        } elseif ($count >= 2 && $count <= 4) {
-            return $count . ' lessons';
-        } else {
-            return $count . ' lessons';
+            return __('0 lessons', 'simple-lms');
         }
+        // Use WordPress _n() for proper plural forms in Polish
+        return sprintf(
+            _n('%d lesson', '%d lessons', $count, 'simple-lms'),
+            $count
+        );
     }
 
     /**

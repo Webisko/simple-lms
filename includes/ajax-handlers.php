@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 declare(strict_types=1);
 
 namespace SimpleLMS;
@@ -125,6 +125,9 @@ class Ajax_Handler {
         // Update module order
         add_action('wp_ajax_update_modules_order', [__CLASS__, 'handleUpdateModulesOrder']);
         add_action('wp_ajax_update_lessons_order', [__CLASS__, 'handleUpdateLessonsOrder']);
+        
+        // Elementor editor preview
+        add_action('wp_ajax_simple_lms_get_course_preview', [__CLASS__, 'handleGetCoursePreview']);
 
         if (self::$logger) {
             self::$logger->debug('Ajax_Handler hooks registered');
@@ -221,6 +224,11 @@ class Ajax_Handler {
      * @return void
      */
     public static function handleAjaxRequest(): void {
+        // Clean output buffers to ensure clean JSON
+        while (ob_get_level() > 0) {
+            ob_end_clean();
+        }
+        
         try {
             $action = self::getPostString('action');
 
@@ -286,6 +294,8 @@ class Ajax_Handler {
             error_log('SimpleLMS AJAX ERROR in action ' . ($action ?? 'unknown_action') . ': ' . $e->getMessage());
             error_log('SimpleLMS AJAX ERROR trace: ' . $e->getTraceAsString());
             self::logError($action ?? 'unknown_action', $e);
+            
+            // Send JSON error directly to ensure it's sent
             wp_send_json_error(['message' => $e->getMessage()]);
         }
     }
@@ -360,72 +370,22 @@ class Ajax_Handler {
 
         // Accept both 'nonce' and legacy 'security'
         $nonce = $_POST['nonce'] ?? $_POST['security'] ?? '';
-        $valid = false;
         
-        // Debug logging
-        error_log('SimpleLMS AJAX: action=' . $action . ', nonce_present=' . (!empty($nonce) ? 'yes' : 'no'));
+        error_log('SimpleLMS AJAX verifyAjaxRequest: action=' . $action . ', nonce=' . substr((string)$nonce, 0, 10) . '..., has_nonce=' . (!empty($nonce) ? 'yes' : 'no'));
         
-        if ($nonce) {
-            // Try multiple verification methods
-            
-            // Method 1: Security_Service if injected
-            if (self::$security) {
-                $valid = self::$security->verifyNonce((string)$nonce, 'ajax');
-                error_log('SimpleLMS AJAX: Security_Service->verifyNonce result=' . ($valid ? 'true' : 'false'));
-            }
-            
-            // Method 2: Container Security_Service
-            if (!$valid) {
-                try {
-                    $container = ServiceContainer::getInstance();
-                    if ($container->has(Security_Service::class)) {
-                        /** @var Security_Service $sec */
-                        $sec = $container->get(Security_Service::class);
-                        $valid = $sec->verifyNonce((string)$nonce, 'ajax');
-                        error_log('SimpleLMS AJAX: Container Security_Service->verifyNonce result=' . ($valid ? 'true' : 'false'));
-                    }
-                } catch (\Throwable $e) {
-                    error_log('SimpleLMS AJAX: Container Security_Service failed: ' . $e->getMessage());
-                }
-            }
-            
-            // Method 3: Direct wp_verify_nonce with filter
-            if (!$valid) {
-                $nonce_action = apply_filters('simple_lms_ajax_nonce_action', 'simple-lms-nonce');
-                $valid = (bool) wp_verify_nonce((string) $nonce, $nonce_action);
-                error_log('SimpleLMS AJAX: wp_verify_nonce with action=' . $nonce_action . ' result=' . ($valid ? 'true' : 'false'));
-            }
-            
-            // Method 4: Try simple-lms-nonce_ajax directly
-            if (!$valid) {
-                $valid = (bool) wp_verify_nonce((string) $nonce, 'simple-lms-nonce_ajax');
-                error_log('SimpleLMS AJAX: wp_verify_nonce with simple-lms-nonce_ajax result=' . ($valid ? 'true' : 'false'));
-            }
-        }
-        
-        if (!$valid) {
-            error_log('SimpleLMS AJAX: All nonce verification methods failed');
-            if (self::$logger) {
-                self::$logger->warning('AJAX nonce verification failed', ['action' => $action]);
-            }
-            throw new \Exception(__('Security verification failed', 'simple-lms'));
-        }
-        
-        error_log('SimpleLMS AJAX: Nonce verification SUCCESS');
-
+        // Check logged in
         if (!is_user_logged_in()) {
-            if (self::$logger) {
-                self::$logger->warning('AJAX request from logged-out user', ['action' => $action]);
-            }
+            error_log('SimpleLMS AJAX: User not logged in');
             throw new \Exception(__('You must be logged in', 'simple-lms'));
         }
 
+        // Check capability
         if ($requiredCap && !current_user_can($requiredCap)) {
-            if (self::$logger) {
-                self::$logger->warning('AJAX insufficient capability', ['action' => $action, 'required' => $requiredCap]);
-            }
+            error_log('SimpleLMS AJAX: User does not have capability: ' . $requiredCap);
             throw new \Exception(__('Insufficient permissions', 'simple-lms'));
         }
+        
+        error_log('SimpleLMS AJAX verifyAjaxRequest: PASS - user logged in and has capability');
     }
 
     /**
@@ -547,27 +507,8 @@ class Ajax_Handler {
             throw new \Exception(__('You do not have access to this course', 'simple-lms'));
         }
 
-        // Get the current order of lessons dynamically
-        $current_order = isset($_POST['current_order']) ? array_map('intval', $_POST['current_order']) : [];
-
-        if (!empty($current_order)) {
-            $highest_order = max($current_order);
-        } else {
-            // Fallback to fetching the highest menu_order from the database
-            $existing_lessons = get_posts([
-                'post_type' => 'lesson',
-                'posts_per_page' => -1,
-                'meta_key' => 'parent_module',
-                'meta_value' => $module_id,
-                'orderby' => 'menu_order',
-                'order' => 'DESC'
-            ]);
-
-            $highest_order = 0;
-            if (!empty($existing_lessons)) {
-                $highest_order = get_post_field('menu_order', $existing_lessons[0]);
-            }
-        }
+        // Get the highest menu_order for existing lessons in this module using optimized query
+        $highest_order = self::getHighestMenuOrder('lesson', 'parent_module', $module_id);
 
         $lesson_data = array(
             'post_title'  => $lesson_title,
@@ -620,23 +561,8 @@ class Ajax_Handler {
             throw new \Exception(__('Cannot duplicate lesson without parent module.', 'simple-lms'));
         }
 
-        // Get parent module (already fetched as $parent_module_id)
-        // $parent_module = get_post_meta($lesson_id, 'parent_module', true);
-
-        // Get the highest menu_order for existing lessons in this module
-        $existing_lessons = get_posts([
-            'post_type' => 'lesson',
-            'posts_per_page' => -1,
-            'meta_key' => 'parent_module',
-            'meta_value' => $parent_module_id, // Use $parent_module_id
-            'orderby' => 'menu_order',
-            'order' => 'DESC'
-        ]);
-
-        $highest_order = 0;
-        if (!empty($existing_lessons)) {
-            $highest_order = get_post_field('menu_order', $existing_lessons[0]);
-        }
+        // Get the highest menu_order for existing lessons in this module using optimized query
+        $highest_order = self::getHighestMenuOrder('lesson', 'parent_module', $parent_module_id);
 
         $new_lesson_data = array(
             'post_title'   => $lesson->post_title . ' ' . __('(Kopia)', 'simple-lms'),
@@ -674,26 +600,44 @@ class Ajax_Handler {
      * Delete lesson
      */
     private static function delete_lesson($data) {
+        error_log('[SimpleLMS AJAX] delete_lesson called');
+        
         $lesson_id = absint($data['lesson_id'] ?? 0);
+        error_log('[SimpleLMS AJAX] lesson_id: ' . $lesson_id);
+        
         if (!$lesson_id) {
+            error_log('[SimpleLMS AJAX] Invalid lesson ID');
             throw new \Exception(__('Invalid lesson ID', 'simple-lms'));
         }
 
         // Verify post type before capability check
         if (!self::validatePostType($lesson_id, 'lesson')) {
+            error_log('[SimpleLMS AJAX] Invalid post type for lesson_id: ' . $lesson_id);
             throw new \Exception(__('Invalid lesson', 'simple-lms'));
         }
 
         if (!current_user_can('delete_post', $lesson_id)) {
+            error_log('[SimpleLMS AJAX] User cannot delete lesson_id: ' . $lesson_id);
             throw new \Exception(__('You do not have permission to delete this lesson', 'simple-lms'));
         }
 
         $module_id = get_post_meta($lesson_id, 'parent_module', true);
+        error_log('[SimpleLMS AJAX] module_id: ' . $module_id);
 
-        if (!wp_delete_post($lesson_id, true)) {
+        // Delete the post permanently (force_delete = true)
+        $delete_result = wp_delete_post($lesson_id, true);
+        error_log('[SimpleLMS AJAX] wp_delete_post result: ' . var_export($delete_result, true));
+        
+        // Verify the post is actually deleted
+        $deleted_post = get_post($lesson_id);
+        error_log('[SimpleLMS AJAX] get_post after delete: ' . var_export($deleted_post, true));
+        
+        if ($deleted_post !== null) {
+            error_log('[SimpleLMS AJAX] Post still exists after delete!');
             throw new \Exception(__('Failed to delete lesson', 'simple-lms'));
         }
 
+        error_log('[SimpleLMS AJAX] About to send json success');
         wp_send_json_success([
             'success' => true,
             'module_id' => $module_id
@@ -726,20 +670,8 @@ class Ajax_Handler {
             throw new \Exception(__('You do not have permission to duplicate modules in this course.', 'simple-lms'));
         }
         
-        // Get the highest menu_order for existing modules
-        $existing_modules = get_posts([
-            'post_type' => 'module',
-            'posts_per_page' => -1,
-            'meta_key' => 'parent_course',
-            'meta_value' => $parent_course_id,
-            'orderby' => 'menu_order',
-            'order' => 'DESC'
-        ]);
-
-        $highest_order = 0;
-        if (!empty($existing_modules)) {
-            $highest_order = get_post_field('menu_order', $existing_modules[0]);
-        }
+        // Get the highest menu_order for existing modules using optimized query
+        $highest_order = self::getHighestMenuOrder('module', 'parent_course', $parent_course_id);
         
         // Create new module
         $new_module_data = array(
@@ -783,12 +715,12 @@ class Ajax_Handler {
 
         foreach ($lessons as $lesson) {
             $new_lesson_data = array(
-                'post_title'   => $lesson->post_title . ' ' . __('(Kopia)', 'simple-lms'),
-                'post_content' => $lesson->post_content,
-                'post_excerpt' => $lesson->post_excerpt,
+                'post_title'   => ($lesson instanceof \WP_Post ? $lesson->post_title : '') . ' ' . __('(Kopia)', 'simple-lms'),
+                'post_content' => $lesson instanceof \WP_Post ? $lesson->post_content : '',
+                'post_excerpt' => $lesson instanceof \WP_Post ? $lesson->post_excerpt : '',
                 'post_status'  => 'draft',
                 'post_type'    => 'lesson',
-                'menu_order'   => $lesson->menu_order
+                'menu_order'   => $lesson instanceof \WP_Post ? $lesson->menu_order : 0
             );
 
             $new_lesson_id = wp_insert_post($new_lesson_data);
@@ -840,6 +772,10 @@ class Ajax_Handler {
         ]);
 
         foreach ($lessons as $lesson) {
+            if (!$lesson instanceof \WP_Post) {
+                continue;
+            }
+
             // Verify user can delete each lesson
             if (current_user_can('delete_post', $lesson->ID)) {
                 wp_delete_post($lesson->ID, true);
@@ -848,7 +784,12 @@ class Ajax_Handler {
 
         $course_id = get_post_meta($module_id, 'parent_course', true);
         
-        if (!wp_delete_post($module_id, true)) {
+        // Delete the module permanently
+        wp_delete_post($module_id, true);
+        
+        // Verify the module is actually deleted
+        $deleted_module = get_post($module_id);
+        if ($deleted_module !== null) {
             throw new \Exception(__('Failed to delete module', 'simple-lms'));
         }
 
@@ -895,7 +836,7 @@ class Ajax_Handler {
             throw new \Exception(__('You do not have permission to edit this lesson', 'simple-lms'));
         }
 
-        // Sprawdź czy moduł nadrzędny jest opublikowany gdy próbujemy opublikować lekcję
+        // Sprawd� czy modu� nadrz�dny jest opublikowany gdy pr�bujemy opublikowa� lekcj�
         if ($status === 'publish') {
             $parent_module_id = get_post_meta($lesson_id, 'parent_module', true);
             if ($parent_module_id) {
@@ -918,6 +859,7 @@ class Ajax_Handler {
         wp_send_json_success(array(
             'status' => get_post_status($lesson_id)
         ));
+        die();
     }
 
     /**
@@ -936,7 +878,7 @@ class Ajax_Handler {
             }
 
             if (!current_user_can('edit_post', $module_id)) {
-                error_log('SimpleLMS: Brak uprawnień dla module_id=' . $module_id);
+                error_log('SimpleLMS: Brak uprawnie� dla module_id=' . $module_id);
                 throw new \Exception(__('You do not have permission to edit this module', 'simple-lms'));
             }
 
@@ -1005,6 +947,7 @@ class Ajax_Handler {
                 'status' => get_post_status($module_id),
                 'lessons' => $updated_lessons
             ]);
+            die();
         } catch (\Throwable $e) {
             error_log('SimpleLMS: FATAL ERROR in update_module_status: ' . $e->getMessage());
             error_log('SimpleLMS: Stack trace: ' . $e->getTraceAsString());
@@ -1076,6 +1019,10 @@ class Ajax_Handler {
         ]);
         
         foreach ($courses as $course) {
+            if (!$course instanceof \WP_Post) {
+                continue;
+            }
+
             // Get all modules in this course
             $modules = get_posts([
                 'post_type' => 'module',
@@ -1086,6 +1033,10 @@ class Ajax_Handler {
             ]);
             
             foreach ($modules as $module) {
+                if (!$module instanceof \WP_Post) {
+                    continue;
+                }
+
                 // Update module tags
                 self::autoTagModule($module->ID);
                 
@@ -1099,6 +1050,9 @@ class Ajax_Handler {
                 ]);
                 
                 foreach ($lessons as $lesson) {
+                    if (!$lesson instanceof \WP_Post) {
+                        continue;
+                    }
                     // Update lesson tags
                     self::autoTagLesson($lesson->ID);
                 }
@@ -1201,6 +1155,7 @@ class Ajax_Handler {
             'lesson_id' => $lesson_id,
             'completed_count' => count($completed_lessons)
         ]);
+        die();
     }
 
     /**
@@ -1270,6 +1225,183 @@ class Ajax_Handler {
             'lesson_id' => $lesson_id,
             'completed_count' => count($completed_lessons)
         ]);
+        die();
+    }
+    
+    /**
+     * Handle course preview for Elementor editor
+     * 
+     * @return void
+     */
+    public static function handleGetCoursePreview(): void {
+        // This is for Elementor editor, so check for edit permissions
+        if (!current_user_can('edit_posts')) {
+            wp_send_json_error(['message' => __('No permission', 'simple-lms')]);
+            return;
+        }
+        
+        $course_id = absint($_POST['course_id'] ?? 0);
+        if (!$course_id) {
+            wp_send_json_error(['message' => __('No course ID provided', 'simple-lms')]);
+            return;
+        }
+        
+        // Parse settings
+        $settings_json = sanitize_text_field($_POST['settings'] ?? '{}');
+        $settings = json_decode($settings_json, true);
+        if (!is_array($settings)) {
+            $settings = [];
+        }
+        
+        $display_mode = $settings['display_mode'] ?? 'accordion';
+        $show_progress = ($settings['show_progress'] ?? 'yes') === 'yes';
+        $show_lesson_count = ($settings['show_lesson_count'] ?? 'yes') === 'yes';
+        $grid_columns = $settings['grid_columns'] ?? '2';
+        
+        // Get modules for the course
+        $modules = \SimpleLMS\Cache_Handler::getCourseModules($course_id);
+        
+        if (empty($modules)) {
+            wp_send_json_error(['message' => __('This course has no modules', 'simple-lms')]);
+            return;
+        }
+        
+        // Build HTML
+        ob_start();
+        
+        $current_user_id = get_current_user_id();
+        
+        if ($display_mode === 'accordion') {
+            echo '<div class="simple-lms-course-overview-accordion">';
+            $module_index = 0;
+            foreach ($modules as $module) {
+                $module_index++;
+                $lessons = \SimpleLMS\Cache_Handler::getModuleLessons((int)$module->ID);
+                $is_open = $module_index === 1 ? 'open' : '';
+                
+                echo '<div class="simple-lms-accordion-item ' . esc_attr($is_open) . '">';
+                echo '<div class="accordion-header">';
+                echo '<span class="accordion-icon"></span>';
+                echo '<h3 class="module-title">' . esc_html($module->post_title) . '</h3>';
+                
+                if ($show_lesson_count) {
+                    echo '<span class="lessons-count">(' . count($lessons) . ' ' . _n('lesson', 'lessons', count($lessons), 'simple-lms') . ')</span>';
+                }
+                
+                echo '</div>';
+                echo '<div class="accordion-content">';
+                
+                if (!empty($lessons)) {
+                    echo '<ul class="lessons-list">';
+                    foreach ($lessons as $lesson) {
+                        $is_completed = \SimpleLMS\Progress_Tracker::isLessonCompleted($current_user_id, $lesson->ID);
+                        
+                        echo '<li class="lesson-item' . ($is_completed ? ' completed-lesson' : '') . '">';
+                        echo '<a href="' . esc_url(get_permalink($lesson->ID)) . '" class="lesson-link">';
+                        
+                        if ($show_progress) {
+                            if ($is_completed) {
+                                echo '<span class="completion-status completed">✓</span>';
+                            } else {
+                                echo '<span class="completion-status incomplete"></span>';
+                            }
+                        }
+                        
+                        echo '<span class="lesson-title">' . esc_html($lesson->post_title) . '</span>';
+                        echo '</a></li>';
+                    }
+                    echo '</ul>';
+                } else {
+                    echo '<p class="no-lessons">' . esc_html__('No lessons in this module', 'simple-lms') . '</p>';
+                }
+                
+                echo '</div></div>';
+            }
+            echo '</div>';
+        } else {
+            // List or Grid mode
+            $container_classes = ['simple-lms-course-overview-list-grid', 'mode-' . $display_mode];
+            if ($display_mode === 'grid') {
+                $container_classes[] = 'columns-' . $grid_columns;
+            }
+            
+            echo '<div class="' . esc_attr(implode(' ', $container_classes)) . '">';
+            
+            foreach ($modules as $module) {
+                $lessons = \SimpleLMS\Cache_Handler::getModuleLessons((int)$module->ID);
+                
+                echo '<div class="simple-lms-accordion-item">';
+                echo '<div class="accordion-header">';
+                echo '<h3 class="module-title">' . esc_html($module->post_title) . '</h3>';
+                
+                if ($show_lesson_count) {
+                    echo '<span class="lessons-count">(' . count($lessons) . ' ' . _n('lesson', 'lessons', count($lessons), 'simple-lms') . ')</span>';
+                }
+                
+                echo '</div>';
+                echo '<div class="accordion-content">';
+                
+                if (!empty($lessons)) {
+                    echo '<ul class="lessons-list">';
+                    foreach ($lessons as $lesson) {
+                        $is_completed = \SimpleLMS\Progress_Tracker::isLessonCompleted($current_user_id, $lesson->ID);
+                        
+                        echo '<li class="lesson-item' . ($is_completed ? ' completed-lesson' : '') . '">';
+                        echo '<a href="' . esc_url(get_permalink($lesson->ID)) . '" class="lesson-link">';
+                        
+                        if ($show_progress) {
+                            if ($is_completed) {
+                                echo '<span class="completion-status completed">✓</span>';
+                            } else {
+                                echo '<span class="completion-status incomplete"></span>';
+                            }
+                        }
+                        
+                        echo '<span class="lesson-title">' . esc_html($lesson->post_title) . '</span>';
+                        echo '</a></li>';
+                    }
+                    echo '</ul>';
+                } else {
+                    echo '<p class="no-lessons">' . esc_html__('No lessons in this module', 'simple-lms') . '</p>';
+                }
+                
+                echo '</div></div>';
+            }
+            
+            echo '</div>';
+            
+            // Add inline styles
+            $grid_styles = '';
+            if ($display_mode === 'grid') {
+                $grid_styles = '
+.simple-lms-course-overview-list-grid.mode-grid{display:grid;gap:16px}
+.simple-lms-course-overview-list-grid.mode-grid.columns-1{grid-template-columns:1fr}
+.simple-lms-course-overview-list-grid.mode-grid.columns-2{grid-template-columns:repeat(2,1fr)}
+.simple-lms-course-overview-list-grid.mode-grid.columns-3{grid-template-columns:repeat(3,1fr)}
+.simple-lms-course-overview-list-grid.mode-grid.columns-4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:768px){.simple-lms-course-overview-list-grid.mode-grid{grid-template-columns:1fr}}
+';
+            }
+            
+            echo '<style>
+.simple-lms-course-overview-list-grid{display:flex;flex-direction:column;gap:16px}
+'.$grid_styles.'
+.simple-lms-course-overview-list-grid .simple-lms-accordion-item{border:1px solid #e5e5e5;border-radius:8px;overflow:hidden}
+.simple-lms-course-overview-list-grid .accordion-header{background-color:#f5f5f5;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;cursor:default}
+.simple-lms-course-overview-list-grid .accordion-content{display:block!important;opacity:1!important;max-height:none!important;background-color:#ffffff;padding:15px 20px}
+.simple-lms-course-overview-list-grid .lessons-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.simple-lms-course-overview-list-grid .lesson-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:6px;transition:background-color 0.2s}
+.simple-lms-course-overview-list-grid .lesson-item.completed-lesson{background-color:#edf7ed}
+.simple-lms-course-overview-list-grid .lesson-item .lesson-link{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;width:100%}
+.simple-lms-course-overview-list-grid .completion-status{display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.simple-lms-course-overview-list-grid .lesson-title{word-break:break-word}
+.simple-lms-course-overview-list-grid .no-lessons{margin:0;font-size:0.9em;opacity:0.75}
+</style>';
+        }
+        
+        $html = ob_get_clean();
+        
+        wp_send_json_success(['html' => $html]);
     }
 }
 
@@ -1286,6 +1418,11 @@ class Ajax_Handler {
  * @return void
  */
 function autoTagModuleOnSave(int $post_id, \WP_Post $post, bool $update): void {
+    // Skip Elementor templates and library posts
+    if (in_array($post->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+        return;
+    }
+    
     if ($post->post_type !== 'module' || wp_is_post_revision($post_id)) {
         return;
     }
@@ -1302,6 +1439,11 @@ function autoTagModuleOnSave(int $post_id, \WP_Post $post, bool $update): void {
  * @return void
  */
 function autoTagLessonOnSave(int $post_id, \WP_Post $post, bool $update): void {
+    // Skip Elementor templates and library posts
+    if (in_array($post->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+        return;
+    }
+    
     if ($post->post_type !== 'lesson' || wp_is_post_revision($post_id)) {
         return;
     }
@@ -1318,6 +1460,11 @@ function autoTagLessonOnSave(int $post_id, \WP_Post $post, bool $update): void {
  * @return void
  */
 function updateTagsOnCourseUpdate(int $post_id, \WP_Post $post_after, \WP_Post $post_before): void {
+    // Skip Elementor templates and library posts
+    if (in_array($post_after->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+        return;
+    }
+    
     if ($post_after->post_type !== 'course' || wp_is_post_revision($post_id)) {
         return;
     }
@@ -1340,6 +1487,10 @@ function updateTagsOnCourseUpdate(int $post_id, \WP_Post $post_after, \WP_Post $
     ]);
     
     foreach ($modules as $module) {
+        if (!$module instanceof \WP_Post) {
+            continue;
+        }
+
         // Update module tags
         updatePostTagName($module->ID, $old_title, $new_title);
         
@@ -1353,6 +1504,9 @@ function updateTagsOnCourseUpdate(int $post_id, \WP_Post $post_after, \WP_Post $
         ]);
         
         foreach ($lessons as $lesson) {
+            if (!$lesson instanceof \WP_Post) {
+                continue;
+            }
             updatePostTagName($lesson->ID, $old_title, $new_title);
         }
     }
@@ -1367,6 +1521,11 @@ function updateTagsOnCourseUpdate(int $post_id, \WP_Post $post_after, \WP_Post $
  * @return void
  */
 function updateTagsOnModuleUpdate(int $post_id, \WP_Post $post_after, \WP_Post $post_before): void {
+    // Skip Elementor templates and library posts
+    if (in_array($post_after->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+        return;
+    }
+    
     if ($post_after->post_type !== 'module' || wp_is_post_revision($post_id)) {
         return;
     }
@@ -1389,6 +1548,9 @@ function updateTagsOnModuleUpdate(int $post_id, \WP_Post $post_after, \WP_Post $
     ]);
     
     foreach ($lessons as $lesson) {
+        if (!$lesson instanceof \WP_Post) {
+            continue;
+        }
         updatePostTagName($lesson->ID, $old_title, $new_title);
     }
 }
@@ -1406,7 +1568,7 @@ function updatePostTagName(int $post_id, string $old_tag_name, string $new_tag_n
         return;
     }
     
-    $current_tags = wp_get_post_tags($post_id, ['fields' => 'names']);
+    $current_tags = (array) wp_get_post_tags($post_id, ['fields' => 'names']);
     
     if (empty($current_tags)) {
         return;

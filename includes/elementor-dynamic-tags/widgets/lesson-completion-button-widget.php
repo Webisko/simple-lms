@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -77,7 +77,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
+                'label' => __('Lesson ID (optional)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
                 'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
@@ -87,7 +87,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'complete_text',
             [
-                'label' => __('Tekst: Mark as completed', 'simple-lms'),
+                'label' => __('Text: Mark as completed', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Mark as completed', 'simple-lms'),
             ]
@@ -96,7 +96,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_control(
             'incomplete_text',
             [
-                'label' => __('Tekst: Mark as incomplete', 'simple-lms'),
+                'label' => __('Text: Mark as incomplete', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Mark as incomplete', 'simple-lms'),
             ]
@@ -119,8 +119,8 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'left',
                 'options' => [
-                    'left' => __('Lewa', 'simple-lms'),
-                    'right' => __('Prawa', 'simple-lms'),
+                    'left' => __('Left', 'simple-lms'),
+                    'right' => __('Right', 'simple-lms'),
                 ],
                 'condition' => [
                     'show_icon' => 'yes',
@@ -135,15 +135,15 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => __('Do lewej', 'simple-lms'),
+                        'title' => __('Left', 'simple-lms'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => __('Inward', 'simple-lms'),
+                        'title' => __('Center', 'simple-lms'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => __('Do prawej', 'simple-lms'),
+                        'title' => __('Right', 'simple-lms'),
                         'icon' => 'eicon-text-align-right',
                     ],
                     'justify' => [
@@ -161,7 +161,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->start_controls_section(
             'button_style_section',
             [
-                'label' => __('Przycisk', 'simple-lms'),
+                'label' => __('Button', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -347,7 +347,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->start_controls_section(
             'icon_style_section',
             [
-                'label' => __('Ikona', 'simple-lms'),
+                'label' => __('Icon', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_icon' => 'yes',
@@ -358,7 +358,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_size',
             [
-                'label' => __('Rozmiar ikony', 'simple-lms'),
+                'label' => __('Icon size', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -388,7 +388,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         $this->add_responsive_control(
             'icon_spacing',
             [
-                'label' => __('Spacing od tekstu', 'simple-lms'),
+                'label' => __('Spacing from text', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [

@@ -1,14 +1,12 @@
 <?php
+namespace SimpleLMS;
+
 /**
  * Cache and optimization handler class
  * 
  * @package SimpleLMS
  * @since 1.0.1
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -205,6 +203,11 @@ class Cache_Handler {
             return;
         }
 
+        // Skip Elementor templates and library posts
+        if (in_array($postType, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+            return;
+        }
+
         static $alreadyFlushed = [];
         if (isset($alreadyFlushed[$postId])) {
             return;
@@ -279,7 +282,11 @@ class Cache_Handler {
         } catch (\Throwable $t) {
             // Fallback for environments without container/logger
             if (function_exists('error_log')) {
-                error_log('[simple-lms.' . $level . '] ' . strtr($message, array_map(function($k){return '{'.$k.'}';}, array_keys($context)), array_values($context)));
+                $placeholders = array_combine(
+                    array_map(function($k){return '{'.$k.'}';}, array_keys($context)),
+                    array_values($context)
+                );
+                error_log('[simple-lms.' . $level . '] ' . strtr($message, $placeholders));
             }
         }
     }
@@ -422,13 +429,13 @@ class Cache_Handler {
      * Flush caches when course/module relationships change via post meta modifications.
      * Handles added, updated, and deleted meta for parent relations.
      *
-     * @param int $metaId Meta row ID
+     * @param int|array $metaId Meta row ID (array when deleting multiple metas)
      * @param int $objectId Post ID
      * @param string $metaKey Meta key
      * @param mixed $metaValue Meta value (new for add/update, old for delete)
      * @return void
      */
-    public static function flushOnMetaChange(int $metaId, int $objectId, string $metaKey, $metaValue): void {
+    public static function flushOnMetaChange($metaId, int $objectId, string $metaKey, $metaValue): void {
         if (!in_array($metaKey, ['parent_course', 'parent_module'], true)) {
             return;
         }
@@ -436,6 +443,11 @@ class Cache_Handler {
         try {
             $postType = get_post_type($objectId);
             if (!$postType) {
+                return;
+            }
+
+            // Skip Elementor post types to avoid interfering with template saves
+            if (in_array($postType, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
                 return;
             }
 

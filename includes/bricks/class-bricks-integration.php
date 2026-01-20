@@ -27,8 +27,9 @@ class Bricks_Integration {
             return;
         }
 
-        // Register Bricks elements
-        add_action('init', [__CLASS__, 'register_elements'], 11);
+        // Register Bricks elements on proper hook
+        // Use bricks_init which fires after Bricks is fully loaded
+        add_action('bricks_init', [__CLASS__, 'register_elements'], 15);
         
         // Register custom category
         add_filter('bricks/builder/i18n', [__CLASS__, 'register_category']);
@@ -54,7 +55,7 @@ class Bricks_Integration {
             'continue-learning-button',
             'access-status',
             'course-purchase',
-            'breadcrumbs',
+            'breadcrumbs-navigation',
             'user-courses-grid',
             'module-navigation',
             'lesson-progress-indicator',

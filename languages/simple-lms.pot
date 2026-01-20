@@ -3283,3 +3283,38 @@ msgstr ""
 msgid "years"
 msgstr ""
 
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
+msgid "Delete all data on uninstall"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
+msgid "Delete all courses, modules, lessons and plugin data when uninstalling"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
+msgid "If enabled, all plugin data will be permanently deleted when you uninstall the plugin. If disabled, your data will be preserved."
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\class-settings.php
+msgid "Warning: This action cannot be undone!"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
+msgid "Tryb wyświetlania"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
+msgid "Akordeon"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
+msgid "Lista"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\elementor-dynamic-tags\widgets\course-overview-widget.php
+msgid "Siatka"
+msgstr ""
+
+#: C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms\includes\custom-meta-boxes.php
+msgid "Podgląd"
+msgstr ""

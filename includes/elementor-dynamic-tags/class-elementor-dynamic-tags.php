@@ -8,6 +8,9 @@
 
 namespace SimpleLMS\Elementor;
 
+use SimpleLMS\Elementor\Widgets;
+use SimpleLMS\Elementor\Tags;
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -20,21 +23,33 @@ class Elementor_Dynamic_Tags {
 
     /**
      * Initialize the integration
+     * Called from elementor_loaded hook to ensure Elementor is fully loaded
      */
     public static function init(): void {
-        // Check if Elementor Pro is active and has dynamic tags
-        if (!did_action('elementor/loaded')) {
-            return;
-        }
-
-        // Register dynamic tags (requires Elementor Pro)
-        add_action('elementor/dynamic_tags/register', [__CLASS__, 'register_dynamic_tags']);
-
-        // Register widgets (works with free Elementor)
-        add_action('elementor/widgets/register', [__CLASS__, 'register_widgets']);
+        error_log('SimpleLMS Elementor init() called');
+        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - init() called, IMMEDIATE registration\n", FILE_APPEND);
         
-        // Register widget category
-        add_action('elementor/elements/categories_registered', [__CLASS__, 'register_widget_category']);
+        // Register immediately instead of waiting for hooks
+        if (class_exists('\Elementor\Plugin')) {
+            $plugin = \Elementor\Plugin::instance();
+            
+            // Register category immediately
+            if (isset($plugin->elements_manager)) {
+                self::register_widget_category($plugin->elements_manager);
+            }
+            
+            // Register widgets immediately
+            if (isset($plugin->widgets_manager)) {
+                self::register_widgets($plugin->widgets_manager);
+            }
+            
+            // Register dynamic tags immediately (Pro only)
+            if (isset($plugin->dynamic_tags)) {
+                self::register_dynamic_tags($plugin->dynamic_tags);
+            }
+        }
+        
+        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - Immediate registration done\n", FILE_APPEND);
     }
 
     /**
@@ -44,12 +59,15 @@ class Elementor_Dynamic_Tags {
      */
     public static function register_dynamic_tags($dynamic_tags_manager): void {
         // Register Simple LMS category
-        $dynamic_tags_manager->register_group(
-            'simple-lms',
-            [
-                'title' => __('Simple LMS', 'simple-lms')
-            ]
-        );
+        if (method_exists($dynamic_tags_manager, 'register_group')) {
+            call_user_func(
+                [$dynamic_tags_manager, 'register_group'],
+                'simple-lms',
+                [
+                    'title' => __('Simple LMS', 'simple-lms')
+                ]
+            );
+        }
 
         // Include tag classes
         require_once __DIR__ . '/tags/course-title.php';
@@ -66,12 +84,20 @@ class Elementor_Dynamic_Tags {
      * Register Simple LMS widgets
      */
     public static function register_widgets($widgets_manager): void {
+        error_log('SimpleLMS register_widgets() called');
+        
         // Check if required classes exist
         if (!class_exists('\Elementor\Widget_Base')) {
+            error_log('SimpleLMS: Elementor Widget_Base not found');
             return;
         }
 
+        error_log('SimpleLMS: Starting widget registration');
+
         // Include widget classes
+        require_once __DIR__ . '/widgets/course-title-widget.php';
+        require_once __DIR__ . '/widgets/module-title-widget.php';
+        require_once __DIR__ . '/widgets/lesson-title-widget.php';
         require_once __DIR__ . '/widgets/lesson-content-widget.php';
         require_once __DIR__ . '/widgets/course-overview-widget.php';
         require_once __DIR__ . '/widgets/course-progress-widget.php';
@@ -85,11 +111,17 @@ class Elementor_Dynamic_Tags {
         require_once __DIR__ . '/widgets/course-purchase-widget.php';
         require_once __DIR__ . '/widgets/breadcrumbs-widget.php';
         require_once __DIR__ . '/widgets/user-courses-grid-widget.php';
-        require_once __DIR__ . '/widgets/module-navigation-widget.php';
         require_once __DIR__ . '/widgets/lesson-progress-indicator-widget.php';
         require_once __DIR__ . '/widgets/user-progress-dashboard-widget.php';
+        require_once __DIR__ . '/widgets/course-featured-image-widget.php';
+        require_once __DIR__ . '/widgets/module-featured-image-widget.php';
+        require_once __DIR__ . '/widgets/lesson-featured-image-widget.php';
+        require_once __DIR__ . '/widgets/module-overview-widget.php';
 
         // Register widgets
+        $widgets_manager->register(new Widgets\Course_Title_Widget());
+        $widgets_manager->register(new Widgets\Module_Title_Widget());
+        $widgets_manager->register(new Widgets\Lesson_Title_Widget());
         $widgets_manager->register(new Widgets\Lesson_Content_Widget());
         $widgets_manager->register(new Widgets\Course_Overview_Widget());
         $widgets_manager->register(new Widgets\Course_Progress_Widget());
@@ -103,15 +135,22 @@ class Elementor_Dynamic_Tags {
         $widgets_manager->register(new Widgets\Course_Purchase_Widget());
         $widgets_manager->register(new Widgets\Breadcrumbs_Widget());
         $widgets_manager->register(new Widgets\User_Courses_Grid_Widget());
-        $widgets_manager->register(new Widgets\Module_Navigation_Widget());
         $widgets_manager->register(new Widgets\Lesson_Progress_Indicator_Widget());
         $widgets_manager->register(new Widgets\User_Progress_Dashboard_Widget());
+        $widgets_manager->register(new Widgets\Course_Featured_Image_Widget());
+        $widgets_manager->register(new Widgets\Module_Featured_Image_Widget());
+        $widgets_manager->register(new Widgets\Lesson_Featured_Image_Widget());
+        $widgets_manager->register(new Widgets\Module_Overview_Widget());
+        
+        error_log('SimpleLMS: 23 widgets registered successfully');
     }
 
     /**
      * Register Simple LMS widget category
      */
     public static function register_widget_category($elements_manager): void {
+        error_log('SimpleLMS register_widget_category() called');
+        
         $elements_manager->add_category(
             'simple-lms',
             [
@@ -119,6 +158,8 @@ class Elementor_Dynamic_Tags {
                 'icon' => 'fa fa-graduation-cap',
             ]
         );
+        
+        error_log('SimpleLMS: Category registered');
     }
 
     /**

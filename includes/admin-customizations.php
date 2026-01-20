@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS;
 
 /**
@@ -258,10 +258,10 @@ class Admin_Customizations {
         return [
             'cb'        => $columns['cb'],
             'title'     => __('Title', 'simple-lms'),
-            'thumbnail' => __('Featured image', 'simple-lms'),
-            'modules'   => __('Number of published modules', 'simple-lms'),
-            'lessons'   => __('Liczba opublikowanych lessons', 'simple-lms'),
-            'date'      => __('Data', 'simple-lms'),
+            'thumbnail' => __('Featured Image', 'simple-lms'),
+            'modules'   => __('Modules', 'simple-lms'),
+            'lessons'   => __('Lessons', 'simple-lms'),
+            'date'      => __('Date', 'simple-lms'),
         ];
     }
 
@@ -297,6 +297,10 @@ class Admin_Customizations {
                 ]);
                 $lesson_count = 0;
                 foreach ($modules as $module) {
+                    if (!$module instanceof \WP_Post) {
+                        continue;
+                    }
+
                     $lessons = get_posts([
                         'post_type' => 'lesson',
                         'posts_per_page' => -1,

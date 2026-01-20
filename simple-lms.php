@@ -4,7 +4,7 @@
  * Plugin URI:  https://webisko.pl/simple-lms
  * Description: LMS plugin for managing courses, modules, and lessons with WooCommerce integration for course sales.
  * Version:     1.5.0
- * Author:      Filip Meyer-Lüters
+ * Author:      Filip Meyer-LĂĽters
  * Author URI:  https://webisko.pl
  * License:     GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -36,11 +36,23 @@
 
 declare(strict_types=1);
 
-namespace SimpleLMS;
-
 if (!defined('ABSPATH')) {
     exit;
 }
+
+/**
+ * Global protection against Elementor save conflicts
+ * This runs before any other hooks to prevent plugin interference
+ */
+add_action('save_post', function($post_id) {
+    $post_type = get_post_type($post_id);
+    if (in_array($post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+        // Remove ALL Simple LMS save_post hooks when saving Elementor templates
+        remove_all_actions('save_post');
+        remove_all_actions('post_updated');
+        error_log('SimpleLMS: Disabled all save_post hooks for Elementor template: ' . $post_id . ' (' . $post_type . ')');
+    }
+}, 1); // Priority 1 - runs before everything else
 
 // Define plugin constants
 define('SIMPLE_LMS_VERSION', '1.5.0');
@@ -48,32 +60,29 @@ define('SIMPLE_LMS_PLUGIN_DIR', \plugin_dir_path(__FILE__));
 define('SIMPLE_LMS_PLUGIN_URL', \plugin_dir_url(__FILE__));
 define('SIMPLE_LMS_PLUGIN_BASENAME', \plugin_basename(__FILE__));
 
-// Load Composer autoloader if available (PSR-4 autoloading)
-// Fallback to require_once if Composer not installed (for legacy setups)
+// ALWAYS load core classes - no matter if Composer exists or not
+// This ensures the plugin works in all environments
+// CORE CLASSES (required for plugin boot)
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-service-container.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-logger.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-error-handler.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-security-service.php';
+
+// MANAGERS (required for plugin boot)
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/HookManager.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/AssetManager.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/CPTManager.php';
+
+// ADDITIONAL CORE CLASSES (will be loaded later but good to load early)
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-cache-handler.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-progress-tracker.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-analytics-tracker.php';
+
+// Load Composer autoloader if available (optional PSR-4 optimization)
 $autoloadFile = SIMPLE_LMS_PLUGIN_DIR . 'vendor/autoload.php';
 if (file_exists($autoloadFile)) {
     require_once $autoloadFile;
-} else {
-    // Manual loading fallback - classes will be loaded via require_once in loadPluginFiles()
-    // This allows plugin to work even without Composer
-    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-service-container.php';
-    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-logger.php';
-    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-error-handler.php';
-    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-security-service.php';
-    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/HookManager.php';
-    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/AssetManager.php';
-    require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/managers/CPTManager.php';
 }
-
-// Use statements for core classes
-use SimpleLMS\ServiceContainer;
-use SimpleLMS\Managers;
-use SimpleLMS\Logger;
-use SimpleLMS\Error_Handler;
-use SimpleLMS\Security_Service;
-use SimpleLMS\Rest_API;
-use SimpleLMS\Cache_Handler;
-use SimpleLMS\Analytics_Retention;
 
 /**
  * Main Plugin Class (refactored with ServiceContainer)
@@ -86,16 +95,16 @@ class Plugin
     /**
      * Service container instance
      *
-     * @var ServiceContainer
+     * @var \SimpleLMS\ServiceContainer
      */
-    private ServiceContainer $container;
+    private \SimpleLMS\ServiceContainer $container;
 
     /**
      * Constructor - initialize with service container
      *
-     * @param ServiceContainer $container Service container
+     * @param \SimpleLMS\ServiceContainer $container Service container
      */
-    public function __construct(ServiceContainer $container)
+    public function __construct(\SimpleLMS\ServiceContainer $container)
     {
         $this->container = $container;
     }
@@ -123,9 +132,9 @@ class Plugin
         \add_action('init', [$this, 'init'], 0);
 
         // Register global error handler early
-        if ($this->container->has(Error_Handler::class)) {
-            /** @var Error_Handler $eh */
-            $eh = $this->container->get(Error_Handler::class);
+        if ($this->container->has(\SimpleLMS\Error_Handler::class)) {
+            /** @var \SimpleLMS\Error_Handler $eh */
+            $eh = $this->container->get(\SimpleLMS\Error_Handler::class);
             $eh->register();
         }
     }
@@ -140,37 +149,36 @@ class Plugin
         $container = $this->container;
 
         // Register HookManager (singleton)
-        $container->singleton(Managers\HookManager::class, function ($c) {
-            return new Managers\HookManager($c);
+        $container->singleton(\SimpleLMS\Managers\HookManager::class, function ($c) {
+            return new \SimpleLMS\Managers\HookManager($c);
         });
 
         // Register AssetManager (singleton)
-        $container->singleton(Managers\AssetManager::class, function ($c) {
-            return new Managers\AssetManager(
+        $container->singleton(\SimpleLMS\Managers\AssetManager::class, function ($c) {
+            return new \SimpleLMS\Managers\AssetManager(
                 SIMPLE_LMS_PLUGIN_DIR,
                 SIMPLE_LMS_PLUGIN_URL,
                 SIMPLE_LMS_VERSION,
-                $c->get(Logger::class)
+                $c->get(\SimpleLMS\Logger::class)
             );
         });
 
         // Register CPTManager (singleton)
-        $container->singleton(Managers\CPTManager::class, function ($c) {
-            return new Managers\CPTManager($c->get(Logger::class));
+        $container->singleton(\SimpleLMS\Managers\CPTManager::class, function ($c) {
+            return new \SimpleLMS\Managers\CPTManager($c->get(\SimpleLMS\Logger::class));
         });
 
         // Register Logger (singleton)
-        $container->singleton(Logger::class, function ($c) {
-            $debug = defined('WP_DEBUG') ? (bool) \WP_DEBUG : false;
-            // Allow enabling verbose logging via option or filter
-            $verboseOpt = (string) \get_option('simple_lms_verbose_logging', 'no') === 'yes';
-            $debugEnabled = (bool) \apply_filters('simple_lms_debug_enabled', ($debug || $verboseOpt));
-            return new Logger('simple-lms', $debugEnabled);
+        $container->singleton(\SimpleLMS\Logger::class, function ($c) {
+            // Disable verbose logging by default to avoid performance issues.
+            // Enable only via filter when explicitly needed.
+            $debugEnabled = (bool) \apply_filters('simple_lms_debug_enabled', false);
+            return new \SimpleLMS\Logger('simple-lms', $debugEnabled);
         });
 
         // Register Error Handler (singleton)
-        $container->singleton(Error_Handler::class, function ($c) {
-            return new Error_Handler($c->get(Logger::class));
+        $container->singleton(\SimpleLMS\Error_Handler::class, function ($c) {
+            return new \SimpleLMS\Error_Handler($c->get(\SimpleLMS\Logger::class));
         });
 
         // Register core classes (will be instantiated when needed)
@@ -188,7 +196,7 @@ class Plugin
 
         // Progress Tracker
         $container->singleton('SimpleLMS\\Progress_Tracker', function ($c) {
-            return new \SimpleLMS\Progress_Tracker($c->get(Logger::class));
+            return new \SimpleLMS\Progress_Tracker($c->get(\SimpleLMS\Logger::class));
         });
 
         // Cache Handler
@@ -198,24 +206,24 @@ class Plugin
 
         // Access Control (refactored to instance with Logger)
         $container->singleton('SimpleLMS\\Access_Control', function ($c) {
-            return new \SimpleLMS\Access_Control($c->get(Logger::class));
+            return new \SimpleLMS\Access_Control($c->get(\SimpleLMS\Logger::class));
         });
 
         // Security Service (nonce + capability helpers) - loaded early
-        $container->singleton(Security_Service::class, function ($c) {
-            return new Security_Service();
+        $container->singleton(\SimpleLMS\Security_Service::class, function ($c) {
+            return new \SimpleLMS\Security_Service();
         });
 
         // Shortcodes (refactored to instance with Logger)
         $container->singleton('SimpleLMS\\LmsShortcodes', function ($c) {
-            return new \SimpleLMS\LmsShortcodes($c->get(Logger::class));
+            return new \SimpleLMS\LmsShortcodes($c->get(\SimpleLMS\Logger::class));
         });
 
         // REST API (with DI: Logger + Security_Service)
         $container->singleton('SimpleLMS\\Rest_API', function ($c) {
             return new \SimpleLMS\Rest_API(
-                $c->get(Logger::class),
-                $c->get(Security_Service::class)
+                $c->get(\SimpleLMS\Logger::class),
+                $c->get(\SimpleLMS\Security_Service::class)
             );
         });
 
@@ -224,7 +232,7 @@ class Plugin
 
         // Analytics Tracker
         $container->singleton('SimpleLMS\\Analytics_Tracker', function ($c) {
-            return new \SimpleLMS\Analytics_Tracker($c->has(Logger::class) ? $c->get(Logger::class) : null);
+            return new \SimpleLMS\Analytics_Tracker($c->has(\SimpleLMS\Logger::class) ? $c->get(\SimpleLMS\Logger::class) : null);
         });
     }
 
@@ -239,36 +247,36 @@ class Plugin
         $container = $this->container;
 
         // Settings (requires class-settings.php)
-        $container->singleton('SimpleLMS\\Settings', function ($c) {
-              return new \SimpleLMS\Settings($c->get(Managers\HookManager::class));
+          $container->singleton('SimpleLMS\\Settings', function ($c) {
+              return new \SimpleLMS\Settings($c->get(\SimpleLMS\Managers\HookManager::class));
         });
 
         // Meta Boxes (requires custom-meta-boxes.php)
-        $container->singleton('SimpleLMS\\Meta_Boxes', function ($c) {
-              return new \SimpleLMS\Meta_Boxes($c->get(Managers\HookManager::class));
+          $container->singleton('SimpleLMS\\Meta_Boxes', function ($c) {
+              return new \SimpleLMS\Meta_Boxes($c->get(\SimpleLMS\Managers\HookManager::class));
         });
 
         // Admin Customizations (requires admin-customizations.php)
         $container->singleton('SimpleLMS\\Admin_Customizations', function ($c) {
-            return new \SimpleLMS\Admin_Customizations($c->get(Managers\HookManager::class));
+            return new \SimpleLMS\Admin_Customizations($c->get(\SimpleLMS\Managers\HookManager::class));
         });
 
         // AJAX Handler (requires ajax-handlers.php)
         $container->singleton('SimpleLMS\\Ajax_Handler', function ($c) {
             return new \SimpleLMS\Ajax_Handler(
-                $c->has(Logger::class) ? $c->get(Logger::class) : null,
-                $c->has(Security_Service::class) ? $c->get(Security_Service::class) : null
+                $c->has(\SimpleLMS\Logger::class) ? $c->get(\SimpleLMS\Logger::class) : null,
+                $c->has(\SimpleLMS\Security_Service::class) ? $c->get(\SimpleLMS\Security_Service::class) : null
             );
         });
 
         // Privacy Handlers (requires class-privacy-handlers.php)
         $container->singleton('SimpleLMS\\Privacy_Handlers', function ($c) {
-            return new \SimpleLMS\Privacy_Handlers($c->has(Logger::class) ? $c->get(Logger::class) : null);
+            return new \SimpleLMS\Privacy_Handlers($c->has(\SimpleLMS\Logger::class) ? $c->get(\SimpleLMS\Logger::class) : null);
         });
 
         // Analytics Retention (requires class-analytics-retention.php)
         $container->singleton('SimpleLMS\\Analytics_Retention', function ($c) {
-            return new \SimpleLMS\Analytics_Retention($c->has(Logger::class) ? $c->get(Logger::class) : null);
+            return new \SimpleLMS\Analytics_Retention($c->has(\SimpleLMS\Logger::class) ? $c->get(\SimpleLMS\Logger::class) : null);
         });
 
         // Access Meta Boxes (requires class-access-meta-boxes.php)
@@ -284,11 +292,11 @@ class Plugin
      */
     private function registerHooks(): void
     {
-        /** @var Managers\HookManager $hookManager */
-        $hookManager = $this->container->get(Managers\HookManager::class);
+        /** @var \SimpleLMS\Managers\HookManager $hookManager */
+        $hookManager = $this->container->get(\SimpleLMS\Managers\HookManager::class);
 
-        /** @var Managers\AssetManager $assetManager */
-        $assetManager = $this->container->get(Managers\AssetManager::class);
+        /** @var \SimpleLMS\Managers\AssetManager $assetManager */
+        $assetManager = $this->container->get(\SimpleLMS\Managers\AssetManager::class);
 
         // Frontend assets
         $hookManager->addAction(
@@ -309,6 +317,14 @@ class Plugin
                 [$this, 'addPluginActionLinks']
             );
         }
+
+        // Cascade delete: when course/module is deleted, delete all children
+        $hookManager->addAction(
+            'before_delete_post',
+            [$this, 'cascadeDeleteChildren'],
+            10,
+            2
+        );
     }
 
     /**
@@ -357,6 +373,12 @@ class Plugin
 
         // Lazy-load Elementor integration only when Elementor is active
         \add_action('elementor_loaded', [$this, 'registerElementorIntegration']);
+        
+        // DEBUG: Write to file to verify hook registration
+        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - elementor_loaded hook registered\n", FILE_APPEND);
+        
+        // ALSO try elementor/init as backup
+        \add_action('elementor/init', [$this, 'registerElementorIntegration'], 1);
 
         // Lazy-load Bricks integration only when Bricks is active
         \add_action('bricks_init', [$this, 'registerBricksIntegration']);
@@ -377,8 +399,8 @@ class Plugin
             // Register WooCommerce Integration service
             $container->singleton('SimpleLMS\\WooCommerce_Integration', function ($c) {
                 return new \SimpleLMS\WooCommerce_Integration(
-                    $c->has(Logger::class) ? $c->get(Logger::class) : null,
-                    $c->has(Security_Service::class) ? $c->get(Security_Service::class) : null
+                    $c->has(\SimpleLMS\Logger::class) ? $c->get(\SimpleLMS\Logger::class) : null,
+                    $c->has(\SimpleLMS\Security_Service::class) ? $c->get(\SimpleLMS\Security_Service::class) : null
                 );
             });
         }
@@ -397,14 +419,26 @@ class Plugin
      */
     public function registerElementorIntegration(): void
     {
+        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - registerElementorIntegration() CALLED\n", FILE_APPEND);
+        
+        error_log('SimpleLMS: registerElementorIntegration() called');
+        
         $elemTags = SIMPLE_LMS_PLUGIN_DIR . 'includes/elementor-dynamic-tags/class-elementor-dynamic-tags.php';
         $elemGuard = SIMPLE_LMS_PLUGIN_DIR . 'includes/compat/elementor-embed-guard.php';
         
         if (file_exists($elemTags)) {
             require_once $elemTags;
             if (class_exists('SimpleLMS\Elementor\Elementor_Dynamic_Tags')) {
+                error_log('SimpleLMS: Calling Elementor_Dynamic_Tags::init()');
+                file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - Calling init()\n", FILE_APPEND);
                 \SimpleLMS\Elementor\Elementor_Dynamic_Tags::init();
+            } else {
+                error_log('SimpleLMS: Elementor_Dynamic_Tags class NOT found');
+                file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - Class NOT found\n", FILE_APPEND);
             }
+        } else {
+            error_log('SimpleLMS: elementor-dynamic-tags file NOT found');
+            file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - File NOT found\n", FILE_APPEND);
         }
         
         if (file_exists($elemGuard)) {
@@ -443,8 +477,8 @@ class Plugin
     {
         \do_action('simple_lms_before_init');
 
-        /** @var Managers\CPTManager $cptManager */
-        $cptManager = $this->container->get(Managers\CPTManager::class);
+        /** @var \SimpleLMS\Managers\CPTManager $cptManager */
+        $cptManager = $this->container->get(\SimpleLMS\Managers\CPTManager::class);
         $cptManager->registerPostTypes();
 
         // Initialize services that have static init() methods (legacy compatibility)
@@ -482,10 +516,10 @@ class Plugin
 
         // REST API - now uses HookManager for endpoint registration
         if ($this->container->has('SimpleLMS\\Rest_API')) {
-            /** @var Rest_API $restApi */
+            /** @var \SimpleLMS\Rest_API $restApi */
             $restApi = $this->container->get('SimpleLMS\\Rest_API');
-            /** @var Managers\HookManager $hookManager */
-            $hookManager = $this->container->get(Managers\HookManager::class);
+            /** @var \SimpleLMS\Managers\HookManager $hookManager */
+            $hookManager = $this->container->get(\SimpleLMS\Managers\HookManager::class);
             $hookManager->addAction('rest_api_init', [$restApi, 'registerEndpoints']);
         }
 
@@ -521,7 +555,7 @@ class Plugin
         // See: registerWooCommerceIntegration(), registerElementorIntegration(), registerBricksIntegration()
 
         if (class_exists('SimpleLMS\Cache_Handler')) {
-            Cache_Handler::init();
+            \SimpleLMS\Cache_Handler::init();
         }
     }
 
@@ -543,26 +577,83 @@ class Plugin
     /**
      * Get service container
      *
-     * @return ServiceContainer
+     * @return \SimpleLMS\ServiceContainer
      */
-    public function getContainer(): ServiceContainer
+    public function getContainer(): \SimpleLMS\ServiceContainer
     {
         return $this->container;
     }
 
-    /**
-     * Plugin activation hook
+    /**     * Cascade delete children when a course or module is deleted
+     * When deleting a course: delete all modules and lessons
+     * When deleting a module: delete all lessons
+     *
+     * @param int $postId Post ID being deleted
+     * @param \WP_Post $post Post object being deleted
+     * @return void
+     */
+    public function cascadeDeleteChildren(int $postId, \WP_Post $post): void
+    {
+        // Only process our custom post types
+        if (!in_array($post->post_type, ['course', 'module'], true)) {
+            return;
+        }
+
+        // Prevent recursion
+        static $processing = [];
+        if (isset($processing[$postId])) {
+            return;
+        }
+        $processing[$postId] = true;
+
+        try {
+            if ($post->post_type === 'course') {
+                // Delete all modules in this course
+                $modules = \get_posts([
+                    'post_type'      => 'module',
+                    'posts_per_page' => -1,
+                    'post_status'    => 'any',
+                    'meta_key'       => 'parent_course',
+                    'meta_value'     => $postId,
+                    'fields'         => 'ids'
+                ]);
+
+                foreach ($modules as $moduleId) {
+                    // This will trigger cascade delete for module's lessons
+                    \wp_delete_post($moduleId, true);
+                }
+            } elseif ($post->post_type === 'module') {
+                // Delete all lessons in this module
+                $lessons = \get_posts([
+                    'post_type'      => 'lesson',
+                    'posts_per_page' => -1,
+                    'post_status'    => 'any',
+                    'meta_key'       => 'parent_module',
+                    'meta_value'     => $postId,
+                    'fields'         => 'ids'
+                ]);
+
+                foreach ($lessons as $lessonId) {
+                    \wp_delete_post($lessonId, true);
+                }
+            }
+        } finally {
+            unset($processing[$postId]);
+        }
+    }
+
+    /**     * Plugin activation hook
      *
      * @return void
      */
     public static function activate(): void
     {
-        $container = ServiceContainer::getInstance();
+        $container = \SimpleLMS\ServiceContainer::getInstance();
 
         // Register and flush CPT rewrites
-        if ($container->has(Managers\CPTManager::class)) {
-            /** @var Managers\CPTManager $cptManager */
-            $cptManager = $container->get(Managers\CPTManager::class);
+        if ($container->has(\SimpleLMS\Managers\CPTManager::class)) {
+            /** @var \SimpleLMS\Managers\CPTManager $cptManager */
+            $cptManager = $container->get(\SimpleLMS\Managers\CPTManager::class);
             $cptManager->flushRewrites();
         }
 
@@ -578,11 +669,74 @@ class Plugin
     {
         // Cleanup scheduled cron jobs
         if (class_exists('SimpleLMS\Analytics_Retention')) {
-            Analytics_Retention::deactivate_cleanup_cron();
+            \SimpleLMS\Analytics_Retention::deactivate_cleanup_cron();
         }
 
         \flush_rewrite_rules();
         \do_action('simple_lms_deactivated');
+    }
+}
+
+/**
+ * Load plugin translations
+ * Hooked to 'init' priority 999 to ensure all plugins have registered their settings first
+ *
+ * @return void
+ */
+function simpleLmsLoadTranslations(): void
+{
+    global $l10n;
+    
+    // Always unload first to ensure clean slate
+    \unload_textdomain('simple-lms');
+    
+    // Also remove from global $l10n array to force fresh load
+    if (isset($l10n['simple-lms'])) {
+        unset($l10n['simple-lms']);
+    }
+    
+    // Clear WordPress translation cache
+    wp_cache_delete('simple-lms', 'translations');
+    
+    // Get plugin language setting (with proper fallback)
+    $language_setting = \get_option('simple_lms_language', 'default');
+    
+    // Validate the setting value
+    $allowed_languages = ['default', 'en_US', 'pl_PL'];
+    if (!in_array($language_setting, $allowed_languages, true)) {
+        $language_setting = 'default';
+    }
+    
+    // For English, explicitly don't load any translation
+    if ($language_setting === 'en_US') {
+        // English is the default source language - use strings from code
+        return;
+    }
+    
+    // Determine which locale to use
+    if ($language_setting === 'pl_PL') {
+        // Force Polish
+        $locale = 'pl_PL';
+    } elseif ($language_setting === 'default') {
+        // Use WordPress default locale
+        $locale = \get_locale();
+    } else {
+        $locale = \get_locale();
+    }
+    
+    // Don't load translation for English
+    if ($locale === 'en_US') {
+        return;
+    }
+    
+    // Build paths
+    $plugin_dir = dirname(SIMPLE_LMS_PLUGIN_BASENAME);
+    $languages_dir = WP_PLUGIN_DIR . '/' . $plugin_dir . '/languages';
+    $mofile = $languages_dir . '/simple-lms-' . $locale . '.mo';
+    
+    // Load the .mo file if it exists
+    if (file_exists($mofile)) {
+        \load_textdomain('simple-lms', $mofile);
     }
 }
 
@@ -593,7 +747,7 @@ class Plugin
  */
 function simpleLmsInit(): Plugin
 {
-    $container = ServiceContainer::getInstance();
+    $container = \SimpleLMS\ServiceContainer::getInstance();
 
     // Register Plugin instance in container
     $container->singleton(Plugin::class, function ($c) {
@@ -607,8 +761,12 @@ function simpleLmsInit(): Plugin
     return $plugin;
 }
 
+// Load plugin translations on init hook (after all plugins loaded and settings registered)
+// This ensures simple_lms_language option can be properly read from the database
+\add_action('init', 'simpleLmsLoadTranslations', 1);
+
 // Boot plugin
-\add_action('plugins_loaded', __NAMESPACE__ . '\\simpleLmsInit', 5);
+\add_action('plugins_loaded', 'simpleLmsInit', 5);
 
 // Register activation/deactivation hooks
 \register_activation_hook(__FILE__, [Plugin::class, 'activate']);

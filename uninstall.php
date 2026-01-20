@@ -14,10 +14,10 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
     exit;
 }
 
-// Check if user wants to keep data (option set in settings)
-$keep_data = get_option('simple_lms_keep_data_on_uninstall', false);
+// Check if user wants to delete all data (option set in settings)
+$delete_data = get_option('simple_lms_delete_data_on_uninstall', 'no');
 
-if ($keep_data) {
+if ($delete_data !== 'yes') {
     // User wants to keep data, exit early
     return;
 }
@@ -38,6 +38,9 @@ function simple_lms_uninstall_remove_posts() {
         ]);
         
         foreach ($posts as $post) {
+            if (!$post instanceof \WP_Post) {
+                continue;
+            }
             // Force delete (skip trash)
             wp_delete_post($post->ID, true);
         }
@@ -60,7 +63,7 @@ function simple_lms_uninstall_remove_options() {
     delete_option('simple_lms_version');
     delete_option('simple_lms_db_version');
     delete_option('simple_lms_analytics_retention_days');
-    delete_option('simple_lms_keep_data_on_uninstall');
+    delete_option('simple_lms_delete_data_on_uninstall');
 }
 
 /**

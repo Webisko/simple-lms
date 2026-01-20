@@ -1,14 +1,12 @@
 <?php
+namespace SimpleLMS;
+
 /**
  * PSR-11 Compatible Service Container for Simple LMS
  *
  * @package SimpleLMS
  * @since 1.4.0
  */
-
-declare(strict_types=1);
-
-namespace SimpleLMS;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -263,7 +261,7 @@ class ServiceContainer implements ContainerInterface
                 $type = $parameter->getType();
 
                 // Skip if no type hint
-                if (null === $type || $type->isBuiltin()) {
+                if (!$type instanceof \ReflectionNamedType || $type->isBuiltin()) {
                     // Try to get default value
                     if ($parameter->isDefaultValueAvailable()) {
                         $dependencies[] = $parameter->getDefaultValue();
@@ -328,7 +326,7 @@ class ServiceContainer implements ContainerInterface
                 $type = $parameter->getType();
 
                 // Skip if no type hint
-                if (null === $type || $type->isBuiltin()) {
+                if (!$type instanceof \ReflectionNamedType || $type->isBuiltin()) {
                     if ($parameter->isDefaultValueAvailable()) {
                         $dependencies[] = $parameter->getDefaultValue();
                     } else {

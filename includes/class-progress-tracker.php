@@ -1,7 +1,4 @@
-﻿<?php
-
-declare(strict_types=1);
-
+<?php
 namespace SimpleLMS;
 
 /**
@@ -122,7 +119,7 @@ class Progress_Tracker {
         
         // Check and upgrade schema if needed
         $currentVersion = get_option('simple_lms_progress_db_version', '0');
-        if (version_compare($currentVersion, '1.3', '<')) {
+        if (version_compare((string) $currentVersion, '1.3', '<')) {
             self::upgradeSchema();
         }
         
@@ -265,7 +262,7 @@ class Progress_Tracker {
         $cacheKey = "simple_lms_progress_{$userId}_{$courseId}";
         $cached = wp_cache_get($cacheKey, \SimpleLMS\Cache_Handler::CACHE_GROUP);
         
-        if ($cached !== false) {
+        if ($cached !== false && is_array($cached)) {
             return $cached;
         }
         
@@ -341,7 +338,7 @@ class Progress_Tracker {
         $cacheKey = "simple_lms_course_stats_{$courseId}";
         $cached = wp_cache_get($cacheKey, \SimpleLMS\Cache_Handler::CACHE_GROUP);
         
-        if ($cached !== false) {
+        if ($cached !== false && is_array($cached)) {
             return $cached;
         }
         
@@ -576,7 +573,7 @@ class Progress_Tracker {
             if (!empty($progress['summary'])) {
                 $summary = $progress['summary'];
                 return sprintf(
-                    '%d kursów (%.1f%% Mediumo)',
+                    '%d kursĂłw (%.1f%% Mediumo)',
                     $summary['total_courses'],
                     $summary['avg_completion']
                 );

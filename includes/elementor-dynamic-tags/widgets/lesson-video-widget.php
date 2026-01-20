@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS\Elementor\Widgets;
 
 /**
@@ -77,7 +77,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'lesson_id',
             [
-                'label' => __('ID lessons (opcjonalne)', 'simple-lms'),
+                'label' => __('Lesson ID (optional)', 'simple-lms'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '',
                 'description' => __('Leave empty to automatically detect current lesson', 'simple-lms'),
@@ -91,7 +91,7 @@ class Lesson_Video_Widget extends Widget_Base {
                 'type' => Controls_Manager::SELECT,
                 'default' => 'custom_field',
                 'options' => [
-                    'custom_field' => __('Z pola niestandardowego lessons', 'simple-lms'),
+                    'custom_field' => __('From lesson custom field', 'simple-lms'),
                     'custom_url' => __('Custom URL', 'simple-lms'),
                 ],
             ]
@@ -137,7 +137,7 @@ class Lesson_Video_Widget extends Widget_Base {
                 'default' => 'featured',
                 'options' => [
                     'featured' => __('Featured lesson thumbnail', 'simple-lms'),
-                    'custom' => __('Custom obraz', 'simple-lms'),
+                    'custom' => __('Custom image', 'simple-lms'),
                 ],
                 'condition' => [
                     'show_poster' => 'yes',
@@ -176,7 +176,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'play_icon',
             [
-                'label' => __('Ikona Play', 'simple-lms'),
+                'label' => __('Play icon', 'simple-lms'),
                 'type' => Controls_Manager::ICONS,
                 'default' => [
                     'value' => 'fas fa-play-circle',
@@ -192,7 +192,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'aspect_ratio',
             [
-                'label' => __('Proporcje (aspect ratio)', 'simple-lms'),
+                'label' => __('Aspect ratio', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '16-9',
                 'options' => [
@@ -241,7 +241,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'autoplay',
             [
-                'label' => __('Automatyczne odtwarzanie', 'simple-lms'),
+                'label' => __('Autoplay', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -251,7 +251,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'muted',
             [
-                'label' => __('Wyciszone', 'simple-lms'),
+                'label' => __('Muted', 'simple-lms'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => '',
                 'return_value' => 'yes',
@@ -271,7 +271,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'show_when_no_video',
             [
-                'label' => __('Gdy brak wideo', 'simple-lms'),
+                'label' => __('When no video', 'simple-lms'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'hide',
                 'options' => [
@@ -284,7 +284,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'no_video_message',
             [
-                'label' => __('Komunikat o braku wideo', 'simple-lms'),
+                'label' => __('No video message', 'simple-lms'),
                 'type' => Controls_Manager::TEXT,
                 'default' => __('Video for this lesson is not yet available.', 'simple-lms'),
                 'condition' => [
@@ -299,7 +299,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->start_controls_section(
             'video_style_section',
             [
-                'label' => __('Kontener wideo', 'simple-lms'),
+                'label' => __('Video container', 'simple-lms'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -381,7 +381,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_control(
             'play_icon_heading',
             [
-                'label' => __('Ikona Play', 'simple-lms'),
+                'label' => __('Play icon', 'simple-lms'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -393,7 +393,7 @@ class Lesson_Video_Widget extends Widget_Base {
         $this->add_responsive_control(
             'play_icon_size',
             [
-                'label' => __('Rozmiar ikony', 'simple-lms'),
+                'label' => __('Icon size', 'simple-lms'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -787,7 +787,7 @@ class Lesson_Video_Widget extends Widget_Base {
             if ($autoplay) $attrs[] = 'autoplay';
             if ($muted) $attrs[] = 'muted';
             
-            return '<video ' . implode(' ', $attrs) . ' style="width: 100%; height: 100%;"><source src="' . esc_url($url) . '" type="video/' . pathinfo($url, PATHINFO_EXTENSION) . '">Twoja przeglądarka nie obsługuje odtwarzania wideo.</video>';
+            return '<video ' . implode(' ', $attrs) . ' style="width: 100%; height: 100%;"><source src="' . esc_url($url) . '" type="video/' . pathinfo($url, PATHINFO_EXTENSION) . '">' . esc_html__('Your browser does not support video playback.', 'simple-lms') . '</video>';
         }
 
         // Fallback - try iframe
@@ -808,7 +808,7 @@ class Lesson_Video_Widget extends Widget_Base {
                     <# if (settings.video_source === 'custom_url' && settings.custom_video_url) { #>
                         {{{ settings.custom_video_url }}}
                     <# } else { #>
-                        <?php echo esc_html__('Preview wideo w edytorze', 'simple-lms'); ?>
+                        <?php echo esc_html__('Video preview in editor', 'simple-lms'); ?>
                     <# } #>
                 </p>
             </div>

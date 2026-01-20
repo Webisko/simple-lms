@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 namespace SimpleLMS;
 
 /**
@@ -12,6 +12,8 @@ namespace SimpleLMS;
 if (!defined('ABSPATH')) {
     exit;
 }
+
+/**
  * Meta boxes handler class
  */
 class Meta_Boxes {
@@ -526,8 +528,8 @@ class Meta_Boxes {
         echo '<div class="module-actions">';
         echo '<div class="module-status-toggle">';
         self::render_status_toggle(
-            __('Published', 'simple-lms'),
-            __('Draft', 'simple-lms'),
+            __('Opublikowany', 'simple-lms'),
+            __('Wersja robocza', 'simple-lms'),
             $isPublished,
             $module_id,
             'module'
@@ -562,10 +564,18 @@ class Meta_Boxes {
      */
     private static function render_lesson_actions(int $lesson_id, bool $isPublished): void {
         echo '<div class="lesson-actions">';
+        
+        // Preview button
+        $lesson_url = get_permalink($lesson_id);
+        if ($lesson_url) {
+            echo '<a href="' . esc_url($lesson_url) . '" class="button lesson-preview-button" target="_blank" style="font-weight: bold;">' . 
+                 esc_html__('Podgląd', 'simple-lms') . '</a>';
+        }
+        
         echo '<div class="lesson-status-toggle">';
         self::render_status_toggle(
-            'Published',
-            'Draft',
+            __('Opublikowany', 'simple-lms'),
+            __('Wersja robocza', 'simple-lms'),
             $isPublished,
             $lesson_id,
             'lesson'
@@ -589,7 +599,7 @@ class Meta_Boxes {
      * @return void
      */
     private static function render_status_toggle(string $labelPublished, string $labelDraft, bool $isPublished, int $objectId, string $type): void {
-        echo '<span class="status-label" data-status="' . ($isPublished ? 'published' : 'draft') . '">' . esc_html($isPublished ? 'Published' : 'Draft') . '</span>';
+        echo '<span class="status-label" data-status="' . ($isPublished ? 'published' : 'draft') . '">' . esc_html($isPublished ? $labelPublished : $labelDraft) . '</span>';
         echo '<label class="toggle-switch">';
         echo '<input type="checkbox" ' . checked($isPublished, true, false) . ' class="toggle-input" data-id="' . esc_attr((string) $objectId) . '" data-type="' . esc_attr($type) . '">';
         echo '<span class="slider"></span>';
@@ -602,20 +612,37 @@ class Meta_Boxes {
     public function save_post_meta($post_id) {
         static $recursion_guard = false;
         if ($recursion_guard) {
+            error_log('SimpleLMS save_post_meta: Recursion guard triggered for post_id ' . $post_id);
             return;
         }
 
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+            error_log('SimpleLMS save_post_meta: Autosave detected for post_id ' . $post_id);
             return;
         }
 
         if (!current_user_can('edit_post', $post_id)) {
+            error_log('SimpleLMS save_post_meta: User cannot edit post ' . $post_id);
             return;
         }
 
-        $recursion_guard = true;
-
+        // Skip Elementor templates and library posts
         $post_type = get_post_type($post_id);
+        error_log('SimpleLMS save_post_meta: Processing post_id ' . $post_id . ' of type: ' . $post_type);
+        
+        if (in_array($post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+            error_log('SimpleLMS save_post_meta: Skipping Elementor template/library post ' . $post_id);
+            return;
+        }
+
+        // Skip if this is an Elementor Ajax save
+        if (defined('ELEMENTOR_VERSION') && !empty($_POST['actions'])) {
+            error_log('SimpleLMS save_post_meta: Skipping Elementor Ajax save for post ' . $post_id);
+            return;
+        }
+
+        error_log('SimpleLMS save_post_meta: Proceeding with save for post ' . $post_id . ' (' . $post_type . ')');
+        $recursion_guard = true;
 
         // Handle course basic info
         if ($post_type === 'course' && 
@@ -825,6 +852,12 @@ class Meta_Boxes {
         }
 
         $post_type = get_post_type($post_id);
+        
+        // Skip Elementor templates and library posts
+        if (in_array($post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+            return;
+        }
+        
         if ($post_type !== 'lesson') {
             return;
         }
@@ -868,7 +901,7 @@ class Meta_Boxes {
             return '';
         }
 
-        $preview_html = '<div class="video-preview" style="margin-top: 15px; Padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: #f9f9f9; max-width: 100%;">';
+        $preview_html = '<div class="video-preview" style="margin: 0; padding: 0; border: none; background: transparent; width: 100%; max-width: 100%; overflow: hidden;">';
 
         if ($video_type === 'youtube' && $video_url) {
             // Extract YouTube ID with improved regex
@@ -880,8 +913,8 @@ class Meta_Boxes {
             }
             
             if ($youtube_id) {
-                $preview_html .= '<div style="position: reyearsive; Padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">';
-                $preview_html .= '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/' . \esc_attr($youtube_id) . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                $preview_html .= '<div style="position: relative; max-width: 100%; overflow: hidden;">';
+                $preview_html .= '<iframe style="width: 100%; height: auto; aspect-ratio: 16/9;" src="https://www.youtube.com/embed/' . \esc_attr($youtube_id) . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 $preview_html .= '</div>';
             } else {
                 $preview_html .= '<p style="color: #d63638;">' . \__('Invalid YouTube link. Check URL format.', 'simple-lms') . '</p>';
@@ -897,8 +930,8 @@ class Meta_Boxes {
             }
             
             if ($vimeo_id) {
-                $preview_html .= '<div style="position: reyearsive; Padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">';
-                $preview_html .= '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://player.vimeo.com/video/' . \esc_attr($vimeo_id) . '" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+                $preview_html .= '<div style="position: relative; max-width: 100%; overflow: hidden;">';
+                $preview_html .= '<iframe style="width: 100%; height: auto; aspect-ratio: 16/9;" src="https://player.vimeo.com/video/' . \esc_attr($vimeo_id) . '" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
                 $preview_html .= '</div>';
             } else {
                 $preview_html .= '<p style="color: #d63638;">' . \__('Invalid Vimeo link. Check URL format.', 'simple-lms') . '</p>';
@@ -1170,7 +1203,7 @@ class Meta_Boxes {
         echo '<input type="number" min="0" step="1" style="width:90px; margin-top:4px;" name="_access_duration_value" value="' . esc_attr($access_duration_value) . '" /> ';
         echo '<select name="_access_duration_unit" style="width:120px;">';
         echo '<option value="days"' . selected($access_duration_unit, 'days', false) . '>' . esc_html__('days', 'simple-lms') . '</option>';
-        echo '<option value="weeks"' . selected($access_duration_unit, 'weeks', false) . '>' . esc_html__('tygodays', 'simple-lms') . '</option>';
+        echo '<option value="weeks"' . selected($access_duration_unit, 'weeks', false) . '>' . esc_html__('weeks', 'simple-lms') . '</option>';
         echo '<option value="months"' . selected($access_duration_unit, 'months', false) . '>' . esc_html__('months', 'simple-lms') . '</option>';
         echo '<option value="years"' . selected($access_duration_unit, 'years', false) . '>' . esc_html__('years', 'simple-lms') . '</option>';
         echo '</select>';
@@ -1257,11 +1290,13 @@ class Meta_Boxes {
                 // Group lessons by parent_module in PHP (no additional queries)
                 $lessons_by_module = [];
                 foreach ($all_lessons as $lesson) {
-                    $parent_module = get_post_meta($lesson->ID, 'parent_module', true);
-                    if (!isset($lessons_by_module[$parent_module])) {
-                        $lessons_by_module[$parent_module] = [];
+                    if ($lesson instanceof \WP_Post) {
+                        $parent_module = get_post_meta($lesson->ID, 'parent_module', true);
+                        if (!isset($lessons_by_module[$parent_module])) {
+                            $lessons_by_module[$parent_module] = [];
+                        }
+                        $lessons_by_module[$parent_module][] = $lesson;
                     }
-                    $lessons_by_module[$parent_module][] = $lesson;
                 }
             } else {
                 $lessons_by_module = [];
@@ -1412,7 +1447,7 @@ class Meta_Boxes {
         
         // Module Structure section (fixed)
         echo '<div class="module-fixed-section" style="background: #fff; border: 1px solid #ccd0d4; border-radius: 4px; margin-bottom: 20px;">';
-        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Struktura MODULE', 'simple-lms') . '</h2>';
+        echo '<h2 style="margin: 0; Padding: 12px 20px; border-bottom: 1px solid #ccd0d4; background: #f7f7f7; font-size: 16px;">' . __('Struktura modułu', 'simple-lms') . '</h2>';
         echo '<div style="Padding: 20px;">';
         self::render_module_hierarchy_content($post);
         echo '</div>';
@@ -1425,7 +1460,7 @@ class Meta_Boxes {
      * Render module hierarchy content (extracted from metabox)
      */
     public function render_module_hierarchy_content($post) {
-        wp_nonce_field('module_hierarchy_nonce', 'module_hierarchy_nonce');
+        wp_nonce_field('module_hierarchy_nonce', 'module_nonce_field');
 
         $lessons = get_posts([
             'post_type'      => 'lesson',
@@ -1460,7 +1495,7 @@ class Meta_Boxes {
         echo '<div class="add-lesson-form">';
         echo '<h3 class="add-lesson-heading">' . esc_html__('Add Lesson', 'simple-lms') . '</h3>';
         echo '<input type="text" name="new_lesson_title_' . esc_attr($post->ID) . 
-             '" placeholder="' . esc_attr__('Wpisz Lesson Title...', 'simple-lms') . '" class="widefat" />';
+             '" placeholder="' . esc_attr__('Enter lesson title', 'simple-lms') . '" class="widefat" />';
         echo '<button type="button" class="button button-primary add-lessons-btn" data-module-id="' . 
              esc_attr($post->ID) . '">';
         echo esc_html__('Add Lesson', 'simple-lms');
@@ -1622,7 +1657,7 @@ class Meta_Boxes {
      * Render course structure metabox (main content area)
      */
     public function render_course_structure_meta_box($post) {
-        wp_nonce_field('course_structure_nonce', 'course_structure_nonce');
+        wp_nonce_field('course_structure_nonce', 'course_nonce_field');
         
         // Use existing course structure content
         self::render_course_structure_content($post);
@@ -1716,13 +1751,13 @@ class Meta_Boxes {
         self::render_lesson_featured_image_content($post);
         echo '</div>';
         
-        // Video section (middle column)
-        echo '<div style="flex: 1;">';
+        // Video section (middle column - fixed width)
+        echo '<div style="flex: 0 0 400px;">';
         self::render_lesson_video_content($post);
         echo '</div>';
         
-        // Video preview section (right column - will be popuyearsed by JS)
-        echo '<div style="flex: 1;" id="lesson-video-preview-container">';
+        // Video preview section (right column - takes remaining space)
+        echo '<div style="flex: 1; min-width: 300px; max-width: 100%; overflow: hidden;" id="lesson-video-preview-container">';
         // Video preview will be inserted here by JavaScript
         echo '</div>';
         
@@ -1806,7 +1841,7 @@ class Meta_Boxes {
         $video_file_id = get_post_meta($post->ID, 'lesson_video_file_id', true);
         
         echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Film lessons', 'simple-lms') . '</h3>';
-        echo '<div class="lesson-video-settings">';
+        echo '<div class="lesson-video-settings" style="max-width: 100%;">';
         
         // Video type selector
         echo '<p><strong>' . __('Typ filmu:', 'simple-lms') . '</strong></p>';
@@ -1861,6 +1896,15 @@ class Meta_Boxes {
         ?>
         <script>
         jQuery(document).ready(function($) {
+            // Initialize: show correct field based on current video type
+            var currentType = $('input[name=lesson_video_type]:checked').val();
+            $(".video-url-section, .video-file-section").hide();
+            if (currentType === "youtube" || currentType === "vimeo" || currentType === "url") {
+                $(".video-url-section").show();
+            } else if (currentType === "file") {
+                $(".video-file-section").show();
+            }
+            
             // Set initial preview
             var initialPreview = <?php echo json_encode($initial_preview); ?>;
             if (initialPreview) {
@@ -1958,6 +2002,17 @@ class Meta_Boxes {
      */
     public function save_lesson_data($post_id) {
         if (!current_user_can('edit_post', $post_id)) {
+            return;
+        }
+        
+        // Skip Elementor templates and library posts
+        $post_type = get_post_type($post_id);
+        if (in_array($post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
+            return;
+        }
+        
+        // Skip if this is an Elementor Ajax save
+        if (defined('ELEMENTOR_VERSION') && !empty($_POST['actions'])) {
             return;
         }
         
@@ -2078,7 +2133,7 @@ class Meta_Boxes {
             $attachments = [];
         }
         echo '<div class="lesson-attachments-container">';
-        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Downloadable files for students', 'simple-lms') . '</h3>';
+        echo '<h3 style="margin-top: 0; font-size: 18px; color: #333;">' . __('Downloadable files for this lesson', 'simple-lms') . '</h3>';
         echo '<div id="attachments-list">';
         if (!empty($attachments)) {
             foreach ($attachments as $index => $attachment_id) {
