@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 echo "==========================================\n";
-echo "  Simple LMS - Manual Tests v1.4.0\n";
+echo "  Simple LMS - Manual Tests v1.0.0\n";
 echo "==========================================\n\n";
 
 $passed = 0;

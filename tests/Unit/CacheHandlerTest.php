@@ -27,6 +27,10 @@ class CacheHandlerTest extends TestCase
             ->with('U', true, 123)
             ->andReturn(1732550400);
 
+        Functions\expect('sanitize_key')
+            ->once()
+            ->andReturnUsing(static fn ($value) => (string) $value);
+
         // Use reflection to access private method
         $reflection = new \ReflectionClass(Cache_Handler::class);
         $method = $reflection->getMethod('generateCacheKey');
@@ -48,6 +52,15 @@ class CacheHandlerTest extends TestCase
             $this->createMockPost(1, 'module'),
             $this->createMockPost(2, 'module'),
         ];
+
+        Functions\expect('get_post_modified_time')
+            ->once()
+            ->with('U', true, $courseId)
+            ->andReturn(1732550400);
+
+        Functions\expect('sanitize_key')
+            ->once()
+            ->andReturnUsing(static fn ($value) => (string) $value);
 
         // Mock wp_cache_get to return cached data
         Functions\expect('wp_cache_get')
@@ -78,13 +91,22 @@ class CacheHandlerTest extends TestCase
         $courseId = 123;
 
         // Mock post object
-        $post = $this->createMockPost($moduleId, 'module');
+        $post = new \WP_Post();
+        $post->ID = $moduleId;
+        $post->post_type = 'module';
+
+        Functions\expect('get_post_modified_time')
+            ->atLeast()
+            ->once()
+            ->andReturn(1732550400);
+
+        Functions\expect('sanitize_key')
+            ->atLeast()
+            ->once()
+            ->andReturnUsing(static fn ($value) => (string) $value);
 
         // Mock get_post_type
-        Functions\expect('get_post_type')
-            ->once()
-            ->with($moduleId)
-            ->andReturn('module');
+        Functions\expect('get_post_type')->never();
 
         // Mock get_post_meta to return parent course
         Functions\expect('get_post_meta')
@@ -127,6 +149,15 @@ class CacheHandlerTest extends TestCase
     {
         $courseId = 123;
 
+        // Cache keys for course_stats and course_modules both use the post modified time
+        Functions\expect('get_post_modified_time')
+            ->times(2)
+            ->andReturn(1732550400);
+
+        Functions\expect('sanitize_key')
+            ->times(2)
+            ->andReturnUsing(static fn ($value) => (string) $value);
+
         // Mock wp_cache_get to return false (no cache)
         Functions\expect('wp_cache_get')
             ->once()
@@ -135,7 +166,7 @@ class CacheHandlerTest extends TestCase
         // Mock getCourseModules (it's called internally)
         Functions\expect('wp_cache_get')
             ->once()
-            ->andReturn([]); // No modules
+            ->andReturn(false); // Cache miss -> query returns no modules
 
         Functions\expect('get_posts')
             ->once()

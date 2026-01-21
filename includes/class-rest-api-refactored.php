@@ -3,7 +3,7 @@
  * REST API - Refactored with Dependency Injection
  * 
  * @package SimpleLMS
- * @since 1.5.0
+ * @since 1.0.0
  */
 
 declare(strict_types=1);

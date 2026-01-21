@@ -157,7 +157,7 @@ class SimpleIntegrationTest extends TestCase
         // XSS prevention
         $input = '<script>alert("xss")</script>Hello';
         $sanitized = strip_tags($input);
-        $this->assertEquals('Hello', $sanitized, 'Should strip HTML tags');
+        $this->assertEquals('alert("xss")Hello', $sanitized, 'Should strip HTML tags');
     }
 
     /**

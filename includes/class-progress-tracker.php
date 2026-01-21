@@ -51,7 +51,7 @@ class Progress_Tracker {
             $instance = $container->get(Progress_Tracker::class);
             $instance->register();
         } catch (\Throwable $e) {
-            if (function_exists('error_log')) {
+            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
                 error_log('Simple LMS Progress_Tracker init failure: ' . $e->getMessage());
             }
         }
@@ -111,7 +111,8 @@ class Progress_Tracker {
             KEY updated_at (updated_at),
             KEY user_lesson_completed (user_id, lesson_id, completed),
             KEY course_stats (course_id, completed, user_id),
-            KEY user_course_updated (user_id, course_id, updated_at)
+            KEY user_course_updated (user_id, course_id, updated_at),
+            KEY user_course_completed (user_id, course_id, completed)
         ) {$charset};";
         
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
@@ -119,12 +120,12 @@ class Progress_Tracker {
         
         // Check and upgrade schema if needed
         $currentVersion = get_option('simple_lms_progress_db_version', '0');
-        if (version_compare((string) $currentVersion, '1.3', '<')) {
+        if (version_compare((string) $currentVersion, '1.4', '<')) {
             self::upgradeSchema();
         }
         
         // Add version option to track schema changes
-        update_option('simple_lms_progress_db_version', '1.3');
+        update_option('simple_lms_progress_db_version', '1.4');
     }
     
     /**
@@ -165,6 +166,11 @@ class Progress_Tracker {
         // Composite index for fast last-lesson lookups per user+course
         if (!in_array('user_course_updated', $existingIndexes)) {
             $wpdb->query("ALTER TABLE `{$tableNameSafe}` ADD INDEX user_course_updated (user_id, course_id, updated_at)");
+        }
+
+        // Composite index for user+course+completed queries
+        if (!in_array('user_course_completed', $existingIndexes)) {
+            $wpdb->query("ALTER TABLE `{$tableNameSafe}` ADD INDEX user_course_completed (user_id, course_id, completed)");
         }
     }
     
@@ -244,7 +250,9 @@ class Progress_Tracker {
             return false;
             
         } catch (\Exception $e) {
-            error_log('Simple LMS Progress Error: ' . $e->getMessage());
+            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+                error_log('Simple LMS Progress Error: ' . $e->getMessage());
+            }
             return false;
         }
     }
@@ -321,7 +329,9 @@ class Progress_Tracker {
             return $result;
             
         } catch (\Exception $e) {
-            error_log('Simple LMS Progress Error (getUserProgress): ' . $e->getMessage());
+            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+                error_log('Simple LMS Progress Error (getUserProgress): ' . $e->getMessage());
+            }
             return ['user_id' => $userId, 'error' => $e->getMessage()];
         }
     }
@@ -382,7 +392,9 @@ class Progress_Tracker {
             return $result;
             
         } catch (\Exception $e) {
-            error_log('Simple LMS Course Stats Error: ' . $e->getMessage());
+            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+                error_log('Simple LMS Course Stats Error: ' . $e->getMessage());
+            }
             return ['course_id' => $courseId, 'error' => $e->getMessage()];
         }
     }
@@ -487,7 +499,7 @@ class Progress_Tracker {
      */
     public function handleMarkLessonComplete(): void {
         try {
-            check_ajax_referer('simple-lms-progress', 'nonce');
+            check_ajax_referer('simple-lms-nonce', 'nonce');
             
             $userId = get_current_user_id();
             if (!$userId) {
@@ -530,7 +542,7 @@ class Progress_Tracker {
      */
     public function handleGetUserProgress(): void {
         try {
-            check_ajax_referer('simple-lms-progress', 'nonce');
+            check_ajax_referer('simple-lms-nonce', 'nonce');
             
             $userId = get_current_user_id();
             if (!$userId) {
@@ -573,7 +585,7 @@ class Progress_Tracker {
             if (!empty($progress['summary'])) {
                 $summary = $progress['summary'];
                 return sprintf(
-                    '%d kursĂłw (%.1f%% Mediumo)',
+                    __('%d kursów (%.1f%% średnio)', 'simple-lms'),
                     $summary['total_courses'],
                     $summary['avg_completion']
                 );

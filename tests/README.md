@@ -1,7 +1,11 @@
 # Simple LMS Test Suite
 
 ## Przegląd
-Automatyczne testy dla Simple LMS v1.3.1 używające PHPUnit + Brain Monkey.
+Automatyczne testy dla Simple LMS v1.0.0.
+
+W tym repo są dwa tryby:
+- **Unit (Brain Monkey)**: szybkie testy bez uruchamiania WordPressa (działają w CI na każdą zmianę).
+- **Integration (WordPress / wp-env)**: testy wymagające pełnego runtime WordPressa (uruchamiane osobnym jobem w CI).
 
 ## Instalacja
 
@@ -19,8 +23,25 @@ choco install composer
 # W folderze wtyczki:
 cd "C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms"
 
-# Instalacja
+# Instalacja zależności testowych (w folderze tests/)
+cd tests
 composer install
+```
+
+## Testy integracyjne (wp-env)
+
+Wymagania:
+- Docker Desktop (uruchomiony)
+- Node.js (>= 18)
+
+Uruchomienie wp-env i testów integracyjnych (jak w CI):
+```powershell
+# Z katalogu głównego wtyczki
+cd "C:\Users\fimel\Local Sites\simple-ecosystem\app\public\wp-content\plugins\simple-lms"
+
+npm run wp-env:start
+npm run test:wp
+npm run wp-env:stop
 ```
 
 ## Uruchamianie testów
@@ -46,6 +67,8 @@ vendor/bin/phpunit --testsuite="Unit Tests"
 ```powershell
 vendor/bin/phpunit --testsuite="Integration Tests"
 ```
+
+Uwaga: te testy wymagają środowiska WordPress (np. `wp-env`). W zwykłym uruchomieniu (Brain Monkey) będą pomijane.
 
 ### Pojedynczy plik testowy
 ```powershell

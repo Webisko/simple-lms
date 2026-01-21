@@ -41,20 +41,31 @@ class AjaxHandlerTest extends TestCase
     public function testVerifyAjaxRequestFailsWithInvalidNonce(): void
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Błąd weryfikacji bezpieczeństwa');
+        $this->expectExceptionMessage('Security verification failed');
 
-        // Mock check_ajax_referer to return false
-        Functions\expect('check_ajax_referer')
+        $_POST['action'] = 'add_new_module';
+        $_POST['nonce'] = 'bad';
+
+        Functions\expect('sanitize_key')
             ->once()
-            ->with('simple-lms-nonce', 'security', false)
+            ->andReturn('add_new_module');
+
+        Functions\expect('wp_verify_nonce')
+            ->once()
+            ->with('bad', 'simple-lms-nonce')
             ->andReturn(false);
+
+        Functions\expect('__')
+            ->once()
+            ->with('Security verification failed', 'simple-lms')
+            ->andReturn('Security verification failed');
 
         // Use reflection to access private method
         $reflection = new \ReflectionClass(Ajax_Handler::class);
         $method = $reflection->getMethod('verifyAjaxRequest');
         $method->setAccessible(true);
 
-        $method->invoke(null, 'edit_posts');
+        $method->invoke(null);
     }
 
     /**
@@ -63,24 +74,39 @@ class AjaxHandlerTest extends TestCase
     public function testVerifyAjaxRequestFailsWithoutCapability(): void
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('Niewystarczające uprawnienia');
+        $this->expectExceptionMessage('Insufficient permissions');
 
-        // Mock check_ajax_referer to return true
-        Functions\expect('check_ajax_referer')
+        $_POST['action'] = 'add_new_module';
+        $_POST['nonce'] = 'ok';
+
+        Functions\expect('sanitize_key')
+            ->once()
+            ->andReturn('add_new_module');
+
+        Functions\expect('wp_verify_nonce')
+            ->once()
+            ->with('ok', 'simple-lms-nonce')
+            ->andReturn(1);
+
+        Functions\expect('is_user_logged_in')
             ->once()
             ->andReturn(true);
 
-        // Mock current_user_can to return false
         Functions\expect('current_user_can')
             ->once()
             ->with('edit_posts')
             ->andReturn(false);
 
+        Functions\expect('__')
+            ->once()
+            ->with('Insufficient permissions', 'simple-lms')
+            ->andReturn('Insufficient permissions');
+
         $reflection = new \ReflectionClass(Ajax_Handler::class);
         $method = $reflection->getMethod('verifyAjaxRequest');
         $method->setAccessible(true);
 
-        $method->invoke(null, 'edit_posts');
+        $method->invoke(null);
     }
 
     /**
@@ -88,7 +114,19 @@ class AjaxHandlerTest extends TestCase
      */
     public function testVerifyAjaxRequestSucceedsWithValidCredentials(): void
     {
-        Functions\expect('check_ajax_referer')
+        $_POST['action'] = 'add_new_module';
+        $_POST['nonce'] = 'ok';
+
+        Functions\expect('sanitize_key')
+            ->once()
+            ->andReturn('add_new_module');
+
+        Functions\expect('wp_verify_nonce')
+            ->once()
+            ->with('ok', 'simple-lms-nonce')
+            ->andReturn(1);
+
+        Functions\expect('is_user_logged_in')
             ->once()
             ->andReturn(true);
 
@@ -102,7 +140,7 @@ class AjaxHandlerTest extends TestCase
         $method->setAccessible(true);
 
         // Should not throw exception
-        $method->invoke(null, 'edit_posts');
+        $method->invoke(null);
 
         $this->assertTrue(true);
     }

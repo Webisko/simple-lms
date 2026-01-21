@@ -474,7 +474,7 @@ class Meta_Boxes {
         echo '<span class="module-toggle chevron-down" data-module-id="' . esc_attr($module_id) . '"></span>';
         echo '</span>';
         echo '<a href="' . esc_url(get_edit_post_link($module_id)) . '" class="module-title-link">' . esc_html($module->post_title) . '</a>';
-        echo '<span class="module-lesson-count"> (' . esc_html(LmsShortcodes::getLessonsCountText($lesson_count)) . ')</span>';
+        echo '<span class="module-lesson-count"> (' . esc_html(Lesson_Helper::getLessonsCountText($lesson_count)) . ')</span>';
         echo '</span>';
         self::render_module_actions((int) $module_id, $module->post_status === 'publish');
         echo '</div>';
@@ -604,6 +604,76 @@ class Meta_Boxes {
         echo '<input type="checkbox" ' . checked($isPublished, true, false) . ' class="toggle-input" data-id="' . esc_attr((string) $objectId) . '" data-type="' . esc_attr($type) . '">';
         echo '<span class="slider"></span>';
         echo '</label>';
+    }
+
+    /**
+     * Batch load modules and lessons for a course to avoid N+1 queries.
+     *
+     * @param int $course_id
+     * @return array{modules: array, lessons_by_module: array}
+     */
+    private static function get_course_hierarchy_data(int $course_id): array {
+        $modules = get_posts([
+            'post_type'              => 'module',
+            'posts_per_page'         => -1,
+            'post_status'            => ['publish', 'draft'],
+            'meta_key'               => 'parent_course',
+            'meta_value'             => $course_id,
+            'orderby'                => ['menu_order' => 'ASC', 'ID' => 'ASC'],
+            'order'                  => 'ASC',
+            'no_found_rows'          => true,
+            'update_post_meta_cache' => true,
+            'update_post_term_cache' => false,
+        ]);
+
+        $lessons_by_module = [];
+
+        if ($modules) {
+            $module_ids = array_map('intval', wp_list_pluck($modules, 'ID'));
+
+            if ($module_ids) {
+                $all_lessons = get_posts([
+                    'post_type'              => 'lesson',
+                    'posts_per_page'         => -1,
+                    'post_status'            => ['publish', 'draft'],
+                    'meta_query'             => [
+                        [
+                            'key'     => 'parent_module',
+                            'value'   => $module_ids,
+                            'compare' => 'IN',
+                            'type'    => 'NUMERIC',
+                        ],
+                    ],
+                    'orderby'                => ['menu_order' => 'ASC', 'ID' => 'ASC'],
+                    'order'                  => 'ASC',
+                    'no_found_rows'          => true,
+                    'update_post_meta_cache' => true,
+                    'update_post_term_cache' => false,
+                ]);
+
+                foreach ($all_lessons as $lesson) {
+                    if (!$lesson instanceof \WP_Post) {
+                        continue;
+                    }
+
+                    $parent_module = (int) get_post_meta($lesson->ID, 'parent_module', true);
+                    if (!$parent_module) {
+                        continue;
+                    }
+
+                    if (!isset($lessons_by_module[$parent_module])) {
+                        $lessons_by_module[$parent_module] = [];
+                    }
+
+                    $lessons_by_module[$parent_module][] = $lesson;
+                }
+            }
+        }
+
+        return [
+            'modules' => $modules ?: [],
+            'lessons_by_module' => $lessons_by_module,
+        ];
     }
 
     /**
@@ -1254,54 +1324,13 @@ class Meta_Boxes {
     public function render_course_structure_content($post) {
         wp_nonce_field('course_hierarchy_nonce', 'course_hierarchy_nonce');
 
-        // Batch load modules (1 query)
-        $modules = get_posts([
-            'post_type'      => 'module',
-            'posts_per_page' => -1,
-            'post_status'    => ['publish', 'draft'],
-            'meta_key'       => 'parent_course',
-            'meta_value'     => $post->ID,
-            'orderby'        => ['menu_order' => 'ASC', 'ID' => 'ASC'],
-            'order'          => 'ASC'
-        ]);
+        $hierarchy = self::get_course_hierarchy_data((int) $post->ID);
+        $modules = $hierarchy['modules'];
+        $lessons_by_module = $hierarchy['lessons_by_module'];
 
         echo '<div class="course-structure">';
         
         if ($modules) {
-            // Batch load all lessons for all modules (1 query instead of N queries)
-            $module_ids = wp_list_pluck($modules, 'ID');
-            
-            if (!empty($module_ids)) {
-                $all_lessons = get_posts([
-                    'post_type'      => 'lesson',
-                    'posts_per_page' => -1,
-                    'post_status'    => ['publish', 'draft'],
-                    'meta_query'     => [
-                        [
-                            'key'     => 'parent_module',
-                            'value'   => $module_ids,
-                            'compare' => 'IN'
-                        ]
-                    ],
-                    'orderby'        => ['menu_order' => 'ASC', 'ID' => 'ASC'],
-                    'order'          => 'ASC'
-                ]);
-
-                // Group lessons by parent_module in PHP (no additional queries)
-                $lessons_by_module = [];
-                foreach ($all_lessons as $lesson) {
-                    if ($lesson instanceof \WP_Post) {
-                        $parent_module = get_post_meta($lesson->ID, 'parent_module', true);
-                        if (!isset($lessons_by_module[$parent_module])) {
-                            $lessons_by_module[$parent_module] = [];
-                        }
-                        $lessons_by_module[$parent_module][] = $lesson;
-                    }
-                }
-            } else {
-                $lessons_by_module = [];
-            }
-            
             self::render_modules_list($modules, $lessons_by_module);
         } else {
             echo '<p>' . esc_html__('Add first module to start building the course.', 'simple-lms') . '</p>';
@@ -2047,6 +2076,11 @@ class Meta_Boxes {
      */
     public function ajax_generate_video_preview() {
         check_ajax_referer('video_preview_nonce', 'nonce');
+
+        if (!current_user_can('edit_posts')) {
+            wp_send_json_error(__('No permission', 'simple-lms'));
+            return;
+        }
         
         $type = sanitize_text_field($_POST['type'] ?? '');
         $url = esc_url_raw($_POST['url'] ?? '');
@@ -2075,7 +2109,7 @@ class Meta_Boxes {
         $attachment_ids = $_POST['attachment_ids'] ?? [];
         
         if (!$post_id || !current_user_can('edit_post', $post_id)) {
-            wp_send_json_error('Brak uprawnień');
+            wp_send_json_error(__('No permission', 'simple-lms'));
             return;
         }
         
@@ -2097,7 +2131,10 @@ class Meta_Boxes {
             delete_post_meta($post_id, 'lesson_attachments');
         }
         
-        wp_send_json_success(['message' => 'Attachments zostały zapisane', 'count' => count($clean_attachments)]);
+        wp_send_json_success([
+            'message' => __('Attachments saved', 'simple-lms'),
+            'count' => count($clean_attachments)
+        ]);
     }
     
     /**

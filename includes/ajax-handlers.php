@@ -1,14 +1,14 @@
 <?php
+/**
+ * AJAX request handlers for Simple LMS.
+ *
+ * @package SimpleLMS
+ * @since 1.0.0
+ */
+
 declare(strict_types=1);
 
 namespace SimpleLMS;
-
-/**
- * AJAX request handlers for Simple LMS
- * 
- * @package SimpleLMS
- * @since 1.0.1
- */
 
 // Import WordPress functions
 use function wp_verify_nonce;
@@ -23,7 +23,7 @@ use function update_user_meta;
 use function current_time;
 use const MINUTE_IN_SECONDS;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
@@ -32,7 +32,8 @@ if (!defined('ABSPATH')) {
  * 
  * Handles all AJAX operations for the LMS functionality
  */
-class Ajax_Handler {
+class Ajax_Handler
+{
 
     /** @var Logger|null */
     private static ?Logger $logger = null;
@@ -128,6 +129,12 @@ class Ajax_Handler {
         
         // Elementor editor preview
         add_action('wp_ajax_simple_lms_get_course_preview', [__CLASS__, 'handleGetCoursePreview']);
+
+        // Auto-tagging hooks for modules/lessons and related updates
+        add_action('save_post', [__CLASS__, 'auto_tag_module_on_save'], 20, 3);
+        add_action('save_post', [__CLASS__, 'auto_tag_lesson_on_save'], 20, 3);
+        add_action('post_updated', [__CLASS__, 'update_tags_on_course_update'], 20, 3);
+        add_action('post_updated', [__CLASS__, 'update_tags_on_module_update'], 20, 3);
 
         if (self::$logger) {
             self::$logger->debug('Ajax_Handler hooks registered');
@@ -255,36 +262,46 @@ class Ajax_Handler {
                     self::addNewModule();
                     break;
                 case 'add_new_lesson_from_module':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::add_new_lesson($_POST);
                     break;
                 case 'duplicate_lesson':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::duplicate_lesson($_POST);
                     break;
                 case 'delete_lesson':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::delete_lesson($_POST);
                     break;
                 case 'duplicate_module':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::duplicate_module($_POST);
                     break;
                 case 'delete_module':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::delete_module($_POST);
                     break;
                 case 'save_course_settings':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::save_course_settings($_POST);
                     break;
                 case 'update_lesson_status':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::update_lesson_status($_POST);
                     break;
                 case 'update_module_status':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- verifyAjaxRequest() already ran.
                     self::update_module_status($_POST);
                     break;
                 case 'bulk_update_tags':
                     self::bulk_update_tags();
                     break;
                 case 'simple_lms_complete_lesson':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- handler verifies its own nonce.
                     self::completeLessonHandler($_POST);
                     break;
                 case 'simple_lms_uncomplete_lesson':
+                    // phpcs:ignore WordPress.Security.NonceVerification.Missing -- handler verifies its own nonce.
                     self::uncompleteLessonHandler($_POST);
                     break;
                 default:
@@ -370,22 +387,20 @@ class Ajax_Handler {
 
         // Accept both 'nonce' and legacy 'security'
         $nonce = $_POST['nonce'] ?? $_POST['security'] ?? '';
-        
-        error_log('SimpleLMS AJAX verifyAjaxRequest: action=' . $action . ', nonce=' . substr((string)$nonce, 0, 10) . '..., has_nonce=' . (!empty($nonce) ? 'yes' : 'no'));
+
+        if (empty($nonce) || !wp_verify_nonce((string) $nonce, 'simple-lms-nonce')) {
+            throw new \Exception(__('Security verification failed', 'simple-lms'));
+        }
         
         // Check logged in
         if (!is_user_logged_in()) {
-            error_log('SimpleLMS AJAX: User not logged in');
             throw new \Exception(__('You must be logged in', 'simple-lms'));
         }
 
         // Check capability
         if ($requiredCap && !current_user_can($requiredCap)) {
-            error_log('SimpleLMS AJAX: User does not have capability: ' . $requiredCap);
             throw new \Exception(__('Insufficient permissions', 'simple-lms'));
         }
-        
-        error_log('SimpleLMS AJAX verifyAjaxRequest: PASS - user logged in and has capability');
     }
 
     /**
@@ -395,6 +410,7 @@ class Ajax_Handler {
      * @return int
      */
     private static function getPostInt(string $key): int {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce is verified upstream for AJAX handlers.
         return isset($_POST[$key]) ? absint($_POST[$key]) : 0;
     }
 
@@ -405,6 +421,7 @@ class Ajax_Handler {
      * @return string
      */
     private static function getPostString(string $key): string {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce is verified upstream for AJAX handlers.
         return isset($_POST[$key]) ? sanitize_text_field($_POST[$key]) : '';
     }
 
@@ -416,13 +433,17 @@ class Ajax_Handler {
      * @return array
      */
     private static function getPostArray(string $key, string $type = 'string'): array {
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce is verified upstream for AJAX handlers.
         if (!isset($_POST[$key]) || !is_array($_POST[$key])) {
             return [];
         }
 
+        // phpcs:ignore WordPress.Security.NonceVerification.Missing -- nonce is verified upstream for AJAX handlers.
+        $raw_values = $_POST[$key];
+
         return $type === 'int' 
-            ? array_map('intval', $_POST[$key])
-            : array_map('sanitize_text_field', $_POST[$key]);
+            ? array_map('intval', $raw_values)
+            : array_map('sanitize_text_field', $raw_values);
     }
 
     /**
@@ -1208,8 +1229,8 @@ class Ajax_Handler {
         }
 
         // Remove lesson from completed if it's there
-        $lesson_key = array_search($lesson_id, $completed_lessons);
-        if ($lesson_key !== false) {
+        $lesson_key = array_search( $lesson_id, $completed_lessons, true );
+        if ( false !== $lesson_key ) {
             unset($completed_lessons[$lesson_key]);
             $completed_lessons = array_values($completed_lessons); // Reindex array
             update_user_meta($user_id, 'simple_lms_completed_lessons', $completed_lessons);
@@ -1233,36 +1254,42 @@ class Ajax_Handler {
      * 
      * @return void
      */
-    public static function handleGetCoursePreview(): void {
+    public static function handleGetCoursePreview(): void
+    {
+        if ( ! check_ajax_referer( 'simple_lms_ajax_nonce', 'nonce', false ) ) {
+            wp_send_json_error( [ 'message' => __( 'Invalid security token', 'simple-lms' ) ] );
+            return;
+        }
+
         // This is for Elementor editor, so check for edit permissions
-        if (!current_user_can('edit_posts')) {
-            wp_send_json_error(['message' => __('No permission', 'simple-lms')]);
+        if ( ! current_user_can( 'edit_posts' ) ) {
+            wp_send_json_error( [ 'message' => __( 'No permission', 'simple-lms' ) ] );
             return;
         }
         
-        $course_id = absint($_POST['course_id'] ?? 0);
-        if (!$course_id) {
-            wp_send_json_error(['message' => __('No course ID provided', 'simple-lms')]);
+        $course_id = absint( $_POST['course_id'] ?? 0 );
+        if ( ! $course_id ) {
+            wp_send_json_error( [ 'message' => __( 'No course ID provided', 'simple-lms' ) ] );
             return;
         }
         
         // Parse settings
-        $settings_json = sanitize_text_field($_POST['settings'] ?? '{}');
-        $settings = json_decode($settings_json, true);
-        if (!is_array($settings)) {
+        $settings_json = sanitize_text_field( $_POST['settings'] ?? '{}' );
+        $settings      = json_decode( $settings_json, true );
+        if ( ! is_array( $settings ) ) {
             $settings = [];
         }
         
         $display_mode = $settings['display_mode'] ?? 'accordion';
-        $show_progress = ($settings['show_progress'] ?? 'yes') === 'yes';
-        $show_lesson_count = ($settings['show_lesson_count'] ?? 'yes') === 'yes';
+        $show_progress = ( $settings['show_progress'] ?? 'yes' ) === 'yes';
+        $show_lesson_count = ( $settings['show_lesson_count'] ?? 'yes' ) === 'yes';
         $grid_columns = $settings['grid_columns'] ?? '2';
         
         // Get modules for the course
-        $modules = \SimpleLMS\Cache_Handler::getCourseModules($course_id);
+        $modules = \SimpleLMS\Cache_Handler::getCourseModules( $course_id );
         
-        if (empty($modules)) {
-            wp_send_json_error(['message' => __('This course has no modules', 'simple-lms')]);
+        if ( empty( $modules ) ) {
+            wp_send_json_error( [ 'message' => __( 'This course has no modules', 'simple-lms' ) ] );
             return;
         }
         
@@ -1271,12 +1298,12 @@ class Ajax_Handler {
         
         $current_user_id = get_current_user_id();
         
-        if ($display_mode === 'accordion') {
+        if ( 'accordion' === $display_mode ) {
             echo '<div class="simple-lms-course-overview-accordion">';
             $module_index = 0;
             foreach ($modules as $module) {
                 $module_index++;
-                $lessons = \SimpleLMS\Cache_Handler::getModuleLessons((int)$module->ID);
+            $lessons = \SimpleLMS\Cache_Handler::getModuleLessons( (int) $module->ID );
                 $is_open = $module_index === 1 ? 'open' : '';
                 
                 echo '<div class="simple-lms-accordion-item ' . esc_attr($is_open) . '">';
@@ -1284,22 +1311,24 @@ class Ajax_Handler {
                 echo '<span class="accordion-icon"></span>';
                 echo '<h3 class="module-title">' . esc_html($module->post_title) . '</h3>';
                 
-                if ($show_lesson_count) {
-                    echo '<span class="lessons-count">(' . count($lessons) . ' ' . _n('lesson', 'lessons', count($lessons), 'simple-lms') . ')</span>';
+                if ( $show_lesson_count ) {
+                    $lesson_count = count( $lessons );
+                    $lesson_label = _n( 'lesson', 'lessons', $lesson_count, 'simple-lms' );
+                    echo '<span class="lessons-count">(' . esc_html( number_format_i18n( $lesson_count ) ) . ' ' . esc_html( $lesson_label ) . ')</span>';
                 }
                 
                 echo '</div>';
                 echo '<div class="accordion-content">';
                 
-                if (!empty($lessons)) {
+                if ( ! empty( $lessons ) ) {
                     echo '<ul class="lessons-list">';
                     foreach ($lessons as $lesson) {
-                        $is_completed = \SimpleLMS\Progress_Tracker::isLessonCompleted($current_user_id, $lesson->ID);
+                        $is_completed = \SimpleLMS\Progress_Tracker::isLessonCompleted( $current_user_id, $lesson->ID );
                         
                         echo '<li class="lesson-item' . ($is_completed ? ' completed-lesson' : '') . '">';
                         echo '<a href="' . esc_url(get_permalink($lesson->ID)) . '" class="lesson-link">';
                         
-                        if ($show_progress) {
+                        if ( $show_progress ) {
                             if ($is_completed) {
                                 echo '<span class="completion-status completed">✓</span>';
                             } else {
@@ -1320,44 +1349,46 @@ class Ajax_Handler {
             echo '</div>';
         } else {
             // List or Grid mode
-            $container_classes = ['simple-lms-course-overview-list-grid', 'mode-' . $display_mode];
-            if ($display_mode === 'grid') {
+            $container_classes = [ 'simple-lms-course-overview-list-grid', 'mode-' . $display_mode ];
+            if ( 'grid' === $display_mode ) {
                 $container_classes[] = 'columns-' . $grid_columns;
             }
             
-            echo '<div class="' . esc_attr(implode(' ', $container_classes)) . '">';
+            echo '<div class="' . esc_attr( implode( ' ', $container_classes ) ) . '">';
             
-            foreach ($modules as $module) {
-                $lessons = \SimpleLMS\Cache_Handler::getModuleLessons((int)$module->ID);
+            foreach ( $modules as $module ) {
+                $lessons = \SimpleLMS\Cache_Handler::getModuleLessons( (int) $module->ID );
                 
                 echo '<div class="simple-lms-accordion-item">';
                 echo '<div class="accordion-header">';
-                echo '<h3 class="module-title">' . esc_html($module->post_title) . '</h3>';
+                echo '<h3 class="module-title">' . esc_html( $module->post_title ) . '</h3>';
                 
-                if ($show_lesson_count) {
-                    echo '<span class="lessons-count">(' . count($lessons) . ' ' . _n('lesson', 'lessons', count($lessons), 'simple-lms') . ')</span>';
+                if ( $show_lesson_count ) {
+                    $lesson_count = count( $lessons );
+                    $lesson_label = _n( 'lesson', 'lessons', $lesson_count, 'simple-lms' );
+                    echo '<span class="lessons-count">(' . esc_html( number_format_i18n( $lesson_count ) ) . ' ' . esc_html( $lesson_label ) . ')</span>';
                 }
                 
                 echo '</div>';
                 echo '<div class="accordion-content">';
                 
-                if (!empty($lessons)) {
+                if ( ! empty( $lessons ) ) {
                     echo '<ul class="lessons-list">';
-                    foreach ($lessons as $lesson) {
-                        $is_completed = \SimpleLMS\Progress_Tracker::isLessonCompleted($current_user_id, $lesson->ID);
+                    foreach ( $lessons as $lesson ) {
+                        $is_completed = \SimpleLMS\Progress_Tracker::isLessonCompleted( $current_user_id, $lesson->ID );
                         
                         echo '<li class="lesson-item' . ($is_completed ? ' completed-lesson' : '') . '">';
                         echo '<a href="' . esc_url(get_permalink($lesson->ID)) . '" class="lesson-link">';
                         
-                        if ($show_progress) {
-                            if ($is_completed) {
+                        if ( $show_progress ) {
+                            if ( $is_completed ) {
                                 echo '<span class="completion-status completed">✓</span>';
                             } else {
                                 echo '<span class="completion-status incomplete"></span>';
                             }
                         }
                         
-                        echo '<span class="lesson-title">' . esc_html($lesson->post_title) . '</span>';
+                        echo '<span class="lesson-title">' . esc_html( $lesson->post_title ) . '</span>';
                         echo '</a></li>';
                     }
                     echo '</ul>';
@@ -1370,9 +1401,9 @@ class Ajax_Handler {
             
             echo '</div>';
             
-            // Add inline styles
+            // Add inline styles.
             $grid_styles = '';
-            if ($display_mode === 'grid') {
+            if ( $display_mode === 'grid' ) {
                 $grid_styles = '
 .simple-lms-course-overview-list-grid.mode-grid{display:grid;gap:16px}
 .simple-lms-course-overview-list-grid.mode-grid.columns-1{grid-template-columns:1fr}
@@ -1382,10 +1413,10 @@ class Ajax_Handler {
 @media(max-width:768px){.simple-lms-course-overview-list-grid.mode-grid{grid-template-columns:1fr}}
 ';
             }
-            
-            echo '<style>
+
+            $style_output = '
 .simple-lms-course-overview-list-grid{display:flex;flex-direction:column;gap:16px}
-'.$grid_styles.'
+' . $grid_styles . '
 .simple-lms-course-overview-list-grid .simple-lms-accordion-item{border:1px solid #e5e5e5;border-radius:8px;overflow:hidden}
 .simple-lms-course-overview-list-grid .accordion-header{background-color:#f5f5f5;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;cursor:default}
 .simple-lms-course-overview-list-grid .accordion-content{display:block!important;opacity:1!important;max-height:none!important;background-color:#ffffff;padding:15px 20px}
@@ -1396,210 +1427,207 @@ class Ajax_Handler {
 .simple-lms-course-overview-list-grid .completion-status{display:inline-flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .simple-lms-course-overview-list-grid .lesson-title{word-break:break-word}
 .simple-lms-course-overview-list-grid .no-lessons{margin:0;font-size:0.9em;opacity:0.75}
-</style>';
+';
+
+            echo '<style>' . esc_html( $style_output ) . '</style>';
         }
         
         $html = ob_get_clean();
         
         wp_send_json_success(['html' => $html]);
     }
-}
 
-/**
- * Auto-tagging functionality for modules and lessons
- */
-
-/**
- * Auto-tag module when saved
- * 
- * @param int $post_id Post ID
- * @param \WP_Post $post Post object
- * @param bool $update Whether this is an update
- * @return void
- */
-function autoTagModuleOnSave(int $post_id, \WP_Post $post, bool $update): void {
-    // Skip Elementor templates and library posts
-    if (in_array($post->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
-        return;
-    }
-    
-    if ($post->post_type !== 'module' || wp_is_post_revision($post_id)) {
-        return;
-    }
-    
-    Ajax_Handler::autoTagModule($post_id);
-}
-
-/**
- * Auto-tag lesson when saved
- * 
- * @param int $post_id Post ID
- * @param \WP_Post $post Post object
- * @param bool $update Whether this is an update
- * @return void
- */
-function autoTagLessonOnSave(int $post_id, \WP_Post $post, bool $update): void {
-    // Skip Elementor templates and library posts
-    if (in_array($post->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
-        return;
-    }
-    
-    if ($post->post_type !== 'lesson' || wp_is_post_revision($post_id)) {
-        return;
-    }
-    
-    Ajax_Handler::autoTagLesson($post_id);
-}
-
-/**
- * Update tags in related posts when course title changes
- * 
- * @param int $post_id Course ID
- * @param \WP_Post $post_after Updated post object
- * @param \WP_Post $post_before Original post object
- * @return void
- */
-function updateTagsOnCourseUpdate(int $post_id, \WP_Post $post_after, \WP_Post $post_before): void {
-    // Skip Elementor templates and library posts
-    if (in_array($post_after->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
-        return;
-    }
-    
-    if ($post_after->post_type !== 'course' || wp_is_post_revision($post_id)) {
-        return;
-    }
-    
-    // Check if title actually changed
-    if ($post_after->post_title === $post_before->post_title) {
-        return;
-    }
-    
-    $old_title = sanitize_text_field($post_before->post_title);
-    $new_title = sanitize_text_field($post_after->post_title);
-    
-    // Get all modules in this course
-    $modules = get_posts([
-        'post_type' => 'module',
-        'posts_per_page' => -1,
-        'meta_key' => 'parent_course',
-        'meta_value' => $post_id,
-        'post_status' => 'any'
-    ]);
-    
-    foreach ($modules as $module) {
-        if (!$module instanceof \WP_Post) {
-            continue;
+    /**
+     * Auto-tag module when saved.
+     *
+     * @param int     $post_id Post ID.
+     * @param \WP_Post $post   Post object.
+     * @param bool    $update  Whether this is an update.
+     * @return void
+     */
+    public static function auto_tag_module_on_save( int $post_id, \WP_Post $post, bool $update ): void
+    {
+        // Skip Elementor templates and library posts.
+        if ( in_array( $post->post_type, [ 'elementor_library', 'elementor_snippet', 'e-landing-page' ], true ) ) {
+            return;
         }
 
-        // Update module tags
-        updatePostTagName($module->ID, $old_title, $new_title);
-        
-        // Get all lessons in this module and update their tags
-        $lessons = get_posts([
-            'post_type' => 'lesson',
-            'posts_per_page' => -1,
-            'meta_key' => 'parent_module',
-            'meta_value' => $module->ID,
-            'post_status' => 'any'
-        ]);
-        
-        foreach ($lessons as $lesson) {
-            if (!$lesson instanceof \WP_Post) {
+        if ( 'module' !== $post->post_type || wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+
+        self::autoTagModule( $post_id );
+    }
+
+    /**
+     * Auto-tag lesson when saved.
+     *
+     * @param int     $post_id Post ID.
+     * @param \WP_Post $post   Post object.
+     * @param bool    $update  Whether this is an update.
+     * @return void
+     */
+    public static function auto_tag_lesson_on_save( int $post_id, \WP_Post $post, bool $update ): void
+    {
+        // Skip Elementor templates and library posts.
+        if ( in_array( $post->post_type, [ 'elementor_library', 'elementor_snippet', 'e-landing-page' ], true ) ) {
+            return;
+        }
+
+        if ( 'lesson' !== $post->post_type || wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+
+        self::autoTagLesson( $post_id );
+    }
+
+    /**
+     * Update tags in related posts when course title changes.
+     *
+     * @param int     $post_id     Course ID.
+     * @param \WP_Post $post_after Updated post object.
+     * @param \WP_Post $post_before Original post object.
+     * @return void
+     */
+    public static function update_tags_on_course_update( int $post_id, \WP_Post $post_after, \WP_Post $post_before ): void
+    {
+        // Skip Elementor templates and library posts.
+        if ( in_array( $post_after->post_type, [ 'elementor_library', 'elementor_snippet', 'e-landing-page' ], true ) ) {
+            return;
+        }
+
+        if ( 'course' !== $post_after->post_type || wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+
+        // Check if title actually changed.
+        if ( $post_after->post_title === $post_before->post_title ) {
+            return;
+        }
+
+        $old_title = sanitize_text_field( $post_before->post_title );
+        $new_title = sanitize_text_field( $post_after->post_title );
+
+        // Get all modules in this course.
+        $modules = get_posts(
+            [
+                'post_type'      => 'module',
+                'posts_per_page' => -1,
+                'meta_key'       => 'parent_course',
+                'meta_value'     => $post_id,
+                'post_status'    => 'any',
+            ]
+        );
+
+        foreach ( $modules as $module ) {
+            if ( ! $module instanceof \WP_Post ) {
                 continue;
             }
-            updatePostTagName($lesson->ID, $old_title, $new_title);
+
+            // Update module tags.
+            self::update_post_tag_name( $module->ID, $old_title, $new_title );
+
+            // Get all lessons in this module and update their tags.
+            $lessons = get_posts(
+                [
+                    'post_type'      => 'lesson',
+                    'posts_per_page' => -1,
+                    'meta_key'       => 'parent_module',
+                    'meta_value'     => $module->ID,
+                    'post_status'    => 'any',
+                ]
+            );
+
+            foreach ( $lessons as $lesson ) {
+                if ( ! $lesson instanceof \WP_Post ) {
+                    continue;
+                }
+                self::update_post_tag_name( $lesson->ID, $old_title, $new_title );
+            }
+        }
+    }
+
+    /**
+     * Update tags in related posts when module title changes.
+     *
+     * @param int     $post_id      Module ID.
+     * @param \WP_Post $post_after  Updated post object.
+     * @param \WP_Post $post_before Original post object.
+     * @return void
+     */
+    public static function update_tags_on_module_update( int $post_id, \WP_Post $post_after, \WP_Post $post_before ): void
+    {
+        // Skip Elementor templates and library posts.
+        if ( in_array( $post_after->post_type, [ 'elementor_library', 'elementor_snippet', 'e-landing-page' ], true ) ) {
+            return;
+        }
+
+        if ( 'module' !== $post_after->post_type || wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+
+        // Check if title actually changed.
+        if ( $post_after->post_title === $post_before->post_title ) {
+            return;
+        }
+
+        $old_title = sanitize_text_field( $post_before->post_title );
+        $new_title = sanitize_text_field( $post_after->post_title );
+
+        // Get all lessons in this module and update their tags.
+        $lessons = get_posts(
+            [
+                'post_type'      => 'lesson',
+                'posts_per_page' => -1,
+                'meta_key'       => 'parent_module',
+                'meta_value'     => $post_id,
+                'post_status'    => 'any',
+            ]
+        );
+
+        foreach ( $lessons as $lesson ) {
+            if ( ! $lesson instanceof \WP_Post ) {
+                continue;
+            }
+            self::update_post_tag_name( $lesson->ID, $old_title, $new_title );
+        }
+    }
+
+    /**
+     * Update specific tag name in a post.
+     *
+     * @param int    $post_id      Post ID.
+     * @param string $old_tag_name Old tag name.
+     * @param string $new_tag_name New tag name.
+     * @return void
+     */
+    public static function update_post_tag_name( int $post_id, string $old_tag_name, string $new_tag_name ): void
+    {
+        if ( empty( $old_tag_name ) || empty( $new_tag_name ) || $old_tag_name === $new_tag_name ) {
+            return;
+        }
+
+        $current_tags = (array) wp_get_post_tags( $post_id, [ 'fields' => 'names' ] );
+
+        if ( empty( $current_tags ) ) {
+            return;
+        }
+
+        $updated_tags = [];
+        $tag_updated  = false;
+
+        foreach ( $current_tags as $tag_name ) {
+            if ( $tag_name === $old_tag_name ) {
+                $updated_tags[] = $new_tag_name;
+                $tag_updated    = true;
+            } else {
+                $updated_tags[] = $tag_name;
+            }
+        }
+
+        // Only update if we actually found and replaced the tag.
+        if ( $tag_updated ) {
+            wp_set_post_tags( $post_id, $updated_tags, false );
         }
     }
 }
-
-/**
- * Update tags in related posts when module title changes
- * 
- * @param int $post_id Module ID
- * @param \WP_Post $post_after Updated post object
- * @param \WP_Post $post_before Original post object
- * @return void
- */
-function updateTagsOnModuleUpdate(int $post_id, \WP_Post $post_after, \WP_Post $post_before): void {
-    // Skip Elementor templates and library posts
-    if (in_array($post_after->post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
-        return;
-    }
-    
-    if ($post_after->post_type !== 'module' || wp_is_post_revision($post_id)) {
-        return;
-    }
-    
-    // Check if title actually changed
-    if ($post_after->post_title === $post_before->post_title) {
-        return;
-    }
-    
-    $old_title = sanitize_text_field($post_before->post_title);
-    $new_title = sanitize_text_field($post_after->post_title);
-    
-    // Get all lessons in this module and update their tags
-    $lessons = get_posts([
-        'post_type' => 'lesson',
-        'posts_per_page' => -1,
-        'meta_key' => 'parent_module',
-        'meta_value' => $post_id,
-        'post_status' => 'any'
-    ]);
-    
-    foreach ($lessons as $lesson) {
-        if (!$lesson instanceof \WP_Post) {
-            continue;
-        }
-        updatePostTagName($lesson->ID, $old_title, $new_title);
-    }
-}
-
-/**
- * Update specific tag name in a post
- * 
- * @param int $post_id Post ID
- * @param string $old_tag_name Old tag name
- * @param string $new_tag_name New tag name
- * @return void
- */
-function updatePostTagName(int $post_id, string $old_tag_name, string $new_tag_name): void {
-    if (empty($old_tag_name) || empty($new_tag_name) || $old_tag_name === $new_tag_name) {
-        return;
-    }
-    
-    $current_tags = (array) wp_get_post_tags($post_id, ['fields' => 'names']);
-    
-    if (empty($current_tags)) {
-        return;
-    }
-    
-    $updated_tags = [];
-    $tag_updated = false;
-    
-    foreach ($current_tags as $tag_name) {
-        if ($tag_name === $old_tag_name) {
-            $updated_tags[] = $new_tag_name;
-            $tag_updated = true;
-        } else {
-            $updated_tags[] = $tag_name;
-        }
-    }
-    
-    // Only update if we actually found and replaced the tag
-    if ($tag_updated) {
-        wp_set_post_tags($post_id, $updated_tags, false);
-    }
-}
-
-// Hook auto-tagging to post save
-add_action('save_post', __NAMESPACE__ . '\autoTagModuleOnSave', 20, 3);
-add_action('save_post', __NAMESPACE__ . '\autoTagLessonOnSave', 20, 3);
-
-// Hook tag updates to post updates
-add_action('post_updated', __NAMESPACE__ . '\updateTagsOnCourseUpdate', 20, 3);
-add_action('post_updated', __NAMESPACE__ . '\updateTagsOnModuleUpdate', 20, 3);
-
-// Ajax_Handler is now managed by ServiceContainer
-// and instantiated in Plugin::registerLateServices()
-?>

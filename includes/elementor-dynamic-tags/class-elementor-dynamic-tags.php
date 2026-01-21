@@ -26,9 +26,6 @@ class Elementor_Dynamic_Tags {
      * Called from elementor_loaded hook to ensure Elementor is fully loaded
      */
     public static function init(): void {
-        error_log('SimpleLMS Elementor init() called');
-        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - init() called, IMMEDIATE registration\n", FILE_APPEND);
-        
         // Register immediately instead of waiting for hooks
         if (class_exists('\Elementor\Plugin')) {
             $plugin = \Elementor\Plugin::instance();
@@ -48,8 +45,6 @@ class Elementor_Dynamic_Tags {
                 self::register_dynamic_tags($plugin->dynamic_tags);
             }
         }
-        
-        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - Immediate registration done\n", FILE_APPEND);
     }
 
     /**
@@ -84,15 +79,10 @@ class Elementor_Dynamic_Tags {
      * Register Simple LMS widgets
      */
     public static function register_widgets($widgets_manager): void {
-        error_log('SimpleLMS register_widgets() called');
-        
         // Check if required classes exist
         if (!class_exists('\Elementor\Widget_Base')) {
-            error_log('SimpleLMS: Elementor Widget_Base not found');
             return;
         }
-
-        error_log('SimpleLMS: Starting widget registration');
 
         // Include widget classes
         require_once __DIR__ . '/widgets/course-title-widget.php';
@@ -141,16 +131,12 @@ class Elementor_Dynamic_Tags {
         $widgets_manager->register(new Widgets\Module_Featured_Image_Widget());
         $widgets_manager->register(new Widgets\Lesson_Featured_Image_Widget());
         $widgets_manager->register(new Widgets\Module_Overview_Widget());
-        
-        error_log('SimpleLMS: 23 widgets registered successfully');
     }
 
     /**
      * Register Simple LMS widget category
      */
     public static function register_widget_category($elements_manager): void {
-        error_log('SimpleLMS register_widget_category() called');
-        
         $elements_manager->add_category(
             'simple-lms',
             [
@@ -158,8 +144,6 @@ class Elementor_Dynamic_Tags {
                 'icon' => 'fa fa-graduation-cap',
             ]
         );
-        
-        error_log('SimpleLMS: Category registered');
     }
 
     /**
@@ -169,7 +153,7 @@ class Elementor_Dynamic_Tags {
      * @return int Course ID or 0
      */
     public static function get_current_course_id(): int {
-        // Try from explicit course_id parameter (shortcode/manual)
+        // Try from explicit course_id parameter (manual/query param)
         if (isset($_GET['course_id'])) {
             return absint($_GET['course_id']);
         }

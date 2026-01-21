@@ -34,6 +34,11 @@ class RestAPITest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+
+        if (!\defined('WP_TESTS_DIR')) {
+            $this->markTestSkipped('Requires WordPress integration test suite (run with phpunit-integration.xml / wp-env).');
+        }
+
         Monkey\setUp();
     }
 

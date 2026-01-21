@@ -20,6 +20,15 @@ use Brain\Monkey\Actions;
  */
 class WooCommerceFlowTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        if (!\defined('WP_TESTS_DIR')) {
+            $this->markTestSkipped('Requires WordPress integration test suite (run with phpunit-integration.xml / wp-env).');
+        }
+    }
+
     /**
      * Test complete purchase flow grants course access
      */

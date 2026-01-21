@@ -1,10 +1,11 @@
 <?php
+
 /**
  * Plugin Name: Simple LMS
  * Plugin URI:  https://webisko.pl/simple-lms
  * Description: LMS plugin for managing courses, modules, and lessons with WooCommerce integration for course sales.
- * Version:     1.5.1
- * Author:      Filip Meyer-LĂĽters
+ * Version:     1.0.0
+ * Author:      Filip Meyer-Lüters
  * Author URI:  https://webisko.pl
  * License:     GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -14,24 +15,7 @@
  * Requires PHP: 8.0
  *
  * @package SimpleLMS
- * @version 1.5.1
- *
- * ARCHITECTURAL CHANGES IN 1.5.0:
- * - Major code audit and refactoring per WordPress best practices
- * - REST API refactored with full Dependency Injection (Logger + Security_Service)
- * - Fixed integration hooks: WooCommerce (woocommerce_loaded), Elementor (elementor_loaded), Bricks (bricks_init)
- * - Composer PSR-4 autoloading for SimpleLMS namespace
- * - Fixed 40+ PHP files with correct declare(strict_types=1) and namespace ordering
- * - Production cleanup: removed 20+ temporary translation scripts and backups
- * - Enhanced security: centralized nonce verification and capability checks
- * - All code compliant with PHP 8.0+ and PSR-12 standards
- *
- * ARCHITECTURAL CHANGES IN 1.4.0:
- * - Replaced Singleton pattern with PSR-11 ServiceContainer
- * - Implemented Dependency Injection throughout
- * - Refactored static methods to instance methods
- * - Introduced service providers (HookManager, AssetManager, CPTManager)
- * - Improved testability and maintainability
+ * @version 1.0.0
  */
 
 declare(strict_types=1);
@@ -40,22 +24,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Global protection against Elementor save conflicts
- * This runs before any other hooks to prevent plugin interference
- */
-add_action('save_post', function($post_id) {
-    $post_type = get_post_type($post_id);
-    if (in_array($post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
-        // Remove ALL Simple LMS save_post hooks when saving Elementor templates
-        remove_all_actions('save_post');
-        remove_all_actions('post_updated');
-        error_log('SimpleLMS: Disabled all save_post hooks for Elementor template: ' . $post_id . ' (' . $post_type . ')');
-    }
-}, 1); // Priority 1 - runs before everything else
-
 // Define plugin constants
-define('SIMPLE_LMS_VERSION', '1.5.1');
+define('SIMPLE_LMS_VERSION', '1.0.0');
 define('SIMPLE_LMS_PLUGIN_DIR', \plugin_dir_path(__FILE__));
 define('SIMPLE_LMS_PLUGIN_URL', \plugin_dir_url(__FILE__));
 define('SIMPLE_LMS_PLUGIN_BASENAME', \plugin_basename(__FILE__));
@@ -64,6 +34,7 @@ define('SIMPLE_LMS_PLUGIN_BASENAME', \plugin_basename(__FILE__));
 // This ensures the plugin works in all environments
 // CORE CLASSES (required for plugin boot)
 require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-service-container.php';
+require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/interface-logger.php';
 require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-logger.php';
 require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-error-handler.php';
 require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-security-service.php';
@@ -79,9 +50,9 @@ require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-progress-tracker.php';
 require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/class-analytics-tracker.php';
 
 // Load Composer autoloader if available (optional PSR-4 optimization)
-$autoloadFile = SIMPLE_LMS_PLUGIN_DIR . 'vendor/autoload.php';
-if (file_exists($autoloadFile)) {
-    require_once $autoloadFile;
+$simple_lms_autoload_file = SIMPLE_LMS_PLUGIN_DIR . 'vendor/autoload.php';
+if (file_exists($simple_lms_autoload_file)) {
+    require_once $simple_lms_autoload_file;
 }
 
 /**
@@ -90,7 +61,7 @@ if (file_exists($autoloadFile)) {
  * This class now uses dependency injection instead of Singleton pattern.
  * Services are managed through ServiceContainer for better testability.
  */
-class Plugin
+class SimpleLMSPlugin
 {
     /**
      * Service container instance
@@ -214,11 +185,6 @@ class Plugin
             return new \SimpleLMS\Security_Service();
         });
 
-        // Shortcodes (refactored to instance with Logger)
-        $container->singleton('SimpleLMS\\LmsShortcodes', function ($c) {
-            return new \SimpleLMS\LmsShortcodes($c->get(\SimpleLMS\Logger::class));
-        });
-
         // REST API (with DI: Logger + Security_Service)
         $container->singleton('SimpleLMS\\Rest_API', function ($c) {
             return new \SimpleLMS\Rest_API(
@@ -249,12 +215,12 @@ class Plugin
         // Settings (requires class-settings.php)
           $container->singleton('SimpleLMS\\Settings', function ($c) {
               return new \SimpleLMS\Settings($c->get(\SimpleLMS\Managers\HookManager::class));
-        });
+          });
 
         // Meta Boxes (requires custom-meta-boxes.php)
           $container->singleton('SimpleLMS\\Meta_Boxes', function ($c) {
               return new \SimpleLMS\Meta_Boxes($c->get(\SimpleLMS\Managers\HookManager::class));
-        });
+          });
 
         // Admin Customizations (requires admin-customizations.php)
         $container->singleton('SimpleLMS\\Admin_Customizations', function ($c) {
@@ -339,13 +305,11 @@ class Plugin
             'includes/class-cache-handler.php',
             'includes/access-control.php',
             'includes/class-access-meta-boxes.php',
-            'includes/custom-post-types.php',
             'includes/custom-meta-boxes.php',
             'includes/admin-customizations.php',
             'includes/ajax-handlers.php',
             'includes/class-rest-api-refactored.php',
             'includes/class-progress-tracker.php',
-            'includes/class-shortcodes.php',
             'includes/class-woocommerce-integration.php',
             'includes/class-analytics-tracker.php',
             'includes/class-analytics-retention.php',
@@ -373,10 +337,7 @@ class Plugin
 
         // Lazy-load Elementor integration only when Elementor is active
         \add_action('elementor_loaded', [$this, 'registerElementorIntegration']);
-        
-        // DEBUG: Write to file to verify hook registration
-        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - elementor_loaded hook registered\n", FILE_APPEND);
-        
+
         // ALSO try elementor/init as backup
         \add_action('elementor/init', [$this, 'registerElementorIntegration'], 1);
 
@@ -386,7 +347,7 @@ class Plugin
 
     /**
      * Register WooCommerce integration on woocommerce_loaded hook
-     * 
+     *
      * Called only when WooCommerce is fully loaded and active
      *
      * @return void
@@ -394,7 +355,7 @@ class Plugin
     public function registerWooCommerceIntegration(): void
     {
         $container = $this->container;
-        
+
         if (!$container->has('SimpleLMS\\WooCommerce_Integration')) {
             // Register WooCommerce Integration service
             $container->singleton('SimpleLMS\\WooCommerce_Integration', function ($c) {
@@ -404,7 +365,7 @@ class Plugin
                 );
             });
         }
-        
+
         if ($container->has('SimpleLMS\\WooCommerce_Integration')) {
             $container->get('SimpleLMS\\WooCommerce_Integration')->register();
         }
@@ -412,35 +373,27 @@ class Plugin
 
     /**
      * Register Elementor integration
-     * 
+     *
      * Called only when Elementor is loaded and active
      *
      * @return void
      */
     public function registerElementorIntegration(): void
     {
-        file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - registerElementorIntegration() CALLED\n", FILE_APPEND);
-        
-        error_log('SimpleLMS: registerElementorIntegration() called');
-        
+        if (!$this->shouldLoadElementorIntegration()) {
+            return;
+        }
+
         $elemTags = SIMPLE_LMS_PLUGIN_DIR . 'includes/elementor-dynamic-tags/class-elementor-dynamic-tags.php';
         $elemGuard = SIMPLE_LMS_PLUGIN_DIR . 'includes/compat/elementor-embed-guard.php';
-        
+
         if (file_exists($elemTags)) {
             require_once $elemTags;
             if (class_exists('SimpleLMS\Elementor\Elementor_Dynamic_Tags')) {
-                error_log('SimpleLMS: Calling Elementor_Dynamic_Tags::init()');
-                file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - Calling init()\n", FILE_APPEND);
                 \SimpleLMS\Elementor\Elementor_Dynamic_Tags::init();
-            } else {
-                error_log('SimpleLMS: Elementor_Dynamic_Tags class NOT found');
-                file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - Class NOT found\n", FILE_APPEND);
             }
-        } else {
-            error_log('SimpleLMS: elementor-dynamic-tags file NOT found');
-            file_put_contents(SIMPLE_LMS_PLUGIN_DIR . 'debug-hooks.log', date('Y-m-d H:i:s') . " - File NOT found\n", FILE_APPEND);
         }
-        
+
         if (file_exists($elemGuard)) {
             require_once $elemGuard;
             if (class_exists('SimpleLMS\Elementor\Elementor_Embed_Guard')) {
@@ -450,22 +403,106 @@ class Plugin
     }
 
     /**
+     * Determine if Elementor widgets/tags should be loaded for this request.
+     *
+     * @return bool
+     */
+    private function shouldLoadElementorIntegration(): bool
+    {
+        if (!class_exists('\Elementor\Plugin')) {
+            return false;
+        }
+
+        $plugin = \Elementor\Plugin::instance();
+
+        if (isset($plugin->editor) && method_exists($plugin->editor, 'is_edit_mode') && $plugin->editor->is_edit_mode()) {
+            return true;
+        }
+
+        if (isset($plugin->preview) && method_exists($plugin->preview, 'is_preview_mode') && $plugin->preview->is_preview_mode()) {
+            return true;
+        }
+
+        $post_id = get_queried_object_id();
+        if ($post_id && isset($plugin->db) && method_exists($plugin->db, 'is_built_with_elementor')) {
+            return (bool) $plugin->db->is_built_with_elementor($post_id);
+        }
+
+        return false;
+    }
+
+    /**
      * Register Bricks integration
-     * 
+     *
      * Called only when Bricks is loaded and active
      *
      * @return void
      */
     public function registerBricksIntegration(): void
     {
+        if (!$this->shouldLoadBricksIntegration()) {
+            return;
+        }
+
         $bricks = SIMPLE_LMS_PLUGIN_DIR . 'includes/bricks/class-bricks-integration.php';
-        
+
         if (file_exists($bricks)) {
             require_once $bricks;
             if (class_exists('SimpleLMS\Bricks\Bricks_Integration')) {
                 \SimpleLMS\Bricks\Bricks_Integration::init();
             }
         }
+    }
+
+    /**
+     * Determine if Bricks elements should be loaded for this request.
+     *
+     * @return bool
+     */
+    private function shouldLoadBricksIntegration(): bool
+    {
+        if (!class_exists('Bricks\Database')) {
+            return false;
+        }
+
+        if (function_exists('bricks_is_builder') && bricks_is_builder()) {
+            return true;
+        }
+
+        if (class_exists('Bricks\Helpers')) {
+            if (method_exists('Bricks\Helpers', 'is_builder') && \Bricks\Helpers::is_builder()) {
+                return true;
+            }
+
+            if (method_exists('Bricks\Helpers', 'is_builder_call') && \Bricks\Helpers::is_builder_call()) {
+                return true;
+            }
+
+            if (method_exists('Bricks\Helpers', 'is_preview') && \Bricks\Helpers::is_preview()) {
+                return true;
+            }
+        }
+
+        $post_id = get_queried_object_id();
+        if ($post_id) {
+            $meta_keys = [
+                'bricks_data',
+                '_bricks_data',
+                'bricks_page_content',
+                '_bricks_page_content',
+                'bricks_template',
+                '_bricks_template',
+            ];
+
+            foreach ($meta_keys as $meta_key) {
+                $value = get_post_meta($post_id, $meta_key, true);
+                if (!empty($value)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -499,15 +536,15 @@ class Plugin
         if ($this->container->has('SimpleLMS\\Settings')) {
             $this->container->get('SimpleLMS\\Settings');
         }
-        
+
         if ($this->container->has('SimpleLMS\\Meta_Boxes')) {
             $this->container->get('SimpleLMS\\Meta_Boxes');
         }
-        
+
         if ($this->container->has('SimpleLMS\\Admin_Customizations')) {
             $this->container->get('SimpleLMS\\Admin_Customizations');
         }
-        
+
         // These still use static init() - will be refactored in next iteration
 
         if ($this->container->has('SimpleLMS\\Ajax_Handler')) {
@@ -529,10 +566,6 @@ class Plugin
 
         if ($this->container->has('SimpleLMS\\Access_Control')) {
             $this->container->get('SimpleLMS\\Access_Control')->register();
-        }
-
-        if ($this->container->has('SimpleLMS\\LmsShortcodes')) {
-            $this->container->get('SimpleLMS\\LmsShortcodes')->register();
         }
 
         if ($this->container->has('SimpleLMS\\WooCommerce_Integration')) {
@@ -686,33 +719,33 @@ class Plugin
 function simpleLmsLoadTranslations(): void
 {
     global $l10n;
-    
+
     // Always unload first to ensure clean slate
     \unload_textdomain('simple-lms');
-    
+
     // Also remove from global $l10n array to force fresh load
     if (isset($l10n['simple-lms'])) {
         unset($l10n['simple-lms']);
     }
-    
+
     // Clear WordPress translation cache
     wp_cache_delete('simple-lms', 'translations');
-    
+
     // Get plugin language setting (with proper fallback)
     $language_setting = \get_option('simple_lms_language', 'default');
-    
+
     // Validate the setting value
     $allowed_languages = ['default', 'en_US', 'pl_PL'];
     if (!in_array($language_setting, $allowed_languages, true)) {
         $language_setting = 'default';
     }
-    
+
     // For English, explicitly don't load any translation
     if ($language_setting === 'en_US') {
         // English is the default source language - use strings from code
         return;
     }
-    
+
     // Determine which locale to use
     if ($language_setting === 'pl_PL') {
         // Force Polish
@@ -723,17 +756,17 @@ function simpleLmsLoadTranslations(): void
     } else {
         $locale = \get_locale();
     }
-    
+
     // Don't load translation for English
     if ($locale === 'en_US') {
         return;
     }
-    
+
     // Build paths
     $plugin_dir = dirname(SIMPLE_LMS_PLUGIN_BASENAME);
     $languages_dir = WP_PLUGIN_DIR . '/' . $plugin_dir . '/languages';
     $mofile = $languages_dir . '/simple-lms-' . $locale . '.mo';
-    
+
     // Load the .mo file if it exists
     if (file_exists($mofile)) {
         \load_textdomain('simple-lms', $mofile);
@@ -743,19 +776,19 @@ function simpleLmsLoadTranslations(): void
 /**
  * Initialize and boot the plugin
  *
- * @return Plugin
+ * @return SimpleLMSPlugin
  */
-function simpleLmsInit(): Plugin
+function simpleLmsInit(): SimpleLMSPlugin
 {
     $container = \SimpleLMS\ServiceContainer::getInstance();
 
     // Register Plugin instance in container
-    $container->singleton(Plugin::class, function ($c) {
-        return new Plugin($c);
+    $container->singleton(SimpleLMSPlugin::class, function ($c) {
+        return new SimpleLMSPlugin($c);
     });
 
-    /** @var Plugin $plugin */
-    $plugin = $container->get(Plugin::class);
+    /** @var SimpleLMSPlugin $plugin */
+    $plugin = $container->get(SimpleLMSPlugin::class);
     $plugin->boot();
 
     return $plugin;
@@ -769,5 +802,5 @@ function simpleLmsInit(): Plugin
 \add_action('plugins_loaded', 'simpleLmsInit', 5);
 
 // Register activation/deactivation hooks
-\register_activation_hook(__FILE__, [Plugin::class, 'activate']);
-\register_deactivation_hook(__FILE__, [Plugin::class, 'deactivate']);
+\register_activation_hook(__FILE__, [SimpleLMSPlugin::class, 'activate']);
+\register_deactivation_hook(__FILE__, [SimpleLMSPlugin::class, 'deactivate']);

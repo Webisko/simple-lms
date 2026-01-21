@@ -722,28 +722,10 @@ Security patches will be released as:
 
 ---
 
-## Changelog
+## Security Notes
 
-### Security Improvements
-
-#### Version 1.4.0 (December 2025)
-- ✅ Introduced `Security_Service` for centralized nonce/capability management
-- ✅ Enhanced REST API write endpoints with nonce requirement
-- ✅ Implemented granular permission callbacks for REST operations
-- ✅ Added capability mapping for AJAX actions
-- ✅ Improved input sanitization (wp_kses_post, whitelist validation)
-- ✅ Integrated structured logging for security events
-- ✅ Added rate limiting for lesson completion AJAX
-
-#### Version 1.3.0
-- Added GDPR compliance (Privacy Tools API)
-- Implemented data export/erasure
-
-#### Version 1.2.0
-- Enhanced WooCommerce integration security
-- Added access control drip logic
-
----
+- Simple LMS follows WordPress security best practices (nonces, capability checks, sanitization/validation).
+- If you find a security issue, please report it privately using the process above.
 
 ## References
 
@@ -755,6 +737,6 @@ Security patches will be released as:
 
 ---
 
-**Last Updated:** December 2, 2025  
-**Version:** 1.4.0  
+**Last Updated:** January 21, 2026  
+**Version:** 1.0.0  
 **Maintainer:** Filip Meyer-Lüters (Webisko)

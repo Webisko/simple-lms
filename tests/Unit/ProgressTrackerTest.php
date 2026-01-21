@@ -63,7 +63,7 @@ class ProgressTrackerTest extends TestCase
 
         // Mock wp_cache_delete
         Functions\expect('wp_cache_delete')
-            ->once();
+            ->times(3);
 
         // Mock do_action
         Functions\expect('do_action')
@@ -155,33 +155,28 @@ class ProgressTrackerTest extends TestCase
      */
     public function testUpgradeSchemaChecksVersion(): void
     {
-        // Mock get_option to return old version
-        Functions\expect('get_option')
-            ->once()
-            ->with('simple_lms_progress_db_version', '1.0')
-            ->andReturn('1.0');
-
         // Mock wpdb
         global $wpdb;
         $wpdb = $this->createMockWpdb();
 
-        // Mock get_results for SHOW INDEX
+        Functions\expect('esc_sql')
+            ->once()
+            ->andReturnUsing(static fn ($value) => (string) $value);
+
+        // Mock get_results for SHOW INDEX (no indexes)
         $wpdb->shouldReceive('get_results')
             ->once()
             ->andReturn([]);
 
-        // Mock query for adding indexes
+        // Mock query for adding indexes (6 possible)
         $wpdb->shouldReceive('query')
-            ->times(2) // Two indexes to add
+            ->times(6)
             ->andReturn(true);
 
-        // Mock update_option
-        Functions\expect('update_option')
-            ->once()
-            ->with('simple_lms_progress_db_version', '1.1')
-            ->andReturn(true);
-
-        Progress_Tracker::upgradeSchema();
+        $reflection = new \ReflectionClass(Progress_Tracker::class);
+        $method = $reflection->getMethod('upgradeSchema');
+        $method->setAccessible(true);
+        $method->invoke(null);
     }
 
     /**
@@ -189,18 +184,31 @@ class ProgressTrackerTest extends TestCase
      */
     public function testUpgradeSchemaSkipsIfAlreadyUpgraded(): void
     {
-        // Mock get_option to return new version
-        Functions\expect('get_option')
-            ->once()
-            ->with('simple_lms_progress_db_version', '1.0')
-            ->andReturn('1.1');
-
         // wpdb should NOT be called
         global $wpdb;
         $wpdb = $this->createMockWpdb();
-        $wpdb->shouldNotReceive('get_results');
+
+        Functions\expect('esc_sql')
+            ->once()
+            ->andReturnUsing(static fn ($value) => (string) $value);
+
+        // All required indexes already exist
+        $wpdb->shouldReceive('get_results')
+            ->once()
+            ->andReturn([
+                ['Key_name' => 'user_lesson_completed'],
+                ['Key_name' => 'course_stats'],
+                ['Key_name' => 'user_course'],
+                ['Key_name' => 'updated_at'],
+                ['Key_name' => 'user_course_updated'],
+                ['Key_name' => 'user_course_completed'],
+            ]);
+
         $wpdb->shouldNotReceive('query');
 
-        Progress_Tracker::upgradeSchema();
+        $reflection = new \ReflectionClass(Progress_Tracker::class);
+        $method = $reflection->getMethod('upgradeSchema');
+        $method->setAccessible(true);
+        $method->invoke(null);
     }
 }

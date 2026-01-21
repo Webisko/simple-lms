@@ -11,6 +11,15 @@ namespace SimpleLMS\Tests\Integration;
 use PHPUnit\Framework\TestCase;
 
 class FullPluginTest extends TestCase {
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        if (!\defined('WP_TESTS_DIR')) {
+            $this->markTestSkipped('Requires WordPress integration test suite (run with phpunit-integration.xml / wp-env).');
+        }
+    }
     
     /**
      * Test if main plugin class exists and initializes
@@ -32,7 +41,7 @@ class FullPluginTest extends TestCase {
             'SimpleLMS\Rest_API',
             'SimpleLMS\Progress_Tracker',
             'SimpleLMS\Meta_Boxes',
-            'SimpleLMS\LmsShortcodes',
+            'SimpleLMS\Lesson_Helper',
             'SimpleLMS\Admin_Customizations',
             'SimpleLMS\WooCommerce_Integration',
             'SimpleLMS\Access_Control',
@@ -247,34 +256,6 @@ class FullPluginTest extends TestCase {
         foreach ($assets as $asset) {
             $path = SIMPLE_LMS_PLUGIN_DIR . $asset;
             $this->assertFileExists($path, "Asset file {$asset} should exist");
-        }
-    }
-    
-    /**
-     * Test shortcodes registration
-     */
-    public function test_shortcodes_registered(): void {
-        global $shortcode_tags;
-        
-        $expected_shortcodes = [
-            'simple_lms_course_title',
-            'simple_lms_course_content',
-            'simple_lms_course_navigation',
-            'simple_lms_course_overview',
-            'simple_lms_lesson_title',
-            'simple_lms_lesson_content',
-            'simple_lms_lesson_video',
-            'simple_lms_next_lesson',
-            'simple_lms_previous_lesson',
-            'simple_lms_lesson_complete_toggle',
-            'simple_lms_access_control',
-        ];
-        
-        foreach ($expected_shortcodes as $shortcode) {
-            $this->assertTrue(
-                isset($shortcode_tags[$shortcode]),
-                "Shortcode {$shortcode} should be registered"
-            );
         }
     }
     

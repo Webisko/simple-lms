@@ -1,12 +1,13 @@
 <?php
-namespace SimpleLMS\Managers;
 
 /**
  * Hook Manager - Manages WordPress hooks registration
  *
  * @package SimpleLMS
- * @since 1.4.0
+ * @since 1.0.0
  */
+
+namespace SimpleLMS\Managers;
 
 if (!defined('ABSPATH')) {
     exit;

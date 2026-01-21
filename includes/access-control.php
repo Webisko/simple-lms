@@ -13,11 +13,10 @@ use const \DAY_IN_SECONDS;
 use const \HOUR_IN_SECONDS;
 use function \add_action;
 use function \add_filter;
-use function \add_shortcode;
 use function \current_time;
 use function \current_user_can;
+use function \delete_user_meta;
 use function \delete_transient;
-use function \do_shortcode;
 use function \esc_attr;
 use function \get_current_user_id;
 use function \get_permalink;
@@ -29,8 +28,8 @@ use function \get_user_meta;
 use function \is_singular;
 use function \is_user_logged_in;
 use function \set_transient;
-use function \shortcode_atts;
 use function \update_user_meta;
+use function \user_can;
 use function \wp_add_inline_style;
 use function \wp_enqueue_style;
 use function \wp_register_style;
@@ -43,6 +42,38 @@ use function \wp_redirect;
  * @return string Meta key used to store course access array
  */
 function simple_lms_get_course_access_meta_key(): string { return 'simple_lms_course_access'; }
+
+/**
+ * Cache-aware post meta loader for current request
+ *
+ * @param int $post_id
+ * @return array<string, array<int, mixed>>
+ */
+function simple_lms_get_post_meta_cached(int $post_id): array {
+    if (!isset($GLOBALS['simple_lms_post_meta_cache']) || !is_array($GLOBALS['simple_lms_post_meta_cache'])) {
+        $GLOBALS['simple_lms_post_meta_cache'] = [];
+    }
+    /** @var array<int, array<string, array<int, mixed>>> $cache */
+    $cache = &$GLOBALS['simple_lms_post_meta_cache'];
+    if ($post_id <= 0) {
+        return [];
+    }
+    if (isset($cache[$post_id])) {
+        return $cache[$post_id];
+    }
+    $meta = get_post_meta($post_id);
+    $cache[$post_id] = is_array($meta) ? $meta : [];
+    return $cache[$post_id];
+}
+
+/**
+ * Reset the per-request post meta cache.
+ *
+ * Primarily intended for unit tests; safe to call anytime.
+ */
+function simple_lms_reset_post_meta_cache(): void {
+    $GLOBALS['simple_lms_post_meta_cache'] = [];
+}
 
 /**
  * Assign course access to a user
@@ -63,12 +94,13 @@ function simple_lms_assign_course_access_tag(int $user_id, int $course_id): bool
         update_user_meta($user_id, $key, array_values(array_unique(array_map('intval', $courses))));
         
         // Set expiration date if course has access duration configured
-        $duration_value = (int) get_post_meta($course_id, '_access_duration_value', true);
-        $duration_unit = get_post_meta($course_id, '_access_duration_unit', true) ?: 'days';
+        $course_meta = simple_lms_get_post_meta_cached($course_id);
+        $duration_value = (int) ($course_meta['_access_duration_value'][0] ?? 0);
+        $duration_unit = (string) ($course_meta['_access_duration_unit'][0] ?? 'days');
         
         // Backward compatibility: migrate old _access_duration_days to new format
         if ($duration_value === 0) {
-            $legacy_days = (int) get_post_meta($course_id, '_access_duration_days', true);
+            $legacy_days = (int) ($course_meta['_access_duration_days'][0] ?? 0);
             if ($legacy_days > 0) {
                 $duration_value = $legacy_days;
                 $duration_unit = 'days';
@@ -86,12 +118,12 @@ function simple_lms_assign_course_access_tag(int $user_id, int $course_id): bool
             $duration_days = $duration_value * ($days_multiplier[$duration_unit] ?? 1);
             
             // Determine start date based on access schedule mode
-            $access_mode = get_post_meta($course_id, '_access_schedule_mode', true) ?: 'purchase';
+            $access_mode = (string) ($course_meta['_access_schedule_mode'][0] ?? 'purchase');
             $start_timestamp = current_time('timestamp');
             
             if ($access_mode === 'fixed_date') {
                 // If fixed_date mode, start counting from the fixed date (not purchase date)
-                $fixed_date = get_post_meta($course_id, '_access_fixed_date', true);
+                $fixed_date = (string) ($course_meta['_access_fixed_date'][0] ?? '');
                 if (!empty($fixed_date)) {
                     $fixed_timestamp = strtotime($fixed_date . ' 00:00:00');
                     if ($fixed_timestamp !== false && $fixed_timestamp > 0) {
@@ -192,8 +224,7 @@ function simple_lms_user_has_course_access(int $user_id, int $course_id): bool {
 /**
  * Access Control class
  * 
- * Handles course access verification, drip content scheduling,
- * and access-related shortcodes.
+ * Handles course access verification and drip content scheduling.
  */
 class Access_Control {
     private static function userCourseStartMetaKey(int $course_id): string { return 'simple_lms_course_access_start_' . $course_id; }
@@ -222,7 +253,6 @@ class Access_Control {
      */
     public function register(): void
     {
-        add_action('init', [$this, 'registerShortcodes']);
         add_filter('body_class', [$this, 'addAccessControlBodyClasses']);
         add_action('wp_enqueue_scripts', [$this, 'enqueueAccessControlAssets']);
         add_action('template_redirect', [$this, 'enforceDripAccess']);
@@ -243,12 +273,6 @@ class Access_Control {
         $logger = new Logger('simple-lms', $debugEnabled);
         self::$instance = new self($logger);
         self::$instance->register();
-    }
-
-    public function registerShortcodes(): void {
-        add_shortcode('simple_lms_access_control', [$this, 'accessControlShortcode']);
-        add_shortcode('simple_lms_access', [$this, 'accessControlShortcode']);
-        add_shortcode('simple_lms_access_expiration', [$this, 'accessExpirationShortcode']);
     }
 
     /**
@@ -314,9 +338,11 @@ class Access_Control {
      */
     public static function userHasAccessToLesson(int $lesson_id): bool {
         if ($lesson_id <= 0) return false;
-        $module_id = (int) get_post_meta($lesson_id, 'parent_module', true);
+        $lesson_meta = simple_lms_get_post_meta_cached($lesson_id);
+        $module_id = (int) ($lesson_meta['parent_module'][0] ?? 0);
         if ($module_id <= 0) return false;
-        $course_id = (int) get_post_meta($module_id, 'parent_course', true);
+        $module_meta = simple_lms_get_post_meta_cached($module_id);
+        $course_id = (int) ($module_meta['parent_course'][0] ?? 0);
         if ($course_id <= 0) return false;
         if (!self::userHasAccessToCourse($course_id)) return false;
         return self::isModuleUnlocked($module_id);
@@ -333,14 +359,16 @@ class Access_Control {
      */
     public static function isModuleUnlocked(int $module_id): bool {
         if ($module_id <= 0) return false;
-        $course_id = (int) get_post_meta($module_id, 'parent_course', true);
+        $module_meta = simple_lms_get_post_meta_cached($module_id);
+        $course_id = (int) ($module_meta['parent_course'][0] ?? 0);
         if ($course_id <= 0) return false;
+        $course_meta = simple_lms_get_post_meta_cached($course_id);
 
-        $mode = get_post_meta($course_id, '_access_schedule_mode', true) ?: 'purchase';
+        $mode = (string) ($course_meta['_access_schedule_mode'][0] ?? 'purchase');
         if ($mode === 'purchase') return true;
 
         if ($mode === 'fixed_date') {
-            $date = (string) get_post_meta($course_id, '_access_fixed_date', true);
+            $date = (string) ($course_meta['_access_fixed_date'][0] ?? '');
             if ($date === '') return true;
             $unlock_ts = strtotime($date . ' 00:00:00');
             if ($unlock_ts === false) return true;
@@ -348,14 +376,14 @@ class Access_Control {
         }
 
         if ($mode === 'drip') {
-            $strategy = get_post_meta($course_id, '_drip_strategy', true) ?: 'interval';
+            $strategy = (string) ($course_meta['_drip_strategy'][0] ?? 'interval');
             $uid = (int) get_current_user_id();
             if ($uid <= 0) return false;
             $start_ts = self::ensureUserCourseAccessStart($uid, $course_id);
             if ($start_ts <= 0) return false;
 
             if ($strategy === 'interval') {
-                $interval_days = (int) get_post_meta($course_id, '_drip_interval_days', true);
+                $interval_days = (int) ($course_meta['_drip_interval_days'][0] ?? 0);
                 if ($interval_days <= 0) return true;
                 $modules = Cache_Handler::getCourseModules($course_id);
                 $idx = 0;
@@ -367,11 +395,11 @@ class Access_Control {
                 return $elapsed_days >= $required_days;
             }
 
-            $mode_module = get_post_meta($module_id, '_module_drip_mode', true) ?: 'days';
+            $mode_module = (string) ($module_meta['_module_drip_mode'][0] ?? 'days');
             if ($mode_module === 'manual') {
-                return ((int) get_post_meta($module_id, '_module_manual_unlocked', true)) === 1;
+                return ((int) ($module_meta['_module_manual_unlocked'][0] ?? 0)) === 1;
             }
-            $drip_days = (int) get_post_meta($module_id, '_module_drip_days', true);
+            $drip_days = (int) ($module_meta['_module_drip_days'][0] ?? 0);
             $elapsed_days = (int) floor(((int) current_time('timestamp') - $start_ts) / (int) DAY_IN_SECONDS);
             return $elapsed_days >= $drip_days;
         }
@@ -381,14 +409,16 @@ class Access_Control {
 
     public static function getModuleUnlockInfo(int $module_id): array {
         if ($module_id <= 0) return ['unlock_ts' => null, 'mode' => 'none'];
-        $course_id = (int) get_post_meta($module_id, 'parent_course', true);
+        $module_meta = simple_lms_get_post_meta_cached($module_id);
+        $course_id = (int) ($module_meta['parent_course'][0] ?? 0);
         if ($course_id <= 0) return ['unlock_ts' => null, 'mode' => 'none'];
+        $course_meta = simple_lms_get_post_meta_cached($course_id);
 
-        $mode = get_post_meta($course_id, '_access_schedule_mode', true) ?: 'purchase';
+        $mode = (string) ($course_meta['_access_schedule_mode'][0] ?? 'purchase');
         if ($mode === 'purchase') return ['unlock_ts' => null, 'mode' => 'purchase'];
 
         if ($mode === 'fixed_date') {
-            $date = (string) get_post_meta($course_id, '_access_fixed_date', true);
+            $date = (string) ($course_meta['_access_fixed_date'][0] ?? '');
             if ($date === '') return ['unlock_ts' => null, 'mode' => 'fixed_date'];
             $unlock_ts = strtotime($date . ' 00:00:00');
             return ['unlock_ts' => ($unlock_ts === false ? null : (int) $unlock_ts), 'mode' => 'fixed_date'];
@@ -400,9 +430,9 @@ class Access_Control {
             $start_ts = self::ensureUserCourseAccessStart($uid, $course_id);
             if ($start_ts <= 0) return ['unlock_ts' => null, 'mode' => 'drip'];
 
-            $strategy = get_post_meta($course_id, '_drip_strategy', true) ?: 'interval';
+            $strategy = (string) ($course_meta['_drip_strategy'][0] ?? 'interval');
             if ($strategy === 'interval') {
-                $interval_days = (int) get_post_meta($course_id, '_drip_interval_days', true);
+                $interval_days = (int) ($course_meta['_drip_interval_days'][0] ?? 0);
                 if ($interval_days <= 0) return ['unlock_ts' => (int) $start_ts, 'mode' => 'drip'];
                 $modules = Cache_Handler::getCourseModules($course_id);
                 $idx = 0;
@@ -414,11 +444,11 @@ class Access_Control {
                 return ['unlock_ts' => $unlock_ts, 'mode' => 'drip'];
             }
 
-            $mode_module = get_post_meta($module_id, '_module_drip_mode', true) ?: 'days';
+            $mode_module = (string) ($module_meta['_module_drip_mode'][0] ?? 'days');
             if ($mode_module === 'manual') {
                 return ['unlock_ts' => null, 'mode' => 'drip'];
             }
-            $drip_days = (int) get_post_meta($module_id, '_module_drip_days', true);
+            $drip_days = (int) ($module_meta['_module_drip_days'][0] ?? 0);
             $unlock_ts = (int) $start_ts + ($drip_days * (int) DAY_IN_SECONDS);
             return ['unlock_ts' => $unlock_ts, 'mode' => 'drip'];
         }
@@ -449,8 +479,10 @@ class Access_Control {
         $type = get_post_type($post_id);
         if ($type === 'lesson') {
             if (!self::userHasAccessToLesson($post_id)) {
-                $module_id = (int) get_post_meta($post_id, 'parent_module', true);
-                $course_id = $module_id ? (int) get_post_meta($module_id, 'parent_course', true) : 0;
+                $lesson_meta = simple_lms_get_post_meta_cached($post_id);
+                $module_id = (int) ($lesson_meta['parent_module'][0] ?? 0);
+                $module_meta = $module_id ? simple_lms_get_post_meta_cached($module_id) : [];
+                $course_id = $module_id ? (int) ($module_meta['parent_course'][0] ?? 0) : 0;
                 if ($course_id) {
                     $this->logger->debug('Redirecting due to locked lesson (drip/access)', [
                         'lesson_id' => $post_id,
@@ -494,6 +526,9 @@ class Access_Control {
     }
 
     public function enqueueAccessControlAssets(): void {
+        if (!\is_singular(['course', 'module', 'lesson'])) {
+            return;
+        }
         $handle = 'simple-lms-access';
         $css = '.simple-lms-course-navigation .accordion-module.locked .accordion-toggle{opacity:.6}';
         if (!wp_style_is($handle, 'registered')) {
@@ -501,100 +536,6 @@ class Access_Control {
         }
         wp_enqueue_style($handle);
         wp_add_inline_style($handle, $css);
-    }
-
-    public function accessControlShortcode($atts, string $content = ''): string {
-        $atts = shortcode_atts([
-            'course_id' => 0,
-            'access' => 'with',
-            'class' => '',
-        ], $atts);
-        $course_id = (int) ($atts['course_id'] ?: self::getCurrentCourseId());
-        if ($course_id <= 0) return '';
-        $has_access = self::userHasAccessToCourse($course_id);
-        $show = ($atts['access'] === 'with') ? $has_access : !$has_access;
-        if (!$show) return '';
-        $class = $atts['class'] ? ' ' . esc_attr((string) $atts['class']) : '';
-        return '<div class="simple-lms-access-controlled' . $class . '">' . do_shortcode($content) . '</div>';
-    }
-
-    /**
-     * Shortcode to display course access expiration information
-     * Usage: [simple_lms_access_expiration course_id="123" format="days"]
-     * 
-     * @param array $atts Shortcode attributes
-     * @return string HTML output
-     */
-    public function accessExpirationShortcode($atts): string {
-        $atts = shortcode_atts([
-            'course_id' => 0,
-            'format' => 'full', // 'full', 'days', 'date'
-            'class' => '',
-        ], $atts);
-        
-        $course_id = (int) ($atts['course_id'] ?: self::getCurrentCourseId());
-        if ($course_id <= 0) return '';
-        
-        $user_id = (int) get_current_user_id();
-        if ($user_id <= 0) return '';
-        
-        if (!self::userHasAccessToCourse($course_id)) {
-            return '';
-        }
-        
-        $expiration = simple_lms_get_course_access_expiration($user_id, $course_id);
-        if ($expiration === null) {
-            return ''; // Unlimited access - don't show anything
-        }
-        
-        $days_remaining = simple_lms_get_course_access_days_remaining($user_id, $course_id);
-        $date_format = get_option('date_format');
-        $expiration_date = date_i18n((string) $date_format, $expiration);
-        
-        $class = $atts['class'] ? ' ' . esc_attr((string) $atts['class']) : '';
-        $warning_class = ($days_remaining !== null && $days_remaining <= 7) ? ' simple-lms-expiration-warning' : '';
-        
-        $output = '<div class="simple-lms-access-expiration' . $class . $warning_class . '">';
-        
-        switch ($atts['format']) {
-            case 'days':
-                if ($days_remaining === 0) {
-                    $output .= '<strong>' . __('Access expired', 'simple-lms') . '</strong>';
-                } else {
-                    $output .= sprintf(
-                        _n('Pozostał %d dzień dostępu', 'Pozostało %d dni dostępu', $days_remaining, 'simple-lms'),
-                        $days_remaining
-                    );
-                }
-                break;
-                
-            case 'date':
-                $output .= sprintf(
-                    __('Access to: %s', 'simple-lms'),
-                    '<strong>' . esc_html($expiration_date) . '</strong>'
-                );
-                break;
-                
-            case 'full':
-            default:
-                if ($days_remaining === 0) {
-                    $output .= '<strong>' . __('Access expired', 'simple-lms') . '</strong>';
-                } else {
-                    $output .= sprintf(
-                        __('Your access expires in %s (%s)', 'simple-lms'),
-                        '<strong>' . sprintf(
-                            _n('%d dzień', '%d dni', $days_remaining, 'simple-lms'),
-                            $days_remaining
-                        ) . '</strong>',
-                        esc_html($expiration_date)
-                    );
-                }
-                break;
-        }
-        
-        $output .= '</div>';
-        
-        return $output;
     }
 
     public static function getCurrentCourseId(): int {

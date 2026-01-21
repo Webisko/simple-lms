@@ -7,7 +7,7 @@
          failOnRisky="false">
     <testsuites>
         <testsuite name="Simple LMS Integration Tests">
-            <directory suffix="Test.php">tests/Integration</directory>
+            <directory suffix="Test.php">tests/WPIntegration</directory>
         </testsuite>
     </testsuites>
     <coverage>
@@ -20,7 +20,7 @@
         </exclude>
     </coverage>
     <php>
-        <env name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib"/>
-        <env name="WP_CORE_DIR" value="/tmp/wordpress"/>
+        <!-- Use the wp-env WordPress runtime (wp-load.php fallback in tests/bootstrap-wordpress.php). -->
+        <env name="WP_CORE_DIR" value="/var/www/html"/>
     </php>
 </phpunit>

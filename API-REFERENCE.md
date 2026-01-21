@@ -1,7 +1,7 @@
 # Simple LMS API Reference
 
-**Version:** 1.3.2  
-**Last Updated:** 2025-11-30
+**Version:** 1.0.0  
+**Last Updated:** 2026-01-21
 
 ## Table of Contents
 1. [Core Classes](#core-classes)
@@ -21,7 +21,7 @@ Manages course access control, drip content scheduling, and user permissions.
 #### Public Methods
 
 ##### `init(): void`
-Initializes access control hooks and shortcodes.
+Initializes access control hooks.
 
 **Usage:**
 ```php
@@ -971,17 +971,11 @@ Simple LMS: Cleaned up 5 expired course access entries
 
 ## Version History
 
-- **1.3.1** - Performance optimizations, security hardening
-- **1.3.0** - Tag-based access, WooCommerce integration, REST API
-- **1.2.0** - Shortcode management, progress tracking
-- **1.1.0** - Cache handler, AJAX improvements
-- **1.0.0** - Initial release
+This is the first public release. Future versions will be documented in CHANGELOG.md.
 
 ---
 
 ## Support & Resources
 
-- **Plugin Repository:** GitHub (private)
 - **Documentation:** This file + README.md
-- **Issue Tracking:** GitHub Issues
 - **Testing Guide:** `tests/E2E-TESTING-GUIDE.md`

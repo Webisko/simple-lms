@@ -14,6 +14,7 @@ Comprehensive documentation of all action and filter hooks available in Simple L
    - [Cache Management](#cache-management)
 2. [Filters](#filters)
    - [Security & Nonces](#security--nonces)
+    - [Assets & Performance](#assets--performance)
    - [Access Control](#access-control-filters)
    - [Cache Configuration](#cache-configuration)
    - [Debug & Logging](#debug--logging)
@@ -393,6 +394,34 @@ Filters AJAX nonce action (legacy - use `simple_lms_nonce_action`).
 - `string $action` - Default action ('simple-lms-nonce')
 
 **Returns:** `string` - Modified action
+
+---
+
+### Assets & Performance
+
+#### `simple_lms_enqueue_frontend_assets`
+Filters whether Simple LMS frontend assets should be enqueued on the current request.
+
+**Parameters:**
+- `bool $should_enqueue` - Default decision based on LMS page context
+
+**Returns:** `bool` - True to enqueue assets, false to skip
+
+**Use Cases:**
+- Disable assets on custom landing pages
+- Force assets on pages with builder widgets
+- Optimize performance for non-LMS pages
+
+**Example:**
+```php
+add_filter('simple_lms_enqueue_frontend_assets', function($should_enqueue) {
+    // Always enqueue on a custom dashboard page
+    if (is_page('student-dashboard')) {
+        return true;
+    }
+    return $should_enqueue;
+});
+```
 
 ---
 

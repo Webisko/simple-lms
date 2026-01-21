@@ -1,65 +1,73 @@
 <?php
+
 /**
- * Uninstall Simple LMS
- * 
+ * Uninstall Simple LMS.
+ *
  * Fired when the plugin is uninstalled.
  * Removes all plugin data from the database (optional, based on settings).
  *
  * @package SimpleLMS
- * @since 1.3.3
+ * @since 1.0.0
  */
 
-// If uninstall not called from WordPress, exit
-if (!defined('WP_UNINSTALL_PLUGIN')) {
+// If uninstall not called from WordPress, exit.
+if (! defined('WP_UNINSTALL_PLUGIN')) {
     exit;
 }
 
-// Check if user wants to delete all data (option set in settings)
-$delete_data = get_option('simple_lms_delete_data_on_uninstall', 'no');
+// Check if user wants to delete all data (option set in settings).
+$simple_lms_delete_data = get_option('simple_lms_delete_data_on_uninstall', 'no');
 
-if ($delete_data !== 'yes') {
-    // User wants to keep data, exit early
+if ('yes' !== $simple_lms_delete_data) {
+    // User wants to keep data, exit early.
     return;
 }
 
 global $wpdb;
 
 /**
- * Remove custom post types and their meta
+ * Remove custom post types and their meta.
  */
-function simple_lms_uninstall_remove_posts() {
-    $post_types = ['course', 'module', 'lesson'];
-    
+function simple_lms_uninstall_remove_posts()
+{
+    $post_types = [ 'course', 'module', 'lesson' ];
+
     foreach ($post_types as $post_type) {
-        $posts = get_posts([
-            'post_type'      => $post_type,
-            'posts_per_page' => -1,
-            'post_status'    => 'any',
-        ]);
-        
+        $posts = get_posts(
+            [
+                'post_type'      => $post_type,
+                'posts_per_page' => -1,
+                'post_status'    => 'any',
+            ]
+        );
+
         foreach ($posts as $post) {
-            if (!$post instanceof \WP_Post) {
+            if (! $post instanceof \WP_Post) {
                 continue;
             }
-            // Force delete (skip trash)
+            // Force delete (skip trash).
             wp_delete_post($post->ID, true);
         }
     }
 }
 
 /**
- * Remove plugin options
+ * Remove plugin options.
  */
-function simple_lms_uninstall_remove_options() {
+function simple_lms_uninstall_remove_options()
+{
     global $wpdb;
-    
-    // Remove all options with simple_lms prefix
+
+    // Remove all options with simple_lms prefix.
+    $like = $wpdb->esc_like('simple_lms_') . '%';
     $wpdb->query(
-        "DELETE FROM {$wpdb->options} 
-         WHERE option_name LIKE 'simple\_lms\_%'"
+        $wpdb->prepare(
+            "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+            $like
+        )
     );
-    
-    // Remove specific known options
+
+    // Remove specific known options.
     delete_option('simple_lms_version');
     delete_option('simple_lms_db_version');
     delete_option('simple_lms_analytics_retention_days');
@@ -67,107 +75,121 @@ function simple_lms_uninstall_remove_options() {
 }
 
 /**
- * Remove user meta
+ * Remove user meta.
  */
-function simple_lms_uninstall_remove_user_meta() {
+function simple_lms_uninstall_remove_user_meta()
+{
     global $wpdb;
-    
-    // Remove course access tags
+
+    // Remove course access tags.
     $wpdb->query(
         "DELETE FROM {$wpdb->usermeta} 
          WHERE meta_key = 'simple_lms_course_access'"
     );
-    
-    // Remove other plugin-specific user meta
+
+    // Remove other plugin-specific user meta.
+    $like = $wpdb->esc_like('simple_lms_') . '%';
     $wpdb->query(
-        "DELETE FROM {$wpdb->usermeta} 
-         WHERE meta_key LIKE 'simple\_lms\_%'"
+        $wpdb->prepare(
+            "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s",
+            $like
+        )
     );
 }
 
 /**
- * Remove transients
+ * Remove transients.
  */
-function simple_lms_uninstall_remove_transients() {
+function simple_lms_uninstall_remove_transients()
+{
     global $wpdb;
-    
-    // Remove transients
+
+    // Remove transients.
+    $transient_like = $wpdb->esc_like('_transient_simple_lms_') . '%';
+    $timeout_like   = $wpdb->esc_like('_transient_timeout_simple_lms_') . '%';
     $wpdb->query(
-        "DELETE FROM {$wpdb->options} 
-         WHERE option_name LIKE '\_transient\_simple\_lms\_%' 
-         OR option_name LIKE '\_transient\_timeout\_simple\_lms\_%'"
+        $wpdb->prepare(
+            "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+            $transient_like,
+            $timeout_like
+        )
     );
-    
-    // Remove site transients (multisite)
+
+    // Remove site transients (multisite).
+    $site_transient_like = $wpdb->esc_like('_site_transient_simple_lms_') . '%';
+    $site_timeout_like   = $wpdb->esc_like('_site_transient_timeout_simple_lms_') . '%';
     $wpdb->query(
-        "DELETE FROM {$wpdb->options} 
-         WHERE option_name LIKE '\_site\_transient\_simple\_lms\_%' 
-         OR option_name LIKE '\_site\_transient\_timeout\_simple\_lms\_%'"
+        $wpdb->prepare(
+            "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
+            $site_transient_like,
+            $site_timeout_like
+        )
     );
 }
 
 /**
- * Remove custom database tables
+ * Remove custom database tables.
  */
-function simple_lms_uninstall_remove_tables() {
+function simple_lms_uninstall_remove_tables()
+{
     global $wpdb;
-    
+
     $tables = [
         $wpdb->prefix . 'simple_lms_progress',
         $wpdb->prefix . 'simple_lms_analytics',
     ];
-    
+
     foreach ($tables as $table) {
-        // Check if table exists before dropping
-        $table_exists = $wpdb->get_var($wpdb->prepare(
-            "SHOW TABLES LIKE %s",
-            $table
-        ));
-        
+        // Check if table exists before dropping.
+        $table_exists = $wpdb->get_var(
+            $wpdb->prepare(
+                'SHOW TABLES LIKE %s',
+                $table
+            )
+        );
+
         if ($table_exists) {
+            // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name is whitelisted via $wpdb->prefix.
             $wpdb->query("DROP TABLE IF EXISTS `{$table}`");
         }
     }
 }
 
 /**
- * Clear WordPress caches
+ * Clear WordPress caches.
  */
-function simple_lms_uninstall_clear_caches() {
-    // Clear object cache
+function simple_lms_uninstall_clear_caches()
+{
+    // Clear object cache.
     wp_cache_flush();
-    
-    // Clear rewrite rules
+
+    // Clear rewrite rules.
     flush_rewrite_rules();
 }
 
 /**
- * Main uninstall routine
+ * Main uninstall routine.
  */
-function simple_lms_uninstall() {
-    // Remove posts and meta
+function simple_lms_uninstall()
+{
+    // Remove posts and meta.
     simple_lms_uninstall_remove_posts();
-    
-    // Remove options
+
+    // Remove options.
     simple_lms_uninstall_remove_options();
-    
-    // Remove user meta
+
+    // Remove user meta.
     simple_lms_uninstall_remove_user_meta();
-    
-    // Remove transients
+
+    // Remove transients.
     simple_lms_uninstall_remove_transients();
-    
-    // Remove custom tables
+
+    // Remove custom tables.
     simple_lms_uninstall_remove_tables();
-    
-    // Clear caches
+
+    // Clear caches.
     simple_lms_uninstall_clear_caches();
-    
-    // Log uninstall (optional, for debugging)
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        error_log('Simple LMS: Plugin uninstalled and all data removed.');
-    }
 }
 
-// Execute uninstall
+// Execute uninstall.
 simple_lms_uninstall();

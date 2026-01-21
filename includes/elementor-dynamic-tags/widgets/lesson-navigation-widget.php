@@ -542,8 +542,8 @@ class Lesson_Navigation_Widget extends Widget_Base {
         }
 
         // Get previous and next lessons
-        $prev_lesson = \SimpleLMS\LmsShortcodes::getPreviousLesson($lesson_id);
-        $next_lesson = \SimpleLMS\LmsShortcodes::getNextLesson($lesson_id);
+        $prev_lesson = \SimpleLMS\Lesson_Helper::getPreviousLesson($lesson_id);
+        $next_lesson = \SimpleLMS\Lesson_Helper::getNextLesson($lesson_id);
 
         $layout = $settings['layout'] ?? 'space-between';
         $show_prev = $settings['show_prev'] === 'yes';

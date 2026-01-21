@@ -37,6 +37,11 @@ abstract class TestCase extends PHPUnitTestCase
      */
     protected function tearDown(): void
     {
+        if (\function_exists('SimpleLMS\\simple_lms_reset_post_meta_cache')) {
+            \SimpleLMS\simple_lms_reset_post_meta_cache();
+        }
+        $_POST = [];
+
         Monkey\tearDown();
         parent::tearDown();
     }
@@ -46,32 +51,13 @@ abstract class TestCase extends PHPUnitTestCase
      */
     protected function setUpCommonWordPressFunctions(): void
     {
-        // Translation functions
-        Monkey\Functions\when('__')->returnArg(1);
-        Monkey\Functions\when('_e')->returnArg(1);
-        Monkey\Functions\when('esc_html__')->returnArg(1);
-        Monkey\Functions\when('esc_attr__')->returnArg(1);
-        
-        // Escaping functions
-        Monkey\Functions\when('esc_html')->returnArg(1);
-        Monkey\Functions\when('esc_attr')->returnArg(1);
-        Monkey\Functions\when('esc_url')->returnArg(1);
-        Monkey\Functions\when('esc_js')->returnArg(1);
-        Monkey\Functions\when('esc_sql')->returnArg(1);
-        Monkey\Functions\when('sanitize_text_field')->returnArg(1);
-        Monkey\Functions\when('sanitize_key')->returnArg(1);
-        Monkey\Functions\when('wp_kses_post')->returnArg(1);
-        Monkey\Functions\when('esc_url_raw')->returnArg(1);
-        
-        // Common utility functions
-        Monkey\Functions\when('absint')->alias(function ($value) {
-            return abs((int) $value);
-        });
-        
-        // Current time
-        Monkey\Functions\when('current_time')->alias(function ($type) {
-            return $type === 'timestamp' ? time() : date('Y-m-d H:i:s');
-        });
+        // Activation/deactivation hooks are not part of Brain Monkey's hook API
+        Monkey\Functions\when('register_activation_hook')->justReturn(true);
+        Monkey\Functions\when('register_deactivation_hook')->justReturn(true);
+
+        // Common environment helpers
+        Monkey\Functions\when('is_admin')->justReturn(false);
+        Monkey\Functions\when('wp_doing_ajax')->justReturn(false);
     }
 
     /**

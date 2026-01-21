@@ -11,7 +11,6 @@ if (!defined('ABSPATH')) {
 }
 
 use function \add_action;
-use function \add_shortcode;
 use function \admin_url;
 use function \checked;
 use function \class_exists;
@@ -32,7 +31,6 @@ use function \in_array;
 use function \is_user_logged_in;
 use function \sanitize_text_field;
 use function \selected;
-use function \shortcode_atts;
 use function \absint;
 use function \update_post_meta;
 use function \update_user_meta;
@@ -105,10 +103,6 @@ class WooCommerce_Integration {
         add_action('woocommerce_order_status_completed', [__CLASS__, 'grant_course_access_on_order_complete']);
         add_action('woocommerce_payment_complete', [__CLASS__, 'grant_course_access_on_payment_complete']);
         add_action('woocommerce_order_status_changed', [__CLASS__, 'handle_order_status_change'], 10, 4);
-
-        // Shortcodes
-        add_shortcode('course_purchase_button', [__CLASS__, 'purchase_button_shortcode']);
-        add_shortcode('simple_lms_purchase_url', [__CLASS__, 'purchase_url_shortcode']);
 
         // Course access control
         add_action('template_redirect', [__CLASS__, 'control_course_access']);
@@ -1412,86 +1406,6 @@ class WooCommerce_Integration {
     }
 
     /**
-     * Purchase button shortcode
-     */
-    public static function purchase_button_shortcode($atts) {
-        $atts = shortcode_atts([
-            'course_id' => self::getCurrentCourseId(),
-            'text' => __('Kup kurs', 'simple-lms'),
-            'class' => 'button wc-forward',
-            'debug' => '0'
-        ], $atts);
-        
-        $course_id = absint($atts['course_id']);
-        if (!$course_id) {
-            return '';
-        }
-
-        // Debug information
-        if ($atts['debug'] === '1') {
-            $debug_info = '<div style="background: #fff3cd; border: 1px solid #ffeaa7; Padding: 10px; margin: 10px 0;">';
-            $debug_info .= '<strong>Debug informacje:</strong><br>';
-            $debug_info .= 'Bieżąca strona ID: ' . get_the_ID() . '<br>';
-            $debug_info .= 'Typ postu: ' . get_post_type() . '<br>';
-            $debug_info .= 'Znaleziony course_id: ' . $course_id . '<br>';
-            $product_ids = get_post_meta($course_id, '_wc_product_ids', true);
-            $debug_info .= 'Product IDs: ' . (is_array($product_ids) ? implode(', ', $product_ids) : 'brak') . '<br>';
-            $debug_info .= '</div>';
-            return $debug_info;
-        }
-        
-        $product_ids = get_post_meta($course_id, '_wc_product_ids', true);
-        if (!is_array($product_ids) || empty($product_ids)) {
-            // Sprawdzenie czy istnieje stary system
-            $old_product_id = get_post_meta($course_id, '_wc_product_id', true);
-            if ($old_product_id) {
-                $product_ids = [$old_product_id];
-            } else {
-                return '<p>' . __('This course is not available for purchase.', 'simple-lms') . '</p>';
-            }
-        }
-        
-        // Sprawdź czy kurs ma ustawiony domyślny produkt
-        $default_product_id = get_post_meta($course_id, '_default_wc_product_id', true);
-        $selected_product = null;
-        
-        if ($default_product_id && in_array($default_product_id, $product_ids)) {
-            $selected_product = wc_get_product($default_product_id);
-            if ($selected_product && $selected_product->get_status() === 'publish') {
-                // Użyj domyślnego produktu
-            } else {
-                $selected_product = null;
-            }
-        }
-        
-        // Jeśli nie ma domyślnego produktu lub jest niedostępny, znajdź pierwszy dostępny
-        if (!$selected_product) {
-            foreach ($product_ids as $product_id) {
-                $product = wc_get_product($product_id);
-                if ($product && $product->get_status() === 'publish') {
-                    $selected_product = $product;
-                    break;
-                }
-            }
-        }
-        
-        if (!$selected_product) {
-            return '<p>' . __('This course is not available for purchase.', 'simple-lms') . '</p>';
-        }
-        
-        $product_url = esc_url(get_permalink($selected_product->get_id()));
-        $price = $selected_product->get_price_html();
-        
-        $output = '<div class="simple-lms-purchase-area">';
-        $output .= '<div class="course-price">' . $price . '</div>';
-        $output .= '<a href="' . $product_url . '" class="simple-lms-purchase-btn ' . esc_attr($atts['class']) . '">';
-        $output .= esc_html($atts['text']) . '</a>';
-        $output .= '</div>';
-        
-        return $output;
-    }
-
-    /**
      * Get current course ID - handles course, module, and lesson contexts
      * 
      * Resolves course ID from the current post, traversing parent relationships
@@ -1614,35 +1528,6 @@ class WooCommerce_Integration {
     }
 
     /**
-     * Shortcode that returns only the purchase URL for the current course context
-     * Usage: [simple_lms_purchase_url] or [simple_lms_purchase_url course_id="123"]
-     */
-    public static function purchase_url_shortcode($atts): string {
-        $atts = shortcode_atts([
-            'course_id' => self::getCurrentCourseId(),
-            'debug' => '0',
-        ], $atts);
-
-        $course_id = absint($atts['course_id']);
-        if (!$course_id) {
-            return '';
-        }
-
-        if ($atts['debug'] === '1') {
-            $product_ids = get_post_meta($course_id, '_wc_product_ids', true);
-            $debug = [
-                'page_id' => get_the_ID(),
-                'post_type' => get_post_type(),
-                'course_id' => $course_id,
-                'product_ids' => is_array($product_ids) ? implode(', ', $product_ids) : 'brak',
-            ];
-            return '<pre style="background:#f6f8fa;border:1px solid #e1e4e8;Padding:8px;">' . esc_html(print_r($debug, true)) . '</pre>';
-        }
-
-        return self::get_purchase_url_for_course($course_id) ?: '';
-    }
-
-    /**
      * Control course access on frontend
      */
     public static function control_course_access() {
@@ -1702,6 +1587,10 @@ class WooCommerce_Integration {
             'post_type' => 'product',
             'post_status' => ['publish', 'draft'],
             'posts_per_page' => 20,
+            'fields' => 'ids',
+            'no_found_rows' => true,
+            'update_post_meta_cache' => false,
+            'update_post_term_cache' => false,
             'meta_query' => [
                 [
                     'key' => '_is_course_product',
@@ -1717,12 +1606,13 @@ class WooCommerce_Integration {
         $products = get_posts($args);
         $result = [];
         
-        foreach ($products as $product_post) {
-            if (!$product_post instanceof \WP_Post) {
+        foreach ($products as $product_id) {
+            $product_id = (int) $product_id;
+            if ($product_id <= 0) {
                 continue;
             }
 
-            $product = wc_get_product($product_post->ID);
+            $product = wc_get_product($product_id);
             if ($product) {
                 $price = $product->get_price_html();
                 if (empty($price)) {

@@ -1,13 +1,17 @@
 {
   "name": "simple-lms",
-  "version": "1.5.1",
+  "version": "1.0.0",
   "description": "Modern LMS plugin for WordPress with WooCommerce integration",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "watch": "vite build --watch",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "wp-env:start": "npx -y @wordpress/env start",
+    "wp-env:stop": "npx -y @wordpress/env stop",
+    "wp-env:destroy": "npx -y @wordpress/env destroy --yes",
+    "test:wp": "npx -y @wordpress/env run tests-cli php wp-content/plugins/simple-lms/tests/vendor/bin/phpunit --configuration wp-content/plugins/simple-lms/phpunit-integration.xml"
   },
   "repository": {
     "type": "git",
@@ -22,12 +26,12 @@
   "author": "Filip Meyer-Lüters <filip@webisko.pl>",
   "license": "GPL-2.0-or-later",
   "devDependencies": {
-    "vite": "^5.4.0",
-    "@vitejs/plugin-legacy": "^5.4.0",
-    "terser": "^5.31.0",
+    "@vitejs/plugin-legacy": "^7.2.1",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "sass": "^1.77.0"
+    "sass": "^1.77.0",
+    "terser": "^5.31.0",
+    "vite": "^7.3.1"
   },
   "engines": {
     "node": ">=18.0.0",

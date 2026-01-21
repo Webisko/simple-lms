@@ -76,12 +76,12 @@ Simple LMS is fully compatible with the following multilingual WordPress plugins
 
 Simple LMS automatically maps post IDs to the current language in:
 
-#### Shortcodes:
-- All lesson shortcodes (title, content, excerpt, permalink, video URL)
-- All module shortcodes (title, content, excerpt)
-- All course shortcodes (title, content, excerpt)
-- Navigation shortcodes (previous/next lesson)
-- WooCommerce purchase URLs
+#### Dynamic tags and widgets:
+- Lesson title/content/excerpt/permalink/video URL tags
+- Module title/content/excerpt tags
+- Course title/content/excerpt tags
+- Navigation widgets (previous/next lesson)
+- WooCommerce purchase URL tags
 
 #### Bricks Elements:
 - Lesson Content element
@@ -249,7 +249,7 @@ Or use **Loco Translate** or **Poedit** for GUI-based compilation.
 1. ✅ Create course in default language with modules and lessons
 2. ✅ Translate course to target language
 3. ✅ Verify navigation (prev/next) links to translated lessons
-4. ✅ Verify shortcodes display correct language content
+4. ✅ Verify dynamic tags/widgets display correct language content
 5. ✅ Verify Bricks elements render translated content
 6. ✅ Verify WooCommerce purchase buttons link to correct product
 7. ✅ Switch admin language and verify UI translations
@@ -331,7 +331,7 @@ $locale = determine_locale(); // WordPress core function
 
 For multilingual-specific issues, please ensure:
 1. Your translation plugin is up-to-date
-2. Simple LMS is version 1.3.4 or higher
+2. Simple LMS is installed and active
 3. PHP version is 8.0 or higher
 4. WordPress version is 6.0 or higher
 

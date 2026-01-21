@@ -1,12 +1,14 @@
 <?php
-namespace SimpleLMS\Managers;
 
 /**
  * Asset Manager - Manages scripts and styles enqueuing
  *
  * @package SimpleLMS
- * @since 1.4.0
+ * @since 1.0.0
  */
+
+namespace SimpleLMS\Managers;
+
 use SimpleLMS\Logger;
 
 if (!defined('ABSPATH')) {
@@ -271,6 +273,12 @@ class AssetManager
      */
     public function enqueueFrontendAssets(): void
     {
+        $shouldEnqueue = \is_singular(['course', 'module', 'lesson']) || \is_post_type_archive('course');
+        $shouldEnqueue = (bool) \apply_filters('simple_lms_enqueue_frontend_assets', $shouldEnqueue);
+        if (!$shouldEnqueue) {
+            return;
+        }
+
         // Main frontend CSS (built with Vite)
         $this->registerStyle(
             'simple-lms-frontend',
@@ -287,7 +295,7 @@ class AssetManager
         // Localize script with data
         $frontendLocalization = [
             'ajaxUrl' => \admin_url('admin-ajax.php'),
-            'nonce' => \wp_create_nonce('simple_lms_nonce'),
+            'nonce' => \wp_create_nonce('simple-lms-nonce'),
             'userId' => \get_current_user_id(),
             'isUserLoggedIn' => \is_user_logged_in(),
         ];
@@ -331,10 +339,10 @@ class AssetManager
             return;
         }
 
-        // Admin CSS - load from src since Vite embeds it in JS
+        // Admin CSS (built with Vite)
         $this->registerStyle(
             'simple-lms-admin',
-            'assets/src/css/admin.css'
+            'assets/dist/css/admin-style.css'
         )->enqueueStyle('simple-lms-admin');
 
         // Admin JS
@@ -347,7 +355,7 @@ class AssetManager
         // Legacy-compatible localization keys expected by admin.js
         $localization = [
             'ajaxurl' => \admin_url('admin-ajax.php'),
-            'nonce' => \wp_create_nonce('simple-lms-nonce_ajax'),
+            'nonce' => \wp_create_nonce('simple-lms-nonce'),
             'editModuleUrl' => \admin_url('post.php?post=MODULE_ID&action=edit'),
             'editLessonUrl' => \admin_url('post.php?post=LESSON_ID&action=edit'),
             'i18n' => [

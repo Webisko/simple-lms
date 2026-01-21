@@ -192,7 +192,7 @@ class Lesson_Content_Widget extends Widget_Base {
         // Output lesson content with WordPress filters
         echo '<div class="simple-lms-lesson-content">';
         
-        // Apply the_content filters to handle shortcodes, embeds, etc.
+        // Apply the_content filters to handle embeds and formatting.
         $content = apply_filters('the_content', $lesson->post_content);
         $content = str_replace(']]>', ']]&gt;', $content);
         

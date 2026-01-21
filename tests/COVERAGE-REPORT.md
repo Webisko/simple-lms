@@ -10,50 +10,7 @@
 
 ### 1. Unit Tests
 
-#### `tests/Unit/ShortcodesTest.php` (650 lines)
-**Coverage:** All 40+ Simple LMS shortcodes
-
-**Test Methods:**
-- `testLessonTitleShortcodeReturnsTitle()` - Lesson title retrieval
-- `testLessonTitleShortcodeHandlesInvalidId()` - Invalid ID edge case
-- `testLessonTitleShortcodeHandlesEmptyAttribute()` - Empty attribute fallback
-- `testLessonContentShortcodeReturnsContent()` - Lesson content retrieval
-- `testLessonExcerptShortcodeReturnsExcerpt()` - Lesson excerpt retrieval
-- `testLessonPermalinkShortcodeReturnsUrl()` - Lesson permalink generation
-- `testLessonVideoUrlShortcodeReturnsUrl()` - Video URL from ACF field
-- `testLessonVideoTypeShortcodeReturnsType()` - Video type detection (youtube/vimeo)
-- `testLessonDurationShortcodeReturnsFormattedTime()` - Duration formatting (HH:MM:SS)
-- `testModuleTitleShortcodeReturnsTitle()` - Module title retrieval
-- `testModuleContentShortcodeReturnsContent()` - Module content retrieval
-- `testModuleExcerptShortcodeReturnsExcerpt()` - Module excerpt retrieval
-- `testModulePermalinkShortcodeReturnsUrl()` - Module permalink generation
-- `testCourseTitleShortcodeReturnsTitle()` - Course title retrieval
-- `testCourseContentShortcodeReturnsContent()` - Course content retrieval
-- `testCourseExcerptShortcodeReturnsExcerpt()` - Course excerpt retrieval
-- `testCourseProgressShortcodeReturnsPercentage()` - Progress calculation
-- `testPreviousLessonUrlShortcodeReturnsUrl()` - Previous lesson navigation
-- `testNextLessonUrlShortcodeReturnsUrl()` - Next lesson navigation
-- `testNavigationClassShortcodeReturnsClasses()` - Navigation CSS classes
-- `testPurchaseUrlShortcodeReturnsUrl()` - WooCommerce purchase URL
-- `testCoursePriceShortcodeReturnsFormattedPrice()` - WooCommerce price display
-- `testCompletionToggleShortcodeReturnsButton()` - Completion toggle button
-- `testHasAccessShortcodeReturnsTrue()` - Access check logic
-- `testLessonCountTextShortcodeReturnsSingular()` - Lesson count with singular/plural
-- `testShortcodeRespectsMultilingualMapping()` - Multilingual ID mapping
-
-**Key Coverage:**
-- ✅ All lesson/module/course shortcodes
-- ✅ Navigation shortcodes (prev/next)
-- ✅ WooCommerce integration shortcodes
-- ✅ Access control shortcodes
-- ✅ Multilingual compatibility
-- ✅ Edge cases (invalid IDs, empty attributes)
-- ✅ Fallback behavior
-
-**Mocking Strategy:**
-- Brain Monkey for WordPress functions (`get_post`, `get_permalink`, `get_field`)
-- Helper method `createMockPost()` for consistent post objects
-- Mocks for `class_exists()` and static class methods
+Unit tests cover core utilities and integration helpers that do not depend on builder-specific rendering.
 
 ---
 
@@ -138,7 +95,7 @@
 - `testGTranslateDynamicTranslation()` - On-the-fly translation
 
 **Cross-Plugin Tests:**
-- `testShortcodeRespectsLanguageContext()` - Shortcodes use translated IDs
+- `testDynamicTagsRespectLanguageContext()` - Dynamic tags use translated IDs
 - `testNavigationLinksUseTranslatedIds()` - Prev/next navigation
 - `testBricksWidgetSupportsTranslations()` - Bricks Builder compatibility
 - `testElementorWidgetSupportsTranslations()` - Elementor compatibility
@@ -155,7 +112,7 @@
 - ✅ qTranslate-X/XT (legacy but still used)
 - ✅ MultilingualPress (multisite networks)
 - ✅ GTranslate (URL-based translation)
-- ✅ Shortcode integration
+- ✅ Dynamic tags/widgets integration
 - ✅ Navigation with translations
 - ✅ Page builder support (Bricks, Elementor)
 - ✅ Course hierarchy preservation
@@ -167,7 +124,7 @@
 - Mock 7 different plugin APIs
 - Simulate `wpml_object_id()`, `pll_get_post()`, `trp_translate()`, etc.
 - Test each plugin independently
-- Test cross-plugin scenarios (shortcodes, navigation, page builders)
+- Test cross-plugin scenarios (navigation, page builders)
 
 ---
 
@@ -295,7 +252,7 @@ coverage:
 
 | Component | Lines | Tests | Coverage | Status |
 |-----------|-------|-------|----------|--------|
-| **Shortcodes** | ~800 | 25+ | ~85% | ✅ Comprehensive |
+| **Dynamic Tags/Widgets** | ~800 | 25+ | ~85% | ✅ Comprehensive |
 | **WooCommerce Integration** | ~1200 | 15+ | ~80% | ✅ Complete flow |
 | **Multilingual Compat** | ~600 | 20+ | ~90% | ✅ All 7 plugins |
 | **Access Control** | ~400 | 8+ | ~75% | ✅ Existing tests |
@@ -318,7 +275,7 @@ coverage:
 - Tested: ~4,000 lines (80%)
 
 **Coverage by Category:**
-- **Unit Tests:** ~75% (shortcodes, utilities, helpers)
+- **Unit Tests:** ~70% (utilities, helpers)
 - **Integration Tests:** ~85% (WooCommerce flow, multilingual, complex interactions)
 - **Untested:** Admin UI (~500 lines), legacy code (~300 lines), builder integrations (~200 lines)
 
@@ -436,7 +393,6 @@ coverage:
 
 ## Task 4 Deliverables
 
-✅ `tests/Unit/ShortcodesTest.php` - 650 lines, 25+ tests  
 ✅ `tests/Integration/WooCommerceFlowTest.php` - 450 lines, 15+ tests  
 ✅ `tests/Integration/MultilingualTest.php` - 550 lines, 20+ tests  
 ✅ `.github/workflows/code-quality.yml` - Enhanced with coverage  

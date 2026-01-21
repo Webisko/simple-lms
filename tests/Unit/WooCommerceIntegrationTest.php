@@ -10,6 +10,7 @@ namespace SimpleLMS\Tests\Unit;
 use SimpleLMS\Tests\TestCase;
 use SimpleLMS\WooCommerce_Integration;
 use Brain\Monkey\Functions;
+use PHPUnit\Framework\Attributes\RunInSeparateProcess;
 
 /**
  * WooCommerce Integration Test Class
@@ -19,17 +20,15 @@ class WooCommerceIntegrationTest extends TestCase
     /**
      * Test is_woocommerce_active returns true when WooCommerce exists
      */
+    #[RunInSeparateProcess]
     public function testIsWooCommerceActiveReturnsTrueWhenActive(): void
     {
-        Functions\expect('class_exists')
-            ->once()
-            ->with('WooCommerce')
-            ->andReturn(true);
-
-        Functions\expect('function_exists')
-            ->once()
-            ->with('wc_get_product')
-            ->andReturn(true);
+        if (!class_exists('WooCommerce', false)) {
+            eval('class WooCommerce {}');
+        }
+        if (!function_exists('wc_get_product')) {
+            eval('function wc_get_product() {}');
+        }
 
         $result = WooCommerce_Integration::is_woocommerce_active();
 
@@ -39,13 +38,9 @@ class WooCommerceIntegrationTest extends TestCase
     /**
      * Test is_woocommerce_active returns false when WooCommerce missing
      */
+    #[RunInSeparateProcess]
     public function testIsWooCommerceActiveReturnsFalseWhenInactive(): void
     {
-        Functions\expect('class_exists')
-            ->once()
-            ->with('WooCommerce')
-            ->andReturn(false);
-
         $result = WooCommerce_Integration::is_woocommerce_active();
 
         $this->assertFalse($result);
@@ -54,6 +49,7 @@ class WooCommerceIntegrationTest extends TestCase
     /**
      * Test granting access on order completion
      */
+    #[RunInSeparateProcess]
     public function testGrantAccessOnOrderCompletion(): void
     {
         $orderId = 123;
@@ -67,11 +63,16 @@ class WooCommerceIntegrationTest extends TestCase
             ->once()
             ->andReturn($userId);
 
-        // Mock order item
-        $item = \Mockery::mock('WC_Order_Item_Product');
-        $item->shouldReceive('get_product_id')
-            ->once()
-            ->andReturn($productId);
+        // Order item must have a real get_product_id() method (method_exists check)
+        $item = new class ($productId) {
+            private int $productId;
+            public function __construct(int $productId) {
+                $this->productId = $productId;
+            }
+            public function get_product_id(): int {
+                return $this->productId;
+            }
+        };
 
         $order->shouldReceive('get_items')
             ->once()
@@ -83,31 +84,47 @@ class WooCommerceIntegrationTest extends TestCase
             ->with($orderId)
             ->andReturn($order);
 
-        // Mock get_posts to find courses with this product
-        Functions\expect('get_posts')
-            ->once()
-            ->andReturn([
-                $this->createMockPost($courseId, 'course')
-            ]);
+        // User must exist (called in process_course_access and grant_user_course_access)
+        Functions\expect('get_user_by')
+            ->times(2)
+            ->with('id', $userId)
+            ->andReturn($this->createMockUser($userId));
 
-        // Mock get_post_meta for product IDs
+        // Product must be marked as course product and point to the course
         Functions\expect('get_post_meta')
             ->once()
-            ->with($courseId, '_wc_product_ids', true)
-            ->andReturn([$productId]);
+            ->with($productId, '_is_course_product', true)
+            ->andReturn('yes');
 
-        // Mock grant_course_access function
-        Functions\expect('SimpleLMS\grant_course_access')
+        Functions\expect('get_post_meta')
+            ->once()
+            ->with($productId, '_course_id', true)
+            ->andReturn($courseId);
+
+        // Grant access tag
+        Functions\expect('SimpleLMS\\simple_lms_assign_course_access_tag')
             ->once()
             ->with($userId, $courseId)
             ->andReturn(true);
 
-        // Mock do_action
-        Functions\expect('do_action')
+        // Access start time meta
+        $startKey = 'simple_lms_course_access_start_' . $courseId;
+        Functions\expect('get_user_meta')
             ->once()
-            ->with('simple_lms_access_granted', $userId, $courseId, $orderId);
+            ->with($userId, $startKey, true)
+            ->andReturn(0);
 
-        WooCommerce_Integration::grant_access_on_order_complete($orderId);
+        Functions\expect('current_time')
+            ->once()
+            ->with('timestamp', true)
+            ->andReturn(1700000000);
+
+        Functions\expect('update_user_meta')
+            ->once()
+            ->with($userId, $startKey, 1700000000)
+            ->andReturn(true);
+
+        WooCommerce_Integration::grant_course_access_on_order_complete($orderId);
     }
 
     /**

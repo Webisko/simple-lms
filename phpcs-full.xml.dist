@@ -1,17 +1,10 @@
 <?xml version="1.0"?>
-<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Simple LMS" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Simple LMS (Full Audit)" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
 
-	<description>PHPCS configuration for Simple LMS plugin</description>
+	<description>PHPCS full-audit configuration for Simple LMS plugin (may report a large number of legacy/style violations).</description>
 
 	<!-- What to scan -->
-	<!--
-		Release gate:
-		Keep this ruleset focused on runtime-critical entrypoints.
-		For a full audit across the whole repo, use phpcs-full.xml.dist.
-	-->
-	<file>simple-lms.php</file>
-	<file>uninstall.php</file>
-	<file>includes/managers</file>
+	<file>.</file>
 
 	<!-- Exclude patterns -->
 	<exclude-pattern>*/vendor/*</exclude-pattern>
@@ -31,12 +24,10 @@
 	<arg name="extensions" value="php"/>
 	<arg name="parallel" value="8"/>
 
-	<!-- Rules: Project style -->
-	<!-- Keep the default ruleset lean; use phpcs-full.xml.dist for full WPCS audit. -->
-	<rule ref="PSR12">
-		<!-- WordPress plugins frequently use a global bootstrap file without a namespace. -->
-		<exclude name="PSR1.Classes.ClassDeclaration.MissingNamespace"/>
-	</rule>
+	<!-- Rules: WordPress Coding Standards -->
+	<rule ref="WordPress-Core"/>
+	<rule ref="WordPress-Extra"/>
+	<rule ref="WordPress-Docs"/>
 
 	<!-- Don't enforce LF-only line endings (Windows dev environment uses CRLF) -->
 	<rule ref="Generic.Files.LineEndings.InvalidEOLChar">
@@ -50,6 +41,41 @@
 
 	<!-- Line length limits are style-only; do not fail builds on them -->
 	<rule ref="Generic.Files.LineLength.TooLong">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Reduce noise from legacy formatting; focus on functional issues first -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Universal.Arrays.DisallowShortArraySyntax">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.PHP.YodaConditions.NotYoda">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
+		<severity>0</severity>
+	</rule>
+	<rule ref="Generic.Formatting.MultipleStatementAlignment.NotSameWarning">
+		<severity>0</severity>
+	</rule>
+	<rule ref="PSR1.Classes.ClassDeclaration.MultipleClasses">
 		<severity>0</severity>
 	</rule>
 

@@ -24,12 +24,16 @@ dist/
 build/
 *.zip
 coverage/
+.phpunit.cache/
 .phpunit.result.cache
 
 # Logs & Backups
 debug-hooks.log
 *.backup
 *.log
+
+# Local reference materials (should not be committed)
+wordpress-guidelines/
 
 # Translation Scripts & Backups (Krok 4 cleanup)
 *-translation*.php

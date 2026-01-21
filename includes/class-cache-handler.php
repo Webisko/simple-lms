@@ -33,7 +33,7 @@ class Cache_Handler {
      * 
      * @var int
      */
-    private static int $cacheExpiration;
+    private static int $cacheExpiration = self::DEFAULT_CACHE_EXPIRATION;
 
     /**
      * Initialize the handler
@@ -281,7 +281,7 @@ class Cache_Handler {
             $logger->log($level, $message, $context);
         } catch (\Throwable $t) {
             // Fallback for environments without container/logger
-            if (function_exists('error_log')) {
+            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
                 $placeholders = array_combine(
                     array_map(function($k){return '{'.$k.'}';}, array_keys($context)),
                     array_values($context)
@@ -337,7 +337,9 @@ class Cache_Handler {
                     break;
             }
         } catch (\Exception $e) {
-            error_log("Simple LMS: Error pre-delete cache flush for post {$postId}: " . $e->getMessage());
+            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+                error_log("Simple LMS: Error pre-delete cache flush for post {$postId}: " . $e->getMessage());
+            }
         }
     }
 

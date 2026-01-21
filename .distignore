@@ -1,0 +1,67 @@
+.git
+.github
+.vscode
+.intelephense
+.stubs
+.phpstorm.meta.php
+.editorconfig
+.copilot-instructions.md
+.wp-env.json
+.distignore
+
+# Dev dependencies / tooling
+node_modules
+vendor
+composer.lock
+composer.json
+package-lock.json
+package.json
+
+# Tests & CI
+tests
+phpunit.xml.dist
+phpunit-integration.xml
+phpunit.xml
+phpcs.xml.dist
+phpcs-full.xml.dist
+phpstan.neon
+
+# Build tooling
+assets/src
+vite.config.js
+postcss.config.js
+dist
+build-production.ps1
+quick-test.ps1
+*.ps1
+
+# Local/temporary files
+*.log
+debug-*.php
+temp-*.po
+translate-*.ps1
+rebuild-po-files.php
+extend-po-files.php
+translate-all.ps1
+fix-translations.ps1
+verify-language-fix.ps1
+
+# Translation tooling
+languages/compile-translations.php
+
+# Docs not needed for WP.org distribution
+docs
+API-REFERENCE.md
+ARCHITECTURE.md
+BUILD.md
+CONTRIBUTING.md
+HOOKS.md
+MULTILINGUAL.md
+PRIVACY.md
+SECURITY.md
+TESTING.md
+
+# Generated artifacts
+coverage
+.phpunit.cache
+.phpunit.result.cache

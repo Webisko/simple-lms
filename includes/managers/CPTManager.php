@@ -1,12 +1,14 @@
 <?php
-namespace SimpleLMS\Managers;
 
 /**
  * Custom Post Type Manager
  *
  * @package SimpleLMS
- * @since 1.4.0
+ * @since 1.0.0
  */
+
+namespace SimpleLMS\Managers;
+
 use SimpleLMS\Logger;
 
 if (!defined('ABSPATH')) {

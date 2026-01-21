@@ -12,8 +12,8 @@ export default defineConfig({
     // Empty output dir before build
     emptyOutDir: true,
     
-    // Generate sourcemaps for production debugging
-    sourcemap: true,
+    // Disable sourcemaps for production release
+    sourcemap: false,
     
     // Target ES5 for WordPress compatibility
     target: 'es2015',

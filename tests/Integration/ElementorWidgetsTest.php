@@ -10,6 +10,12 @@
 
 namespace SimpleLMS\Tests\Integration;
 
+// This test suite is intended for WordPress' integration test environment.
+// When running via Brain Monkey / standalone PHPUnit, skip gracefully.
+if (!class_exists('WP_UnitTestCase')) {
+    class_alias(\PHPUnit\Framework\TestCase::class, 'WP_UnitTestCase');
+}
+
 use WP_UnitTestCase;
 
 /**
@@ -27,6 +33,10 @@ class ElementorWidgetsTest extends WP_UnitTestCase {
      */
     public function setUp(): void {
         parent::setUp();
+
+        if (!method_exists($this, 'factory') || !function_exists('update_post_meta')) {
+            $this->markTestSkipped('Requires WordPress integration test suite (WP_UnitTestCase + factories).');
+        }
 
         // Create test course structure
         $this->courseId = $this->factory()->post->create([

@@ -52,7 +52,7 @@ Simple LMS follows a **hybrid architecture** combining WordPress conventions wit
 │  ┌───────────────────────────────────────────────┐  │
 │  │        Presentation Layer                     │  │
 │  │  • REST API       • AJAX Handlers             │  │
-│  │  • Shortcodes     • Admin UI                  │  │
+│  │  • Dynamic Tags   • Admin UI                  │  │
 │  │  • Frontend Views • Builder Integrations      │  │
 │  └───────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────┘
@@ -65,7 +65,7 @@ Simple LMS follows a **hybrid architecture** combining WordPress conventions wit
 | **Service Container** | Dependency management, service lifecycle | `ServiceContainer`, `Logger`, `Security_Service` |
 | **Business Logic** | Core functionality, domain rules | `Access_Control`, `Progress_Tracker`, `Analytics_Tracker` |
 | **Data Access** | Database operations, caching | `Cache_Handler`, `wpdb` queries, post/user meta |
-| **Presentation** | User interaction, data delivery | REST API, AJAX, Shortcodes, Admin UI |
+| **Presentation** | User interaction, data delivery | REST API, AJAX, Dynamic Tags/Widgets, Admin UI |
 
 ---
 

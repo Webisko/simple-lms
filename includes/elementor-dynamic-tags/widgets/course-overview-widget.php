@@ -603,7 +603,7 @@ class Course_Overview_Widget extends Widget_Base {
             
             // Lesson count
             if ($settings['show_lesson_count'] === 'yes') {
-                echo '<span class="lessons-count">(' . esc_html(\SimpleLMS\LmsShortcodes::getLessonsCountText($lessons_count)) . ')</span>';
+                echo '<span class="lessons-count">(' . esc_html(\SimpleLMS\Lesson_Helper::getLessonsCountText($lessons_count)) . ')</span>';
             }
 
             // Unlock date
@@ -622,7 +622,7 @@ class Course_Overview_Widget extends Widget_Base {
                 
                 foreach ($lessons as $lesson) {
                     $is_current = ($is_lesson_page && $lesson->ID == $current_lesson_id);
-                    $is_completed = \SimpleLMS\LmsShortcodes::isLessonCompleted($lesson->ID);
+                    $is_completed = \SimpleLMS\Lesson_Helper::isLessonCompleted($lesson->ID);
                     
                     $classes = ['lesson-item'];
                     if ($is_current) {
@@ -724,7 +724,7 @@ class Course_Overview_Widget extends Widget_Base {
             
             // Lesson count
             if ($settings['show_lesson_count'] === 'yes') {
-                echo '<span class="lessons-count">('.esc_html(\SimpleLMS\LmsShortcodes::getLessonsCountText(count($lessons))).')</span>';
+                echo '<span class="lessons-count">('.esc_html(\SimpleLMS\Lesson_Helper::getLessonsCountText(count($lessons))).')</span>';
             }
 
             // Unlock date
@@ -740,7 +740,7 @@ class Course_Overview_Widget extends Widget_Base {
                 echo '<ul class="lessons-list">';
                 foreach ($lessons as $lesson) {
                     $is_current = ($is_lesson_page && $lesson->ID == $current_lesson_id);
-                    $is_completed = \SimpleLMS\LmsShortcodes::isLessonCompleted($lesson->ID);
+                    $is_completed = \SimpleLMS\Lesson_Helper::isLessonCompleted($lesson->ID);
                     $lesson_link = get_permalink($lesson->ID);
                     
                     $classes = ['lesson-item'];

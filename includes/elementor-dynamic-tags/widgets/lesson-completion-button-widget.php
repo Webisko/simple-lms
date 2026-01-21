@@ -440,7 +440,7 @@ class Lesson_Completion_Button_Widget extends Widget_Base {
         }
 
         // Check if lesson is completed
-        $is_completed = \SimpleLMS\LmsShortcodes::isLessonCompleted($lesson_id);
+        $is_completed = \SimpleLMS\Lesson_Helper::isLessonCompleted($lesson_id);
         
         $button_text = $is_completed ? $settings['incomplete_text'] : $settings['complete_text'];
         $button_class = 'simple-lms-completion-btn';

@@ -23,6 +23,11 @@ class AccessControlTest extends TestCase
         $userId = 123;
         $courseId = 456;
 
+        Functions\expect('user_can')
+            ->once()
+            ->with($userId, 'manage_options')
+            ->andReturn(false);
+
         Functions\expect('get_current_user_id')->once()->andReturn($userId);
         Functions\expect('get_user_meta')
             ->once()
@@ -49,6 +54,12 @@ class AccessControlTest extends TestCase
     {
         $userId = 321;
         $courseId = 654;
+
+        Functions\expect('user_can')
+            ->once()
+            ->with($userId, 'manage_options')
+            ->andReturn(false);
+
         Functions\expect('get_current_user_id')->once()->andReturn($userId);
         Functions\expect('get_user_meta')
             ->once()
@@ -73,19 +84,25 @@ class AccessControlTest extends TestCase
             ->once()
             ->with($userId, 'simple_lms_course_access', true)
             ->andReturn([]);
-        // Course duration meta
+        // Course meta is loaded in one call (cached) and then read by key
         Functions\expect('get_post_meta')
-            ->once()->with($courseId, '_access_duration_value', true)->andReturn(0);
-        Functions\expect('get_post_meta')
-            ->once()->with($courseId, '_access_duration_unit', true)->andReturn('');
-        // Legacy duration meta check
-        Functions\expect('get_post_meta')
-            ->once()->with($courseId, '_access_duration_days', true)->andReturn(0);
-        // Access schedule mode
-        Functions\expect('get_post_meta')
-            ->once()->with($courseId, '_access_schedule_mode', true)->andReturn('purchase');
+            ->once()
+            ->with($courseId)
+            ->andReturn([
+                '_access_duration_value' => [0],
+                '_access_duration_unit' => [''],
+                '_access_duration_days' => [0],
+                '_access_schedule_mode' => ['purchase'],
+            ]);
         Functions\expect('update_user_meta')
             ->once()->with($userId, 'simple_lms_course_access', [$courseId])->andReturn(true);
+
+        // Unlimited duration clears any previous expiration
+        Functions\expect('delete_user_meta')
+            ->once()
+            ->with($userId, 'simple_lms_course_access_expiration_' . $courseId)
+            ->andReturn(true);
+
         Functions\expect('delete_transient')->once()->andReturn(true);
         require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/access-control.php';
         $this->assertTrue(\SimpleLMS\simple_lms_assign_course_access_tag($userId, $courseId));
@@ -102,12 +119,8 @@ class AccessControlTest extends TestCase
             ->once()->with($userId, 'simple_lms_course_access', true)->andReturn([$courseId]);
         // Since already present update_user_meta should not be called
         Functions\expect('update_user_meta')->never();
-        Functions\expect('delete_transient')->once()->andReturn(true);
-        // Duration meta lookups still occur
-        Functions\expect('get_post_meta')->once()->with($courseId, '_access_duration_value', true)->andReturn(0);
-        Functions\expect('get_post_meta')->once()->with($courseId, '_access_duration_unit', true)->andReturn('');
-        Functions\expect('get_post_meta')->once()->with($courseId, '_access_duration_days', true)->andReturn(0);
-        Functions\expect('get_post_meta')->once()->with($courseId, '_access_schedule_mode', true)->andReturn('purchase');
+        // No mutation -> no cache invalidation
+        Functions\expect('delete_transient')->never();
         require_once SIMPLE_LMS_PLUGIN_DIR . 'includes/access-control.php';
         $this->assertTrue(\SimpleLMS\simple_lms_assign_course_access_tag($userId, $courseId));
     }

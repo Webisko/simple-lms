@@ -47,12 +47,6 @@ if (!function_exists('register_taxonomy')) {
     }
 }
 
-if (!function_exists('add_shortcode')) {
-    function add_shortcode($tag, $callback) {
-        return true;
-    }
-}
-
 if (!function_exists('wp_enqueue_style')) {
     function wp_enqueue_style($handle, $src = '', $deps = [], $ver = false, $media = 'all') {
         return true;

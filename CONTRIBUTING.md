@@ -195,7 +195,7 @@ feature/rest-api-v2
 bugfix/cache-invalidation-issue
 bugfix/lesson-progress-race-condition
 hotfix/security-nonce-bypass
-release/v1.5.0
+release/v1.0.0
 ```
 
 ### Development Steps
@@ -507,7 +507,7 @@ coverage reports with Xdebug configuration steps.
 - [ ] All tests pass (`composer test` passes)
 - [ ] New features have tests (target: 80% coverage)
 - [ ] Documentation updated (README, HOOKS.md, etc.)
-- [ ] Changelog entry added to DEEP-REPORT.md
+- [ ] Changelog updated (CHANGELOG.md)
 - [ ] No merge conflicts with `develop`
 - [ ] Assets built (`npm run build` if JS/CSS changed)
 
@@ -783,7 +783,7 @@ You can grant access using the class. Just call the method.
 - [ ] HOOKS.md updated for new hooks
 - [ ] TESTING.md updated for new test requirements
 - [ ] SECURITY.md updated for security-related changes
-- [ ] DEEP-REPORT.md changelog entry added
+- [ ] CHANGELOG.md updated
 
 ---
 
