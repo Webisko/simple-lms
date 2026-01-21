@@ -624,18 +624,22 @@ function simple_lms_cleanup_expired_access(): void {
                 delete_user_meta($user_id, $meta_key);
                 $cleaned_count++;
                 
-                error_log(sprintf(
-                    'Simple LMS: Removed expired access for user %d to course %d (expired on %s)',
-                    $user_id,
-                    $course_id,
-                    date('Y-m-d H:i:s', $expiration)
-                ));
+                if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+                    error_log(sprintf(
+                        'Simple LMS: Removed expired access for user %d to course %d (expired on %s)',
+                        $user_id,
+                        $course_id,
+                        date('Y-m-d H:i:s', $expiration)
+                    ));
+                }
             }
         }
     }
     
     if ($cleaned_count > 0) {
-        error_log('Simple LMS: Cleaned up ' . $cleaned_count . ' expired course access entries');
+        if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+            error_log('Simple LMS: Cleaned up ' . $cleaned_count . ' expired course access entries');
+        }
     }
 }
 

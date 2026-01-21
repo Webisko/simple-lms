@@ -677,41 +677,54 @@ class Meta_Boxes {
     }
 
     /**
+     * Debug logger helper (WP_DEBUG only)
+     *
+     * @param string $message Message to log.
+     * @return void
+     */
+    private function debugLog(string $message): void
+    {
+        if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+            error_log($message);
+        }
+    }
+
+    /**
      * Save post meta
      */
     public function save_post_meta($post_id) {
         static $recursion_guard = false;
         if ($recursion_guard) {
-            error_log('SimpleLMS save_post_meta: Recursion guard triggered for post_id ' . $post_id);
+            $this->debugLog('SimpleLMS save_post_meta: Recursion guard triggered for post_id ' . $post_id);
             return;
         }
 
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-            error_log('SimpleLMS save_post_meta: Autosave detected for post_id ' . $post_id);
+            $this->debugLog('SimpleLMS save_post_meta: Autosave detected for post_id ' . $post_id);
             return;
         }
 
         if (!current_user_can('edit_post', $post_id)) {
-            error_log('SimpleLMS save_post_meta: User cannot edit post ' . $post_id);
+            $this->debugLog('SimpleLMS save_post_meta: User cannot edit post ' . $post_id);
             return;
         }
 
         // Skip Elementor templates and library posts
         $post_type = get_post_type($post_id);
-        error_log('SimpleLMS save_post_meta: Processing post_id ' . $post_id . ' of type: ' . $post_type);
+        $this->debugLog('SimpleLMS save_post_meta: Processing post_id ' . $post_id . ' of type: ' . $post_type);
         
         if (in_array($post_type, ['elementor_library', 'elementor_snippet', 'e-landing-page'], true)) {
-            error_log('SimpleLMS save_post_meta: Skipping Elementor template/library post ' . $post_id);
+            $this->debugLog('SimpleLMS save_post_meta: Skipping Elementor template/library post ' . $post_id);
             return;
         }
 
         // Skip if this is an Elementor Ajax save
         if (defined('ELEMENTOR_VERSION') && !empty($_POST['actions'])) {
-            error_log('SimpleLMS save_post_meta: Skipping Elementor Ajax save for post ' . $post_id);
+            $this->debugLog('SimpleLMS save_post_meta: Skipping Elementor Ajax save for post ' . $post_id);
             return;
         }
 
-        error_log('SimpleLMS save_post_meta: Proceeding with save for post ' . $post_id . ' (' . $post_type . ')');
+        $this->debugLog('SimpleLMS save_post_meta: Proceeding with save for post ' . $post_id . ' (' . $post_type . ')');
         $recursion_guard = true;
 
         // Handle course basic info

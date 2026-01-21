@@ -247,7 +247,9 @@ class Ajax_Handler
                     $logger = $container->get(Logger::class);
                     $logger->warning('AJAX invalid action: {action}', ['action' => $action ?: 'NONE']);
                 } catch (\Throwable $t) {
-                    error_log('Simple LMS AJAX: Invalid action: ' . ($action ?: 'NONE'));
+                    if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+                        error_log('Simple LMS AJAX: Invalid action: ' . ($action ?: 'NONE'));
+                    }
                 }
                 throw new \InvalidArgumentException(__('Invalid action', 'simple-lms'));
             }
@@ -308,8 +310,6 @@ class Ajax_Handler
                     throw new \InvalidArgumentException(__('Unknown action', 'simple-lms'));
             }
         } catch (\Exception $e) {
-            error_log('SimpleLMS AJAX ERROR in action ' . ($action ?? 'unknown_action') . ': ' . $e->getMessage());
-            error_log('SimpleLMS AJAX ERROR trace: ' . $e->getTraceAsString());
             self::logError($action ?? 'unknown_action', $e);
             
             // Send JSON error directly to ensure it's sent
@@ -460,13 +460,15 @@ class Ajax_Handler
             $logger = $container->get(Logger::class);
             $logger->error('AJAX error [{action}]: {error}', ['action' => $action, 'error' => $exception]);
         } catch (\Throwable $t) {
-            error_log(sprintf(
-                'Simple LMS AJAX Error [%s]: %s in %s:%d',
-                $action,
-                $exception->getMessage(),
-                $exception->getFile(),
-                $exception->getLine()
-            ));
+            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
+                error_log(sprintf(
+                    'Simple LMS AJAX Error [%s]: %s in %s:%d',
+                    $action,
+                    $exception->getMessage(),
+                    $exception->getFile(),
+                    $exception->getLine()
+                ));
+            }
         }
     }
 
@@ -621,44 +623,32 @@ class Ajax_Handler
      * Delete lesson
      */
     private static function delete_lesson($data) {
-        error_log('[SimpleLMS AJAX] delete_lesson called');
-        
         $lesson_id = absint($data['lesson_id'] ?? 0);
-        error_log('[SimpleLMS AJAX] lesson_id: ' . $lesson_id);
-        
         if (!$lesson_id) {
-            error_log('[SimpleLMS AJAX] Invalid lesson ID');
             throw new \Exception(__('Invalid lesson ID', 'simple-lms'));
         }
 
         // Verify post type before capability check
         if (!self::validatePostType($lesson_id, 'lesson')) {
-            error_log('[SimpleLMS AJAX] Invalid post type for lesson_id: ' . $lesson_id);
             throw new \Exception(__('Invalid lesson', 'simple-lms'));
         }
 
         if (!current_user_can('delete_post', $lesson_id)) {
-            error_log('[SimpleLMS AJAX] User cannot delete lesson_id: ' . $lesson_id);
             throw new \Exception(__('You do not have permission to delete this lesson', 'simple-lms'));
         }
 
         $module_id = get_post_meta($lesson_id, 'parent_module', true);
-        error_log('[SimpleLMS AJAX] module_id: ' . $module_id);
 
         // Delete the post permanently (force_delete = true)
         $delete_result = wp_delete_post($lesson_id, true);
-        error_log('[SimpleLMS AJAX] wp_delete_post result: ' . var_export($delete_result, true));
         
         // Verify the post is actually deleted
         $deleted_post = get_post($lesson_id);
-        error_log('[SimpleLMS AJAX] get_post after delete: ' . var_export($deleted_post, true));
         
         if ($deleted_post !== null) {
-            error_log('[SimpleLMS AJAX] Post still exists after delete!');
             throw new \Exception(__('Failed to delete lesson', 'simple-lms'));
         }
 
-        error_log('[SimpleLMS AJAX] About to send json success');
         wp_send_json_success([
             'success' => true,
             'module_id' => $module_id

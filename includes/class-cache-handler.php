@@ -337,9 +337,7 @@ class Cache_Handler {
                     break;
             }
         } catch (\Exception $e) {
-            if (defined('WP_DEBUG') && WP_DEBUG && function_exists('error_log')) {
-                error_log("Simple LMS: Error pre-delete cache flush for post {$postId}: " . $e->getMessage());
-            }
+            self::log('error', 'Error pre-delete cache flush for post {postId}: {error}', ['postId' => $postId, 'error' => $e]);
         }
     }
 
@@ -500,7 +498,7 @@ class Cache_Handler {
                 }
             }
         } catch (\Exception $e) {
-            error_log("Simple LMS: Error flushing cache on meta change for post {$objectId}: " . $e->getMessage());
+            self::log('error', 'Error flushing cache on meta change for post {objectId}: {error}', ['objectId' => $objectId, 'error' => $e]);
         }
     }
 
