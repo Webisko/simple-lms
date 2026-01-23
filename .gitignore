@@ -7,6 +7,7 @@ wp-content/plugins/*
 vendor/
 node_modules/
 composer.lock
+package-lock.json
 
 # IDE & Local
 .vscode/workspace.code-workspace
@@ -22,6 +23,7 @@ Thumbs.db
 # Build & Tests
 dist/
 build/
+assets/dist/
 *.zip
 coverage/
 .phpunit.cache/
